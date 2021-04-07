@@ -1,0 +1,151 @@
+#course__wrapper {
+	flex-direction: row;
+	width: 1000px;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+#course__banner {
+	width: 100%;
+	height: 305px;
+	background-color: rgb(233, 27, 34);
+}
+
+#course__logo {
+	width: 370px;
+	height: 275px;
+	background: rgb(238,238,238);
+	border-radius: 40px;
+	margin: 0 12px;
+	justify-content: center;
+}
+
+#course__logo img {
+	width: 110px;
+}
+
+#course__intro {
+	width: 700px;
+	flex-direction: column;
+	justify-content: space-evenly;
+	color: white;
+	font-family: 'Droid Sans Fallback';
+	font-size: 18px;
+	padding-left: 20px
+}
+
+
+#course__intro #intro__name {
+	font-size: 28px;
+}
+
+/*메인 섹션*/
+#course__detail {
+	font-family: 'Noto Sans KR';
+	flex-direction: column;
+	width: 1000px;
+}
+
+/*내용 바로가기를 위한 내비게이션 css*/
+#detail__index {
+	position: sticky;
+	top: 0px;
+	flex-direction: row;
+	align-items: flex-end;
+	height: 70px;
+	border-bottom: 1px solid rgba(128, 128, 128, 0.8);
+	margin-bottom: 30px;
+	background-color: white;
+}
+
+#detail__navigation {
+	list-style-type: none;
+	font-weight: bold;
+	width: 410px;
+	text-align: left;
+	margin: 0px;
+	padding: 0px;
+}
+
+
+#detail__navigation li {
+	font-size: 18px;
+	padding-right: 38px;
+    margin-bottom: 9px;
+    letter-spacing: -0.7px;
+}
+
+#underbar {
+	width: 27px;
+	height: 5px;
+	background: red;
+	position: absolute;
+	top: 465px;
+	-webkit-transition: 0.5s ease; 
+}
+
+#enroll__button__wrapper {
+	width: 590px;
+	height: 45px;
+}
+
+#enroll__button { /*수강신청 버튼*/
+	width: 220px;
+	height: 50px;
+	float: right;
+	background: rgb(233, 27, 34);
+	border-radius: 10px;
+	margin-top: -15px;
+	color: white;
+	
+}
+
+#enroll__button a {
+	display: block;
+	padding: 8px;
+	
+	font-family: 'Droid Sans Fallback';
+	font-size: 25px;
+	text-align: center;
+	letter-spacing: -0.5px;
+}
+
+/*강의계획서 부분 css*/
+#syllabus__contents {
+	width: 1000px;
+	letter-spacing: -0.5px;
+	
+}
+
+.detail__title {
+	font-size: 30px;
+	color: rgb(233, 27, 34);
+	
+}
+
+.detail {
+	display: block;
+	height: 300px;
+	font-size: 15px;
+}
+
+#back__button__wrapper {
+	width: 1000px;
+	justify-content: flex-end;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+#back__button {
+	width: 50px;
+	height: 27px;
+	
+	text-align: center;
+	padding: 3px;
+	border-radius: 2px;
+	background-color:  rgb(233, 27, 34);
+}
+#back__button a{
+	font-family: 'Noto Sans KR';
+	font-size: 17px;
+	color: white;
+}

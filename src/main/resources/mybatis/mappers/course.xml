@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.course">
+	<resultMap id="crsResult" type="courseVO">
+		<result property="id" column="crs_id" />
+		<result property="startDate" column="crs_start_date" />
+		<result property="endDate" column="crs_end_date" />
+		<result property="startTime" column="crs_start_time" />
+		<result property="endTime" column="crs_end_time" />
+		<result property="classroom" column="crs_classroom" />
+		<result property="bannerImg" column="crs_banner_img" />
+		<association property="syllabusVO" resultMap="slbResult"/>
+		
+	</resultMap>
+	
+	<resultMap id="slbResult" type="syllabusVO">
+		<result property="id" column="slb_id"/>
+		<result property="name" column="slb_name"/>
+		<result property="reportName" column="slb_reportName"/>
+		<result property="type" column="slb_type"/>
+		<result property="category" column="slb_category"/>
+		<result property="overview" column="slb_overview"/>
+		<result property="objectives" column="slb_objectives"/>
+		<result property="target" column="slb_target"/>
+		<result property="contents" column="slb_contents"/>
+		<result property="joinDate" column="slb_join_date"/>
+		<result property="modDate" column="slb_mod_date"/>
+		<result property="days" column="slb_days"/>
+		<result property="time" column="slb_time"/>
+	</resultMap>
+
+
+	<select id="selectAllCourseList" resultMap="crsResult">
+		select crs_id, crs_start_date, crs_end_date, crs_start_time, crs_end_time, crs_classroom, slb_name, slb_type, slb_category, slb_time
+		from course
+			inner join syllabus using(slb_id)
+		order by crs_join_date
+	</select>
+	
+	<insert id="insertNewEnrollment" parameterType="java.util.Map">
+	<![CDATA[
+		INSERT INTO enrollment_detail(enrd_id, crs_id, mem_id, enrd_stat, enrd_join_date, enrd_mod_date)
+		VALUES(enrollment_detail_id_seq.NEXTVAL, #{courseID}, #{id}, '신청', to_char(sysdate, 'YYYY-MM-DD HH:MM:SS'), to_char(sysdate, 'YYYY:MM:DD HH-MM-SS'))
+	]]>
+	</insert>
+	
+	<select id="selectSyllabus" parameterType="int" resultMap="slbResult">
+		<![CDATA[
+			SELECT slb_id, slb_name, slb_type, slb_category, slb_overview, slb_objectives, slb_target, slb_contents
+			FROM syllabus
+				INNER JOIN course using(slb_id)
+			WHERE crs_id = #{courseId}
+		]]>
+	</select>
+	
+	<select id="selectCourse" parameterType="int" resultMap="crsResult">
+		<![CDATA[
+			SELECT *
+			FROM course
+			WHERE crs_id = #{courseId}
+		]]>
+	</select>
+	
+
+</mapper>
