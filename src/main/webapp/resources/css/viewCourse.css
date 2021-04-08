@@ -39,17 +39,20 @@
 	font-size: 28px;
 }
 
-/*¸ŞÀÎ ¼½¼Ç*/
+/*ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½*/
 #course__detail {
 	font-family: 'Noto Sans KR';
 	flex-direction: column;
 	width: 1000px;
 }
 
-/*³»¿ë ¹Ù·Î°¡±â¸¦ À§ÇÑ ³»ºñ°ÔÀÌ¼Ç css*/
-#detail__index {
+/*ê³¼ì • ë‚´ìš©ìœ¼ë¡œ ë°”ë¡œê°€ëŠ” ë‚´ë¹„ê²Œì´ì…˜ css*/
+#detail__navigation {
 	position: sticky;
 	top: 0px;
+}
+#__wrapper {
+	position: relative;
 	flex-direction: row;
 	align-items: flex-end;
 	height: 70px;
@@ -58,7 +61,7 @@
 	background-color: white;
 }
 
-#detail__navigation {
+#__wrapper ul {
 	list-style-type: none;
 	font-weight: bold;
 	width: 410px;
@@ -68,20 +71,19 @@
 }
 
 
-#detail__navigation li {
+#__wrapper li {
 	font-size: 18px;
 	padding-right: 38px;
     margin-bottom: 9px;
     letter-spacing: -0.7px;
 }
 
-#underbar {
+#active__underline { /*ë©”ë‰´ë¥¼ í´ë¦­í•˜ëŠ” ê³³ìœ¼ë¡œ sliding effect*/
 	width: 27px;
 	height: 5px;
 	background: red;
 	position: absolute;
-	top: 465px;
-	-webkit-transition: 0.5s ease; 
+	transition: all 0.3s ease-in-out;
 }
 
 #enroll__button__wrapper {
@@ -89,7 +91,7 @@
 	height: 45px;
 }
 
-#enroll__button { /*¼ö°­½ÅÃ» ¹öÆ°*/
+#enroll__button { 
 	width: 220px;
 	height: 50px;
 	float: right;
@@ -110,7 +112,7 @@
 	letter-spacing: -0.5px;
 }
 
-/*°­ÀÇ°èÈ¹¼­ ºÎºĞ css*/
+/*ê°•ì˜ê³„íšì„œ css*/
 #syllabus__contents {
 	width: 1000px;
 	letter-spacing: -0.5px;

@@ -41,17 +41,19 @@ $(document).ready(function() {
 
 <div class="grid mx-auto" id="course__detail">
 	<!--  과정상세 각 내용으로 바로 가는 내비게이션 -->
-	<section class="grid mx-auto" id="detail__index">
-		<ul class="grid" id="detail__navigation">
-			<li id="__overview">학습개요</li>
-			<li id="__objectives">학습목표</li>
-			<li id="__target">학습대상</li>
-			<li id="__contents">교육내용</li>
-		</ul>
-		<div id="underbar"></div>
-		<div id="enroll__button__wrapper">
-			<div id="enroll__button">
-				<a>신청하기</a>
+	<section id="detail__navigation">
+		<div class="grid mx-auto" id="__wrapper">
+			<ul class="grid">
+				<li class="active" id="__overview">학습개요</li>
+				<li id="__objectives">학습목표</li>
+				<li id="__target">학습대상</li>
+				<li id="__contents">교육내용</li>
+			</ul>
+			<div id="active__underline"></div>
+			<div id="enroll__button__wrapper">
+				<div id="enroll__button">
+					<a>신청하기</a>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -83,7 +85,8 @@ $(document).ready(function() {
 </div>
 
 
-<script>
+<script type="text/javascript">
+// Automatically scroll when user click the menu
 $(document).ready(function() {
 	const posOverview = $('#overview > h2').offset();
 	const posObjectives = $('#objectives > h2').offset();
@@ -104,5 +107,51 @@ $(document).ready(function() {
 		$('html, body').animate({scrollTop:posContents.top-90}, "slow");
 	})
 })
-	
+
+// sliding underline effect
+/* var activeLink = document.querySelector('#detail__navigation li.active');
+var underline = document.querySelector('#active_underline');
+
+setActiveUnderline(activeLink, underline);
+
+var menu_link = document.querySelector('#detail__navigation ul');
+var menu_linkList = document.querySelectorAll('#detail__navigation ul li');
+
+menu_link.addEventListener("mouseover", function( event ) {
+  var selectedWidth = event.target.offsetWidth;
+  var newleftpos = event.target.offsetLeft;
+  underline.style.left = newleftpos+'px';
+  underline.style.width = selectedWidth+'px';
+});
+
+menu_link.addEventListener("mouseout", function( event ) {   
+  underline.style.left = activeLink.offsetLeft+'px';
+});
+
+var menu_link_anchor = document.querySelectorAll('#detail__navigation li');
+
+
+Array.from(menu_link_anchor).forEach(link => {
+    link.addEventListener("click", function(event){
+      event.preventDefault();
+      
+      Array.from(menu_linkList).forEach(linkList => {
+        linkList.classList.remove('active');
+      });
+      
+      event.target.parentNode.classList.add('active');
+      
+      activeLink = document.querySelector('#detail__navigation li.active');
+      underline = document.querySelector('#active_underline');
+
+      setActiveUnderline(activeLink, underline);
+    });
+});
+
+function setActiveUnderline(activeLink, underline){
+  underline.style.left = activeLink.offsetLeft+'px';
+  underline.style.width = activeLink.offsetWidth+'px';
+};
+ */
+
 </script>
