@@ -1,38 +1,35 @@
 package com.ktdsuniversity.edu.course.vo;
 
-import java.sql.Date;
-
 import org.springframework.stereotype.Component;
 
 @Component("courseVO")
 public class CourseVO {
 	private int id;
-	private Date startDate;
-	private Date endDate;
+	private String startDate;
+	private String endDate;
 	private String startTime;
 	private String endTime;
 	private String classroom;
 	private String bannerImg;
 	private SyllabusVO syllabusVO;
+	
 	public CourseVO() {
 		
 	}
 	
-
-
-	public CourseVO(int crs_id, Date crs_start_date, Date crs_end_date, String crs_start_time, String crs_end_time,
-			String crs_classroom, String crs_banner_img, SyllabusVO syllabusVO) {
-		this.id = crs_id;
-		this.startDate = crs_start_date;
-		this.endDate = crs_end_date;
-		this.startTime = crs_start_time;
-		this.endTime = crs_end_time;
-		this.classroom = crs_classroom;
-		this.bannerImg = crs_banner_img;
+	public CourseVO(int id, String startDate, String endDate, String startTime, String endTime, String classroom,
+			String bannerImg, SyllabusVO syllabusVO) {
+		this.id = id;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.classroom = classroom;
+		this.bannerImg = bannerImg;
 		this.syllabusVO = syllabusVO;
 	}
-	
-	
+
+
 	public int getId() {
 		return id;
 	}
@@ -45,25 +42,25 @@ public class CourseVO {
 
 
 
-	public Date getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
 
 
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 
 
 
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
 
 
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 
