@@ -1,116 +1,86 @@
-#course__wrapper {
-	flex-direction: row;
-	width: 1000px;
-	margin-top: auto;
-	margin-bottom: auto;
-}
-
 #course__banner {
 	width: 100%;
 	height: 305px;
 	background-color: rgb(233, 27, 34);
 }
 
+#course__wrapper {
+	width: 1000px;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+
+
 #course__logo {
-	width: 370px;
+	width: 275px;
 	height: 275px;
 	background: rgb(238,238,238);
 	border-radius: 40px;
-	margin: 0 12px;
+	margin-right: 	20px;
 	justify-content: center;
 }
 
 #course__logo img {
-	width: 110px;
+	width: 180px;
 }
 
+#intro__wrapper {
+	justify-content: space-evenly;
+}
+
+
 #course__intro {
-	width: 700px;
+	width: 420px;
 	flex-direction: column;
 	justify-content: space-evenly;
 	color: white;
-	font-family: 'Droid Sans Fallback';
-	font-size: 18px;
-	padding-left: 20px
+	font-size: 16px;
+	font-weight: 300;
+	padding-left: 20px;
+	margin-left: 20px;
 }
 
 
-#course__intro #intro__name {
+#course__intro p {
+	margin: 12px 0px;
+}
+
+#course__name {
 	font-size: 28px;
+	font-weight: 400;
 }
 
-/*���� ����*/
-#course__detail {
-	font-family: 'Noto Sans KR';
-	flex-direction: column;
-	width: 1000px;
-}
-
-/*과정 내용으로 바로가는 내비게이션 css*/
-#detail__navigation {
-	position: sticky;
-	top: 0px;
-}
-#__wrapper {
-	position: relative;
-	flex-direction: row;
-	align-items: flex-end;
-	height: 70px;
-	border-bottom: 1px solid rgba(128, 128, 128, 0.8);
-	margin-bottom: 30px;
-	background-color: white;
-}
-
-#__wrapper ul {
-	list-style-type: none;
-	font-weight: bold;
-	width: 410px;
-	text-align: left;
-	margin: 0px;
-	padding: 0px;
-}
-
-
-#__wrapper li {
-	font-size: 18px;
-	padding-right: 38px;
-    margin-bottom: 9px;
-    letter-spacing: -0.7px;
-}
-
-#active__underline { /*메뉴를 클릭하는 곳으로 sliding effect*/
-	width: 27px;
-	height: 5px;
-	background: red;
-	position: absolute;
-	transition: all 0.3s ease-in-out;
-}
-
-#enroll__button__wrapper {
-	width: 590px;
-	height: 45px;
-}
 
 #enroll__button { 
-	width: 220px;
-	height: 50px;
+	width: 165px;
+	height: 30px;
 	float: right;
-	background: rgb(233, 27, 34);
-	border-radius: 10px;
-	margin-top: -15px;
+	background: #ec7880;
+	border-radius: 5px;
+	margin: 5px;
+	margin-left:40px;
 	color: white;
 	
 }
 
 #enroll__button a {
-	display: block;
-	padding: 8px;
-	
-	font-family: 'Droid Sans Fallback';
-	font-size: 25px;
-	text-align: center;
-	letter-spacing: -0.5px;
+    display: block;
+    font-size: 15px;
+    text-align: center;
+    letter-spacing: -0.5px;
+    padding-top: 4px;
 }
+
+
+
+/*메인 섹션*/
+#course__detail {
+	flex-direction: column;
+	width: 1000px;
+	margin-top: -40px;
+}
+
 
 /*강의계획서 css*/
 #syllabus__contents {
@@ -121,22 +91,24 @@
 
 .detail__title {
 	font-size: 30px;
-	color: rgb(233, 27, 34);
-	
+	font-weight: 600;
+	color: #e92028;
 }
 
 .detail {
 	display: block;
-	height: 300px;
+	height: fit-content;
 	font-size: 15px;
+	margin-bottom: 60px;
 }
 
 #back__button__wrapper {
 	width: 1000px;
 	justify-content: flex-end;
-	margin-top: 50px;
-	margin-bottom: 50px;
+	margin-top: 30px;
+	margin-bottom: 30px;
 }
+
 #back__button {
 	width: 50px;
 	height: 27px;
@@ -144,10 +116,10 @@
 	text-align: center;
 	padding: 3px;
 	border-radius: 2px;
-	background-color:  rgb(233, 27, 34);
+	background-color: #f2f2f2;
 }
+
 #back__button a{
-	font-family: 'Noto Sans KR';
 	font-size: 17px;
-	color: white;
+	color: black;
 }

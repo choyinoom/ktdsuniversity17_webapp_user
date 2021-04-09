@@ -19,45 +19,39 @@ request.setCharacterEncoding("UTF-8");
 <script type="text/javascript">
 $(document).ready(function() {
 	$("header").css("position" ,"relative");
-	$("main").css("padding-top" ,"0px" );
+	$("main").css("padding-top" ,"10px" );
 })
 </script>
 
 
 <div class="grid" id="course__banner">
-	<div class="grid mx-auto" id="course__wrapper">
+	<div class="grid mx-auto row-wrap" id="course__wrapper">
 		<div class="grid ai-center" id="course__logo">
 			<img alt="과정 로고" src="${contextPath}/resources/image/course_banner/${course.bannerImg}">
 		</div>
-		<div class="grid" id="course__intro">
-			<p>[${syllabus.type}] ${syllabus.category}</p>
-			<p id="intro__name">${syllabus.name}</p>
-			<p>교육기간 : <fmt:formatDate value="${parsedStartDate}" pattern="yy/MM/dd"/> ~ <fmt:formatDate value="${parsedEndDate}" pattern="yy/MM/dd"/>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  강의장:${course.classroom}
-			</p>
+		<div class="grid col-wrap" id="intro__wrapper">
+			<div class="grid" id="course__intro">
+				<p>[${syllabus.type}] ${syllabus.category}</p>
+				<p id="course__name">${syllabus.name}</p>
+				<p>교육기간 : <fmt:formatDate value="${parsedStartDate}" pattern="yy/MM/dd"/> ~ <fmt:formatDate value="${parsedEndDate}" pattern="yy/MM/dd"/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  강의장:${course.classroom}
+				</p>
+			</div>
+			<div id="enroll__button">
+				<a>신청하기</a>
+			</div>
 		</div>
 	</div>
 </div>
 
+<div id="back__button__wrapper" class="grid mx-auto">
+	<div id="back__button">
+		<a href="${contextPath}/course/listCourses.do">목록</a>
+	</div>
+</div>
+
 <div class="grid mx-auto" id="course__detail">
-	<!--  과정상세 각 내용으로 바로 가는 내비게이션 -->
-	<section id="detail__navigation">
-		<div class="grid mx-auto" id="__wrapper">
-			<ul class="grid">
-				<li class="active" id="__overview">학습개요</li>
-				<li id="__objectives">학습목표</li>
-				<li id="__target">학습대상</li>
-				<li id="__contents">교육내용</li>
-			</ul>
-			<div id="active__underline"></div>
-			<div id="enroll__button__wrapper">
-				<div id="enroll__button">
-					<a>신청하기</a>
-				</div>
-			</div>
-		</div>
-	</section>
-	
+	<!--  강의계획서 -->	
 	<section class="mx-auto" id=syllabus__contents>
 		<article id="overview">
 			<h2 class="detail__title">학습개요</h2>
@@ -106,52 +100,22 @@ $(document).ready(function() {
 	$('#__contents').on('click', function() {
 		$('html, body').animate({scrollTop:posContents.top-90}, "slow");
 	})
+
 })
+</script>
+<script id ="rendered-js" type="text/javascript">
+//css tabs with sliding underline
+let tabs = document.getElementsByClassName('tab');
 
-// sliding underline effect
-/* var activeLink = document.querySelector('#detail__navigation li.active');
-var underline = document.querySelector('#active_underline');
-
-setActiveUnderline(activeLink, underline);
-
-var menu_link = document.querySelector('#detail__navigation ul');
-var menu_linkList = document.querySelectorAll('#detail__navigation ul li');
-
-menu_link.addEventListener("mouseover", function( event ) {
-  var selectedWidth = event.target.offsetWidth;
-  var newleftpos = event.target.offsetLeft;
-  underline.style.left = newleftpos+'px';
-  underline.style.width = selectedWidth+'px';
+Array.prototype.forEach.call(tabs, function(tab) {
+	tab.addEventListener('click', setActiveClass);
 });
 
-menu_link.addEventListener("mouseout", function( event ) {   
-  underline.style.left = activeLink.offsetLeft+'px';
-});
-
-var menu_link_anchor = document.querySelectorAll('#detail__navigation li');
-
-
-Array.from(menu_link_anchor).forEach(link => {
-    link.addEventListener("click", function(event){
-      event.preventDefault();
-      
-      Array.from(menu_linkList).forEach(linkList => {
-        linkList.classList.remove('active');
-      });
-      
-      event.target.parentNode.classList.add('active');
-      
-      activeLink = document.querySelector('#detail__navigation li.active');
-      underline = document.querySelector('#active_underline');
-
-      setActiveUnderline(activeLink, underline);
-    });
-});
-
-function setActiveUnderline(activeLink, underline){
-  underline.style.left = activeLink.offsetLeft+'px';
-  underline.style.width = activeLink.offsetWidth+'px';
-};
- */
-
+function setActiveClass(event) {
+	Array.prototype.forEach.call(tabs, function(tab){
+		tab.classList.remove('active');
+	});
+	
+	event.currentTarget.classList.add('active');
+}
 </script>
