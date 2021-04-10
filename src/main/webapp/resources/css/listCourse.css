@@ -78,3 +78,36 @@
 	padding: 4px 12px;
 	font-size: 13px;
 }
+
+#Pagination {
+	width: 1000px;
+}
+
+#pagination {
+	list-style: none;
+    padding-left: 0;
+    width: fit-content;
+}
+
+#pagination li {
+	display: inline-block;
+    margin: 20px 20px;
+}
+
+#pagination li a {
+    color: #757575;
+}
+
+#pagination .active a{
+	font-weight: 600;
+	color: #4d4d4d;
+}
+
+li[class~="first"] {
+	display: none !important;
+}
+
+li[class~="last"] {
+	display: none !important;
+}
+
