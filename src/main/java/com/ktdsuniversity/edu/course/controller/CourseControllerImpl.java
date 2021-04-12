@@ -63,7 +63,9 @@ public class CourseControllerImpl implements CourseController{
 		
 		// 이미 수강 접수한 이력이 있는지 확인한다.
 		EnrollmentDetailVO enrollmentVO  = mypageService.findEnrollmentDetailByEnrollMap(enrollMap);
-		String stat = enrollmentVO.getStat();
+		String stat = null;
+		if (enrollmentVO != null)
+			stat = enrollmentVO.getStat();
 		
 		String message = null;
 		ResponseEntity<String> resEnt = null;

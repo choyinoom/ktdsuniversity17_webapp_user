@@ -67,6 +67,7 @@
 #enroll__button a {
     display: block;
     font-size: 15px;
+    color: white;
     text-align: center;
     letter-spacing: -0.5px;
     padding-top: 4px;
@@ -97,9 +98,13 @@
 
 .detail {
 	display: block;
+	width: 900px;
 	height: fit-content;
 	font-size: 15px;
 	margin-bottom: 60px;
+	white-space: pre-wrap; /*width가 넘어가는 경우 자동 줄바꿈처리*/
+	font-family: 'Noto Sans KR';
+	
 }
 
 #back__button__wrapper {

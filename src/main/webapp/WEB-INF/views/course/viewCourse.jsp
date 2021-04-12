@@ -75,19 +75,19 @@ $(document).ready(function() {
 	<section class="mx-auto" id=syllabus__contents>
 		<article id="overview">
 			<h2 class="detail__title">학습개요</h2>
-			<p class="detail">${syllabus.overview}</p>
+			<pre class="detail">${syllabus.overview}</pre>
 		</article>
 		<article id="objectives">
 			<h2 class="detail__title">학습목표</h2>
-			<p class="detail">${syllabus.objectives}</p>
+			<pre class="detail">${syllabus.objectives}</pre>
 		</article>
 		<article id="target">
 			<h2 class="detail__title">학습대상</h2>
-			<p class="detail">${syllabus.target}</p>
+			<pre class="detail">${syllabus.target}</pre>
 		</article>
 		<article id="contents">
 			<h2 class="detail__title">교육내용</h2>
-			<p class="detail">${syllabus.contents}</p>
+			<pre class="detail">${syllabus.contents}</pre>
 		</article>
 	</section>
 </div>
