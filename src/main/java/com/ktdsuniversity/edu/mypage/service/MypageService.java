@@ -1,5 +1,9 @@
 package com.ktdsuniversity.edu.mypage.service;
 
-public interface MypageService {
+import java.util.Map;
 
+import com.ktdsuniversity.edu.mypage.vo.EnrollmentDetailVO;
+
+public interface MypageService {
+	public EnrollmentDetailVO findEnrollmentDetailByEnrollMap(Map<String, Object> enrollMap); 
 }

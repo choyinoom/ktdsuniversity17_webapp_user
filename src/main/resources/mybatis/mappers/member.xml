@@ -21,13 +21,13 @@
 
 	<select id="selectAllMemberList" resultMap="memResult">
 		<![CDATA[
-         select * from t_member	order by joinDate desc	 	
+         select * from member order by joinDate desc	 	
       ]]>
 	</select>
 
 	<insert id="insertMember" parameterType="memberVO">
 		<![CDATA[
-		 insert into t_member(id, pwd, name, email, joinDate)
+		 insert into member(id, pwd, name, email, joinDate)
 		 values(#{id}, #{pwd}, #{name}, #{email}, sysdate)
 		]]>
 	</insert>

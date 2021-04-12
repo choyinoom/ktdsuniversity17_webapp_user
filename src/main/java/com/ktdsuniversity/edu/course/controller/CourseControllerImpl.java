@@ -23,17 +23,22 @@ import com.ktdsuniversity.edu.course.service.CourseService;
 import com.ktdsuniversity.edu.course.vo.CourseVO;
 import com.ktdsuniversity.edu.course.vo.SyllabusVO;
 import com.ktdsuniversity.edu.member.vo.MemberVO;
+import com.ktdsuniversity.edu.mypage.service.MypageService;
+import com.ktdsuniversity.edu.mypage.vo.EnrollmentDetailVO;
 
 @Controller("courseController")
+@RequestMapping(value="/course")
 public class CourseControllerImpl implements CourseController{
 	@Autowired
 	private CourseService courseService;
+	@Autowired
+	private MypageService mypageService;
 	
 	@Autowired
 	MemberVO memberVO;
 	
 	@Override
-	@RequestMapping(value = "/course/listCourses.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/listCourses.do", method = RequestMethod.GET)
 	public ModelAndView listCourses(HttpServletRequest request, HttpServletResponse response) {
 		String viewName = (String) request.getAttribute("viewName");
 		List coursesList = courseService.listCourses();
@@ -43,44 +48,55 @@ public class CourseControllerImpl implements CourseController{
 		return mav;
 	}
 	
+	
 	@Override
-	@RequestMapping(value = "/course/enrollCourse.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/enrollCourse.do", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity enrollCourse(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ResponseEntity<String> enrollCourse(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		/* 과정 수강 신청을 위한 메소드*/
 		HttpSession session = request.getSession();
 		memberVO = (MemberVO) session.getAttribute("member");
 		
 		Map<String, Object> enrollMap = new HashMap<String, Object>();
 		enrollMap.put("id", memberVO.getId());
-		enrollMap.put("courseID", session.getAttribute("courseID"));
+		enrollMap.put("courseID", request.getParameter("courseID"));
 		
-		String message;
-		ResponseEntity resEnt = null;
+		// 이미 수강 접수한 이력이 있는지 확인한다.
+		EnrollmentDetailVO enrollmentVO  = mypageService.findEnrollmentDetailByEnrollMap(enrollMap);
+		String stat = enrollmentVO.getStat();
+		
+		String message = null;
+		ResponseEntity<String> resEnt = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		
-		try {
-			int result = courseService.enrollCourse(enrollMap);
+		if(stat == null || stat.equals("취소")) {// 수강이력이 없거나, 취소 상태인 경우 
+			try {
+				courseService.enrollCourse(enrollMap);
+				message = "<script>";
+				message += " alert('수강신청이 완료되었습니다.');";
+				message += " history.go(-1); "; // 이전 페이지로 돌아가기
+				message += " </script>";
+			} catch(Exception e) {
+				message = "<script>";
+				message += " alert(`수강신청에 실패하였습니다\n관리자에게 문의하십시오.`);";
+				message += " history.go(-1); ";
+				message += " </script>";
+				e.printStackTrace();
+			}
+		} else if (stat.equals("신청")){ // 이미 접수된 상태일 경우
 			message = "<script>";
-			message += " alert('수강신청이 완료되었습니다.');";
-			message += " location.href='" + request.getContextPath() + "/course/listCourses.do'; ";
-			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-		} catch(Exception e) {
-			message = "<script>";
-			message += " alert('수강신청에 실패하였습니다<br>관리자에게 문의하십시오.');";
-			message += " location.href='" + request.getContextPath() + "/course/listCourses.do'; ";
-			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-			e.printStackTrace();
-		
-		}
+			message += " alert('이미 신청된 과목입니다.');";
+			message += " history.go(-1);"; 
+			message += "</script>";
+		} //else: 이미 수료 완료한 경우는 과정 신청 자체가 되지 않으므로 고려하지 않음.
+		resEnt = new ResponseEntity<String> (message, responseHeaders, HttpStatus.CREATED);
 		
 		return resEnt;
 	}
 	
 	@Override
-	@RequestMapping(value="/course/viewCourse.do", method= RequestMethod.GET) 
+	@RequestMapping(value="/viewCourse.do", method= RequestMethod.GET) 
 	public ModelAndView viewCourse(@RequestParam("courseId") int courseId, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		
 		HttpSession session = request.getSession();

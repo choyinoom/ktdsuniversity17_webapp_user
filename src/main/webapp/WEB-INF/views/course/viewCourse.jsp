@@ -22,7 +22,26 @@ $(document).ready(function() {
 	$("main").css("padding-top" ,"10px" );
 })
 </script>
-
+<script type="text/javascript">
+	// 로그인을 하지 않으면 과정 신청이 불가합니다.
+	function fn_enrollCourse(isLogOn, enrollCourse, loginForm, courseID) {
+		if(isLogOn != '' && isLogOn != 'false') {
+			console.log(courseID);
+			let form = document.createElement("form");
+			form.action = enrollCourse;
+			form.method = "post";
+			let input = document.createElement("input");
+			input.setAttribute("name", "courseID");
+			input.setAttribute("value", courseID);
+			form.appendChild(input);
+			document.body.appendChild(form);
+			form.submit();
+		} else {
+			alert("로그인 후 수강신청이 가능합니다.");
+			location.href=loginForm+'?action=/course/viewCourse.do?courseId='+courseID;
+		}
+	}
+</script>
 
 <div class="grid" id="course__banner">
 	<div class="grid mx-auto row-wrap" id="course__wrapper">
@@ -38,7 +57,8 @@ $(document).ready(function() {
 				</p>
 			</div>
 			<div id="enroll__button">
-				<a>신청하기</a>
+				<a id="course__btn" 
+	            	href="javascript:fn_enrollCourse('${isLogOn}', '${contextPath}/course/enrollCourse.do', '${contextPath}/member/loginForm.do', ${course.id} )">신청하기</a>
 			</div>
 		</div>
 	</div>
@@ -78,44 +98,3 @@ $(document).ready(function() {
 	</div>
 </div>
 
-
-<script type="text/javascript">
-// Automatically scroll when user click the menu
-$(document).ready(function() {
-	const posOverview = $('#overview > h2').offset();
-	const posObjectives = $('#objectives > h2').offset();
-	const posTarget = $('#target > h2').offset();
-	const posContents = $('#contents > h2').offset();
-	
-	$('#__overview').on('click', function() {
-		$('html, body').animate({scrollTop:posOverview.top-90}, "slow");
-	})
-	$('#__objectives').on('click', function() {
-		$('html, body').animate({scrollTop:posObjectives.top-90}, "slow");
-		$('#__objectives > span').toggleClass("f");
-	})
-	$('#__target').on('click', function() {
-		$('html, body').animate({scrollTop:posTarget.top-90}, "slow");
-	})
-	$('#__contents').on('click', function() {
-		$('html, body').animate({scrollTop:posContents.top-90}, "slow");
-	})
-
-})
-</script>
-<script id ="rendered-js" type="text/javascript">
-//css tabs with sliding underline
-let tabs = document.getElementsByClassName('tab');
-
-Array.prototype.forEach.call(tabs, function(tab) {
-	tab.addEventListener('click', setActiveClass);
-});
-
-function setActiveClass(event) {
-	Array.prototype.forEach.call(tabs, function(tab){
-		tab.classList.remove('active');
-	});
-	
-	event.currentTarget.classList.add('active');
-}
-</script>

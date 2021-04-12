@@ -18,11 +18,11 @@ request.setCharacterEncoding("UTF-8");
 			// 로그인을 하지 않으면 과정 신청이 불가합니다.
 			function fn_enrollCourse(isLogOn, enrollCourse, loginForm, courseID) {
 				if(isLogOn != '' && isLogOn != 'false') {
+					console.log(isLogOn);
 					let form = document.createElement("form");
 					form.action = enrollCourse;
 					form.method = "post";
 					let input = document.createElement("input");
-					input.setAttribute("type", "hidden");
 					input.setAttribute("name", "courseID");
 					input.setAttribute("value", courseID);
 					form.appendChild(input);
