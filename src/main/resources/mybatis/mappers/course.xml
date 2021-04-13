@@ -32,16 +32,16 @@
 
 
 	<select id="selectAllCourseList" resultMap="crsResult">
-		select crs_id, crs_start_date, crs_end_date, crs_start_time, crs_end_time, crs_classroom, slb_name, slb_type, slb_category, slb_time
-		from course
-			inner join syllabus using(slb_id)
-		order by crs_join_date
+		SELECT crs_id, SUBSTR(crs_start_date,0,10) as crs_start_date, SUBSTR(crs_end_date,0,10) as crs_end_date, crs_start_time, crs_end_time, crs_classroom, slb_name, slb_type, slb_category, slb_time
+		FROM course
+			INNER JOIN syllabus USING(slb_id)
+		ORDER BY crs_join_date
 	</select>
 	
 	<insert id="insertNewEnrollment" parameterType="java.util.Map">
 	<![CDATA[
 		INSERT INTO enrollment_detail(enrd_id, crs_id, mem_id, enrd_stat, enrd_join_date, enrd_mod_date)
-		VALUES(enrollment_detail_id_seq.NEXTVAL, #{courseID}, #{id}, '신청', to_char(sysdate, 'YYYY-MM-DD HH:MM:SS'), to_char(sysdate, 'YYYY:MM:DD HH-MM-SS'))
+		VALUES(enrd_seq.NEXTVAL, #{courseID}, #{id}, '신청', to_char(sysdate, 'YYYY-MM-DD HH:MM:SS'), to_char(sysdate, 'YYYY:MM:DD HH-MM-SS'))
 	]]>
 	</insert>
 	

@@ -11,7 +11,7 @@
 	href="<c:url 
 value='/resources/css/common.css'/>">
 <script src="<c:url 
-value='/resources/jquery-3.6.0.min.js'/>"></script>
+value='/resources/js/jquery-3.6.0.min.js'/>"></script>
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script>

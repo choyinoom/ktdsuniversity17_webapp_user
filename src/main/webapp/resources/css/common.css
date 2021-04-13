@@ -1,6 +1,5 @@
-@font-face { 
-	font-family: 'Droid Sans Fallback'; /* 폰트 패밀리 이름 주기*/ 
-	src: url('../OLLEHFONT.ttf'); /*폰트 파일 주소*/ 
+html {
+	font-family: 'Noto Sans KR';
 }
 
 body {
@@ -64,6 +63,14 @@ footer {
 
 .grid {
 	display:flex;
+}
+
+.row-wrap {
+	flex-direction: row;
+}
+
+.col-wrap {
+	flex-direction: column;
 }
 
 .ai-center {

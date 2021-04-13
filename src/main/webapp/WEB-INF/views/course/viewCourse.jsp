@@ -19,59 +19,75 @@ request.setCharacterEncoding("UTF-8");
 <script type="text/javascript">
 $(document).ready(function() {
 	$("header").css("position" ,"relative");
-	$("main").css("padding-top" ,"0px" );
+	$("main").css("padding-top" ,"10px" );
 })
 </script>
-
+<script type="text/javascript">
+	// 로그인을 하지 않으면 과정 신청이 불가합니다.
+	function fn_enrollCourse(isLogOn, enrollCourse, loginForm, courseID) {
+		if(isLogOn != '' && isLogOn != 'false') {
+			console.log(courseID);
+			let form = document.createElement("form");
+			form.action = enrollCourse;
+			form.method = "post";
+			let input = document.createElement("input");
+			input.setAttribute("name", "courseID");
+			input.setAttribute("value", courseID);
+			form.appendChild(input);
+			document.body.appendChild(form);
+			form.submit();
+		} else {
+			alert("로그인 후 수강신청이 가능합니다.");
+			location.href=loginForm+'?action=/course/viewCourse.do?courseId='+courseID;
+		}
+	}
+</script>
 
 <div class="grid" id="course__banner">
-	<div class="grid mx-auto" id="course__wrapper">
+	<div class="grid mx-auto row-wrap" id="course__wrapper">
 		<div class="grid ai-center" id="course__logo">
 			<img alt="과정 로고" src="${contextPath}/resources/image/course_banner/${course.bannerImg}">
 		</div>
-		<div class="grid" id="course__intro">
-			<p>[${syllabus.type}] ${syllabus.category}</p>
-			<p id="intro__name">${syllabus.name}</p>
-			<p>교육기간 : <fmt:formatDate value="${parsedStartDate}" pattern="yy/MM/dd"/> ~ <fmt:formatDate value="${parsedEndDate}" pattern="yy/MM/dd"/>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  강의장:${course.classroom}
-			</p>
+		<div class="grid col-wrap" id="intro__wrapper">
+			<div class="grid" id="course__intro">
+				<p>[${syllabus.type}] ${syllabus.category}</p>
+				<p id="course__name">${syllabus.name}</p>
+				<p>교육기간 : <fmt:formatDate value="${parsedStartDate}" pattern="yy/MM/dd"/> ~ <fmt:formatDate value="${parsedEndDate}" pattern="yy/MM/dd"/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  강의장:${course.classroom}
+				</p>
+			</div>
+			<div id="enroll__button">
+				<a id="course__btn" 
+	            	href="javascript:fn_enrollCourse('${isLogOn}', '${contextPath}/course/enrollCourse.do', '${contextPath}/member/loginForm.do', ${course.id} )">신청하기</a>
+			</div>
 		</div>
 	</div>
 </div>
 
+<div id="back__button__wrapper" class="grid mx-auto">
+	<div id="back__button">
+		<a href="${contextPath}/course/listCourses.do">목록</a>
+	</div>
+</div>
+
 <div class="grid mx-auto" id="course__detail">
-	<!--  과정상세 각 내용으로 바로 가는 내비게이션 -->
-	<section class="grid mx-auto" id="detail__index">
-		<ul class="grid" id="detail__navigation">
-			<li id="__overview">학습개요</li>
-			<li id="__objectives">학습목표</li>
-			<li id="__target">학습대상</li>
-			<li id="__contents">교육내용</li>
-		</ul>
-		<div id="underbar"></div>
-		<div id="enroll__button__wrapper">
-			<div id="enroll__button">
-				<a>신청하기</a>
-			</div>
-		</div>
-	</section>
-	
+	<!--  강의계획서 -->	
 	<section class="mx-auto" id=syllabus__contents>
 		<article id="overview">
 			<h2 class="detail__title">학습개요</h2>
-			<p class="detail">${syllabus.overview}</p>
+			<pre class="detail">${syllabus.overview}</pre>
 		</article>
 		<article id="objectives">
 			<h2 class="detail__title">학습목표</h2>
-			<p class="detail">${syllabus.objectives}</p>
+			<pre class="detail">${syllabus.objectives}</pre>
 		</article>
 		<article id="target">
 			<h2 class="detail__title">학습대상</h2>
-			<p class="detail">${syllabus.target}</p>
+			<pre class="detail">${syllabus.target}</pre>
 		</article>
 		<article id="contents">
 			<h2 class="detail__title">교육내용</h2>
-			<p class="detail">${syllabus.contents}</p>
+			<pre class="detail">${syllabus.contents}</pre>
 		</article>
 	</section>
 </div>
@@ -82,27 +98,3 @@ $(document).ready(function() {
 	</div>
 </div>
 
-
-<script>
-$(document).ready(function() {
-	const posOverview = $('#overview > h2').offset();
-	const posObjectives = $('#objectives > h2').offset();
-	const posTarget = $('#target > h2').offset();
-	const posContents = $('#contents > h2').offset();
-	
-	$('#__overview').on('click', function() {
-		$('html, body').animate({scrollTop:posOverview.top-90}, "slow");
-	})
-	$('#__objectives').on('click', function() {
-		$('html, body').animate({scrollTop:posObjectives.top-90}, "slow");
-		$('#__objectives > span').toggleClass("f");
-	})
-	$('#__target').on('click', function() {
-		$('html, body').animate({scrollTop:posTarget.top-90}, "slow");
-	})
-	$('#__contents').on('click', function() {
-		$('html, body').animate({scrollTop:posContents.top-90}, "slow");
-	})
-})
-	
-</script>
