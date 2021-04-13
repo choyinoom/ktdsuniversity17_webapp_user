@@ -1,12 +1,14 @@
 package com.ktdsuniversity.edu.member.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.ktdsuniversity.edu.member.vo.EnrollmentDetailVO;
 import com.ktdsuniversity.edu.member.vo.MemberVO;
 
 
@@ -37,6 +39,13 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public MemberVO loginById(MemberVO memberVO) throws DataAccessException{
 		  MemberVO vo = sqlSession.selectOne("mapper.member.loginById",memberVO);
+		return vo;
+	}
+
+	@Override
+	public EnrollmentDetailVO selectEnrollmentDetailBy(Map<String, Object> enrollMap)
+			throws DataAccessException {
+		EnrollmentDetailVO vo = sqlSession.selectOne("mapper.member.selectEnrollmentDetailByEnrollMap", enrollMap);
 		return vo;
 	}
 

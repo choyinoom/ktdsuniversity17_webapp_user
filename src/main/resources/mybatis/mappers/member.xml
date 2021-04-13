@@ -9,14 +9,18 @@
 		<result property="email" column="email" />
 		<result property="joinDate" column="joinDate" />
 	</resultMap>
-	<!-- 
-	<resultMap id="memResult" type="java.util.HashMap">
-      <result property="id" column="id" />
-      <result property="pwd" column="pwd" />
-      <result property="name" column="name" />
-      <result property="email" column="email" />
-      <result property="joinDate" column="joinDate" />
-   </resultMap> -->
+	
+	<resultMap id="enrdResult" type="enrollmentDetailVO">
+		<id property="id" column="enrd_id"/>
+		<result property="crsId" column="crs_id"/>
+		<result property="memId" column="mem_id"/>
+		<result property="stat" column="enrd_stat"/>
+		<result property="joinDate" column="enrd_join_date"/>
+		<result property="modDate" column="enrd_mod_date"/>
+		<result property="completeDate" column="enrd_complete_date"/>
+		<association property="syllabusVO" resultMap="mapper.course.slbResult"/>
+		<association property="courseVO" resultMap="mapper.course.crsResult"/>
+	</resultMap>
 
 
 	<select id="selectAllMemberList" resultMap="memResult">
@@ -49,10 +53,19 @@
 	   id=#{id}
 	]]>
 	</delete>
+	
 	<select id="loginById" resultType="memberVO" parameterType="memberVO">
 		<![CDATA[
 		select * from t_member	
 		where id=#{id} and pwd=#{pwd}		
 	]]>
+	</select>
+	
+	<select id="selectEnrollmentDetailByEnrollMap" parameterType="java.util.Map" resultMap="enrdResult">
+		<![CDATA[
+			SELECT enrd_id, crs_id, mem_id, enrd_stat
+			FROM enrollment_detail
+			WHERE crs_id = #{courseID} AND mem_id = #{id}
+		]]>
 	</select>
 </mapper>

@@ -19,12 +19,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ktdsuniversity.edu.member.service.MemberService;
 import com.ktdsuniversity.edu.course.service.CourseService;
 import com.ktdsuniversity.edu.course.vo.CourseVO;
 import com.ktdsuniversity.edu.course.vo.SyllabusVO;
 import com.ktdsuniversity.edu.member.vo.MemberVO;
-import com.ktdsuniversity.edu.mypage.service.MypageService;
-import com.ktdsuniversity.edu.mypage.vo.EnrollmentDetailVO;
+import com.ktdsuniversity.edu.member.vo.EnrollmentDetailVO;
 
 @Controller("courseController")
 @RequestMapping(value="/course")
@@ -32,8 +32,7 @@ public class CourseControllerImpl implements CourseController{
 	@Autowired
 	private CourseService courseService;
 	@Autowired
-	private MypageService mypageService;
-	
+	private MemberService memberService;
 	@Autowired
 	MemberVO memberVO;
 	
@@ -62,7 +61,7 @@ public class CourseControllerImpl implements CourseController{
 		enrollMap.put("courseID", request.getParameter("courseID"));
 		
 		// 이미 수강 접수한 이력이 있는지 확인한다.
-		EnrollmentDetailVO enrollmentVO  = mypageService.findEnrollmentDetailByEnrollMap(enrollMap);
+		EnrollmentDetailVO enrollmentVO  = memberService.findEnrollmentDetailBy(enrollMap);
 		String stat = null;
 		if (enrollmentVO != null)
 			stat = enrollmentVO.getStat();
