@@ -40,7 +40,7 @@ value='/resources/css/header.css'/>">
 				<li><a class="navbar__menu__each" href="#">회사소개</a></li>
 				<li><a class="navbar__menu__each" href="${contextPath}/course/listCourses.do">과정안내</a></li>
 				<li><a class="navbar__menu__each" href="#">교육장안내</a></li>
-				<li><a class="navbar__menu__each" href="#">고객지원</a></li>
+				<li><a class="navbar__menu__each" href="${contextPath}/customer/listNotices.do?pageNo=1">고객지원</a></li>
 			</ul>
 
 	</div>
