@@ -35,14 +35,24 @@ value='/resources/css/header.css'/>">
 				<li ><a class="navbar__menu__each" href="#">마이페이지</a></li>
 			</ol>
 
-
+		<div class="topMenu">
 			<ul class="navbar__menu__gnb grid">
-				<li><a class="navbar__menu__each" href="#">회사소개</a></li>
-				<li><a class="navbar__menu__each" href="${contextPath}/course/listCourses.do">과정안내</a></li>
-				<li><a class="navbar__menu__each" href="#">교육장안내</a></li>
-				<li><a class="navbar__menu__each" href="#">고객지원</a></li>
+				<li><a class="navbar__menu__each__main" href="${contextPath}/company/companyInfo.do">회사소개</a>
+				<ul class="navbar__menu__each__sub">
+				<li><a id="navbar__menu__each__sub__text" href="${contextPath}/company/companyInfo.do">회사소개</a></li>
+				<li><a id="navbar__menu__each__sub__text" href="${contextPath}/company/consortium.do">컨소시엄소개</a></li>
+				</ul>
+				</li>
+				<li><a class="navbar__menu__each__main" href="${contextPath}/course/listCourses.do">과정안내</a></li>
+				<li><a class="navbar__menu__each__main" href="${contextPath}/company/classroom.do">교육장안내</a></li>
+				<li><a class="navbar__menu__each__main" href="#">고객지원</a>
+				<ul class="navbar__menu__each__sub">
+				<li><a id="navbar__menu__each__sub__text" href="${contextPath}/company/companyInfo.do">공지사항</a></li>
+				<li><a id="navbar__menu__each__sub__text" href="${contextPath}/company/companyInfo.do">FAQ</a></li>
+				</ul>
+				</li>
 			</ul>
-
+		</div>
 	</div>
 
 </nav>

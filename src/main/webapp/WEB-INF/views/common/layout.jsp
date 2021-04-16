@@ -19,9 +19,28 @@ $(function () {
 	  $(document).scroll(function () {
 	    var $header = $("header");
 	    $header.toggleClass('scrolled', $(this).scrollTop() > $header.height());
-	    
 	  });
+	  
+	  $(document).on('mouseover', '.topMenu', function() {
+	        $('.navbar__menu__each__sub').slideDown(300);
+	        $(".header__transparent").css("background", "white")
+	        $(".header__transparent .navbar__menu__each").css("color", "black")
+	        $(".header__transparent .navbar__menu__each__main").css("color", "black")
+	        var $header = $(".topMenu");
+	    	$header.toggleClass('mouseover');
+	    });
+
+	    $(document).on('mouseleave', 'header', function() {
+	        $('.navbar__menu__each__sub').slideUp(300);
+	        $(".header__transparent").css("background", "transparent")
+	        $(".header__transparent .navbar__menu__each").css("color", "white")
+	        $(".header__transparent .navbar__menu__each__main").css("color", "white")
+	        var $header = $(".topMenu");
+	    	$header.toggleClass('');
+	    });
 	});
+	
+	
 </script>
 
 <title><tiles:insertAttribute name="title" /></title>

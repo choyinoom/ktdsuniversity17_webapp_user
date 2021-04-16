@@ -1,0 +1,110 @@
+.company__container {
+	display: flex;
+	justify-content: center;
+}
+
+.company__content {
+	width: 1000px;
+}
+
+#company__intro {
+	margin-top: 50px;
+}
+
+#company__content {
+	margin-top: 100px;
+}
+
+#company__history {
+	margin-top: 100px;
+}
+
+.consortium__content {
+	display: flex;
+	justify-content: center;
+	margin: 60px;
+}
+
+.classroom__container {
+	display: flex;
+	justify-content: center;
+}
+
+.classroom__content {
+	width: 1000px;
+	display: block;
+	margin: 60px;
+}
+
+#classroom__contact {
+	position: relative;
+	left: 520px;
+	margin: 70px 0px 50px 0px;
+}
+
+.restroom {
+	display: flex;
+	justify-content: space-between;
+}
+
+#restroom1, #restroom2, #restroom3 {
+	width: 308px;
+	height: 231px;
+}
+
+.classroom {
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: 90px;
+	border-bottom: 1px solid #969696;
+}
+
+#classroom1, #classroom2, #classroom3 {
+	width: 308px;
+	height: 231px;
+}
+
+/* 모달창 */
+#restroom1_1, #restroom2_1, #restroom3_1 {
+	display: none;
+	width: 300px;
+	padding: 20px 60px;
+	background-color: #fefefe;
+	border: 1px solid #888;
+	border-radius: 8px;
+}
+
+#restroom1_1 .modal_close_btn, #restroom2_1 .modal_close_btn, #restroom3_1 .modal_close_btn {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	cursor: pointer;
+}
+
+#classroom1_1, #classroom2_1, #classroom3_1 {
+	display: none;
+	width: 300px;
+	padding: 20px 60px;
+	background-color: #fefefe;
+	border: 1px solid #888;
+	border-radius: 8px;
+}
+
+#classroom1_1 .modal_close_btn, #classroom2_1 .modal_close_btn, #classroom3_1 .modal_close_btn {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	cursor: pointer;
+}
+
+/* 카카오맵API */
+#map {
+	position: absolute;
+	left: 425px;
+	top: 1753px;
+	width: 500px;
+	height: 500px;
+	min-width: 500px;
+	min-height: 500px;
+	object-fit: cover;
+}

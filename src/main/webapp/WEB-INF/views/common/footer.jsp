@@ -10,7 +10,7 @@ value='/resources/css/footer.css'/>">
 
 <div class="grid mx-auto ai-center" id="footer__container">
 	<div class='footer__contents grid' id="left">
-		<h3>케이티디에스(주)</h3>
+		<h3>(주)케이티디에스</h3>
 		<p>
 			대표이사: 우정민<br> 사업자등록번호: 117-81-655799<br> 통신판매 신고번호 2013-서울서초-0039<br> 주소 : 서울특별시
 			서초구 효령로176 <br> copyright(c) 2018 kt ds All Rights Reserved.
