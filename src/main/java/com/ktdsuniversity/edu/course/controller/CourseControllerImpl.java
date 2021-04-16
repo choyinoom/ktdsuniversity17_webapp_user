@@ -36,11 +36,12 @@ public class CourseControllerImpl implements CourseController{
 	@Autowired
 	MemberVO memberVO;
 	
+	// 과정안내 페이지
 	@Override
 	@RequestMapping(value = "/listCourses.do", method = RequestMethod.GET)
-	public ModelAndView listCourses(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView listCourses(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String viewName = (String) request.getAttribute("viewName");
-		List coursesList = courseService.listCourses();
+		List<CourseVO> coursesList = courseService.listCourses();
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("coursesList", coursesList);
 		
@@ -48,6 +49,7 @@ public class CourseControllerImpl implements CourseController{
 	}
 	
 	
+	// 수강신청 버튼을 클릭한 경우
 	@Override
 	@RequestMapping(value = "/enrollCourse.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -96,6 +98,8 @@ public class CourseControllerImpl implements CourseController{
 		return resEnt;
 	}
 	
+	
+	// 과정 안내 (상세)
 	@Override
 	@RequestMapping(value="/viewCourse.do", method= RequestMethod.GET) 
 	public ModelAndView viewCourse(@RequestParam("courseId") int courseId, HttpServletRequest request, HttpServletResponse response) throws Exception{

@@ -17,8 +17,8 @@ public class CourseDAOImpl implements CourseDAO{
 	private SqlSession sqlSession;
 	
 	@Override
-	public List selectAllCourseList() throws DataAccessException {
-		List<CourseDAO> courseList = null;
+	public List<CourseVO> selectAllCourseList() throws DataAccessException {
+		List<CourseVO> courseList = null;
 		courseList = sqlSession.selectList("mapper.course.selectAllCourseList");
 		return courseList;
 	}
@@ -41,5 +41,12 @@ public class CourseDAOImpl implements CourseDAO{
 		CourseVO courseVO = null;
 		courseVO = sqlSession.selectOne("mapper.course.selectCourse", courseId);
 		return courseVO;
+	}
+	
+	@Override
+	public List<CourseVO> selectAllCourseListForWelcomePage() throws DataAccessException {
+		List<CourseVO> courseList = null;
+		courseList = sqlSession.selectList("mapper.course.selectAllCourseListForWelcomePage");
+		return courseList;
 	}
 }

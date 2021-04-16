@@ -9,9 +9,8 @@ import com.ktdsuniversity.edu.course.vo.CourseVO;
 import com.ktdsuniversity.edu.course.vo.SyllabusVO;
 
 public interface CourseService {
-	public List listCourses() throws DataAccessException;
-
-	public int enrollCourse(Map<String, Object> enrollMap);
-
-	public Map<String, Object> viewCourse(int courseId);
+	public List<CourseVO> listCourses() throws Exception;
+	public int enrollCourse(Map<String, Object> enrollMap) throws Exception;
+	public Map<String, Object> viewCourse(int courseId) throws Exception;
+	public Map<String, Object> listCoursesForWelcomePage() throws Exception;
 }

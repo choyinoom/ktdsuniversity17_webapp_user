@@ -1,6 +1,7 @@
 package com.ktdsuniversity.edu.member.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ktdsuniversity.edu.course.service.CourseService;
+import com.ktdsuniversity.edu.course.vo.CourseVO;
 import com.ktdsuniversity.edu.member.service.MemberService;
 import com.ktdsuniversity.edu.member.vo.MemberVO;
 
@@ -28,13 +32,21 @@ public class MemberControllerImpl implements MemberController {
 	@Autowired
 	private MemberService memberService;
 	@Autowired
+	private CourseService courseService;
+	@Autowired
 	MemberVO memberVO;
+	@Autowired
+	CourseVO courseVO;
 
 	@RequestMapping(value = { "/", "/main.do" }, method = RequestMethod.GET)
-	private String main(HttpServletRequest request, HttpServletResponse response) {
-	
-	return "main";
-
+	private ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		Map<String, Object> courseMap = courseService.listCoursesForWelcomePage();
+		String coursesJSON = new ObjectMapper().writeValueAsString(courseMap);
+		System.out.println(coursesJSON);
+		mav.addObject("coursesJSON", coursesJSON);
+		return mav;
 	}
 
 	@Override
