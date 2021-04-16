@@ -3,11 +3,17 @@
 
 <mapper namespace="mapper.member">
 	<resultMap id="memResult" type="memberVO">
-		<result property="id" column="id" />
-		<result property="pwd" column="pwd" />
-		<result property="name" column="name" />
-		<result property="email" column="email" />
-		<result property="joinDate" column="joinDate" />
+		<result property="id" column="mem_id" />
+		<result property="pw" column="mem_pw" />
+		<result property="name" column="mem_name" />
+		<result property="phone" column="mem_phone"/>
+		<result property="email" column="mem_email" />
+		<result property="subscription" column="mem_subscription"/>
+		<result property="companyName" column="mem_company_name"/>
+		<result property="delYN" column="mem_delyn"/>
+		<result property="joinDate" column="mem_join_date"/>
+		<result property="modDate" column="mem_mod_date"/>
+		<result property="loginFail" column="mem_login_fail" />
 	</resultMap>
 	
 	<resultMap id="enrdResult" type="enrollmentDetailVO">
@@ -54,10 +60,10 @@
 	]]>
 	</delete>
 	
-	<select id="loginById" resultType="memberVO" parameterType="memberVO">
+	<select id="loginById" resultMap="memResult" parameterType="memberVO">
 		<![CDATA[
-		select * from t_member	
-		where id=#{id} and pwd=#{pwd}		
+		select * from member	
+		where mem_id=#{id} and mem_pw=#{pw}		
 	]]>
 	</select>
 	

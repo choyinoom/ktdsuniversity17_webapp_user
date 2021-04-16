@@ -14,7 +14,6 @@
 }
 
 .navbar__menu{
-	width: 100%;
 	flex-direction: column;
 }
 
@@ -59,7 +58,7 @@
 	border-bottom: 1px solid rgba(232, 12, 30, .8);
 }
 
-/*main¿¡¼­¸¸ Àû¿ë*/
+/*mainï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½*/
 .header__transparent {
 	background: transparent;
 }
@@ -75,7 +74,7 @@
 	color:white;
 }
 
-/*½ºÅ©·Ñ½Ã Àû¿ë */
+/*ï¿½ï¿½Å©ï¿½Ñ½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
 .navbar.scrolled {
   background-color: #fff !important;
   transition: background-color 200ms linear;

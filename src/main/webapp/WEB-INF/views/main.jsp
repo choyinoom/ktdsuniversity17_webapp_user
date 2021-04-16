@@ -7,73 +7,50 @@
 request.setCharacterEncoding("UTF-8");
 %>
 
+
+<link rel="stylesheet" href="<c:url value='/resources/css/main.css'/>">
+<!-- Bootstrap CSS-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 <script>
 	$(document).ready(function() {
 		$("header").toggleClass("header__transparent");
 		$("main").css("padding-top", 0); //main에는 패딩 없음.
 	});
 </script>
-
-
-<link rel="stylesheet" href="<c:url 
-value='/resources/css/main.css'/>">
-
-<div id="slider">
-	<div id="slides">
-		<!-- radio buttons to choose img -->
-		<input type="radio" name="radio" id="radio1" checked/> 
-		<input type="radio" name="radio" id="radio2"/> 
-		<input type="radio" name="radio" id="radio3"/>
-
-		<!--  images to slide -->
-		<div class="slide s1">
-			<img alt="ktds 야외"
-				src="${contextPath}/resources/image/main_banner1.jpg">
+<div id="carouselIndicators" class="carousel slide" data-ride="carousel">
+	<ol class="carousel-indicators">
+		<li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
+		<li data-target="#carouselIndicators" data-slide-to="1"></li>
+		<li data-target="#carouselIndicators" data-slide-to="2"></li>
+		<li data-target="#carouselIndicators" data-slide-to="3"></li>
+	</ol>
+	<div class="carousel-inner">
+		<div class="carousel-item active">
+			<img src="${contextPath}/resources/image/main_banner/1.jpg" class="d-block w-100" alt="전경">
 		</div>
-		<div class="slide">
-			<img alt="교육장 내부1"
-				src="${contextPath}/resources/image/main_banner2.jpg">
+		<div class="carousel-item">
+			<img src="${contextPath}/resources/image/main_banner/2.jpg" class="d-block w-100" alt="로비">
 		</div>
-		<div class="slide">
-			<img alt="교육장 내부2"
-				src="${contextPath}/resources/image/main_banner3.jpg">
+		<div class="carousel-item">
+			<img src="${contextPath}/resources/image/main_banner/3.jpg" class="d-block w-100" alt="휴식공간">
 		</div>
-
-		<div id="slide__navigation">
-			<span class="arrow prev">◀</span>
-			<label for="radio1" class="slide__btn"></label>
-			<label for="radio2" class="slide__btn"></label>
-			<label for="radio3" class="slide__btn"></label>
-			<span class="arrow next">▶</span>
-		</div>
-
-
-		<div id="text__wrapper">
-			<div class="mx-auto" id="main__banner__text">
-				<p id="text__1">
-					<span class="big__text"><b>IT분야 HRD 업무노하우</b></span>를 바탕으로<br>
-					<span class="big__text"><b>IT전문 교육기관</b></span>으로 신뢰받는 기업<br>
-				</p>
-				<p id="text__2">
-					kt ds는 KT 정보시스템 구축 기술과 노하우를 기반으로 <br> 새로운 IT서비스를 창출하고 우수한 인재를
-					양성하여 <br> 고객의 가치를 최고로 실현하는 IT서비스 전문기업입니다.
-				</p>
-
-			</div>
+		<div class="carousel-item">
+			<img src="${contextPath}/resources/image/main_banner/4.jpg" class="d-block w-100" alt="복도">
 		</div>
 	</div>
 </div>
+<div id="text__wrapper">
+	<div class="mx-auto" id="main__banner__text">
+		<p id="text__1">
+			<span class="big__text">IT분야 HRD 업무노하우</span>를 바탕으로<br>
+			<span class="big__text">IT전문 교육기관</span>으로 신뢰받는 기업<br>
+		</p>
+		<p id="text__2">
+			kt ds는 KT 정보시스템 구축 기술과 노하우를 기반으로 <br> 새로운 IT서비스를 창출하고 우수한 인재를
+			양성하여 <br> 고객의 가치를 최고로 실현하는 IT서비스 전문기업입니다.
+		</p>
 
-
-
-<script>
-	var counter = 1;
-	setInterval(function() {
-		document.getElementById('radio' + counter).checked = true;
-		counter++;
-		if (counter > 3) {
-			counter = 1;
-		}
-	}, 5000);
-</script>
+	</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 

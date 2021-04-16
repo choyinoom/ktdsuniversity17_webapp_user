@@ -37,7 +37,7 @@
 				<c:choose> 
 					<c:when test="${articlesList.size() > all - 10 * (pageNo - 1)}">
 						<c:set var="index" value = "${articlesList.size()}"/>
-					</c:when>
+					</c:when> 
 					<c:otherwise>
 						<c:set var="index" value = "${all - 10 * (pageNo - 1)}"/>
 					</c:otherwise>
