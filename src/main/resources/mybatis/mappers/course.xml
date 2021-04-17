@@ -61,24 +61,6 @@
 	]]>
 	</insert>
 	
-	<!-- 강의계획서 내용 -->
-	<select id="selectSyllabus" parameterType="int" resultMap="slbResult">
-	<![CDATA[
-		SELECT 
-			slb_id, 
-			slb_name, 
-			slb_type, 
-			slb_category, 
-			slb_overview, 
-			slb_objectives, 
-			slb_target, 
-			slb_contents
-		FROM syllabus
-			INNER JOIN course using(slb_id)
-		WHERE crs_id = #{courseId}
-	]]>
-	</select>
-	
 	<!-- 과정 상세 내용 출력 -->
 	<select id="selectCourse" parameterType="int" resultMap="crsResult">
 	<![CDATA[
@@ -94,7 +76,8 @@
 			slb_category,
 			slb_overview,
 			slb_target,
-			slb_contents 
+			slb_contents,
+			slb_banner_img 
 		FROM course
 			INNER JOIN syllabus USING(slb_id)
 		WHERE crs_id = #{courseId}
@@ -105,13 +88,13 @@
 	<select id="selectAllCourseListForWelcomePage" resultMap="crsResult">
 	<![CDATA[
 		SELECT
-			crs_id,
-			SUBSTR(crs_start_date,0,10) as crs_start_date, 
-			SUBSTR(crs_end_date,0,10) as crs_end_date,
-			slb_name,
-			slb_banner_img 
+		    crs_id,
+		    to_char(to_date(SUBSTR(crs_start_date,0,10)),'YY/MM/DD') as crs_start_date, 
+		    to_char(to_date(SUBSTR(crs_end_date,0,10)),'YY/MM/DD') as crs_end_date,
+		    slb_name,
+		    slb_banner_img 
 		FROM course
-			INNER JOIN syllabus using(slb_id)
+		    INNER JOIN syllabus using(slb_id)
 		WHERE crs_stat = '신청가능' AND trunc(sysdate) <= to_date(crs_re_date, 'YYYY-MM-DD HH24:MI:SS')
 		ORDER BY crs_start_date
 	]]>

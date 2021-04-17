@@ -1,3 +1,8 @@
+/*메인 캐러셀에는 next, prev 버튼 없음*/
+.main__carousel button[class~="slick-arrow"] {
+	display: none !important;
+}
+
 /*text css*/
 #text__wrapper {
     width: 100%;
@@ -32,25 +37,75 @@
 	letter-spacing: -0.5px;
 }
 
-#month__button {
+.button__wrapper {
 	list-style: none;
 	padding: 0;
 	margin: 5px 12px;
 }
 
-#course__carousel img {
-	width: 190px;
-	height: 245px;
+.button__wrapper li {
+	font-size: 23px;
+    font-weight: 500;
+    margin: 5px 25px;
 }
 
-.carousel-item {
- display: flex !important; 
- margin-right: 0 !important;
- -webkit-box-align: center !important;
- -ms-flex-align: center !important;
- align-items: center !important;
- }
- 
- .carousel-item .active {
-  display: flex !important; 
- } 
+.slick-prev:before, .slick-next:before { /*캐러셀 화살표*/
+    color: grey !important;
+}
+
+#course__carousel__wrapper {
+	height: 400px;
+	margin-top: 20px;
+}
+
+#course__carousel__navigator { /*월(月) 버튼*/
+	justify-content: center;
+	margin: 10px;
+}
+
+.courses__carousel {
+	width: 1400px;
+	min-width: 0px;
+	min-height: 0px;
+}
+
+.courses__carousel .card { /* 과정 바로가기 카드*/
+	width: 215px;
+	height: 277px;
+	margin: 5px 12px;
+}
+
+.courses__carousel img { /*과정 이미지*/
+	width: 80%;
+	opacity: .3;
+}
+
+.slide__top { /* 과정 카드 윗 부분*/
+	justify-content: center;
+	transition: background-color .5s;
+	height: 240px;
+	background-color: #f2f2f2;
+}
+
+.slide__top span {	/*강의 제목*/
+	position: absolute;
+    display: block;
+    width: 190px;
+    text-align: center;
+    word-break: keep-all;
+    font-weight: 600;
+    line-height: 34px;
+}
+
+.slide__bottom { /* 과정 카드 아랫 부분*/
+    height: 37px;
+    background-color: red;
+    color: #f1eded;
+    font-size: 13px;
+    text-align: center;
+}
+
+.slide__bottom span { /*교육 기간*/
+	display: block;
+	padding-top: 7px;
+}

@@ -12,7 +12,7 @@
 		<!-- Google Font -->
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-		
+		<script src="<c:url value='/resources/js/jquery-3.6.0.min.js'/>"></script>
 		
 		<title><tiles:insertAttribute name="title" /></title>
 	</head>
@@ -21,9 +21,6 @@
 			<header>
 				<tiles:insertAttribute name="header" />
 			</header>
-			<!-- jQuery, Bootstrap -->
-			<script src="<c:url value='/resources/js/jquery-3.6.0.min.js'/>"></script>
-	    	
 			<main>
 				<tiles:insertAttribute name="body" />
 			</main>
