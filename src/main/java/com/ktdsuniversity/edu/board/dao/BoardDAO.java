@@ -14,6 +14,7 @@ public interface BoardDAO {
 	public List<ArticleFileVO> selectArticleFileList(int articleId) throws DataAccessException;
 	public ArticleVO selectArticle(int articleId) throws DataAccessException;
 	public int countAllNotices() throws DataAccessException;
+	public List<ArticleVO> selectArticlesListForWelcomePage() throws DataAccessException;
 
 	// public int insertNewArticle(Map articleMap) throws DataAccessException;
 	// public void insertNewImage(Map articleMap) throws DataAccessException;

@@ -61,6 +61,12 @@ public class BoardServiceImpl implements BoardService {
 	public int countAllNotices() throws Exception {
 		return boardDAO.countAllNotices();
 	}
+
+	@Override
+	public List<ArticleVO> listNoticesForWelcomepage() throws Exception {
+		List<ArticleVO> articlesList = boardDAO.selectArticlesListForWelcomePage();
+		return articlesList;
+	}
 	
 	/*
 	 * //���� ���� ���̱�

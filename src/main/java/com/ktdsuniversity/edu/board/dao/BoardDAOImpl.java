@@ -40,6 +40,12 @@ public class BoardDAOImpl implements BoardDAO {
 		fileList = sqlSession.selectList("mapper.board.selectFilesList", articleId);
 		return fileList;
 	}
+
+	@Override
+	public List<ArticleVO> selectArticlesListForWelcomePage() throws DataAccessException {
+		List<ArticleVO> articlesList = sqlSession.selectList("mapper.board.selectArticlesListForWelcomePage");
+		return articlesList;
+	}
 	
 //	@Override
 //	public int insertNewArticle(Map articleMap) throws DataAccessException {

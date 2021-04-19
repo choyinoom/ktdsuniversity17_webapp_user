@@ -42,7 +42,40 @@ request.setCharacterEncoding("UTF-8");
 <section class="grid mx-auto ai-center col-wrap" id="course__carousel__wrapper">
 	<div class="grid mx-auto ai-center" id="course__carousel__navigator">
 	</div>
+	<div class="grid mx-auto" id="go__course"><a href="${contextPath}/course/listCourses.do">전체보기</a></div>
 	<div class="courses__carousel">
+	</div>
+</section>
+<section >
+	<div class="grid mx-auto ai-center row-wrap" id="quickmenu__wrapper">
+		<a href="${contextPath}/company/classroom.do">
+			<div class="grid col-wrap ai-center quickmenu">
+				<span>오시는 길</span>
+				<span>바로가기</span>
+			</div>
+		</a>
+		<a href="#">
+			<div class="grid col-wrap ai-center quickmenu">
+				<span>FAQ</span>
+				<span>바로가기</span>
+			</div>
+		</a>
+		<div class="grid col-wrap quickmenu" id="go__notice">
+			<span>공지사항</span>
+			<a href="${contextPath}/customer/listNotices.do">더보기</a>
+			<hr style="width:100%; margin-bottom: 22px">
+			<div class="grid col-wrap "id="noticelist">
+			<c:forEach var="notice" items="${noticesList}">
+				<c:if test="${notice.important == null}">
+					<a style="color:#818181" href="${contextPath}/customer/viewNotice.do?articleId=${notice.id}"><c:out value="${notice.title}"></c:out></a>
+				</c:if>
+				<c:if test="${notice.important != null}">
+					<a style="color:red" href="${contextPath}/customer/viewNotice.do?articleId=${notice.id}"><c:out value="${notice.title}"></c:out></a>
+				</c:if>
+				
+			</c:forEach>
+			</div>
+		</div>
 	</div>
 </section>
 <script type="text/javascript">
@@ -79,23 +112,7 @@ request.setCharacterEncoding("UTF-8");
 			}
 			$(this).css('border-bottom', '3px solid red');
 						  
-		});
-		
-		$('.courses__carousel').on('mouseover', '.card', function() {
-			var slideTop = $(this).find('.slide__top');
-			slideTop.css('background-color', 'red');
-			slideTop.find('img').css('display', 'none');
-			slideTop.find('span').css('color', 'white');
-			$(this).css('transition', '2s linear');
-		});
-		
-		$('.courses__carousel').on('mouseout', '.card', function() {
-			var slideTop = $(this).find('.slide__top');
-			slideTop.css('background-color', 'rgb(242, 242, 242)');
-			slideTop.find('img').css('display', 'block');
-			slideTop.find('span').css('color', 'black');
-		});
-		
+		});		
 	});
 </script>
 <script type="text/javascript">

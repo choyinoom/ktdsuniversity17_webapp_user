@@ -24,7 +24,13 @@
 	<![CDATA[
 	 SELECT *
 	 FROM (
-	 	SELECT art_id, art_title, SUBSTR(art_join_date,0,10) as art_join_date, art_contents, art_file, art_important, art_hits, ROW_NUMBER() OVER (ORDER BY art_important, art_join_date desc) rn
+	 	SELECT 
+	 		art_id, 
+	 		art_title, 
+	 		SUBSTR(art_join_date,0,10) as art_join_date, 
+	 		art_contents, art_file, art_important, 
+	 		art_hits, 
+	 		ROW_NUMBER() OVER (ORDER BY art_important, art_join_date desc) rn
 	 	FROM article
 	 )
 	 WHERE rn BETWEEN #{start} AND #{end}
@@ -64,6 +70,19 @@
 		]]>
 	</insert>
 
+	<!-- 메인에 보여줄 최신 공지사항 선택 -->
+	<select id="selectArticlesListForWelcomePage" resultMap="articlesResult">
+	<![CDATA[
+		SELECT 
+			art_id, 
+			art_title, 
+			art_important
+		FROM article
+		ORDER BY art_important, art_join_date desc
+		FETCH FIRST 8 ROWS ONLY
+	]]>
+	</select>
+	
 	<select id="selectNewArticleNO" resultType="int">
     <![CDATA[
 			SELECT  nvl(max(articleNO)+1, 1) from t_board		

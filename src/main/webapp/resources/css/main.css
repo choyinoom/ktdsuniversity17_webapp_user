@@ -41,6 +41,7 @@
 	list-style: none;
 	padding: 0;
 	margin: 5px 12px;
+	z-index: 100;
 }
 
 .button__wrapper li {
@@ -63,6 +64,14 @@
 	margin: 10px;
 }
 
+#go__course { /* 강의목록 바로가기 */
+	width: 600px;
+    font-size: 14px;
+	justify-content: flex-end;
+	margin-top: -40px;
+	margin-bottom: 20px;
+}
+
 .courses__carousel {
 	width: 1400px;
 	min-width: 0px;
@@ -82,9 +91,24 @@
 
 .slide__top { /* 과정 카드 윗 부분*/
 	justify-content: center;
-	transition: background-color .5s;
 	height: 240px;
-	background-color: #f2f2f2;
+	background-size: 100% 200%;
+    background-image: linear-gradient(to bottom, #f2f2f2 50%, red 50%);
+    transition: background-position 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+/* 카드에 마우스 올릴 시 애니메이션 추가 */
+.slide__top:hover, .slide__top:focus {
+    background-position: 0 100%;
+    color: red;
+}
+
+.slide__top:hover img {
+	display: none;
+}
+
+.slide__top:hover span {
+	color: white;
 }
 
 .slide__top span {	/*강의 제목*/
@@ -108,4 +132,67 @@
 .slide__bottom span { /*교육 기간*/
 	display: block;
 	padding-top: 7px;
+}
+
+#quickmenu__wrapper {
+	width: 1000px;
+	margin-top: 70px;
+	margin-bottom: 50px;
+}
+
+.quickmenu {
+	width: 300px;
+	height: 300px;
+	margin: 0px 12px;
+	justify-content: center;
+}
+
+#quickmenu__wrapper a:nth-child(1) div{
+	background-image: url("../image/quick_1.png")
+}
+
+#quickmenu__wrapper a:nth-child(2) div{
+	background-image: url("../image/quick_2.png")
+}
+
+.quickmenu span {
+	display: block;
+	color: white;
+}
+
+.quickmenu span:nth-child(1) {
+	font-size: 27px;
+	font-weight: 600;	
+}
+
+#go__notice {
+	letter-spacing: -.5px;
+	word-spacing: -.5px;	
+}
+
+#go__notice > span {
+	color: #585858; 
+	margin-top: -9px
+}
+
+#go__notice > a {
+	display: block;
+	width: 300px;
+	text-align: right;
+	margin-top: -20px;
+}
+
+#noticelist {
+	height: 235px;
+    justify-content: space-between;
+    margin-bottom: -3px;
+}
+
+#noticelist a {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /*말줄임표*/
 }

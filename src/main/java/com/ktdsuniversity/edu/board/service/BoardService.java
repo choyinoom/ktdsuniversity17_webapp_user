@@ -14,5 +14,6 @@ public interface BoardService {
 //	public void removeArticle(int articleNO) throws Exception;
 	public int findTotalPages() throws Exception;
 	public int countAllNotices() throws Exception;
+	public List<ArticleVO> listNoticesForWelcomepage() throws Exception;
 	
 }

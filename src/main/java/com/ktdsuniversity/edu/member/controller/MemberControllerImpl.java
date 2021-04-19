@@ -21,6 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ktdsuniversity.edu.board.service.BoardService;
+import com.ktdsuniversity.edu.board.vo.ArticleVO;
 import com.ktdsuniversity.edu.course.service.CourseService;
 import com.ktdsuniversity.edu.course.vo.CourseVO;
 import com.ktdsuniversity.edu.member.service.MemberService;
@@ -34,6 +36,8 @@ public class MemberControllerImpl implements MemberController {
 	@Autowired
 	private CourseService courseService;
 	@Autowired
+	private BoardService boardService;
+	@Autowired
 	MemberVO memberVO;
 	@Autowired
 	CourseVO courseVO;
@@ -42,10 +46,13 @@ public class MemberControllerImpl implements MemberController {
 	private ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
+		// 현재 모집중인 과정
 		Map<String, Object> courseMap = courseService.listCoursesForWelcomePage();
-		String coursesJSON = new ObjectMapper().writeValueAsString(courseMap);
-		System.out.println(coursesJSON);
+		String coursesJSON = new ObjectMapper().writeValueAsString(courseMap); // courseMap을 JSON으로 변환
+		// 최신 공지사항
+		List<ArticleVO> noticesList = boardService.listNoticesForWelcomepage();
 		mav.addObject("coursesJSON", coursesJSON);
+		mav.addObject("noticesList", noticesList);
 		return mav;
 	}
 
