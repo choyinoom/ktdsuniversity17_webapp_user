@@ -19,12 +19,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ktdsuniversity.edu.member.service.MemberService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ktdsuniversity.edu.course.service.CourseService;
 import com.ktdsuniversity.edu.course.vo.CourseVO;
 import com.ktdsuniversity.edu.course.vo.SyllabusVO;
 import com.ktdsuniversity.edu.member.vo.MemberVO;
-import com.ktdsuniversity.edu.mypage.service.MypageService;
-import com.ktdsuniversity.edu.mypage.vo.EnrollmentDetailVO;
+import com.ktdsuniversity.edu.member.vo.EnrollmentDetailVO;
 
 @Controller("courseController")
 @RequestMapping(value="/course")
@@ -32,23 +33,28 @@ public class CourseControllerImpl implements CourseController{
 	@Autowired
 	private CourseService courseService;
 	@Autowired
-	private MypageService mypageService;
-	
+	private MemberService memberService;
 	@Autowired
 	MemberVO memberVO;
 	
+	// 과정안내 페이지
 	@Override
 	@RequestMapping(value = "/listCourses.do", method = RequestMethod.GET)
-	public ModelAndView listCourses(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView listCourses(@RequestParam(required=false) String keyword, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
-		List coursesList = courseService.listCourses();
+		List<CourseVO> coursesList = null;
+		if (keyword != null) { // 검색 필터 적용시
+			coursesList = courseService.listCoursesBy(keyword);
+		} else { // 검색 필터 미적용시
+			coursesList = courseService.listCourses();
+		}
 		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("coursesList", coursesList);
-		
+		String coursesJSON = new ObjectMapper().writeValueAsString(coursesList);
+		mav.addObject("coursesJSON", coursesJSON);
 		return mav;
 	}
 	
-	
+	// 수강신청 버튼을 클릭한 경우
 	@Override
 	@RequestMapping(value = "/enrollCourse.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -59,10 +65,11 @@ public class CourseControllerImpl implements CourseController{
 		
 		Map<String, Object> enrollMap = new HashMap<String, Object>();
 		enrollMap.put("id", memberVO.getId());
-		enrollMap.put("courseID", request.getParameter("courseID"));
-		
+		enrollMap.put("courseId", request.getParameter("courseId"));
+		System.out.println(memberVO.getId());
+		System.out.println(request.getParameter("courseId"));
 		// 이미 수강 접수한 이력이 있는지 확인한다.
-		EnrollmentDetailVO enrollmentVO  = mypageService.findEnrollmentDetailByEnrollMap(enrollMap);
+		EnrollmentDetailVO enrollmentVO  = memberService.findEnrollmentDetailBy(enrollMap);
 		String stat = null;
 		if (enrollmentVO != null)
 			stat = enrollmentVO.getStat();
@@ -97,6 +104,8 @@ public class CourseControllerImpl implements CourseController{
 		return resEnt;
 	}
 	
+	
+	// 과정 안내 (상세)
 	@Override
 	@RequestMapping(value="/viewCourse.do", method= RequestMethod.GET) 
 	public ModelAndView viewCourse(@RequestParam("courseId") int courseId, HttpServletRequest request, HttpServletResponse response) throws Exception{

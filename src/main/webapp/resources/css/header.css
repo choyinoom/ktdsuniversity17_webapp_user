@@ -14,6 +14,7 @@
 	top: 20px;
 }
 
+
 .navbar__menu {
 	width: 100%;
 	flex-direction: column;
@@ -118,9 +119,11 @@
 	color: white;
 }
 
+
 .header__transparent .navbar__menu__each__main {
 	color: white;
 }
+
 /*��ũ�ѽ� ���� */
 .navbar.scrolled {
 	background-color: #fff !important;

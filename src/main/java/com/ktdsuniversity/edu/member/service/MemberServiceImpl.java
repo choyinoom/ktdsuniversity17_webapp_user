@@ -2,18 +2,19 @@ package com.ktdsuniversity.edu.member.service;
 
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ktdsuniversity.edu.member.dao.MemberDAO;
+import com.ktdsuniversity.edu.member.vo.EnrollmentDetailVO;
 import com.ktdsuniversity.edu.member.vo.MemberVO;
 
 
@@ -43,6 +44,12 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MemberVO login(MemberVO memberVO) throws Exception{
 		return memberDAO.loginById(memberVO);
+	}
+
+	@Override
+	public EnrollmentDetailVO findEnrollmentDetailBy(Map<String, Object> enrollMap)
+			throws DataAccessException {
+		return memberDAO.selectEnrollmentDetailBy(enrollMap);
 	}
 
 }

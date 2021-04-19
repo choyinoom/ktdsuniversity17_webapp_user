@@ -9,7 +9,10 @@
 		<result property="startTime" column="crs_start_time" />
 		<result property="endTime" column="crs_end_time" />
 		<result property="classroom" column="crs_classroom" />
-		<result property="bannerImg" column="crs_banner_img" />
+		<result property="joinDate" column="crs_join_date"/>
+		<result property="rsDate" column="crs_rs_date"/>
+		<result property="reDate" column="crs_re_date"/>
+		<result property="stat" column="crs_stat"/>
 		<association property="syllabusVO" resultMap="slbResult"/>
 		
 	</resultMap>
@@ -28,39 +31,107 @@
 		<result property="modDate" column="slb_mod_date"/>
 		<result property="days" column="slb_days"/>
 		<result property="time" column="slb_time"/>
+		<result property="bannerImg" column="slb_banner_img"/>
 	</resultMap>
 
-
+	<!-- 강의목록 출력 -->
 	<select id="selectAllCourseList" resultMap="crsResult">
-		SELECT crs_id, SUBSTR(crs_start_date,0,10) as crs_start_date, SUBSTR(crs_end_date,0,10) as crs_end_date, crs_start_time, crs_end_time, crs_classroom, slb_name, slb_type, slb_category, slb_time
+	<![CDATA[
+		SELECT 
+			crs_id, 
+			SUBSTR(crs_start_date,0,10) as crs_start_date, 
+			SUBSTR(crs_end_date,0,10) as crs_end_date, 
+			crs_classroom, 
+			slb_name, 
+			slb_type, 
+			slb_category, 
+			slb_time
 		FROM course
 			INNER JOIN syllabus USING(slb_id)
-		ORDER BY crs_join_date
+		WHERE crs_stat = '신청가능' AND trunc(sysdate) <= to_date(crs_re_date, 'YYYY-MM-DD HH24:MI:SS')
+		ORDER BY crs_start_date
+	]]>
 	</select>
 	
+	<!-- 수강신청 -->
 	<insert id="insertNewEnrollment" parameterType="java.util.Map">
 	<![CDATA[
-		INSERT INTO enrollment_detail(enrd_id, crs_id, mem_id, enrd_stat, enrd_join_date, enrd_mod_date)
-		VALUES(enrd_seq.NEXTVAL, #{courseID}, #{id}, '신청', to_char(sysdate, 'YYYY-MM-DD HH:MM:SS'), to_char(sysdate, 'YYYY:MM:DD HH-MM-SS'))
+		INSERT INTO 
+			enrollment_detail(
+				enrd_id, 
+				crs_id, 
+				mem_id, 
+				enrd_stat
+			)
+		VALUES(
+			enrd_seq.NEXTVAL, 
+			#{courseId}, 
+			#{id}, 
+			'신청'
+		)
 	]]>
 	</insert>
 	
-	<select id="selectSyllabus" parameterType="int" resultMap="slbResult">
-		<![CDATA[
-			SELECT slb_id, slb_name, slb_type, slb_category, slb_overview, slb_objectives, slb_target, slb_contents
-			FROM syllabus
-				INNER JOIN course using(slb_id)
-			WHERE crs_id = #{courseId}
-		]]>
-	</select>
-	
+	<!-- 과정 상세 내용 출력 -->
 	<select id="selectCourse" parameterType="int" resultMap="crsResult">
-		<![CDATA[
-			SELECT *
-			FROM course
-			WHERE crs_id = #{courseId}
-		]]>
+	<![CDATA[
+		SELECT 
+			crs_id, 
+			SUBSTR(crs_start_date,0,10) as crs_start_date, 
+			SUBSTR(crs_end_date,0,10) as crs_end_date, 
+			crs_start_time, 
+			crs_end_time, 
+			crs_classroom, 
+			slb_name, 
+			slb_type, 
+			slb_category,
+			slb_overview,
+			slb_target,
+			slb_contents,
+			slb_banner_img 
+		FROM course
+			INNER JOIN syllabus USING(slb_id)
+		WHERE crs_id = #{courseId}
+	]]>
 	</select>
 	
+	<!-- 메인 페이지 강의목록 캐러셀 -->
+	<select id="selectAllCourseListForWelcomePage" resultMap="crsResult">
+	<![CDATA[
+		SELECT
+		    crs_id,
+		    to_char(to_date(SUBSTR(crs_start_date,0,10)),'YY/MM/DD') as crs_start_date, 
+		    to_char(to_date(SUBSTR(crs_end_date,0,10)),'YY/MM/DD') as crs_end_date,
+		    slb_name,
+		    slb_banner_img 
+		FROM course
+		    INNER JOIN syllabus using(slb_id)
+		WHERE crs_stat = '신청가능' AND trunc(sysdate) <= to_date(crs_re_date, 'YYYY-MM-DD HH24:MI:SS')
+		ORDER BY crs_start_date
+	]]>
+	</select>
+	
+	<!-- 수강목록 검색 -->
+	<select id="selectAllCourseListBy"  parameterType="String" resultMap="crsResult">
+	<![CDATA[
+		WITH base as (
+			SELECT 
+				crs_id, 
+				SUBSTR(crs_start_date,0,10) as crs_start_date, 
+				SUBSTR(crs_end_date,0,10) as crs_end_date, 
+				crs_classroom, 
+				slb_name, 
+				slb_type, 
+				slb_category, 
+				slb_time
+			FROM course
+				INNER JOIN syllabus USING(slb_id)
+			WHERE crs_stat = '신청가능' AND trunc(sysdate) <= to_date(crs_re_date, 'YYYY-MM-DD HH24:MI:SS')
+			ORDER BY crs_start_date )
+		SELECT *
+		FROM base
+		WHERE slb_name like '%' || #{keyword} || '%'
+	]]>
+	</select>
 
 </mapper>

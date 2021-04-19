@@ -1,74 +1,12 @@
-#slider {
+/*메인 캐러셀에는 next, prev 버튼 없음*/
+.main__carousel button[class~="slick-arrow"] {
+	display: none !important;
+}
+
+.main__carousel div img {
 	width: 100%;
-	height: 100%;
+	min-height: 500px;
 }
-
-#slides {
-	width: 300%;
-	height: 100%;
-	display: flex;	
-}
-.slide {
-	width: 33.3%;
-	transition: 0.6s;
-}
-
-.slide img {
-	width: 100%;
-	height: 100%;
-}
-
-/*css for navigation auto*/
-
-#slide__navigation {
-	position: absolute;
-	display: flex;
-	width: 100%;
-	justify-content: center;
-	margin-top: 600px;
-}
-
-.slide__btn {
-	background: grey;
-	padding: 5px;
-	margin: 10px;
-	border-radius: 10px;
-	cursor: pointer;
-	transition: 1s;
-}
-
-.arrow {
-	color: white;
-	font-size: 15px;
-	font-weight: 500px;
-	padding: 5px;
-	cursor: pointer;
-	
-}
-.slide__btn:hover {
-	
-	background: white;
-}
-
-input[name="radio"]{
-    position: absolute;
-    visibility: hidden;
-}
-
-
-
-#radio1:checked ~ .s1 {
-	margin-left: 0;
-}
-
-#radio2:checked ~ .s1 {
-	margin-left: -33.3%;
-}
-
-#radio3:checked ~ .s1 {
-	margin-left: -66.6%;
-}
-
 
 /*text css*/
 #text__wrapper {
@@ -89,16 +27,193 @@ input[name="radio"]{
 
 
 #text__1 {
-	font-size: 35px;
-	font-weight: 300;
+	font-size: 26px;
+	font-weight: 200;
+	line-height: 37px;	
 }
+
 .big__text {
-	font-size: 40px;
-	font-weight: 700;
+	font-size: 30px;
+	font-weight: 600;
 }
+
 #text__2 {
 	font-size: 15px;
-	font-weight: 400;
-	line-height: 25px;
-	letter-spacing: 0.5px;
+	font-weight: 200;
+	line-height: 23px;
+	letter-spacing: -0.5px;
+}
+
+#text__wrapper button {
+    background-color: #ececec;
+    color: #4d4d4d;
+    font-family: 'Noto Sans KR';
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -1.5px;
+    border-radius: 12px;
+    border-style: none;
+    width: 100px;
+    height: 32px;
+    margin-top: 15px;
+}
+
+.button__wrapper {
+	list-style: none;
+	padding: 0;
+	margin: 5px 12px;
+	z-index: 100;
+}
+
+.button__wrapper li {
+	font-size: 23px;
+    font-weight: 500;
+    margin: 5px 25px;
+}
+
+.slick-prev:before, .slick-next:before { /*캐러셀 화살표*/
+    color: grey !important;
+}
+
+#course__carousel__wrapper {
+	height: 400px;
+	margin-top: 20px;
+}
+
+#course__carousel__navigator { /*월(月) 버튼*/
+	justify-content: center;
+	margin: 10px;
+}
+
+#go__course { /* 강의목록 바로가기 */
+	width: 600px;
+    font-size: 14px;
+	justify-content: flex-end;
+	margin-top: -40px;
+	margin-bottom: 20px;
+}
+
+.courses__carousel {
+	width: 1400px;
+	min-width: 0px;
+	min-height: 0px;
+}
+
+.courses__carousel .card { /* 과정 바로가기 카드*/
+	width: 215px;
+	height: 277px;
+	margin: 5px 12px;
+}
+
+.courses__carousel img { /*과정 이미지*/
+	width: 80%;
+	opacity: .3;
+}
+
+.slide__top { /* 과정 카드 윗 부분*/
+	justify-content: center;
+	height: 240px;
+	background-size: 100% 200%;
+    background-image: linear-gradient(to bottom, #f2f2f2 50%, red 50%);
+    transition: background-position 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+/* 카드에 마우스 올릴 시 애니메이션 추가 */
+.slide__top:hover, .slide__top:focus {
+    background-position: 0 100%;
+    color: red;
+}
+
+.slide__top:hover img {
+	display: none;
+}
+
+.slide__top:hover span {
+	color: white;
+}
+
+.slide__top span {	/*강의 제목*/
+	position: absolute;
+    display: block;
+    width: 190px;
+    text-align: center;
+    word-break: keep-all;
+    font-weight: 600;
+    line-height: 34px;
+}
+
+.slide__bottom { /* 과정 카드 아랫 부분*/
+    height: 37px;
+    background-color: red;
+    color: #f1eded;
+    font-size: 13px;
+    text-align: center;
+}
+
+.slide__bottom span { /*교육 기간*/
+	display: block;
+	padding-top: 7px;
+}
+
+#quickmenu__wrapper {
+	width: 1000px;
+	margin-top: 70px;
+	margin-bottom: 50px;
+}
+
+.quickmenu {
+	width: 300px;
+	height: 300px;
+	margin: 0px 12px;
+	justify-content: center;
+}
+
+#quickmenu__wrapper a:nth-child(1) div{
+	background-image: url("../image/quick_1.png")
+}
+
+#quickmenu__wrapper a:nth-child(2) div{
+	background-image: url("../image/quick_2.png")
+}
+
+.quickmenu span {
+	display: block;
+	color: white;
+}
+
+.quickmenu span:nth-child(1) {
+	font-size: 27px;
+	font-weight: 600;	
+}
+
+#go__notice {
+	letter-spacing: -.5px;
+	word-spacing: -.5px;	
+}
+
+#go__notice > span {
+	color: #585858; 
+	margin-top: -9px
+}
+
+#go__notice > a {
+	display: block;
+	width: 300px;
+	text-align: right;
+	margin-top: -20px;
+}
+
+#noticelist {
+	height: 235px;
+    justify-content: space-between;
+    margin-bottom: -3px;
+}
+
+#noticelist a {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /*말줄임표*/
 }

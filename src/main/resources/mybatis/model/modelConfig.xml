@@ -4,10 +4,10 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.ktdsuniversity.edu.member.vo.MemberVO" alias="memberVO" />
+		<typeAlias type="com.ktdsuniversity.edu.member.vo.EnrollmentDetailVO" alias="enrollmentDetailVO"/>
 		<typeAlias type="com.ktdsuniversity.edu.board.vo.ArticleVO" alias="articleVO" />
-		<typeAlias type="com.ktdsuniversity.edu.board.vo.ImageVO" alias="imageVO" />
+		<typeAlias type="com.ktdsuniversity.edu.board.vo.ArticleFileVO" alias="articleFileVO" />
 		<typeAlias type="com.ktdsuniversity.edu.course.vo.CourseVO" alias="courseVO"/>
 		<typeAlias type="com.ktdsuniversity.edu.course.vo.SyllabusVO" alias="syllabusVO"/>
-		<typeAlias type="com.ktdsuniversity.edu.mypage.vo.EnrollmentDetailVO" alias="enrollmentDetailVO"/>
 	</typeAliases>
 </configuration>

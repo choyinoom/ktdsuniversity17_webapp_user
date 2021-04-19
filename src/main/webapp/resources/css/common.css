@@ -11,6 +11,7 @@ body {
 
 a {
 	text-decoration: none;
+	color: black;
 }
 
 fieldset {
@@ -34,7 +35,7 @@ header {
 	position: fixed;
 	width: 100%;
 	top: 0;
-	z-index: 1000;
+	z-index: 30;
 	background-color: white;
 	box-sizing: border-box;
 }
@@ -94,13 +95,155 @@ footer {
 	color: white;
 	padding-top: 110px;
 	padding-bottom: 110px;
-}
-.layer {
-    background-color: rgba(90,90,90, 0.7);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+	font-size: 2em;
 }
 
+.contents { /*본문 영역*/
+	width: 1000px;
+}
+
+.search {
+	justify-content: flex-end;
+	align-items: flex-end;
+	padding-top:30px;
+	padding-bottom:30px;
+	margin-bottom:10px;
+}
+
+.search img {
+	width: 21px;
+	height: 21px;
+	padding: 0px 12px;
+}
+
+.search__in {
+	height: 13px;
+	padding: 12px 8px 12px 0px;
+	background: white;
+	border-bottom: 1px solid rgba(128, 128, 128, 0.8);
+}
+
+.search__in > input {
+	margin: 0px;
+	width: 130px;
+	height: 14px;
+}
+
+.search__btn {
+	margin-left: 5px;
+	padding: 5px;
+	border-radius: 4px;
+}
+
+
+/*테이블*/
+table {
+	width: 100%;
+	border-collapse: collapse;
+	
+}
+
+table th{
+	border-bottom: 1px solid rgba(128, 128, 128, 0.8);
+	height: 60px;
+	
+}
+
+table td {
+	border-bottom: 1px solid rgba(128, 128, 128, 0.8);
+	padding: 8px 12px;
+	height: 60px;
+	font-size: 13px;
+}
+
+.row__title {
+	text-align: left;
+	padding-left: 60px !important;
+}
+
+.row__title a {
+	color: black;
+}
+
+.file__icon {
+	position: relative;
+    top: 6px;
+}
+/*페이지네이션*/
+.pagination {
+	list-style: none;
+    padding-left: 0;
+    width: fit-content;
+}
+
+.pagination li {
+	display: inline-block;
+    margin: 20px 20px;
+}
+
+.pagination li a {
+    color: #757575;
+    cursor: pointer;
+}
+
+.pagination .active a{ /* 현재 페이지 */
+	font-weight: 600;
+	color: #4d4d4d;
+}
+
+/* 공지사항 */
+.notice__banner {
+	background:url("../image/notice-banner.png");
+}
+
+.notice__important {
+	color: #e91c24;
+	font-weight: 600;
+}
+
+
+/* 모달 */
+.modal {
+	display: none;
+	position: fixed;
+	align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 40;
+}
+
+.modal .dimmed {
+	position: absolute;
+    background: rgba(11,19,30,.37);
+}
+
+.modal, .modal .dimmed {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.modal > section {
+	position: absolute;
+	border-radius: 4px;
+    background-color: #fff;
+	padding: 38px 64px;
+    width: calc(100% - 40px);
+    max-width: 416px;
+    min-width: 320px;
+}
+
+.modal #buttons {
+	justify-content: center;
+	padding-top: 14px;
+}
+
+#buttons button {
+	border-style: none;
+	margin: 0px 12px;
+	padding: 8px;
+    border-radius: 4px;
+    font-size: 13px;
+}
