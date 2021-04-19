@@ -25,7 +25,8 @@ public class CourseDAOImpl implements CourseDAO{
 
 	@Override
 	public int enrollCourse(Map<String, Object> enrollMap) throws DataAccessException {
-		
+		System.out.println(enrollMap.get("id"));
+		System.out.println(enrollMap.get("courseId"));
 		return sqlSession.insert("mapper.course.insertNewEnrollment", enrollMap);
 	}
 

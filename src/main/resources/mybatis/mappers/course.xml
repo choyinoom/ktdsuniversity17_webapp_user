@@ -56,8 +56,19 @@
 	<!-- 수강신청 -->
 	<insert id="insertNewEnrollment" parameterType="java.util.Map">
 	<![CDATA[
-		INSERT INTO enrollment_detail(enrd_id, crs_id, mem_id, enrd_stat, enrd_join_date, enrd_mod_date)
-		VALUES(enrd_seq.NEXTVAL, #{courseID}, #{id}, '신청', to_char(sysdate, 'YYYY-MM-DD HH:MM:SS'), to_char(sysdate, 'YYYY:MM:DD HH-MM-SS'))
+		INSERT INTO 
+			enrollment_detail(
+				enrd_id, 
+				crs_id, 
+				mem_id, 
+				enrd_stat
+			)
+		VALUES(
+			enrd_seq.NEXTVAL, 
+			#{courseId}, 
+			#{id}, 
+			'신청'
+		)
 	]]>
 	</insert>
 	

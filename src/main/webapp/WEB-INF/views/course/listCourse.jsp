@@ -23,7 +23,7 @@ request.setCharacterEncoding("UTF-8");
 					form.action = enrollCourse;
 					form.method = "post";
 					let input = document.createElement("input");
-					input.setAttribute("name", "courseID");
+					input.setAttribute("name", "courseId");
 					input.setAttribute("value", courseID);
 					form.appendChild(input);
 					document.body.appendChild(form);
