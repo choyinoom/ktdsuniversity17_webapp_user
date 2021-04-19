@@ -102,7 +102,6 @@ request.setCharacterEncoding("UTF-8");
 	<body>
 		<div class="grid mx-auto ai-center" id="course__container">
 			<div class="banner" id="course__banner">
-				<h1>과정 안내</h1>
 			</div>
 			<h2>현재 모집중인 과정</h2>
 			<div id="course__contents">
