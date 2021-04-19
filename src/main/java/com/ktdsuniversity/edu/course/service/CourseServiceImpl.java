@@ -62,4 +62,11 @@ public class CourseServiceImpl implements CourseService {
 		}
 		return courseMap;
 	}
+
+	@Override
+	public List<CourseVO> listCoursesBy(String keyword) throws Exception {
+		List<CourseVO> coursesList = null;
+		coursesList = courseDAO.selectAllCourseListBy(keyword);
+		return coursesList;
+	}
 }

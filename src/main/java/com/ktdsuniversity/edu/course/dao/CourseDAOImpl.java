@@ -18,36 +18,36 @@ public class CourseDAOImpl implements CourseDAO{
 	
 	@Override
 	public List<CourseVO> selectAllCourseList() throws DataAccessException {
-		List<CourseVO> courseList = null;
-		courseList = sqlSession.selectList("mapper.course.selectAllCourseList");
-		return courseList;
+		List<CourseVO> coursesList = sqlSession.selectList("mapper.course.selectAllCourseList");
+		return coursesList;
 	}
 
 	@Override
 	public int enrollCourse(Map<String, Object> enrollMap) throws DataAccessException {
-		System.out.println(enrollMap.get("id"));
-		System.out.println(enrollMap.get("courseId"));
 		return sqlSession.insert("mapper.course.insertNewEnrollment", enrollMap);
 	}
 
 	@Override
 	public SyllabusVO selectSyllabus(int courseId) {
-		SyllabusVO syllabusVO = null;
-		syllabusVO =  sqlSession.selectOne("mapper.course.selectSyllabus", courseId);
+		SyllabusVO syllabusVO = sqlSession.selectOne("mapper.course.selectSyllabus", courseId);
 		return syllabusVO;
 	}
 	
 	@Override
 	public CourseVO selectCourse(int courseId) {
-		CourseVO courseVO = null;
-		courseVO = sqlSession.selectOne("mapper.course.selectCourse", courseId);
+		CourseVO courseVO = sqlSession.selectOne("mapper.course.selectCourse", courseId);
 		return courseVO;
 	}
 	
 	@Override
 	public List<CourseVO> selectAllCourseListForWelcomePage() throws DataAccessException {
-		List<CourseVO> courseList = null;
-		courseList = sqlSession.selectList("mapper.course.selectAllCourseListForWelcomePage");
-		return courseList;
+		List<CourseVO> coursesList = sqlSession.selectList("mapper.course.selectAllCourseListForWelcomePage");
+		return coursesList;
+	}
+
+	@Override
+	public List<CourseVO> selectAllCourseListBy(String keyword) throws DataAccessException {
+		List<CourseVO> coursesList = sqlSession.selectList("mapper.course.selectAllCourseListBy", keyword);
+		return coursesList;
 	}
 }

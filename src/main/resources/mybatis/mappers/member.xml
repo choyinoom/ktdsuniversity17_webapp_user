@@ -71,7 +71,7 @@
 		<![CDATA[
 			SELECT enrd_id, crs_id, mem_id, enrd_stat
 			FROM enrollment_detail
-			WHERE crs_id = #{courseID} AND mem_id = #{id}
+			WHERE crs_id = #{courseId} AND mem_id = #{id}
 		]]>
 	</select>
 </mapper>

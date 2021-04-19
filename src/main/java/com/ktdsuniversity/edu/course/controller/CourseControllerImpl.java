@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ktdsuniversity.edu.member.service.MemberService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ktdsuniversity.edu.course.service.CourseService;
 import com.ktdsuniversity.edu.course.vo.CourseVO;
 import com.ktdsuniversity.edu.course.vo.SyllabusVO;
@@ -39,15 +40,19 @@ public class CourseControllerImpl implements CourseController{
 	// 과정안내 페이지
 	@Override
 	@RequestMapping(value = "/listCourses.do", method = RequestMethod.GET)
-	public ModelAndView listCourses(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public ModelAndView listCourses(@RequestParam(required=false) String keyword, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
-		List<CourseVO> coursesList = courseService.listCourses();
+		List<CourseVO> coursesList = null;
+		if (keyword != null) { // 검색 필터 적용시
+			coursesList = courseService.listCoursesBy(keyword);
+		} else { // 검색 필터 미적용시
+			coursesList = courseService.listCourses();
+		}
 		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("coursesList", coursesList);
-		
+		String coursesJSON = new ObjectMapper().writeValueAsString(coursesList);
+		mav.addObject("coursesJSON", coursesJSON);
 		return mav;
 	}
-	
 	
 	// 수강신청 버튼을 클릭한 경우
 	@Override

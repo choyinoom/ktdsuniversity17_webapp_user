@@ -13,4 +13,5 @@ public interface CourseService {
 	public int enrollCourse(Map<String, Object> enrollMap) throws Exception;
 	public Map<String, Object> viewCourse(int courseId) throws Exception;
 	public Map<String, Object> listCoursesForWelcomePage() throws Exception;
+	public List<CourseVO> listCoursesBy(String keyword) throws Exception;
 }

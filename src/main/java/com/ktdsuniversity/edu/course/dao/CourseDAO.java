@@ -18,4 +18,6 @@ public interface CourseDAO {
 	public CourseVO selectCourse(int courseId);
 
 	public List<CourseVO> selectAllCourseListForWelcomePage() throws DataAccessException;
+
+	public List<CourseVO> selectAllCourseListBy(String keyword)throws DataAccessException;
 }

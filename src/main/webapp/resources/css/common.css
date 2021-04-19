@@ -35,7 +35,7 @@ header {
 	position: fixed;
 	width: 100%;
 	top: 0;
-	z-index: 1000;
+	z-index: 30;
 	background-color: white;
 	box-sizing: border-box;
 }
@@ -96,14 +96,6 @@ footer {
 	padding-top: 110px;
 	padding-bottom: 110px;
 	font-size: 2em;
-}
-.layer {
-    background-color: rgba(90,90,90, 0.7);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
 }
 
 .contents { /*본문 영역*/
@@ -207,4 +199,51 @@ table td {
 .notice__important {
 	color: #e91c24;
 	font-weight: 600;
+}
+
+
+/* 모달 */
+.modal {
+	display: none;
+	position: fixed;
+	align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 40;
+}
+
+.modal .dimmed {
+	position: absolute;
+    background: rgba(11,19,30,.37);
+}
+
+.modal, .modal .dimmed {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.modal > section {
+	position: absolute;
+	border-radius: 4px;
+    background-color: #fff;
+	padding: 38px 64px;
+    width: calc(100% - 40px);
+    max-width: 416px;
+    min-width: 320px;
+}
+
+.modal #buttons {
+	justify-content: center;
+	padding-top: 14px;
+}
+
+#buttons button {
+	border-style: none;
+	margin: 0px 12px;
+	padding: 8px;
+    border-radius: 4px;
+    font-size: 13px;
 }
