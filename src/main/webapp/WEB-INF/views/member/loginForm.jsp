@@ -58,7 +58,7 @@ value='/resources/css/loginForm.css'/>">
 		<div id="login__help">
 			<div id="find__pw">
 			<span><b>비밀번호를 잊어버리셨나요?</b><br></span>
-			<a href="#">비밀번호 찾기</a>	
+			<a href="${contextPath}/member/find_pw_form.do">비밀번호 찾기</a>	
 		</div>
 		<div id="join">
 			<span><b>회원이 아니신가요?</b><br></span>

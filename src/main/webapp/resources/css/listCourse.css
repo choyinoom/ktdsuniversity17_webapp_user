@@ -5,6 +5,7 @@
 #course__banner {
 	background:url("../image/course-banner.png");
 }
+
 #course__contents {
 	width: 1000px;
 }
@@ -17,7 +18,7 @@
 }
 
 #course__search img {
-	width: 21px;
+	width: 21px; 
 	height: 21px;
 	padding: 0px 12px;
 }

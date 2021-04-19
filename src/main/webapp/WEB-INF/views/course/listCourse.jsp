@@ -122,7 +122,7 @@ request.setCharacterEncoding("UTF-8");
 				 	name: row[2].textContent, 
 				 	date: row[3].textContent
 				}
-		
+	
 				$('#name').text('과정명: ' + course.name); 
 				$('#date').text('일시: ' + course.date.substr(0,23));
 				 

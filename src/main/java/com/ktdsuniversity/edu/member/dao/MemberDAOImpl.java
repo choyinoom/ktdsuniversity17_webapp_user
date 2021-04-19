@@ -23,7 +23,7 @@ public class MemberDAOImpl implements MemberDAO {
 		membersList = sqlSession.selectList("mapper.member.selectAllMemberList");
 		return membersList;
 	}
-
+	
 	@Override
 	public int insertMember(MemberVO memberVO) throws DataAccessException {
 		int result = sqlSession.insert("mapper.member.insertMember", memberVO);

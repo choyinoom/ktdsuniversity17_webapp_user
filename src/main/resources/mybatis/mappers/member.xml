@@ -28,7 +28,7 @@
 		<association property="courseVO" resultMap="mapper.course.crsResult"/>
 	</resultMap>
 
-
+  
 	<select id="selectAllMemberList" resultMap="memResult">
 		<![CDATA[
          select * from member order by joinDate desc	 	
@@ -59,13 +59,14 @@
 	   id=#{id}
 	]]>
 	</delete>
-	
-	<select id="loginById" resultMap="memResult" parameterType="memberVO">
-		<![CDATA[
+
+	<select id="loginById" resultType="memberVO" parameterType="memberVO">
+	<![CDATA[
 		select * from member	
 		where mem_id=#{id} and mem_pw=#{pw}		
 	]]>
 	</select>
+
 	
 	<select id="selectEnrollmentDetailByEnrollMap" parameterType="java.util.Map" resultMap="enrdResult">
 		<![CDATA[
