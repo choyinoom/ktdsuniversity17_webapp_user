@@ -36,6 +36,16 @@ public class MemberControllerImpl implements MemberController {
 	return "main";
 
 	}
+	
+	@RequestMapping(value = "/member/privacy.do", method =  RequestMethod.GET)
+	@Override
+	public ModelAndView listPrivacy(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String)request.getAttribute("viewName");
+		System.out.println(viewName);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
+	}
 
 	@Override
 	@RequestMapping(value = "/member/listMembers.do", method = RequestMethod.GET)

@@ -92,9 +92,24 @@
 	color: black;
 }
 
+.header__transparent.scrolled .navbar__menu__each {
+	color: black !important;
+}
+
+.header__transparent.scrolled .navbar__menu__each__main {
+	color: black !important;
+}
+
 .header__transparent .navbar__logo img {
 	float: left;
 	content: url("../image/white-logo-horizontal-transparent.png");
+	width: 180px;
+	padding: 8px 12px;
+}
+
+.navbar__logo.mouse img {
+	float: left;
+	content: url("../image/logo-horizontal-transparent.png");
 	width: 180px;
 	padding: 8px 12px;
 }

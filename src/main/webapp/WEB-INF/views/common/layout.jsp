@@ -7,11 +7,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet"
-	href="<c:url 
-value='/resources/css/common.css'/>">
-<script src="<c:url 
-value='/resources/js/jquery-3.6.0.min.js'/>"></script>
+<link rel="stylesheet"	href="<c:url value='/resources/css/common.css'/>">
+<script src="<c:url value='/resources/js/jquery-3.6.0.min.js'/>"></script>
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script>
@@ -28,15 +25,19 @@ $(function () {
 	        $(".header__transparent .navbar__menu__each__main").css("color", "black")
 	        var $header = $(".topMenu");
 	    	$header.toggleClass('mouseover');
+	    	var $logo = $(".navbar__logo");
+	    	$logo.toggleClass('mouse');
 	    });
 
-	    $(document).on('mouseleave', 'header', function() {
+	    $(document).on('mouseleave', '.topMenu', function() {
 	        $('.navbar__menu__each__sub').slideUp(300);
 	        $(".header__transparent").css("background", "transparent")
 	        $(".header__transparent .navbar__menu__each").css("color", "white")
 	        $(".header__transparent .navbar__menu__each__main").css("color", "white")
 	        var $header = $(".topMenu");
 	    	$header.toggleClass('');
+	    	var $logo = $(".navbar__logo");
+	    	$logo.toggleClass('');
 	    });
 	});
 	

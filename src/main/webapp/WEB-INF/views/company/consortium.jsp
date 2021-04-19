@@ -15,6 +15,10 @@ request.setCharacterEncoding("UTF-8");
 	rel="stylesheet">
 </head>
 <body>
+
+<!-- 스크롤업 -->
+	 <div class="scrollTop" onclick="scrollToTop()"></div>
+	 
 	<div class="consortium__container">
 		<img id="consortium__banner"
 			src="${contextPath}/resources/image/consortium_banner.png">
@@ -23,5 +27,20 @@ request.setCharacterEncoding("UTF-8");
 				src="${contextPath}/resources/image/consortium_content.png">
 		</div>
 	</div>
+	
+	<!-- 스크롤업 -->
+		<script type="text/javascript">
+		    window.addEventListener('scroll', function(){
+		        const scroll = document.querySelector('.scrollTop');
+		        scroll.classList.toggle("active" , window.scrollY > 500)
+		    })
+		
+		    function scrollToTop(){
+		        window.scrollTo({
+		            top: 0,
+		            behavior: 'smooth'
+		        })
+		    }
+   		 </script>
 </body>
 </html>

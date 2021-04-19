@@ -16,23 +16,27 @@
 #right {
 	justify-content: flex-start;
 }
-.footer__contents h3{
-	color: white;
+.footer__contents h2{
+	color: #EFEFEF;
 }
 
 .footer__contents a{
 	display: block;
-	color: white;
+	color: #EFEFEF;
 	font-size: 15px;
 	margin: 9px 0px;
 }
 
+.footer__contents a:hover{
+	color: #E91B23;
+	}
+
 .footer__contents p {
-	color: white;
+	color: #727171;
 	font-size: 14px;
 	line-height: 23px;
 }
 
-#right h3 {
+#right h2 {
 	padding-top: 22px;
 }

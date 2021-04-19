@@ -1,3 +1,26 @@
+.scrollTop {
+  position: fixed;
+  bottom: 800px;
+  right: 40px;
+  width: 60px;
+  height: 60px;
+  background: url("../image/scroll.png");
+  border-radius: 50%;
+  background-size: 40px;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  z-index: 10000;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.5s;
+}
+.scrollTop.active {
+  bottom: 40px;
+  visibility: visible;
+  opacity: 1;
+}
+
 .company__container {
 	display: flex;
 	justify-content: center;
@@ -37,9 +60,9 @@
 }
 
 #classroom__contact {
-	position: relative;
-	left: 520px;
 	margin: 70px 0px 50px 0px;
+	width: 450px;
+	height: 450px;	
 }
 
 .restroom {
@@ -57,6 +80,10 @@
 	justify-content: space-between;
 	padding-bottom: 90px;
 	border-bottom: 1px solid #969696;
+}
+
+.classroom_bottom {
+	display : flex;
 }
 
 #classroom1, #classroom2, #classroom3 {
@@ -99,12 +126,10 @@
 
 /* 카카오맵API */
 #map {
-	position: absolute;
-	left: 425px;
-	top: 1753px;
-	width: 500px;
-	height: 500px;
-	min-width: 500px;
-	min-height: 500px;
+	margin: 70px 70px 50px 0px;	
+	width: 450px;
+	height: 450px;
+	min-width: 450px;
+	min-height: 450px;
 	object-fit: cover;
 }
