@@ -14,16 +14,16 @@ request.setCharacterEncoding("UTF-8");
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 <section class="main__carousel">
 	<div class="carousel-item">
-		<img src="${contextPath}/resources/image/main_banner/1.jpg" class="d-block w-100" alt="전경">
+		<img src="${contextPath}/resources/image/main_banner/1.jpg" alt="전경">
 	</div>
 	<div class="carousel-item">
-		<img src="${contextPath}/resources/image/main_banner/2.jpg" class="d-block w-100" alt="로비">
+		<img src="${contextPath}/resources/image/main_banner/2.jpg" alt="로비">
 	</div>
 	<div class="carousel-item">
-		<img src="${contextPath}/resources/image/main_banner/3.jpg" class="d-block w-100" alt="휴식공간">
+		<img src="${contextPath}/resources/image/main_banner/3.jpg" alt="휴식공간">
 	</div>
 	<div class="carousel-item">
-		<img src="${contextPath}/resources/image/main_banner/4.jpg" class="d-block w-100" alt="복도">
+		<img src="${contextPath}/resources/image/main_banner/4.jpg" alt="복도">
 	</div>
 </section>
 <div id="text__wrapper">
@@ -36,8 +36,9 @@ request.setCharacterEncoding("UTF-8");
 			kt ds는 KT 정보시스템 구축 기술과 노하우를 기반으로 <br> 새로운 IT서비스를 창출하고 우수한 인재를
 			양성하여 <br> 고객의 가치를 최고로 실현하는 IT서비스 전문기업입니다.
 		</p>
-
+		<button onclick="location.href='${contextpath}/company/company.do'" type="button">자세히 보기</button>
 	</div>
+	
 </div>
 <section class="grid mx-auto ai-center col-wrap" id="course__carousel__wrapper">
 	<div class="grid mx-auto ai-center" id="course__carousel__navigator">

@@ -3,6 +3,11 @@
 	display: none !important;
 }
 
+.main__carousel div img {
+	width: 100%;
+	min-height: 500px;
+}
+
 /*text css*/
 #text__wrapper {
     width: 100%;
@@ -26,15 +31,31 @@
 	font-weight: 200;
 	line-height: 37px;	
 }
+
 .big__text {
 	font-size: 30px;
 	font-weight: 600;
 }
+
 #text__2 {
 	font-size: 15px;
 	font-weight: 200;
 	line-height: 23px;
 	letter-spacing: -0.5px;
+}
+
+#text__wrapper button {
+    background-color: #ececec;
+    color: #4d4d4d;
+    font-family: 'Noto Sans KR';
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -1.5px;
+    border-radius: 12px;
+    border-style: none;
+    width: 100px;
+    height: 32px;
+    margin-top: 15px;
 }
 
 .button__wrapper {
