@@ -9,6 +9,10 @@
 %> 
  
 
+<%String searchType = request.getParameter("searchType");
+  String searchText = request.getParameter("searchText");
+%> 
+
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link href="<c:url value='/resources/css/listNotices.css'/>" rel="stylesheet">
 
@@ -16,14 +20,28 @@
 	<section class="banner notice__banner">
 		<h1>공지사항</h1>
 	</section>
-	<section class="grid mx-auto col-wrap contents">
+	<section class="grid mx-auto col-wrap contents"><<<<<<< 2Hyung5
+
+<form method="get" onsubmit="fn_paginationCtrl(1); return false;" id="searchFrm" > 
+		
+		<!-- 검색 값이 있냐 없냐에 따라 값 띄우는거 설정 -->
 		<div class="grid search">
 			<img src="${contextPath}/resources/image/loupe.png" alt="검색하기">
+			
 			<div class="search__in">
-				<input type='text' name='search'>
+				<c:choose>
+					<c:when test="${searchText != null }">
+						<input type="text" name="searchText" id="searchText" value="${searchText }">
+					</c:when>
+					<c:otherwise>
+						<input type="text" name="searchText" id="searchText">
+					</c:otherwise>
+				</c:choose>			
 			</div>
-			<input type='submit' class ='search__btn' value="검색">
+			<input type="submit" class ='search__btn' value="검색">
 		</div>
+</form>				
+
 		<table id="notice__list">
 			<thead>
 				<tr align="center">
@@ -37,7 +55,7 @@
 				<c:choose> 
 					<c:when test="${articlesList.size() > all - 10 * (pageNo - 1)}">
 						<c:set var="index" value = "${articlesList.size()}"/>
-					</c:when> 
+					</c:when>
 					<c:otherwise>
 						<c:set var="index" value = "${all - 10 * (pageNo - 1)}"/>
 					</c:otherwise>
@@ -78,10 +96,11 @@
 </div>
 <script type="text/javascript">
  	function fn_paginationCtrl(page) { // 페이지 이동
+ 		var searchText = document.getElementById('searchText').value;
 		$.ajax({
 			url: "${contextPath}/ajax/customer/listNotices",
 			method: "GET",
-			data: {"pageNo" : page},
+			data: {"pageNo" : page, "searchText" : searchText},
 			success: function(result) {
 				const articlesList = result.articlesList;
 				var index = Math.max(articlesList.length, ${all} - 10 * (page - 1));
@@ -100,7 +119,7 @@
 					index = index - 1;
 					// 제목 컬럼
 					td = $(`<td width="60%" class="row__title">
-							<a href="${contextPath}/customer/viewNotice.do?articleId=${article.id}">
+							<a href="${contextPath}/customer/viewNotice.do?articleId=\${article.id}">
 							\${article.title}
 							</a></td>`);
 					if (article['file'] === 'T') { // 첨부파일 있을 경우 아이콘 표시
@@ -112,7 +131,7 @@
 					tr.append(td);
 					tableBody.append(tr);
 				})
-				history.pushState('', '공지사항', 'listNotices.do?pageNo=' + page);
+				history.pushState('', '공지사항', "listNotices.do?pageNo=" + page + "&searchText=" + searchText);
 			},
 			error: function(xhr, status, error) {
 				console.log(error);

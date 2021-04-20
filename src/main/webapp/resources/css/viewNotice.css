@@ -1,0 +1,42 @@
+
+.notice_title {
+border-bottom: 1px solid;
+display : flex;
+justify-content: space-between;
+margin-bottom : 30px;
+padding-bottom : 10px;
+}
+.notice_title ul {
+list-style: none;
+display : flex;
+padding : 0px;
+}
+.notice_container {
+margin-top: 30px;
+}
+
+#notice_important{
+color : #E91B23;
+font-weight : bold;
+}
+#notice_title {
+font-weight : bold;
+margin-left : 15px;
+}
+#notice_joindate{
+margin-left : 22px;
+}
+.notice_content {
+margin-bottom: 30px;
+}
+
+.addfile {
+display: flex;
+justify-content: flex-end;
+margin-bottom: 12px;
+}
+
+.notice_listbutton {
+display :flex;
+justify-content: flex-end;
+}

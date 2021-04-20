@@ -60,14 +60,13 @@
 	]]>
 	</delete>
 
-	<select id="loginById" resultType="memberVO" parameterType="memberVO">
+	<select id="loginById" resultMap="memResult" parameterType="memberVO">
 	<![CDATA[
 		select * from member	
 		where mem_id=#{id} and mem_pw=#{pw}		
 	]]>
 	</select>
 
-	
 	<select id="selectEnrollmentDetailByEnrollMap" parameterType="java.util.Map" resultMap="enrdResult">
 		<![CDATA[
 			SELECT enrd_id, crs_id, mem_id, enrd_stat
