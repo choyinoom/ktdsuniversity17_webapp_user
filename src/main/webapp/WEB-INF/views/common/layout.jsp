@@ -18,26 +18,24 @@
         $header.toggleClass('scrolled', $(this).scrollTop() > $header.height());
       });
 
-      $(document).on('mouseover', '.topMenu', function() {
-            $('.navbar__menu__each__sub').slideDown(300);
-            $(".header__transparent").css("background", "white")
-            $(".header__transparent .navbar__menu__each").css("color", "black")
-            $(".header__transparent .navbar__menu__each__main").css("color", "black")
+      $('header').hover(function() {
+      	$('.navbar__menu__each__sub').slideDown(300);
+        $(".header__transparent").css("background", "white");
+        $(".header__transparent .navbar__menu__each").css("color", "black");
+        $(".header__transparent .navbar__menu__each__main").css("color", "black");
+		var $header = $(".topMenu");
+        $header.toggleClass('mouseover');
+        var $logo = $(".navbar__logo");
+        $logo.toggleClass('mouse');
+        }, function() {
+            $('.navbar__menu__each__sub').slideUp(300);
+            $(".header__transparent").css("background", "transparent");
+            $(".header__transparent .navbar__menu__each").css("color", "white");
+            $(".header__transparent .navbar__menu__each__main").css("color", "white");
             var $header = $(".topMenu");
-          $header.toggleClass('mouseover');
+          $header.toggleClass('mouseenter');
           var $logo = $(".navbar__logo");
           $logo.toggleClass('mouse');
-        });
-
-        $(document).on('mouseleave', '.topMenu', function() {
-            $('.navbar__menu__each__sub').slideUp(300);
-            $(".header__transparent").css("background", "transparent")
-            $(".header__transparent .navbar__menu__each").css("color", "white")
-            $(".header__transparent .navbar__menu__each__main").css("color", "white")
-            var $header = $(".topMenu");
-          $header.toggleClass('');
-          var $logo = $(".navbar__logo");
-          $logo.toggleClass('');
         });
     });
   </script>
