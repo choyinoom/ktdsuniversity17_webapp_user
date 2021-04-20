@@ -110,7 +110,7 @@
 
 .navbar__logo.mouse img {
 	float: left;
-	content: url("../image/logo-horizontal-transparent.png");
+	content: url("../image/logo-horizontal-transparent.png") !important;
 	width: 180px;
 	padding: 8px 12px;
 }
@@ -124,7 +124,7 @@
 	color: white;
 }
 
-/*��ũ�ѽ� ���� */
+/*스크롤 시 내비게이션 바*/
 .navbar.scrolled {
 	background-color: #fff !important;
 	transition: background-color 200ms linear;

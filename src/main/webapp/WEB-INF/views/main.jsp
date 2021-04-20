@@ -79,6 +79,7 @@ request.setCharacterEncoding("UTF-8");
 		</div>
 	</div>
 </section>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("header").toggleClass("header__transparent");
@@ -167,4 +168,3 @@ request.setCharacterEncoding("UTF-8");
 	}
 </script>
 
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
