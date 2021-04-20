@@ -14,9 +14,6 @@ public interface BoardController {
 	
 	public ModelAndView listArticles(@RequestParam("pageNo") int currentPage, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView viewArticle(@RequestParam("articleId") int articleId, HttpServletRequest request, HttpServletResponse response) throws Exception;
-	ModelAndView listBySearchArticles(@RequestParam("pageNo") int pageNo, @RequestParam("searchText") String searchText, HttpServletRequest request, HttpServletResponse response) throws Exception;
-	
-	
 //	public ResponseEntity addNewArticle(MultipartHttpServletRequest multipartRequest,HttpServletResponse response) throws Exception;		                        H
 //	public ResponseEntity modArticle(MultipartHttpServletRequest multipartRequest,  HttpServletResponse response) throws Exception;
 //	public ResponseEntity removeArticle(@RequestParam("articleNO") int articleNO, HttpServletRequest request, HttpServletResponse response) throws Exception;

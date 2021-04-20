@@ -11,6 +11,7 @@ import com.ktdsuniversity.edu.board.vo.ArticleVO;
 
 
 public interface BoardDAO {
+
 	public List<ArticleVO> selectArticlesListBy(Map<String, Object> map) throws DataAccessException;
 	public List<ArticleFileVO> selectArticleFileList(int articleId) throws DataAccessException;
 	public ArticleVO selectArticle(int articleId) throws DataAccessException;
@@ -22,7 +23,4 @@ public interface BoardDAO {
 	// public void insertNewImage(Map articleMap) throws DataAccessException;
 	// public void updateArticle(Map articleMap) throws DataAccessException;
 	// public void deleteArticle(int articleNO) throws DataAccessException;
-	
-
-	
 }

@@ -19,6 +19,7 @@ public class BoardDAOImpl implements BoardDAO {
 	private SqlSession sqlSession;
 	
 	@Override
+
 	public List<ArticleVO> selectArticlesListBy(Map<String, Object> map) throws DataAccessException{
 		List<ArticleVO> articlesList = sqlSession.selectList("mapper.board.selectArticlesListByPage", map);
 		return articlesList;
@@ -63,6 +64,18 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.update("mapper.board.addHits", articleVO);
 	}
 
+
+	public List<ArticleFileVO> selectArticleFileList(int articleId) throws DataAccessException {
+		List<ArticleFileVO> fileList = null;
+		fileList = sqlSession.selectList("mapper.board.selectFilesList", articleId);
+		return fileList;
+	}
+
+	@Override
+	public List<ArticleVO> selectArticlesListForWelcomePage() throws DataAccessException {
+		List<ArticleVO> articlesList = sqlSession.selectList("mapper.board.selectArticlesListForWelcomePage");
+		return articlesList;
+	}
 	
 //	@Override
 //	public int insertNewArticle(Map articleMap) throws DataAccessException {
@@ -100,10 +113,6 @@ public class BoardDAOImpl implements BoardDAO {
 //		sqlSession.delete("mapper.board.deleteArticle", articleNO);
 //		
 //	}
-	
-	
-
-
 
 
 

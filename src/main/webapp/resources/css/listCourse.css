@@ -3,8 +3,9 @@
 }
 
 #course__banner {
-	background:url("../image/login-banner.png");
+	background:url("../image/course-banner.png");
 }
+
 #course__contents {
 	width: 1000px;
 }
@@ -12,13 +13,12 @@
 #course__search {
 	justify-content: flex-end;
 	align-items: flex-end;
-	padding-top:30px;
 	padding-bottom:30px;
 	margin-bottom:10px;
 }
 
 #course__search img {
-	width: 21px;
+	width: 21px; 
 	height: 21px;
 	padding: 0px 12px;
 }
@@ -73,6 +73,7 @@
 #course__btn {
 	width: fit-content;
 	border-radius: 6px;
+	border-style: none;
 	background: #EE2129;
 	color: white;
 	padding: 4px 12px;
@@ -110,4 +111,3 @@ li[class~="first"] {
 li[class~="last"] {
 	display: none !important;
 }
-

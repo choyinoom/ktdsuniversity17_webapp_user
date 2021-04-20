@@ -16,10 +16,7 @@ public interface BoardService {
 	public int countAllNotices() throws Exception;
 	public List<ArticleVO> listBySearchArticles(int pageNo ,String searchText) throws DataAccessException;
 	public int addHits(ArticleVO articleVO) throws DataAccessException;
-	
-//	public int addNewArticle(Map articleMap) throws Exception;
-//  public ArticleVO viewArticle(int articleNO) throws Exception;
-//	public void modArticle(Map articleMap) throws Exception;
-//	public void removeArticle(int articleNO) throws Exception;
+	public List<ArticleVO> listNoticesForWelcomepage() throws Exception;
+
 	
 }

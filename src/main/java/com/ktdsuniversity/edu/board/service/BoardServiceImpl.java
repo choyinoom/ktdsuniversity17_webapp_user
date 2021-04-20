@@ -45,7 +45,7 @@ public class BoardServiceImpl implements BoardService {
 	 * articleMap.put("articleNO", articleNO); boardDAO.insertNewImage(articleMap);
 	 * return articleNO; }
 	 */
-	
+
 	
 	// 공지사항 글 보기
 	@Override
@@ -87,8 +87,13 @@ public class BoardServiceImpl implements BoardService {
 		return boardDAO.addHits(articleVO);
 	}
 	
-	
-	
+
+	@Override
+	public List<ArticleVO> listNoticesForWelcomepage() throws Exception {
+		List<ArticleVO> articlesList = boardDAO.selectArticlesListForWelcomePage();
+		return articlesList;
+	}
+
 	/*
 	 * //���� ���� ���̱�
 	 * 

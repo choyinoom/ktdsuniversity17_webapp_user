@@ -8,10 +8,10 @@
   request.setCharacterEncoding("UTF-8");
 %> 
  
+
 <%String searchType = request.getParameter("searchType");
   String searchText = request.getParameter("searchText");
 %> 
-
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link href="<c:url value='/resources/css/listNotices.css'/>" rel="stylesheet">
@@ -20,11 +20,11 @@
 	<section class="banner notice__banner">
 		<h1>공지사항</h1>
 	</section>
-	<section class="grid mx-auto col-wrap contents">
+	<section class="grid mx-auto col-wrap contents"><<<<<<< 2Hyung5
 
 <form method="get" onsubmit="fn_paginationCtrl(1); return false;" id="searchFrm" > 
 		
-		<!-- 검색 값이 있냐 없냐에 따라 값 뛰우는거 설정 -->
+		<!-- 검색 값이 있냐 없냐에 따라 값 띄우는거 설정 -->
 		<div class="grid search">
 			<img src="${contextPath}/resources/image/loupe.png" alt="검색하기">
 			
@@ -41,7 +41,7 @@
 			<input type="submit" class ='search__btn' value="검색">
 		</div>
 </form>				
-		
+
 		<table id="notice__list">
 			<thead>
 				<tr align="center">
@@ -131,7 +131,7 @@
 					tr.append(td);
 					tableBody.append(tr);
 				})
-				history.pushState('', '공지사항', "listNotices.do?pageNo=" + page /* + "&searchText=" + searchText; */);
+				history.pushState('', '공지사항', "listNotices.do?pageNo=" + page + "&searchText=" + searchText);
 			},
 			error: function(xhr, status, error) {
 				console.log(error);
@@ -152,4 +152,3 @@
 		}
 	})
 </script>
-

@@ -24,7 +24,13 @@
 	<![CDATA[
 	 SELECT *
 	 FROM (
-	 	SELECT art_id, art_title, SUBSTR(art_join_date,0,10) as art_join_date, art_contents, art_file, art_important, art_hits, ROW_NUMBER() OVER (ORDER BY art_important, art_join_date desc) rn
+	 	SELECT 
+	 		art_id, 
+	 		art_title, 
+	 		SUBSTR(art_join_date,0,10) as art_join_date, 
+	 		art_contents, art_file, art_important, 
+	 		art_hits, 
+	 		ROW_NUMBER() OVER (ORDER BY art_important, art_join_date desc) rn
 	 	FROM article
 	 )
 	 WHERE rn BETWEEN #{start} AND #{end}
@@ -85,7 +91,7 @@
      WHERE art_id = #{id}
 	</update>
 	
- 	<!--단일이미지 추가 
+	<!--단일이미지 추가 -->
 	<insert id="insertNewArticle" parameterType="java.util.Map">
     <![CDATA[
 			INSERT into t_board(articleNO, parentNO, title, content, writeDate, imageFileName, id)
@@ -93,13 +99,24 @@
 		]]>
 	</insert>
 
+	<!-- 메인에 보여줄 최신 공지사항 선택 -->
+	<select id="selectArticlesListForWelcomePage" resultMap="articlesResult">
+	<![CDATA[
+		SELECT 
+			art_id, 
+			art_title, 
+			art_important
+		FROM article
+		ORDER BY art_important, art_join_date desc
+		FETCH FIRST 8 ROWS ONLY
+	]]>
+	</select>
+	
 	<select id="selectNewArticleNO" resultType="int">
     <![CDATA[
 			SELECT  nvl(max(articleNO)+1, 1) from t_board		
 		]]>
 	</select>
-
-	
 
 	<update id="updateArticle" parameterType="java.util.Map">
 		update t_board
@@ -121,9 +138,19 @@
     ]]>
 	</delete>
 
-	다중 이미지 추가 SQL문 -> <insert id="insertNewArticle" parameterType="java.util.Map"> 
+
+	<!--다중 이미지 추가 SQL문 -> <insert id="insertNewArticle" parameterType="java.util.Map"> 
 		<![CDATA[ insert into t_board(articleNO, id, title, content, imageFileName) 
-		values(#{articleNO}, #{id}, #{title}, #{content}, null) ]]> </insert
+		values(#{articleNO}, #{id}, #{title}, #{content}, null) ]]> </insert -->
+
+	<insert id="insertNewImage" parameterType="java.util.Map">
+		<foreach item="item" collection="list" open="INSERT ALL"
+			separator=" " close="SELECT * FROM DUAL">
+			INTO t_imageFile(imageFileNO, imageFileName, articleNO, regDate)
+			VALUES (#{item.imageFileNO}, #{item.imageFileName}, #{item.articleNO},
+			sysdate)
+		</foreach>
+	</insert>
 
 
 	<insert id="insertNewImage" parameterType="java.util.Map">
@@ -141,8 +168,4 @@
       SELECT  nvl(max(imageFileNO),0) from t_imageFile		
     ]]>
 	</select>
- -->
-
-	
-
 </mapper>
