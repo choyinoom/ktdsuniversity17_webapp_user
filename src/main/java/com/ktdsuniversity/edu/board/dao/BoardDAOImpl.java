@@ -1,5 +1,6 @@
 package com.ktdsuniversity.edu.board.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,20 +19,9 @@ public class BoardDAOImpl implements BoardDAO {
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<ArticleVO> selectArticlesListBy(Map<String, Integer> map) throws DataAccessException{
+	public List<ArticleVO> selectArticlesListBy(Map<String, Object> map) throws DataAccessException{
 		List<ArticleVO> articlesList = sqlSession.selectList("mapper.board.selectArticlesListByPage", map);
 		return articlesList;
-	}
-
-	@Override
-	public int countAllNotices() throws DataAccessException {
-		return sqlSession.selectOne("mapper.board.selectAllArticlesCount");
-	}
-	
-	@Override
-	public ArticleVO selectArticle(int articleId) throws DataAccessException {
-		ArticleVO vo = sqlSession.selectOne("mapper.board.selectArticle", articleId);
-		return vo;
 	}
 	
 	@Override
@@ -40,6 +30,39 @@ public class BoardDAOImpl implements BoardDAO {
 		fileList = sqlSession.selectList("mapper.board.selectFilesList", articleId);
 		return fileList;
 	}
+
+	@Override
+	public int countAllNotices() throws DataAccessException {
+		return sqlSession.selectOne("mapper.board.selectAllArticlesCount");
+	}
+	
+	// 공지사항 선택
+	@Override
+	public ArticleVO selectArticle(int articleId) throws DataAccessException {
+		ArticleVO vo = sqlSession.selectOne("mapper.board.selectArticle", articleId);
+		return vo;
+	}
+	
+	// 공지사항 파일 선택
+	@Override
+	public ArticleFileVO selectArticleFile(int articleId) throws DataAccessException {
+		ArticleFileVO filevo = sqlSession.selectOne("mapper.board.selectArticleFile", articleId);
+		return filevo;
+	}
+	
+	// 공지사항 제목 검색
+	@Override
+	public List<ArticleVO> selectBySearchArticlesListBy(Map<String, Object> map) throws DataAccessException {
+		List<ArticleVO> articlesBySearchList = sqlSession.selectList("mapper.board.selectBySearchArticlesList", map);
+		return articlesBySearchList;
+	}
+	
+	// 조회수 증가
+	@Override
+	public int addHits(ArticleVO articleVO) throws DataAccessException {
+		return sqlSession.update("mapper.board.addHits", articleVO);
+	}
+
 	
 //	@Override
 //	public int insertNewArticle(Map articleMap) throws DataAccessException {

@@ -13,7 +13,7 @@
 		<collection property="articleFiles" column="id" ofType="articleFileVO" select="selectFilesList" />
 	</resultMap>
 
-	<resultMap id="fileResult" type="articleFileVO">
+	<resultMap id="filesResult" type="articleFileVO">
 		<result property="id" column="file_id" />
 		<result property="artId" column="art_id" />
 		<result property="name" column="file_name" />
@@ -41,14 +41,22 @@
 	<!-- 공지사항 게시글 선택 -->
 	<select id="selectArticle" resultMap="articlesResult" parameterType="int">
     <![CDATA[
-      SELECT * 
+      SELECT art_id, art_title, SUBSTR(art_join_date,0,10) as art_join_date, art_contents, art_file, art_important, art_hits
       FROM article
-      WHERE art_id = #{articleId}		
+      WHERE art_id = #{articleId}			
     ]]>
 	</select>
 	
+	<select id="selectArticleFile" resultMap="filesResult" parameterType="int">
+    <![CDATA[
+      SELECT * 
+      FROM article_file
+      WHERE art_id = #{articleId}		
+    ]]>
+  </select>
+	
 	<!-- 공지사항 첨부파일 선택 -->
-	<select id="selectFilesList" resultMap="fileResult" parameterType="int">
+	<select id="selectFilesList" resultMap="filesResult" parameterType="int">
     <![CDATA[
       SELECT *
       FROM article_file
@@ -56,7 +64,28 @@
     ]]>
 	</select>
 	
-	<!--단일이미지 추가 -->
+	<!-- 공지사항 리스트에서 검색 -->
+	<select id="selectBySearchArticlesList" resultMap="articlesResult" parameterType="java.util.Map" >
+
+        SELECT * 
+        FROM (
+	 		SELECT art_id, art_title, SUBSTR(art_join_date,0,10) as art_join_date, art_contents, art_file, art_important, art_hits, ROW_NUMBER() OVER (ORDER BY art_important, art_join_date desc) rn
+	 		FROM article
+	 		WHERE art_title LIKE '%' || #{searchText} || '%' OR art_contents LIKE '%' || #{searchText} || '%'
+	 		)
+        WHERE rn BETWEEN #{start} AND #{end}
+        ORDER BY rn
+        
+	</select>
+	
+	<!-- 공지사항 조회수 기능 -->
+	<update id="addHits" parameterType="int">
+     UPDATE article 
+     SET art_hits = art_hits + 1
+     WHERE art_id = #{id}
+	</update>
+	
+ 	<!--단일이미지 추가 
 	<insert id="insertNewArticle" parameterType="java.util.Map">
     <![CDATA[
 			INSERT into t_board(articleNO, parentNO, title, content, writeDate, imageFileName, id)
@@ -92,9 +121,9 @@
     ]]>
 	</delete>
 
-	<!--다중 이미지 추가 SQL문 -> <insert id="insertNewArticle" parameterType="java.util.Map"> 
+	다중 이미지 추가 SQL문 -> <insert id="insertNewArticle" parameterType="java.util.Map"> 
 		<![CDATA[ insert into t_board(articleNO, id, title, content, imageFileName) 
-		values(#{articleNO}, #{id}, #{title}, #{content}, null) ]]> </insert -->
+		values(#{articleNO}, #{id}, #{title}, #{content}, null) ]]> </insert
 
 
 	<insert id="insertNewImage" parameterType="java.util.Map">
@@ -112,7 +141,7 @@
       SELECT  nvl(max(imageFileNO),0) from t_imageFile		
     ]]>
 	</select>
-
+ -->
 
 	
 

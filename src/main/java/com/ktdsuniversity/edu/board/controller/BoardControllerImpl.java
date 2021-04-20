@@ -44,38 +44,68 @@ public class BoardControllerImpl implements BoardController {
 	@Override
 	@RequestMapping(value = "/customer/listNotices.do", method = RequestMethod.GET)
 	public ModelAndView listArticles(@RequestParam("pageNo") int pageNo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		String viewName = (String) request.getAttribute("viewName");
 		List<ArticleVO> articlesList = boardService.listArticles(pageNo);
-		int totalPages = boardService.findTotalPages(); // 총 페이지 수 계산
-		int all = boardService.countAllNotices();		// 총 게시글 개수
-		
+		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+		System.out.println(articlesList);
 		ModelAndView mav = new ModelAndView(viewName);
+			
+		int totalPages = boardService.findTotalPages(); // 총 페이지 수 계산
+		int all = boardService.countAllNotices();	
 		mav.addObject("articlesList", articlesList);
 		mav.addObject("totalPages", totalPages);
 		mav.addObject("all", all);
 		mav.addObject("pageNo", pageNo);
 		return mav;
+			
+		}
+		
+	// 검색기능
+	@Override
+	@RequestMapping(value = "/customer/listBySearch.do", method = RequestMethod.POST)
+	public ModelAndView listBySearchArticles(@RequestParam("pageNo") int pageNo, @RequestParam("searchText") String searchText, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
 
+		String viewName = (String) request.getAttribute("viewName");
+		List<ArticleVO> articlesList = boardService.listBySearchArticles(pageNo, searchText);
+		ModelAndView mav = new ModelAndView("/customer/listNotices");
+		mav.addObject("articlesList", articlesList);
+		return mav;
 	}
 
 	/* 공지사항 페이지네이션을 위한 ajax */
 	@RequestMapping(value="/ajax/customer/listNotices", method= RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Object> getArticles(@RequestParam("pageNo") int pageNo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		Map<String, Object> result = new HashMap<String, Object>();
-		List<ArticleVO> articlesList = boardService.listArticles(pageNo);
-		result.put("articlesList", articlesList);
-		return result;
+		String searchText = (String) request.getParameter("searchText");
+		
+		if (searchText != null) {
+			List<ArticleVO> articlesList = boardService.listBySearchArticles(pageNo, searchText);
+			result.put("articlesList", articlesList);
+			return result; 
+			
+		} else {
+			List<ArticleVO> articlesList = boardService.listArticles(pageNo);
+			result.put("articlesList", articlesList);
+			return result; 
+		}
 	}
 	
 	/* 공지사항 상세내용을 보여주기 위한 메서드*/
-	@RequestMapping(value = "/customer/viewNotice.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/customer/viewNotice.do", method = RequestMethod.GET)
 	public ModelAndView viewArticle(@RequestParam("articleId") int articleId, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
-		Map<String, Object> articleMap = boardService.viewArticle(articleId);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
-		mav.addObject("articleMap", articleMap);
+		ArticleVO vo = boardService.viewArticle(articleId);
+		boardService.addHits(vo);
+		ArticleFileVO filevo = boardService.viewArticleFile(articleId);
+		mav.addObject("articleId",articleId);
+		mav.addObject("vo", vo);
+		mav.addObject("filevo", filevo);
 		return mav;
 	}
 	
