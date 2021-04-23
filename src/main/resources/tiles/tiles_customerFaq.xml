@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+
+	
+	<!-- FAQ- -->
+	
+	<definition name="/customer/faq" extends="baseLayout">
+		<put-attribute name="title" value="FAQ" />
+		<put-attribute name="body" value="/WEB-INF/views/customer/faq.jsp" />
+	</definition>
+	
+	<definition name="/customer/faqMember" extends="baseLayout">
+		<put-attribute name="title" value="회원관련" />
+		<put-attribute name="body" value="/WEB-INF/views/customer/faqMember.jsp" />
+	</definition>
+	
+	<definition name="/customer/faqCourse" extends="baseLayout">
+		<put-attribute name="title" value="수강관련" />
+		<put-attribute name="body" value="/WEB-INF/views/customer/faqCourse.jsp" />
+	</definition>
+	
+		
+	<definition name="/customer/faqEdu" extends="baseLayout">
+		<put-attribute name="title" value="교육관련" />
+		<put-attribute name="body" value="/WEB-INF/views/customer/faqEdu.jsp" />
+	</definition>
+	
+		
+	<definition name="/customer/faqSuryo" extends="baseLayout">
+		<put-attribute name="title" value="수료관련" />
+		<put-attribute name="body" value="/WEB-INF/views/customer/faqSuryo.jsp" />
+	</definition>
+		
+	<definition name="/customer/faqElse" extends="baseLayout">
+		<put-attribute name="title" value="기타" />
+		<put-attribute name="body" value="/WEB-INF/views/customer/faqElse.jsp" />
+	</definition>
+	
+</tiles-definitions>

@@ -358,20 +358,52 @@ public class BoardControllerImpl implements BoardController {
 //		}
 //		return imageFileName;
 //	}
+	
+	/* FAQ 페이지 */
+	@RequestMapping(value = { "customer/faq.do" }, method = RequestMethod.GET)
+	private String main(HttpServletRequest request, HttpServletResponse response) {
 
-	/*
-	 * //�떎以� �씠誘몄� �뾽濡쒕뱶�븯湲� private List<String> upload(MultipartHttpServletRequest
-	 * multipartRequest) throws Exception{ List<String> fileList= new
-	 * ArrayList<String>(); Iterator<String> fileNames =
-	 * multipartRequest.getFileNames(); while(fileNames.hasNext()){ String fileName
-	 * = fileNames.next(); MultipartFile mFile = multipartRequest.getFile(fileName);
-	 * String originalFileName=mFile.getOriginalFilename();
-	 * fileList.add(originalFileName); File file = new File(ARTICLE_IMAGE_REPO
-	 * +"\\"+ fileName); if(mFile.getSize()!=0){ //File Null Check if(!
-	 * file.exists()){ //寃쎈줈�긽�뿉 �뙆�씪�씠 議댁옱�븯吏� �븡�쓣 寃쎌슦 if(file.getParentFile().mkdirs()){
-	 * //寃쎈줈�뿉 �빐�떦�븯�뒗 �뵒�젆�넗由щ뱾�쓣 �깮�꽦 file.createNewFile(); //�씠�썑 �뙆�씪 �깮�꽦 } }
-	 * mFile.transferTo(new File(ARTICLE_IMAGE_REPO
-	 * +"\\"+"temp"+ "\\"+originalFileName)); //�엫�떆濡� ���옣�맂 multipartFile�쓣 �떎�젣 �뙆�씪濡� �쟾�넚 } }
-	 * return fileList; }
-	 */
+		return "/customer/faq";
+
+	}
+	
+	@RequestMapping(value = { "customer/faqMember.do" }, method = RequestMethod.GET)
+	private String faqMember(HttpServletRequest request, HttpServletResponse response) {
+
+		return "/customer/faqMember";
+
+	}
+	
+	@RequestMapping(value = { "customer/faqCourse.do" }, method = RequestMethod.GET)
+	private String faqCourse(HttpServletRequest request, HttpServletResponse response) {
+
+		return "/customer/faqCourse";
+
+	}
+	
+	@RequestMapping(value = { "customer/faqEdu.do" }, method = RequestMethod.GET)
+	private String faqEdu(HttpServletRequest request, HttpServletResponse response) {
+
+		return "/customer/faqEdu";
+
+	}
+	
+	@RequestMapping(value = { "customer/faqSuryo.do" }, method = RequestMethod.GET)
+	private String faqSuryo(HttpServletRequest request, HttpServletResponse response) {
+
+		return "/customer/faqSuryo";
+
+	}
+	
+	@RequestMapping(value = { "customer/faqElse.do" }, method = RequestMethod.GET)
+	private String faqElse(HttpServletRequest request, HttpServletResponse response) {
+
+		return "/customer/faqElse";
+
+	}
+
+
+
+	
+	
 }
