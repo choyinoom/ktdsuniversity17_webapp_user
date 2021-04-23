@@ -1,6 +1,24 @@
+#notice__filter {
+	width: 1000px;
+	align-items: flex-end;
+	justify-content: space-between;
+	margin-top:30px;
+	margin-bottom:30px;
+}
+
 #notice__list, #notice__list td {
 	font-size: 16px;
 	letter-spacing: -0.6px;
+	border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+	padding-top: 0px;
+	padding-bottom: 0px;
 }
 
+#notice__list img {
+	width: 15px;
+    padding-left: 5px;
+}
 
+#notice__list th {
+	border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+}
