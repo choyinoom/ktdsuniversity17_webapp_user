@@ -65,7 +65,7 @@ public class CourseControllerImpl implements CourseController{
 		
 		Map<String, Object> enrollMap = new HashMap<String, Object>();
 		enrollMap.put("id", memberVO.getId());
-		enrollMap.put("courseId", request.getParameter("courseId"));
+		enrollMap.put("courseId", Integer.parseInt(request.getParameter("courseId")));
 		System.out.println(memberVO.getId());
 		System.out.println(request.getParameter("courseId"));
 		// 이미 수강 접수한 이력이 있는지 확인한다.

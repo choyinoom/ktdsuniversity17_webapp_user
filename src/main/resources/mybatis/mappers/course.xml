@@ -32,6 +32,7 @@
 		<result property="days" column="slb_days"/>
 		<result property="time" column="slb_time"/>
 		<result property="bannerImg" column="slb_banner_img"/>
+		<result property="crsCategoryId" column="crs_category_id"/>
 	</resultMap>
 
 	<!-- 강의목록 출력 -->
@@ -95,13 +96,14 @@
 	]]>
 	</select>
 	
-	<!-- 메인 페이지 강의목록 캐러셀 -->
+	<!-- 메인 페이지 강의목록 -->
 	<select id="selectAllCourseListForWelcomePage" resultMap="crsResult">
 	<![CDATA[
 		SELECT
 		    crs_id,
-		    to_char(to_date(SUBSTR(crs_start_date,0,10)),'YY/MM/DD') as crs_start_date, 
-		    to_char(to_date(SUBSTR(crs_end_date,0,10)),'YY/MM/DD') as crs_end_date,
+		    crs_category_id,
+		    to_char(to_date(SUBSTR(crs_start_date,0,10)),'MM"월" DD"일"') as crs_start_date, 
+		    to_char(to_date(SUBSTR(crs_end_date,0,10)),'MM"월" DD"일"') as crs_end_date,
 		    slb_name,
 		    slb_banner_img 
 		FROM course

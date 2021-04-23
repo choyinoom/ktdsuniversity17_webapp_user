@@ -14,6 +14,10 @@ a {
 	color: black;
 }
 
+ul {
+	list-style:none;
+}
+
 fieldset {
 	border: 0;
 }
@@ -51,7 +55,7 @@ main {
 }
 
 footer {
-	height: 300px;
+	height: 200px;
 	bottom: 0;	
 	padding: 5px;
 	background-color: rgb(53, 51, 46);
@@ -105,9 +109,6 @@ footer {
 .search {
 	justify-content: flex-end;
 	align-items: flex-end;
-	padding-top:30px;
-	padding-bottom:30px;
-	margin-bottom:10px;
 }
 
 .search img {
@@ -150,15 +151,15 @@ table th{
 }
 
 table td {
-	border-bottom: 1px solid rgba(128, 128, 128, 0.8);
+	border-bottom: 1px solid rgba(128, 128, 128, 0.3);
 	padding: 8px 12px;
 	height: 60px;
-	font-size: 13px;
+	font-size: 14px;
 }
 
 .row__title {
 	text-align: left;
-	padding-left: 60px !important;
+	padding-left: 50px !important;
 }
 
 .row__title a {
@@ -198,12 +199,12 @@ table td {
 
 .notice__important {
 	color: #e91c24;
-	font-weight: 600;
+	font-weight: 700;
 }
 
 
 /* 모달 */
-.modal {
+.custom__modal {
 	display: none;
 	position: fixed;
 	align-items: center;
@@ -213,19 +214,19 @@ table td {
     z-index: 40;
 }
 
-.modal .dimmed {
+.custom__modal .dimmed {
 	position: absolute;
     background: rgba(11,19,30,.37);
 }
 
-.modal, .modal .dimmed {
+.custom__modal, .custom__modal .dimmed {
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
 }
 
-.modal > section {
+.custom__modal > section {
 	position: absolute;
 	border-radius: 4px;
     background-color: #fff;
@@ -235,7 +236,7 @@ table td {
     min-width: 320px;
 }
 
-.modal #buttons {
+.custom__modal #buttons {
 	justify-content: center;
 	padding-top: 14px;
 }
