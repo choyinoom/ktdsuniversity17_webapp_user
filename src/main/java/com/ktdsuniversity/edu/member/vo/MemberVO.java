@@ -1,6 +1,5 @@
 package com.ktdsuniversity.edu.member.vo;
 
-
 import org.springframework.stereotype.Component;
 
 @Component("memberVO")
@@ -8,6 +7,7 @@ public class MemberVO {
 	private String id;
 	private String name;
 	private String pw;
+	private String tel;
 	private String phone;
 	private String email;
 	private String subscription;
@@ -18,10 +18,9 @@ public class MemberVO {
 	private int loginFail;
 
 	public MemberVO() {
-		
-	}	
-	
-	public MemberVO(String id, String name, String pw, String phone, String email, String subscription,
+	}
+
+	public MemberVO(String id, String name, String pw, String tel, String phone, String email, String subscription,
 			String companyName, String delYN, String joinDate, String modDate, int loginFail) {
 		this.id = id;
 		this.name = name;
@@ -35,9 +34,6 @@ public class MemberVO {
 		this.modDate = modDate;
 		this.loginFail = loginFail;
 	}
-
-
-
 
 	public String getId() {
 		return id;
@@ -61,6 +57,14 @@ public class MemberVO {
 
 	public void setPw(String pw) {
 		this.pw = pw;
+	}
+
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 
 	public String getPhone() {
@@ -127,6 +131,4 @@ public class MemberVO {
 		this.loginFail = loginFail;
 	}
 
-	
-	
 }

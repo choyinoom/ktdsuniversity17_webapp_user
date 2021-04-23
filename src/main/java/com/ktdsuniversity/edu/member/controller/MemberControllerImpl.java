@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -65,6 +66,29 @@ public class MemberControllerImpl implements MemberController {
 		mav.setViewName(viewName);
 		return mav;
 	}
+	
+	@RequestMapping(value = "/member/privacy.do", method =  RequestMethod.GET)
+	@Override
+	public ModelAndView listPrivacy(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String)request.getAttribute("viewName");
+		System.out.println(viewName);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
+	}
+	
+	//아이디 중복확인
+	@ResponseBody
+	@RequestMapping(value = "/member/idCheck.do", method =  RequestMethod.POST)
+	public int idCheck(String id, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		MemberVO vo = new MemberVO();
+		vo.setId(id);
+		int result = memberService.idCheck(vo);
+		return result;
+	}
+	
+	
+	
 
 	@Override
 	@RequestMapping(value = "/member/listMembers.do", method = RequestMethod.GET)
@@ -76,15 +100,18 @@ public class MemberControllerImpl implements MemberController {
 
 		return mav;
 	}
-
+	
+	//회원가입
 	@Override
 	@RequestMapping(value = "/member/addMember.do", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
 	public ModelAndView addMember(@ModelAttribute("member") MemberVO member, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		int result = 0;
-		result = memberService.addMember(member);
-		ModelAndView mav = new ModelAndView("redirect:/member/listMembers.do");
+				memberService.addMember(member);
+		System.out.println("#####################################");
+		System.out.println(member.getPhone());
+		System.out.println(member.getTel());
+		ModelAndView mav = new ModelAndView("redirect:/");
 		return mav;
 	}
 

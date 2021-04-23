@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.company">
+	<resultMap id="comResult" type="companyVO">
+		<result property="id" column="com_id" />
+		<result property="name" column="com_name" />
+		<result property="regDate" column="com_reg_date" />
+		<result property="modDate" column="com_mod_date" />
+		<result property="contractName" column="com_contract_name" />
+		<result property="managerPhone" column="com_manager_phone" />
+		<result property="managerEmail" column="com_manager_email" />
+		<result property="contractStat" column="com_contract_stat" />
+		<result property="contractType" column="com_contract_type" />
+		<result property="address" column="com_address" />
+	</resultMap>
+
+	<select id="selectAllCompaniesList" resultMap="comResult">
+		<![CDATA[
+         SELECT 
+         com_id, com_name, SUBSTR(com_reg_date, 0, 10) as com_reg_date, SUBSTR(com_mod_date,0,10) as com_mod_date, com_contract_name, 
+         com_manager_phone, com_manager_email, com_contract_stat, com_contract_type, com_homePage, com_address, com_contract_agree, com_tel 
+         FROM company
+         ORDER BY com_reg_date desc
+         ]]>
+	</select>
+
+
+	<select id="selectBySearchCompaniesList" resultMap="comResult"
+		parameterType="companyVO">
+		select * from company
+		<choose>
+			<when test="searchType == 'companyName'">
+				WHERE com_name LIKE '%' || #{searchText} || '%'
+			</when>
+			<when test="searchType == 'companyNum'">
+				WHERE com_id LIKE '%' || #{searchText} || '%'
+			</when>
+		</choose>
+	</select>
+
+	<select id="selectCompany" resultMap="comResult"
+		parameterType="String">
+		<![CDATA[
+			select * from company where com_id = #{id}
+		]]>
+	</select>
+
+	<select id="listCriteria" resultMap="comResult">
+		SELECT
+		com_contract_stat,
+		com_name,
+		com_contract_name,
+		com_manager_phone,
+		com_id,
+		com_contract_type,
+		SUBSTR(com_reg_date, 0, 10) as com_reg_date,
+		com_address
+		FROM (select ROW_NUMBER() OVER (ORDER BY com_reg_date desc) NUM,
+		com_id,
+		com_name,
+		SUBSTR(com_reg_date, 0, 10) as com_reg_date,
+		com_contract_type,
+		com_contract_name,
+		com_manager_phone,
+		com_contract_stat,
+		com_address
+		FROM company ORDER BY com_reg_date desc)
+		WHERE NUM BETWEEN #{pageStart}
+		<choose>
+			<when test="#{perPageNum} == '10'">
+				AND #{perPageNum} - 1
+			</when>
+			<when test="#{perPageNum} != '10'">
+				AND (#{perPageNum} + #{pageStart}) - 1
+			</when>
+		</choose>
+		order by com_reg_date desc
+	</select>
+
+
+
+
+	<!-- 검색과 기준에 의해 나눠지는 리스트 뽑기 select -->
+	<select id="selectCriteriaBySearchCompanyList"
+		resultMap="comResult">
+		SELECT
+		com_id, com_name, SUBSTR(com_reg_date, 0, 10) as com_reg_date,
+		SUBSTR(com_mod_date,0,10) as com_mod_date, com_contract_name,
+		com_manager_phone, com_manager_email, com_contract_stat,
+		com_contract_type, com_homePage, com_address, com_contract_agree,
+		com_tel
+		FROM (SELECT ROW_NUMBER() OVER (ORDER BY com_reg_date desc)
+		NUM,
+		com_id, com_name, SUBSTR(com_reg_date, 0, 10) as com_reg_date,
+		SUBSTR(com_mod_date,0,10) as com_mod_date, com_contract_name,
+		com_manager_phone, com_manager_email, com_contract_stat,
+		com_contract_type, com_homePage, com_address, com_contract_agree,
+		com_tel
+		from company
+		<choose>
+			<when test="searchType == 'companyName'">
+				WHERE com_name LIKE '%' || #{searchText} || '%'
+			</when>
+			<when test="searchType == 'companyNum'">
+				WHERE com_id LIKE '%' || #{searchText} || '%'
+			</when>
+		</choose>
+		ORDER BY com_reg_date desc)
+		WHERE NUM BETWEEN #{pageStart}
+		<choose>
+			<when test="#{perPageNum} == '10'">
+				AND #{perPageNum} - 1
+			</when>
+			<when test="#{perPageNum} != '10'">
+				AND (#{perPageNum} + #{pageStart}) - 1
+			</when>
+		</choose>
+		order by com_reg_date desc
+	</select>
+
+
+
+</mapper>
