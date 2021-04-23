@@ -19,9 +19,9 @@
 		<result property="name" column="file_name" />
 	</resultMap>
 
-	<!-- 공지사항 목록 가져오기 -->	
+	<!-- 공지사항 목록 가져오기 -->
 	<select id="selectArticlesListByPage" parameterType="java.util.Map" resultMap="articlesResult">
-	<![CDATA[
+		<![CDATA[
 	 SELECT *
 	 FROM (
 	 	SELECT 
@@ -43,35 +43,35 @@
 		SELECT COUNT(*)
 		FROM article
 	</select>
-	
+
 	<!-- 공지사항 게시글 선택 -->
 	<select id="selectArticle" resultMap="articlesResult" parameterType="int">
-    <![CDATA[
+		<![CDATA[
       SELECT art_id, art_title, SUBSTR(art_join_date,0,10) as art_join_date, art_contents, art_file, art_important, art_hits
       FROM article
       WHERE art_id = #{articleId}			
     ]]>
 	</select>
-	
+
 	<select id="selectArticleFile" resultMap="filesResult" parameterType="int">
-    <![CDATA[
+		<![CDATA[
       SELECT * 
       FROM article_file
       WHERE art_id = #{articleId}		
     ]]>
-  </select>
-	
+	</select>
+
 	<!-- 공지사항 첨부파일 선택 -->
 	<select id="selectFilesList" resultMap="filesResult" parameterType="int">
-    <![CDATA[
+		<![CDATA[
       SELECT *
       FROM article_file
       where art_id = #{articleId}	
     ]]>
 	</select>
-	
+
 	<!-- 공지사항 리스트에서 검색 -->
-	<select id="selectBySearchArticlesList" resultMap="articlesResult" parameterType="java.util.Map" >
+	<select id="selectBySearchArticlesList" resultMap="articlesResult" parameterType="java.util.Map">
 
         SELECT * 
         FROM (
@@ -83,17 +83,17 @@
         ORDER BY rn
         
 	</select>
-	
+
 	<!-- 공지사항 조회수 기능 -->
 	<update id="addHits" parameterType="int">
      UPDATE article 
      SET art_hits = art_hits + 1
      WHERE art_id = #{id}
 	</update>
-	
+
 	<!--단일이미지 추가 -->
 	<insert id="insertNewArticle" parameterType="java.util.Map">
-    <![CDATA[
+		<![CDATA[
 			INSERT into t_board(articleNO, parentNO, title, content, writeDate, imageFileName, id)
 			VALUES(#{articleNO}, #{parentNO}, #{title},	#{content}, sysdate, #{imageFileName},	#{id})
 		]]>
@@ -101,7 +101,7 @@
 
 	<!-- 메인에 보여줄 최신 공지사항 선택 -->
 	<select id="selectArticlesListForWelcomePage" resultMap="articlesResult">
-	<![CDATA[
+		<![CDATA[
 		SELECT 
 			art_id, 
 			art_title, 
@@ -111,9 +111,9 @@
 		FETCH FIRST 8 ROWS ONLY
 	]]>
 	</select>
-	
+
 	<select id="selectNewArticleNO" resultType="int">
-    <![CDATA[
+		<![CDATA[
 			SELECT  nvl(max(articleNO)+1, 1) from t_board		
 		]]>
 	</select>
@@ -129,7 +129,7 @@
 	</update>
 
 	<delete id="deleteArticle" parameterType="int">
-    <![CDATA[
+		<![CDATA[
       delete from t_board
       where articleNO in (
          SELECT articleNO FROM  t_board
@@ -144,18 +144,7 @@
 		values(#{articleNO}, #{id}, #{title}, #{content}, null) ]]> </insert -->
 
 	<insert id="insertNewImage" parameterType="java.util.Map">
-		<foreach item="item" collection="list" open="INSERT ALL"
-			separator=" " close="SELECT * FROM DUAL">
-			INTO t_imageFile(imageFileNO, imageFileName, articleNO, regDate)
-			VALUES (#{item.imageFileNO}, #{item.imageFileName}, #{item.articleNO},
-			sysdate)
-		</foreach>
-	</insert>
-
-
-	<insert id="insertNewImage" parameterType="java.util.Map">
-		<foreach item="item" collection="list" open="INSERT ALL"
-			separator=" " close="SELECT * FROM DUAL">
+		<foreach item="item" collection="list" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL">
 			INTO t_imageFile(imageFileNO, imageFileName, articleNO, regDate)
 			VALUES (#{item.imageFileNO}, #{item.imageFileName}, #{item.articleNO},
 			sysdate)
@@ -164,7 +153,7 @@
 
 
 	<select id="selectNewImageFileNO" resultType="int">
-    <![CDATA[
+		<![CDATA[
       SELECT  nvl(max(imageFileNO),0) from t_imageFile		
     ]]>
 	</select>
