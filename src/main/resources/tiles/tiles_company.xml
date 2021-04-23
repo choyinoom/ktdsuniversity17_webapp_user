@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE tiles-definitions PUBLIC
-"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
-"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
 	<definition name="/company/companyInfo" extends="baseLayout">
-	      <put-attribute name="title" value="회사소개" />
-	      <put-attribute name="body" value="/WEB-INF/views/company/companyInfo.jsp" />
+		<put-attribute name="title" value="회사소개" />
+		<put-attribute name="body" value="/WEB-INF/views/company/companyInfo.jsp" />
 	</definition>
-	
-	
+
+
 	<definition name="/company/consortium" extends="baseLayout">
-	      <put-attribute name="title" value="컨소시엄소개" />
-	      <put-attribute name="body" value="/WEB-INF/views/company/consortium.jsp" />
+		<put-attribute name="title" value="컨소시엄소개" />
+		<put-attribute name="body" value="/WEB-INF/views/company/consortium.jsp" />
 	</definition>
-	
+
 	<definition name="/company/classroom" extends="baseLayout">
-	      <put-attribute name="title" value="교육장안내" />
-	      <put-attribute name="body" value="/WEB-INF/views/company/classroom.jsp" />
+		<put-attribute name="title" value="교육장안내" />
+		<put-attribute name="body" value="/WEB-INF/views/company/classroom.jsp" />
+	</definition>
+
+	<definition name="/company/popUp" template="/WEB-INF/views/common/layout_popUp.jsp">
+		<put-attribute name="title" value="팝업창" />
+		<put-attribute name="body" value="/WEB-INF/views/member/popUp.jsp" />
 	</definition>
 
 </tiles-definitions>
