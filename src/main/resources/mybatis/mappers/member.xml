@@ -3,17 +3,32 @@
 
 <mapper namespace="mapper.member">
 	<resultMap id="memResult" type="memberVO">
-		<result property="id" column="id" />
-		<result property="pwd" column="pwd" />
-		<result property="name" column="name" />
-		<result property="email" column="email" />
-		<result property="joinDate" column="joinDate" />
+		<result property="id" column="mem_id" />
+		<result property="pw" column="mem_pw" />
+		<result property="name" column="mem_name" />
+		<result property="tel" column="mem_tel" />
+		<result property="phone" column="mem_phone" />
+		<result property="email" column="mem_email" />
+		<result property="subscription" column="mem_subscription" />
+		<result property="companyName" column="mem_company_name" />
+		<result property="delYN" column="mem_delYN" />
+		<result property="joinDate" column="mem_join_date" />
+		<result property="modDate" column="mem_mod_date" />
+		<result property="loginFail" column="mem_login_fail" />
 	</resultMap>
+	
 	<!-- <resultMap id="memResult" type="java.util.HashMap"> <result property="id" 
 		column="id" /> <result property="pwd" column="pwd" /> <result property="name" 
 		column="name" /> <result property="email" column="email" /> <result property="joinDate" 
 		column="joinDate" /> </resultMap> -->
 
+	<!-- 아이디 중복체크 -->
+	<select id="selectMember" resultType="int">
+	<![CDATA[
+		select COUNT(*) from member	
+		where mem_id=#{id} 	
+	]]>
+	</select>
 
 	<select id="selectAllMemberList" resultMap="memResult">
 		<![CDATA[
@@ -23,8 +38,8 @@
 
 	<insert id="insertMember" parameterType="memberVO">
 		<![CDATA[
-		 insert into member(id, pwd, name, email, joinDate)
-		 values(#{id}, #{pwd}, #{name}, #{email}, sysdate)
+		 insert into member(mem_name, mem_id, mem_pw, mem_tel, mem_phone, mem_email, mem_subscription, mem_company_name)
+		 values(#{name}, #{id}, #{pw}, #{tel, jdbcType=VARCHAR}, #{phone, jdbcType=VARCHAR}, #{email}, #{subscription}, #{companyName})
 		]]>
 	</insert>
 

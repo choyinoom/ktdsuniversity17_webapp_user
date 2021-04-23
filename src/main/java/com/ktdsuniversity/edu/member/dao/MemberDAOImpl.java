@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.ktdsuniversity.edu.member.vo.MemberVO;
+import com.ktdsuniversity.edu.company.vo.CompanyVO;
 
 
 @Repository("memberDAO")
@@ -40,4 +41,10 @@ public class MemberDAOImpl implements MemberDAO {
 		return vo;
 	}
 
+	@Override
+	public int idCheck(MemberVO vo) throws DataAccessException{
+		int result = sqlSession.selectOne("mapper.member.selectMember", vo);
+		return result;
+	}
+	
 }

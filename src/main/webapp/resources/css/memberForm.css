@@ -1,0 +1,148 @@
+@charset "UTF-8";
+
+.memberform_container {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin: 0px;
+	padding: 0px;
+}
+
+.memberform {
+	width: 516px;
+	margin: 50px;
+}
+
+.memberform_box {
+background: #ECECEC;
+width: 318px;
+height: 40px;
+border-radius: 6px;
+margin: 0px 10px 0px 30px;
+}
+
+.memberform_box_id {
+background: #ECECEC;
+width: 200px;
+height: 40px;
+border-radius: 6px;
+margin: 0px 10px 10px 30px;
+}
+
+.memberform_box_tel {
+background: #ECECEC;
+width: 85px;
+height: 40px;
+border-radius: 6px;
+margin: 0px 10px 0px 10px;
+}
+
+.memberform_box_company {
+background: #ECECEC;
+width: 220px;
+height: 40px;
+border-radius: 6px;
+margin: 0px 10px 0px 30px;
+}
+
+.memberSubscription {
+-webkit-appearance : checkbox;
+margin: 3px 8px 0px 32px;
+position : relative;
+top : 1px;
+}
+
+#memberSubscription{
+color: #4D4D4D;
+font-size: 13px;
+margin-bottom : 5px;
+}
+
+#memberform_necessity {
+font-size : 16px;
+color: #E91B23;
+font-weight: 700;
+}
+
+.memberform table tr td {
+	height: 50px;
+	padding: 0px;
+}
+
+#memberform_search {
+background: #969696;
+width: 80px;
+height: 40px;
+border-radius: 6px;
+margin: 0px 10px 0px 5px;
+color: #EFEFEF;
+cursor: pointer;
+font-size: 16px;
+}
+
+.memberform_button {
+	display: flex;
+	justify-content: center;
+	margin: 30px;
+}
+
+.memberform_button > input{
+font-weight: 500;
+color: #EFEFEF;
+background: #E91B23;
+width: 90px;
+height: 40px;
+border-radius: 4px;
+font-size: 16px;
+cursor: pointer;
+}
+
+#memberForm_cancel{
+background: #969696;
+margin-left:15px;
+}
+
+#idChk{
+background: #969696;
+width: 100px;
+height: 40px;
+border-radius: 6px;
+margin: 0px 10px 0px 5px;
+color: #EFEFEF;
+cursor: pointer;
+font-size: 16px;
+border:none;
+}
+
+#userTel {
+background: #ECECEC;
+width: 85px;
+height: 40px;
+border-radius: 6px;
+margin: 0px 10px 0px 30px;
+border: none;
+text-align:center;
+}
+
+#userPhone {
+background: #ECECEC;
+width: 85px;
+height: 40px;
+border-radius: 6px;
+margin: 0px 10px 0px 30px;
+border: none;
+}
+
+#alert-success{
+display: none;
+color: #00c853;
+margin-left: 30px;
+font-size: 12px;
+}
+
+#alert-danger {
+display: none;
+color: #E91B23;
+margin-left: 30px;
+font-size: 12px;
+}

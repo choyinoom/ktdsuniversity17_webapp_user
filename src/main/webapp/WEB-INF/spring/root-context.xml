@@ -8,3 +8,4 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 			<aop:aspectj-autoproxy/>
 </beans>
+
