@@ -1,8 +1,11 @@
-package com.ktdsuniversity.edu.mypage.vo;
+package com.ktdsuniversity.edu.member.vo;
+
+import org.springframework.stereotype.Component;
 
 import com.ktdsuniversity.edu.course.vo.CourseVO;
 import com.ktdsuniversity.edu.course.vo.SyllabusVO;
 
+@Component("enrollmentDetailVO")
 public class EnrollmentDetailVO {
 	private int id;
 	private int crsId;
@@ -104,6 +107,4 @@ public class EnrollmentDetailVO {
 		this.syllabusVO = syllabusVO;
 	}
 	
-	
-
 }

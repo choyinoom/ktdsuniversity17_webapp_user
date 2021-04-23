@@ -47,7 +47,7 @@ value='/resources/css/loginForm.css'/>">
 						oninput="this.setCustomValidity('')">
 				</div>
 				<div class="input__row" id="login__pw" >
-					<input type="password" name="pwd" placeholder="비밀번호" required
+					<input type="password" name="pw" placeholder="비밀번호" required
 						oninvalid="this.setCustomValidity('Enter User Password Here')"
 						oninput="this.setCustomValidity('')">
 				</div>

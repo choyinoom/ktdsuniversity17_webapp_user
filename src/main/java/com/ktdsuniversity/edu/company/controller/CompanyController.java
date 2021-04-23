@@ -21,5 +21,5 @@ public interface CompanyController {
 			throws Exception;
 
 	public ModelAndView companyInfo(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	
+
 }

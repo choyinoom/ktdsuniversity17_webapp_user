@@ -29,7 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ktdsuniversity.edu.board.service.BoardService;
 import com.ktdsuniversity.edu.board.vo.ArticleVO;
-import com.ktdsuniversity.edu.board.vo.ImageVO;
+import com.ktdsuniversity.edu.board.vo.ArticleFileVO;
 import com.ktdsuniversity.edu.member.vo.MemberVO;
 
 @Controller("boardController")
@@ -40,83 +40,121 @@ public class BoardControllerImpl implements BoardController {
 	@Autowired
 	private ArticleVO articleVO;
 
+	/* 공지사항 글을 불러오는 메서드 */
 	@Override
-	@RequestMapping(value = "/board/listArticles.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView listArticles(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "/customer/listNotices.do", method = RequestMethod.GET)
+	public ModelAndView listArticles(@RequestParam("pageNo") int pageNo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		String viewName = (String) request.getAttribute("viewName");
-		List articlesList = boardService.listArticles();
-		ModelAndView mav = new ModelAndView(viewName);
+		List<ArticleVO> articlesList = null;
+		if (searchText != null) {
+			articlesList = boardService.listBySearchArticles(pageNo, searchText); 	
+		} else {
+			articlesList = boardService.listArticles(pageNo);
+		}
+    
+		ModelAndView mav = new ModelAndView(viewName);		
+		int totalPages = boardService.findTotalPages(); // 총 페이지 수 계산
+		int all = boardService.countAllNotices();	
 		mav.addObject("articlesList", articlesList);
+		mav.addObject("totalPages", totalPages);
+		mav.addObject("all", all);
+		mav.addObject("pageNo", pageNo);
 		return mav;
+			
+		}
+		
 
-	}
-
-	// �븳 媛� �씠誘몄� 湲��벐湲�
-	@Override
-	@RequestMapping(value = "/board/addNewArticle.do", method = RequestMethod.POST)
+	/* 공지사항 페이지네이션을 위한 ajax */
+	@RequestMapping(value="/ajax/customer/listNotices", method= RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity addNewArticle(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
-			throws Exception {
-		multipartRequest.setCharacterEncoding("utf-8");
-		Map<String, Object> articleMap = new HashMap<String, Object>();
-		Enumeration enu = multipartRequest.getParameterNames();
-		while (enu.hasMoreElements()) {
-			String name = (String) enu.nextElement();
-			String value = multipartRequest.getParameter(name);
-			articleMap.put(name, value);
+	public Map<String, Object> getArticles(@RequestParam("pageNo") int pageNo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		String searchText = (String) request.getParameter("searchText");
+		
+		if (searchText != null) {
+			List<ArticleVO> articlesList = boardService.listBySearchArticles(pageNo, searchText);
+			result.put("articlesList", articlesList);
+			return result; 
+			
+		} else {
+			List<ArticleVO> articlesList = boardService.listArticles(pageNo);
+			result.put("articlesList", articlesList);
+			return result; 
 		}
-
-		String imageFileName = upload(multipartRequest);
-		HttpSession session = multipartRequest.getSession();
-		MemberVO memberVO = (MemberVO) session.getAttribute("member");
-		String id = memberVO.getId();
-		articleMap.put("parentNO", 0);
-		articleMap.put("id", id);
-		articleMap.put("imageFileName", imageFileName);
-
-		String message;
-		ResponseEntity resEnt = null;
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-		try {
-			int articleNO = boardService.addNewArticle(articleMap);
-			if (imageFileName != null && imageFileName.length() != 0) {
-				File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName);
-				File destDir = new File(ARTICLE_IMAGE_REPO + "\\" + articleNO);
-				FileUtils.moveFileToDirectory(srcFile, destDir, true);
-			}
-
-			message = "<script>";
-			message += " alert('�깉湲��쓣 異붽��뻽�뒿�땲�떎.');";
-			message += " location.href='" + multipartRequest.getContextPath() + "/board/listArticles.do'; ";
-			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-		} catch (Exception e) {
-			File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName);
-			srcFile.delete();
-
-			message = " <script>";
-			message += " alert('�삤瑜섍� 諛쒖깮�뻽�뒿�땲�떎. �떎�떆 �떆�룄�빐 二쇱꽭�슂');');";
-			message += " location.href='" + multipartRequest.getContextPath() + "/board/articleForm.do'; ";
-			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-			e.printStackTrace();
-		}
-		return resEnt;
 	}
-
-	// �븳媛쒖쓽 �씠誘몄� 蹂댁뿬二쇨린
-	@RequestMapping(value = "/board/viewArticle.do", method = RequestMethod.GET)
-	public ModelAndView viewArticle(@RequestParam("articleNO") int articleNO, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	
+	/* 공지사항 상세내용을 보여주기 위한 메서드*/
+	@RequestMapping(value = "/customer/viewNotice.do", method = RequestMethod.GET)
+	public ModelAndView viewArticle(@RequestParam("articleId") int articleId, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
-		// articleVO = (ArticleVO) boardService.viewArticle(articleNO).get("article");
-		Map articleMap = boardService.viewArticle(articleNO);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
-		mav.addObject("articleMap", articleMap);
+		ArticleVO vo = boardService.viewArticle(articleId);
+		boardService.addHits(vo);
+		ArticleFileVO filevo = boardService.viewArticleFile(articleId);
+		mav.addObject("articleId",articleId);
+		mav.addObject("vo", vo);
+		mav.addObject("filevo", filevo);
 		return mav;
 	}
+	
+	// �븳 媛� �씠誘몄� 湲��벐湲�
+//	@Override
+//	@RequestMapping(value = "/board/addNewArticle.do", method = RequestMethod.POST)
+//	@ResponseBody
+//	public ResponseEntity addNewArticle(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
+//			throws Exception {
+//		multipartRequest.setCharacterEncoding("utf-8");
+//		Map<String, Object> articleMap = new HashMap<String, Object>();
+//		Enumeration enu = multipartRequest.getParameterNames();
+//		while (enu.hasMoreElements()) {
+//			String name = (String) enu.nextElement();
+//			String value = multipartRequest.getParameter(name);
+//			articleMap.put(name, value);
+//		}
+//
+//		String imageFileName = upload(multipartRequest);
+//		HttpSession session = multipartRequest.getSession();
+//		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+//		String id = memberVO.getId();
+//		articleMap.put("parentNO", 0);
+//		articleMap.put("id", id);
+//		articleMap.put("imageFileName", imageFileName);
+//
+//		String message;
+//		ResponseEntity resEnt = null;
+//		HttpHeaders responseHeaders = new HttpHeaders();
+//		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+//		try {
+//			int articleNO = boardService.addNewArticle(articleMap);
+//			if (imageFileName != null && imageFileName.length() != 0) {
+//				File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName);
+//				File destDir = new File(ARTICLE_IMAGE_REPO + "\\" + articleNO);
+//				FileUtils.moveFileToDirectory(srcFile, destDir, true);
+//			}
+//
+//			message = "<script>";
+//			message += " alert('�깉湲��쓣 異붽��뻽�뒿�땲�떎.');";
+//			message += " location.href='" + multipartRequest.getContextPath() + "/board/listArticles.do'; ";
+//			message += " </script>";
+//			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+//		} catch (Exception e) {
+//			File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName);
+//			srcFile.delete();
+//
+//			message = " <script>";
+//			message += " alert('�삤瑜섍� 諛쒖깮�뻽�뒿�땲�떎. �떎�떆 �떆�룄�빐 二쇱꽭�슂');');";
+//			message += " location.href='" + multipartRequest.getContextPath() + "/board/articleForm.do'; ";
+//			message += " </script>";
+//			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+//			e.printStackTrace();
+//		}
+//		return resEnt;
+//	}
+
+
 
 	/*
 	 * //�떎以� �씠誘몄� 蹂댁뿬二쇨린
@@ -131,92 +169,92 @@ public class BoardControllerImpl implements BoardController {
 	 */
 
 	// �븳 媛� �씠誘몄� �닔�젙 湲곕뒫
-	@RequestMapping(value = "/board/modArticle.do", method = RequestMethod.POST)
-	@ResponseBody
-	public ResponseEntity modArticle(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
-			throws Exception {
-		multipartRequest.setCharacterEncoding("utf-8");
-		Map<String, Object> articleMap = new HashMap<String, Object>();
-		Enumeration enu = multipartRequest.getParameterNames();
-		while (enu.hasMoreElements()) {
-			String name = (String) enu.nextElement();
-			String value = multipartRequest.getParameter(name);
-			articleMap.put(name, value);
-		}
+//	@RequestMapping(value = "/board/modArticle.do", method = RequestMethod.POST)
+//	@ResponseBody
+//	public ResponseEntity modArticle(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
+//			throws Exception {
+//		multipartRequest.setCharacterEncoding("utf-8");
+//		Map<String, Object> articleMap = new HashMap<String, Object>();
+//		Enumeration enu = multipartRequest.getParameterNames();
+//		while (enu.hasMoreElements()) {
+//			String name = (String) enu.nextElement();
+//			String value = multipartRequest.getParameter(name);
+//			articleMap.put(name, value);
+//		}
+//
+//		String imageFileName = upload(multipartRequest);
+//		HttpSession session = multipartRequest.getSession();
+//		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+//		String id = memberVO.getId();
+//		articleMap.put("id", id);
+//		articleMap.put("imageFileName", imageFileName);
+//
+//		String articleNO = (String) articleMap.get("articleNO");
+//		String message;
+//		ResponseEntity resEnt = null;
+//		HttpHeaders responseHeaders = new HttpHeaders();
+//		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+//		try {
+//			boardService.modArticle(articleMap);
+//			if (imageFileName != null && imageFileName.length() != 0) {
+//				File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName);
+//				File destDir = new File(ARTICLE_IMAGE_REPO + "\\" + articleNO);
+//				FileUtils.moveFileToDirectory(srcFile, destDir, true);
+//
+//				String originalFileName = (String) articleMap.get("originalFileName");
+//				File oldFile = new File(ARTICLE_IMAGE_REPO + "\\" + articleNO + "\\" + originalFileName);
+//				oldFile.delete();
+//			}
+//			message = "<script>";
+//			message += " alert('湲��쓣 �닔�젙�뻽�뒿�땲�떎.');";
+//			message += " location.href='" + multipartRequest.getContextPath() + "/board/viewArticle.do?articleNO="
+//					+ articleNO + "';";
+//			message += " </script>";
+//			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+//		} catch (Exception e) {
+//			File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName);
+//			srcFile.delete();
+//			message = "<script>";
+//			message += " alert('�삤瑜섍� 諛쒖깮�뻽�뒿�땲�떎.�떎�떆 �닔�젙�빐二쇱꽭�슂');";
+//			message += " location.href='" + multipartRequest.getContextPath() + "/board/viewArticle.do?articleNO="
+//					+ articleNO + "';";
+//			message += " </script>";
+//			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+//		}
+//		return resEnt;
+//	}
 
-		String imageFileName = upload(multipartRequest);
-		HttpSession session = multipartRequest.getSession();
-		MemberVO memberVO = (MemberVO) session.getAttribute("member");
-		String id = memberVO.getId();
-		articleMap.put("id", id);
-		articleMap.put("imageFileName", imageFileName);
-
-		String articleNO = (String) articleMap.get("articleNO");
-		String message;
-		ResponseEntity resEnt = null;
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-		try {
-			boardService.modArticle(articleMap);
-			if (imageFileName != null && imageFileName.length() != 0) {
-				File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName);
-				File destDir = new File(ARTICLE_IMAGE_REPO + "\\" + articleNO);
-				FileUtils.moveFileToDirectory(srcFile, destDir, true);
-
-				String originalFileName = (String) articleMap.get("originalFileName");
-				File oldFile = new File(ARTICLE_IMAGE_REPO + "\\" + articleNO + "\\" + originalFileName);
-				oldFile.delete();
-			}
-			message = "<script>";
-			message += " alert('湲��쓣 �닔�젙�뻽�뒿�땲�떎.');";
-			message += " location.href='" + multipartRequest.getContextPath() + "/board/viewArticle.do?articleNO="
-					+ articleNO + "';";
-			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-		} catch (Exception e) {
-			File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName);
-			srcFile.delete();
-			message = "<script>";
-			message += " alert('�삤瑜섍� 諛쒖깮�뻽�뒿�땲�떎.�떎�떆 �닔�젙�빐二쇱꽭�슂');";
-			message += " location.href='" + multipartRequest.getContextPath() + "/board/viewArticle.do?articleNO="
-					+ articleNO + "';";
-			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-		}
-		return resEnt;
-	}
-
-	@Override
-	@RequestMapping(value = "/board/removeArticle.do", method = RequestMethod.POST)
-	@ResponseBody
-	public ResponseEntity removeArticle(@RequestParam("articleNO") int articleNO, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		response.setContentType("text/html; charset=UTF-8");
-		String message;
-		ResponseEntity resEnt = null;
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-		try {
-			boardService.removeArticle(articleNO);
-			File destDir = new File(ARTICLE_IMAGE_REPO + "\\" + articleNO);
-			FileUtils.deleteDirectory(destDir);
-
-			message = "<script>";
-			message += " alert('湲��쓣 �궘�젣�뻽�뒿�땲�떎.');";
-			message += " location.href='" + request.getContextPath() + "/board/listArticles.do';";
-			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-
-		} catch (Exception e) {
-			message = "<script>";
-			message += " alert('�옉�뾽以� �삤瑜섍� 諛쒖깮�뻽�뒿�땲�떎.�떎�떆 �떆�룄�빐 二쇱꽭�슂.');";
-			message += " location.href='" + request.getContextPath() + "/board/listArticles.do';";
-			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-			e.printStackTrace();
-		}
-		return resEnt;
-	}
+//	@Override
+//	@RequestMapping(value = "/board/removeArticle.do", method = RequestMethod.POST)
+//	@ResponseBody
+//	public ResponseEntity removeArticle(@RequestParam("articleNO") int articleNO, HttpServletRequest request,
+//			HttpServletResponse response) throws Exception {
+//		response.setContentType("text/html; charset=UTF-8");
+//		String message;
+//		ResponseEntity resEnt = null;
+//		HttpHeaders responseHeaders = new HttpHeaders();
+//		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+//		try {
+//			boardService.removeArticle(articleNO);
+//			File destDir = new File(ARTICLE_IMAGE_REPO + "\\" + articleNO);
+//			FileUtils.deleteDirectory(destDir);
+//
+//			message = "<script>";
+//			message += " alert('湲��쓣 �궘�젣�뻽�뒿�땲�떎.');";
+//			message += " location.href='" + request.getContextPath() + "/board/listArticles.do';";
+//			message += " </script>";
+//			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+//
+//		} catch (Exception e) {
+//			message = "<script>";
+//			message += " alert('�옉�뾽以� �삤瑜섍� 諛쒖깮�뻽�뒿�땲�떎.�떎�떆 �떆�룄�빐 二쇱꽭�슂.');";
+//			message += " location.href='" + request.getContextPath() + "/board/listArticles.do';";
+//			message += " </script>";
+//			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+//			e.printStackTrace();
+//		}
+//		return resEnt;
+//	}
 
 	/*
 	 * //�떎以� �씠誘몄� 湲� 異붽��븯湲�
@@ -275,37 +313,37 @@ public class BoardControllerImpl implements BoardController {
 	 * 
 	 */
 
-	@RequestMapping(value = "/board/*Form.do", method = RequestMethod.GET)
-	private ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String) request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
-		return mav;
-	}
+//	@RequestMapping(value = "/board/*Form.do", method = RequestMethod.GET)
+//	private ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//		String viewName = (String) request.getAttribute("viewName");
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName(viewName);
+//		return mav;
+//	}
 
 	// �븳媛� �씠誘몄� �뾽濡쒕뱶�븯湲�
-	private String upload(MultipartHttpServletRequest multipartRequest) throws Exception {
-		String imageFileName = null;
-		Iterator<String> fileNames = multipartRequest.getFileNames();
-
-		while (fileNames.hasNext()) {
-			String fileName = fileNames.next();
-			MultipartFile mFile = multipartRequest.getFile(fileName);
-			imageFileName = mFile.getOriginalFilename();
-			File file = new File(ARTICLE_IMAGE_REPO + "\\" + fileName);
-			if (mFile.getSize() != 0) { // File Null Check
-				if (!file.exists()) { // 寃쎈줈�긽�뿉 �뙆�씪�씠 議댁옱�븯吏� �븡�쓣 寃쎌슦
-					if (file.getParentFile().mkdirs()) { // 寃쎈줈�뿉 �빐�떦�븯�뒗 �뵒�젆�넗由щ뱾�쓣 �깮�꽦
-						file.createNewFile(); // �씠�썑 �뙆�씪 �깮�꽦
-					}
-				}
-				mFile.transferTo(new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName)); // �엫�떆濡� ���옣�맂
-																										// multipartFile�쓣
-																										// �떎�젣 �뙆�씪濡� �쟾�넚
-			}
-		}
-		return imageFileName;
-	}
+//	private String upload(MultipartHttpServletRequest multipartRequest) throws Exception {
+//		String imageFileName = null;
+//		Iterator<String> fileNames = multipartRequest.getFileNames();
+//
+//		while (fileNames.hasNext()) {
+//			String fileName = fileNames.next();
+//			MultipartFile mFile = multipartRequest.getFile(fileName);
+//			imageFileName = mFile.getOriginalFilename();
+//			File file = new File(ARTICLE_IMAGE_REPO + "\\" + fileName);
+//			if (mFile.getSize() != 0) { // File Null Check
+//				if (!file.exists()) { // 寃쎈줈�긽�뿉 �뙆�씪�씠 議댁옱�븯吏� �븡�쓣 寃쎌슦
+//					if (file.getParentFile().mkdirs()) { // 寃쎈줈�뿉 �빐�떦�븯�뒗 �뵒�젆�넗由щ뱾�쓣 �깮�꽦
+//						file.createNewFile(); // �씠�썑 �뙆�씪 �깮�꽦
+//					}
+//				}
+//				mFile.transferTo(new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName)); // �엫�떆濡� ���옣�맂
+//																										// multipartFile�쓣
+//																										// �떎�젣 �뙆�씪濡� �쟾�넚
+//			}
+//		}
+//		return imageFileName;
+//	}
 
 	/*
 	 * //�떎以� �씠誘몄� �뾽濡쒕뱶�븯湲� private List<String> upload(MultipartHttpServletRequest

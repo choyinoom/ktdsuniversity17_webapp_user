@@ -1,7 +1,5 @@
 package com.ktdsuniversity.edu.course.vo;
 
-import java.sql.Date;
-
 import org.springframework.stereotype.Component;
 
 @Component("syllabusVO")
@@ -15,10 +13,11 @@ public class SyllabusVO {
 	private String objectives;
 	private String target;
 	private String contents;
-	private Date joinDate;
-	private Date modDate;
+	private String joinDate;
+	private String modDate;
 	private int time;
 	private int days;
+	private String bannerImg;
 	
 	
 	public SyllabusVO() {
@@ -26,7 +25,7 @@ public class SyllabusVO {
 	}
 
 	public SyllabusVO(int id, String name, String reportName, String type, String category, String overview,
-			String objectives, String target, String contents, Date joinDate, Date modDate, int time, int days) {
+			String objectives, String target, String contents, String joinDate, String modDate, int time, int days, String bannerImg) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -41,6 +40,7 @@ public class SyllabusVO {
 		this.modDate = modDate;
 		this.time = time;
 		this.days = days;
+		this.bannerImg = bannerImg;
 	}
 
 	public int getId() {
@@ -133,22 +133,22 @@ public class SyllabusVO {
 	}
 
 
-	public Date getJoinDate() {
+	public String getJoinDate() {
 		return joinDate;
 	}
 
 
-	public void setJoinDate(Date joinDate) {
+	public void setJoinDate(String joinDate) {
 		this.joinDate = joinDate;
 	}
 
 
-	public Date getModDate() {
+	public String getModDate() {
 		return modDate;
 	}
 
 
-	public void setModDate(Date modDate) {
+	public void setModDate(String modDate) {
 		this.modDate = modDate;
 	}
 
@@ -170,6 +170,14 @@ public class SyllabusVO {
 
 	public void setDays(int days) {
 		this.days = days;
+	}
+
+	public String getBannerImg() {
+		return bannerImg;
+	}
+
+	public void setBannerImg(String bannerImg) {
+		this.bannerImg = bannerImg;
 	}
 
 
