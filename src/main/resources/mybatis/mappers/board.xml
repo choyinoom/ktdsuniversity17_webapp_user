@@ -153,16 +153,6 @@
 	</insert>
 
 
-	<insert id="insertNewImage" parameterType="java.util.Map">
-		<foreach item="item" collection="list" open="INSERT ALL"
-			separator=" " close="SELECT * FROM DUAL">
-			INTO t_imageFile(imageFileNO, imageFileName, articleNO, regDate)
-			VALUES (#{item.imageFileNO}, #{item.imageFileName}, #{item.articleNO},
-			sysdate)
-		</foreach>
-	</insert>
-
-
 	<select id="selectNewImageFileNO" resultType="int">
     <![CDATA[
       SELECT  nvl(max(imageFileNO),0) from t_imageFile		

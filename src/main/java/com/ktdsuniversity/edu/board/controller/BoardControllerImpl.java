@@ -46,6 +46,7 @@ public class BoardControllerImpl implements BoardController {
 	public ModelAndView listArticles(@RequestParam("pageNo") int pageNo, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		String viewName = (String) request.getAttribute("viewName");
+		String searchText = (String) request.getParameter("searchText");
 		List<ArticleVO> articlesList = null;
 		if (searchText != null) {
 			articlesList = boardService.listBySearchArticles(pageNo, searchText); 	
