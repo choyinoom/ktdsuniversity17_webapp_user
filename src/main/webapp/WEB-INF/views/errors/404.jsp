@@ -18,7 +18,7 @@ request.setCharacterEncoding("UTF-8");
 	<img src="${contextPath}/resources/image/errorpage.png">
 	</div>
 	<div class="error_button" style="position:relative; top:750px;">
-		<a style="border-radius:12px;  font-weight : bold; text-decoration: none; padding : 20px; width : 100px; height : 50px; font-size: 20px; color:#EFEFEF; background:#E91B23;" href="${contextPath}/">홈으로 돌아가기</a>
+		<a style="border-radius:12px;  font-weight : bold; text-decoration: none; padding : 20px; width : 100px; height : 50px; font-size: 20px; color:#EFEFEF; background:#E91B23; cursor:pointer;" onclick="history.back()">이전으로 돌아가기</a>
 	</div>
 	</div>
 </body>

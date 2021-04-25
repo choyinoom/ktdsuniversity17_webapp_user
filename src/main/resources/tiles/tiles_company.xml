@@ -19,4 +19,9 @@
 	      <put-attribute name="body" value="/WEB-INF/views/company/classroom.jsp" />
 	</definition>
 
+	<definition name="/company/popUp"  template="/WEB-INF/views/common/layout_popUp.jsp">
+      <put-attribute name="title" value="팝업창" />
+      <put-attribute name="body" value="/WEB-INF/views/member/popUp.jsp" />
+   </definition>
+
 </tiles-definitions>

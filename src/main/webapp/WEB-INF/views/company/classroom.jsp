@@ -27,7 +27,7 @@ request.setCharacterEncoding("UTF-8");
 
 	<!-- 상단배너 -->
 	<img id="classroom__banner"
-		src="${contextPath}/resources/image/classroom_banner2.png">
+		src="${contextPath}/resources/image/classroom_banner2.png" style="width:100%">
 
 	<div class="classroom__container">
 
@@ -49,17 +49,17 @@ request.setCharacterEncoding("UTF-8");
 
 			<!-- 모달 휴게실 사진 영역 -->
 			<div id="restroom1_1">
-				<img src="${contextPath}/resources/image/restroom1.png"> <a
+				<img src="${contextPath}/resources/image/restroom1.png" style="width:100%; height: 100%"> <a
 					class="modal_close_btn"><img
 					src="${contextPath}/resources/image/close_button.png"></a>
 			</div>
 			<div id="restroom2_1">
-				<img src="${contextPath}/resources/image/restroom2.png"> <a
+				<img src="${contextPath}/resources/image/restroom2.png" style="width:100%; height: 100%"> <a
 					class="modal_close_btn"><img
 					src="${contextPath}/resources/image/close_button.png"></a>
 			</div>
 			<div id="restroom3_1">
-				<img src="${contextPath}/resources/image/restroom3.png"> <a
+				<img src="${contextPath}/resources/image/restroom3.png" style="width:100%; height: 100%"> <a
 					class="modal_close_btn"><img
 					src="${contextPath}/resources/image/close_button.png"></a>
 			</div>
@@ -77,17 +77,17 @@ request.setCharacterEncoding("UTF-8");
 
 			<!-- 모달 강의장 사진 영역 -->
 			<div id="classroom1_1">
-				<img src="${contextPath}/resources/image/classroom1.png"> <a
+				<img src="${contextPath}/resources/image/classroom1.png" style="width:100%; height: 100%"> <a
 					class="modal_close_btn"><img
 					src="${contextPath}/resources/image/close_button.png"></a>
 			</div>
 			<div id="classroom2_1">
-				<img src="${contextPath}/resources/image/classroom2.png"> <a
+				<img src="${contextPath}/resources/image/classroom2.png" style="width:100%; height: 100%"> <a
 					class="modal_close_btn"><img
 					src="${contextPath}/resources/image/close_button.png"></a>
 			</div>
 			<div id="classroom3_1">
-				<img src="${contextPath}/resources/image/classroom3.png"> <a
+				<img src="${contextPath}/resources/image/classroom3.png" style="width:100%; height: 100%"> <a
 					class="modal_close_btn"><img
 					src="${contextPath}/resources/image/close_button.png"></a>
 			</div>

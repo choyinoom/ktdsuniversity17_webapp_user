@@ -203,7 +203,7 @@ table td {
 
 
 /* 모달 */
-.modal {
+.custom__modal {
 	display: none;
 	position: fixed;
 	align-items: center;
@@ -213,19 +213,19 @@ table td {
     z-index: 40;
 }
 
-.modal .dimmed {
+.custom__modal .dimmed {
 	position: absolute;
     background: rgba(11,19,30,.37);
 }
 
-.modal, .modal .dimmed {
+.custom__modal, .custom__modal .dimmed {
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
 }
 
-.modal > section {
+.custom__modal > section {
 	position: absolute;
 	border-radius: 4px;
     background-color: #fff;
@@ -235,7 +235,7 @@ table td {
     min-width: 320px;
 }
 
-.modal #buttons {
+.custom__modal #buttons {
 	justify-content: center;
 	padding-top: 14px;
 }
@@ -247,4 +247,11 @@ table td {
 	padding: 8px;
     border-radius: 4px;
     font-size: 13px;
+}
+
+select {
+	text-align-last: center;
+   text-align: center;
+   -ms-text-align-last: center;
+   -moz-text-align-last: center;
 }

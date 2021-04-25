@@ -52,4 +52,5 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/member/privacy.jsp" />
 	</definition>	
+	
 </tiles-definitions>

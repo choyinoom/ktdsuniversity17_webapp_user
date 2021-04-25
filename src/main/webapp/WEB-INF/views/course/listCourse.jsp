@@ -42,7 +42,7 @@ request.setCharacterEncoding("UTF-8");
 					<ul class = "grid mx-auto" id="pagination"></ul>
 				</div>
 			</section>
-			<div class="modal">
+			<div class="custom__modal">
 				<div class="dimmed"></div>
 				<section id="course__enroll">
 					<div id="content">
@@ -126,7 +126,7 @@ request.setCharacterEncoding("UTF-8");
 				$('#name').text('과정명: ' + course.name); 
 				$('#date').text('일시: ' + course.date.substr(0,23));
 				 
-				$('.modal').css('display','flex');
+				$('.custom__modal').css('display','flex');
 			} else {
 				alert("로그인 후 수강신청이 가능합니다.");
 				const loginForm = '${contextPath}/member/loginForm.do';
@@ -135,7 +135,7 @@ request.setCharacterEncoding("UTF-8");
 		});
 		
 		/* 수강신청 버튼*/
-		$('.modal #submit').on('click', function() {
+		$('.custom__modal #submit').on('click', function() {
 			let form = document.createElement("form");
 			form.action = '${contextPath}/course/enrollCourse.do';
 			form.method = "post";
@@ -148,8 +148,8 @@ request.setCharacterEncoding("UTF-8");
 		})
 		
 		/* 취소 버튼*/
-		$('.modal #cancle').on('click', function() {
-			$('.modal').css('display','none');
+		$('.custom__modal #cancle').on('click', function() {
+			$('.custom__modal').css('display','none');
 		})
 		</script>
 	</body>

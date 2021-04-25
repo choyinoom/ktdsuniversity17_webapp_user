@@ -21,7 +21,7 @@ request.setCharacterEncoding("UTF-8");
 	 
 	<div class="consortium__container">
 		<img id="consortium__banner"
-			src="${contextPath}/resources/image/consortium_banner.png">
+			src="${contextPath}/resources/image/consortium_banner.png" style="width:100%">
 		<div class="consortium__content">
 			<img id="consortium__content"
 				src="${contextPath}/resources/image/consortium_content.png">

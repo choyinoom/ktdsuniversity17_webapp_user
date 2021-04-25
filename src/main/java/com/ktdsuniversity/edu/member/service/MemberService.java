@@ -14,4 +14,6 @@ public interface MemberService {
 	 public int removeMember(String id) throws DataAccessException;
 	 public MemberVO login(MemberVO memberVO) throws Exception;
 	 public EnrollmentDetailVO findEnrollmentDetailBy(Map<String, Object> enrollMap) throws DataAccessException;
+	public int idCheck(MemberVO vo) throws DataAccessException;
+
 }
