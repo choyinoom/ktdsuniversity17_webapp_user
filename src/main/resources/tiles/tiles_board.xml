@@ -27,4 +27,9 @@
     	<put-attribute name="title" value="공지사항" />
     	<put-attribute name="body" value="/WEB-INF/views/customer/viewNotice.jsp" />
   	</definition>
+  	
+  	 <definition name="/customer/faq" extends="baseLayout">
+    	<put-attribute name="title" value="faq" />
+    	<put-attribute name="body" value="/WEB-INF/views/customer/faq.jsp" />
+  	</definition>
 </tiles-definitions>

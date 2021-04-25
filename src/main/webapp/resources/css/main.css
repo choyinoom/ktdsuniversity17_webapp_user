@@ -5,14 +5,14 @@
 
 .main__carousel div img {
 	width: 100%;
-	min-height: 500px;
+	height: 400px;
 }
 
 /*text css*/
 #text__wrapper {
     width: 100%;
     position: absolute;
-    top: 150px;
+    top: 100px;
     justify-content: center;
 }
 
@@ -34,7 +34,7 @@
 
 .big__text {
 	font-size: 30px;
-	font-weight: 600;
+	font-weight: 700;
 }
 
 #text__2 {
@@ -49,7 +49,7 @@
     color: #4d4d4d;
     font-family: 'Noto Sans KR';
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -1.5px;
     border-radius: 12px;
     border-style: none;
@@ -61,159 +61,148 @@
 .button__wrapper {
 	list-style: none;
 	padding: 0;
-	margin: 5px 12px;
-	z-index: 100;
+	margin-left: 5px;
+}
+
+#quickview__wrapper {
+	width: 1000px;
+	height: fit-content;
+	margin-top: 20px;
+	padding-bottom: 20px;
+	justify-content: space-between;
+}
+
+#course__quickview__navigator { /*월(月) 버튼*/
+	justify-content: flex-start;
+	margin: 10px;
 }
 
 .button__wrapper li {
 	font-size: 23px;
     font-weight: 500;
-    margin: 5px 25px;
+    margin-right: 25px;
 }
 
-.slick-prev:before, .slick-next:before { /*캐러셀 화살표*/
-    color: grey !important;
+#nav__wrapper {
+	justify-content: space-between;
 }
 
-#course__carousel__wrapper {
-	height: 400px;
-	margin-top: 20px;
+#nav__wrapper > a {
+	height: fit-content;
+	padding-top: 39px;
+    padding-right: 17px;
 }
-
-#course__carousel__navigator { /*월(月) 버튼*/
-	justify-content: center;
-	margin: 10px;
-}
-
-#go__course { /* 강의목록 바로가기 */
-	width: 600px;
-    font-size: 14px;
-	justify-content: flex-end;
-	margin-top: -40px;
+.course__cards {	/*강의 카드 목록*/
+	width: 800px;
+	flex-wrap: wrap;
 	margin-bottom: 20px;
 }
 
-.courses__carousel {
-	width: 1400px;
-	min-width: 0px;
-	min-height: 0px;
+.column {
+	width: 33.333333%;	
 }
 
-.courses__carousel .card { /* 과정 바로가기 카드*/
-	width: 215px;
-	height: 277px;
-	margin: 5px 12px;
+.card {	/* 강의 카드 */
+	position: relative;
+    width: 240px;
+    height: fit-content;
+    padding: .75rem;    
 }
 
-.courses__carousel img { /*과정 이미지*/
-	width: 80%;
-	opacity: .3;
+.card:hover .card__back {
+	opacity: 1;
 }
 
-.slide__top { /* 과정 카드 윗 부분*/
-	justify-content: center;
-	height: 240px;
-	background-size: 100% 200%;
-    background-image: linear-gradient(to bottom, #f2f2f2 50%, red 50%);
-    transition: background-position 0.2s ease-in-out, color 0.2s ease-in-out;
+.hidden {
+	display:none;
 }
 
-/* 카드에 마우스 올릴 시 애니메이션 추가 */
-.slide__top:hover, .slide__top:focus {
-    background-position: 0 100%;
-    color: red;
+.card__image {
+    background-repeat: no-repeat;
+    width: 240px;
+    height: 105px;
+    text-align: center;
+    padding-top: 5px;	
 }
 
-.slide__top:hover img {
-	display: none;
+.card__image img {
+	width: 90px;
 }
 
-.slide__top:hover span {
-	color: white;
+.card__contents {
+	width: 240px;
+	font-size:14px;
 }
 
-.slide__top span {	/*강의 제목*/
+.course__title {
+	font-weight: 500;
+}
+
+.course__date {
+	color: #787878;
+	padding-top: 8px;
+}
+
+.card__back {
 	position: absolute;
-    display: block;
-    width: 190px;
-    text-align: center;
-    word-break: keep-all;
-    font-weight: 600;
-    line-height: 34px;
+	top: 12px;
+	background: rgba(0, 0, 0, 0.7);
+	color: #fff;
+	width: inherit;
+	height: calc(100% - 24px);
+	transition: .5 ease;
+	opacity: 0;
 }
 
-.slide__bottom { /* 과정 카드 아랫 부분*/
-    height: 37px;
-    background-color: red;
-    color: #f1eded;
-    font-size: 13px;
-    text-align: center;
+.card__back a {
+	position: absolute;
+    padding: .75rem;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: #fff;
 }
 
-.slide__bottom span { /*교육 기간*/
-	display: block;
-	padding-top: 7px;
+.card__back a .course__title {
+	word-break: keep-all;
 }
 
-#quickmenu__wrapper {
-	width: 1000px;
-	margin-top: 70px;
-	margin-bottom: 50px;
+.card__back a p {
+	margin: auto !important;
 }
 
-.quickmenu {
-	width: 300px;
-	height: 300px;
-	margin: 0px 12px;
-	justify-content: center;
+#more {
+	width: fit-content;
+	padding: 5px 12px;
+	border-style: none;
+	border-radius: 4px;
+	margin: 0px auto;
 }
 
-#quickmenu__wrapper a:nth-child(1) div{
-	background-image: url("../image/quick_1.png")
+#article__quickview { /* faq, 공지사항, 오시는 길, 내비게이션 */
+	padding-top: 87px;
 }
 
-#quickmenu__wrapper a:nth-child(2) div{
-	background-image: url("../image/quick_2.png")
+#article__quickview ul {
+	margin: 0;
+	padding: 0;
 }
 
-.quickmenu span {
-	display: block;
-	color: white;
+#article__quickview ul li{
+    border-bottom: 2px solid #eeeeee;
+    padding-top: 7px;
+    padding-bottom: 7px;
 }
 
-.quickmenu span:nth-child(1) {
-	font-size: 27px;
-	font-weight: 600;	
+#article__quickview img {
+	width: 30px;
+	height: 30px;
 }
 
-#go__notice {
-	letter-spacing: -.5px;
-	word-spacing: -.5px;	
+#article__quickview span {
+	padding-left: 19px;
+	color: #555555;
+	font-weight: 500;
 }
 
-#go__notice > span {
-	color: #585858; 
-	margin-top: -9px
-}
-
-#go__notice > a {
-	display: block;
-	width: 300px;
-	text-align: right;
-	margin-top: -20px;
-}
-
-#noticelist {
-	height: 235px;
-    justify-content: space-between;
-    margin-bottom: -3px;
-}
-
-#noticelist a {
-    display: block;
-    font-size: 14px;
-    font-weight: 600;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; /*말줄임표*/
-}

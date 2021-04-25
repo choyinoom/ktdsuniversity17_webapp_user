@@ -19,14 +19,12 @@ import com.ktdsuniversity.edu.board.vo.ArticleFileVO;
 public class BoardServiceImpl implements BoardService {
 	@Autowired
 	BoardDAO boardDAO;
-
-	static final int PAGE_CHUNK = 10;
 	
-	public List<ArticleVO> listArticles(int pageNo) throws Exception {
+	public List<ArticleVO> listArticles(int pageNo, int pagingSize) throws Exception {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("start", 1 + PAGE_CHUNK*(pageNo - 1));
-		map.put("end", PAGE_CHUNK * pageNo);
+		map.put("start", 1 + pagingSize*(pageNo - 1));
+		map.put("end", pagingSize * pageNo);
 		List<ArticleVO> articlesList = boardDAO.selectArticlesListBy(map);
 		return articlesList;
 				
@@ -60,23 +58,17 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int findTotalPages() throws Exception {
-		int totalNotices = boardDAO.countAllNotices();
-		return (int)Math.ceil(totalNotices/(double)PAGE_CHUNK);
-	}
-
-	@Override
 	public int countAllNotices() throws Exception {
 		return boardDAO.countAllNotices();
 	}
 	
 	// 제목 검색
 	@Override
-	public List<ArticleVO> listBySearchArticles(int pageNo, String searchText) throws DataAccessException {
+	public List<ArticleVO> listArticlesBy(int pageNo, int pagingSize, String searchText) throws DataAccessException {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("start", 1 + PAGE_CHUNK*(pageNo - 1));
-		map.put("end", PAGE_CHUNK * pageNo);
+		map.put("start", 1 + pagingSize*(pageNo - 1));
+		map.put("end", pagingSize * pageNo);
 		map.put("searchText", searchText);
 		List<ArticleVO> articlesBySearchList = boardDAO.selectBySearchArticlesListBy(map);
 		return articlesBySearchList;
@@ -86,12 +78,10 @@ public class BoardServiceImpl implements BoardService {
 	public int addHits(ArticleVO articleVO) throws DataAccessException {
 		return boardDAO.addHits(articleVO);
 	}
-	
 
 	@Override
-	public List<ArticleVO> listNoticesForWelcomepage() throws Exception {
-		List<ArticleVO> articlesList = boardDAO.selectArticlesListForWelcomePage();
-		return articlesList;
+	public int countNoticesBy(String searchText) throws Exception {
+		return boardDAO.countNoticesBy(searchText);
 	}
 
 	/*

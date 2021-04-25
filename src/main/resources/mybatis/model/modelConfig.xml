@@ -10,5 +10,6 @@
 		<typeAlias type="com.ktdsuniversity.edu.board.vo.ArticleFileVO" alias="articleFileVO" />
 		<typeAlias type="com.ktdsuniversity.edu.course.vo.CourseVO" alias="courseVO"/>
 		<typeAlias type="com.ktdsuniversity.edu.course.vo.SyllabusVO" alias="syllabusVO"/>
+		<typeAlias type="com.ktdsuniversity.edu.course.vo.CourseCategoryVO" alias="courseCategoryVO"/>
 	</typeAliases>
 </configuration>

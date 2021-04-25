@@ -39,7 +39,7 @@
 	</select>
 
 	<!-- 공지사항 게시글 개수 -->
-	<select id="selectAllArticlesCount" resultType="int">
+	<select id="selectAllNoticesCount" resultType="int">
 		SELECT COUNT(*)
 		FROM article
 	</select>
@@ -72,16 +72,33 @@
 	
 	<!-- 공지사항 리스트에서 검색 -->
 	<select id="selectBySearchArticlesList" resultMap="articlesResult" parameterType="java.util.Map" >
-
         SELECT * 
         FROM (
-	 		SELECT art_id, art_title, SUBSTR(art_join_date,0,10) as art_join_date, art_contents, art_file, art_important, art_hits, ROW_NUMBER() OVER (ORDER BY art_important, art_join_date desc) rn
+	 		SELECT 
+	 			art_id, 
+	 			art_title, 
+	 			SUBSTR(art_join_date,0,10) as art_join_date, 
+	 			art_contents, 
+	 			art_file, 
+	 			art_important, 
+	 			art_hits, 
+	 			ROW_NUMBER() OVER (ORDER BY art_important, art_join_date desc) rn
 	 		FROM article
-	 		WHERE art_title LIKE '%' || #{searchText} || '%' OR art_contents LIKE '%' || #{searchText} || '%'
+	 		WHERE 
+	 			art_title LIKE '%' || #{searchText} || '%' 
+	 			OR art_contents LIKE '%' || #{searchText} || '%'
 	 		)
         WHERE rn BETWEEN #{start} AND #{end}
         ORDER BY rn
         
+	</select>
+	
+	<!-- 공지사항 검색결과 개수 -->
+	<select id="selectNoticesCountBySearchText" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM article
+		WHERE art_title LIKE '%' || #{searchText} || '%' 
+			OR art_contents LIKE '%' || #{searchText} || '%'
 	</select>
 	
 	<!-- 공지사항 조회수 기능 -->
@@ -151,7 +168,6 @@
 			sysdate)
 		</foreach>
 	</insert>
-
 
 	<select id="selectNewImageFileNO" resultType="int">
     <![CDATA[

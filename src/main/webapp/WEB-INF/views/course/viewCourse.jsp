@@ -50,11 +50,12 @@ $(document).ready(function() {
 		</div>
 		<div class="grid col-wrap" id="intro__wrapper">
 			<div class="grid" id="course__intro">
-				<p>[${syllabus.type}] ${syllabus.category}</p>
+				<p>[${syllabus.type}] ${syllabus.courseCategoryVO.name}</p>
 				<p id="course__name">${syllabus.name}</p>
-				<p>교육기간 : <fmt:formatDate value="${parsedStartDate}" pattern="yy/MM/dd"/> ~ <fmt:formatDate value="${parsedEndDate}" pattern="yy/MM/dd"/>
+				<p>교육기간 : ${course.startDate} ~ ${course.endDate}
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  강의장:${course.classroom}
 				</p>
+				<p>교육시간: ${course.startTime} ~ ${course.endTime}</p>
 			</div>
 			<div id="enroll__button">
 				<a id="course__btn" 

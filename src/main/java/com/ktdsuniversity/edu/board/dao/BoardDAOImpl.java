@@ -1,6 +1,5 @@
 package com.ktdsuniversity.edu.board.dao;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +33,7 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public int countAllNotices() throws DataAccessException {
-		return sqlSession.selectOne("mapper.board.selectAllArticlesCount");
+		return sqlSession.selectOne("mapper.board.selectAllNoticesCount");
 	}
 	
 	// 공지사항 선택
@@ -64,12 +63,11 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.update("mapper.board.addHits", articleVO);
 	}
 
-
 	@Override
-	public List<ArticleVO> selectArticlesListForWelcomePage() throws DataAccessException {
-		List<ArticleVO> articlesList = sqlSession.selectList("mapper.board.selectArticlesListForWelcomePage");
-		return articlesList;
+	public int countNoticesBy(String searchText) throws DataAccessException {
+		return sqlSession.selectOne("mapper.board.selectNoticesCountBySearchText", searchText);
 	}
+
 	
 //	@Override
 //	public int insertNewArticle(Map articleMap) throws DataAccessException {
