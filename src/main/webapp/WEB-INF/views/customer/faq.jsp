@@ -32,23 +32,24 @@
         			});
 		</script> 
 		
-    <body>
+    <body class = "faq_body">
     
-    	<div class="banner" id="course__banner">
+    	<div class="banner" id="faq__banner">
+    	<!-- div class="banner" 는 common.css에서 사용한 배너 이미지의 css속성을 적용시키기 위해 클래스명을 바꾸지 않았습니다.  -->
 			<h1>FAQ</h1>
 		</div>
     
-        <div class = "container">
-            <div class="menu">
+        <div class = "faq_container">
+            <div class="faq_menu">
 
               <!-- float:left로 주기 -->
 
-              <button class="menu_button_1"><a href="${contextPath}/customer/faq.do">전체</a></button>
-              <button class="menu_button"><a href="${contextPath}/customer/faqMember.do">회원관련</a></button>
-              <button class="menu_button"><a href="${contextPath}/customer/faqCourse.do">수강관련</a></button>
-              <button class="menu_button"><a href="${contextPath}/customer/faqEdu.do">교육관련</a></button>
-              <button class="menu_button"><a href="${contextPath}/customer/faqSuryo.do">수료관련</a></button>
-              <button class="menu_button"><a href="${contextPath}/customer/faqElse.do">기타</a></button>
+              <button class="faq_menu_button_1"><a href="${contextPath}/customer/faq.do">전체</a></button>
+              <button class="faq_menu_button"><a href="${contextPath}/customer/faqMember.do">회원관련</a></button>
+              <button class="faq_menu_button"><a href="${contextPath}/customer/faqCourse.do">수강관련</a></button>
+              <button class="faq_menu_button"><a href="${contextPath}/customer/faqEdu.do">교육관련</a></button>
+              <button class="faq_menu_button"><a href="${contextPath}/customer/faqSuryo.do">수료관련</a></button>
+              <button class="faq_menu_button"><a href="${contextPath}/customer/faqElse.do">기타</a></button>
         
             </div>
 
