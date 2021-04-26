@@ -52,5 +52,10 @@ public class MemberServiceImpl implements MemberService {
 		int result = memberDAO.idCheck(vo);
 		return result;
 	}
+
+	@Override
+	public MemberVO getMemberInfoBy(String id) throws Exception {
+		return memberDAO.selectMemberInfoBy(id);
+	}
 	
 }

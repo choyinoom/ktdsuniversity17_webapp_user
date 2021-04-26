@@ -24,33 +24,29 @@
 	</definition>
 
 
-	<definition name="/member/listMembers" extends="baseLayout">
-		<put-attribute name="title" value="회원목록창" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/member/listMembers.jsp" />
-	</definition>
-
-
 	<definition name="/member/loginForm" extends="baseLayout">
-		<put-attribute name="title" value="로그인창" />
+		<put-attribute name="title" value="로그인" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/member/loginForm.jsp" />
 	</definition>
 
 
 	<definition name="/member/memberForm" extends="baseLayout">
-		<put-attribute name="title" value="회원등록창" />
+		<put-attribute name="title" value="회원등록" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/member/memberForm.jsp" />
 	</definition>
-	<!-- <definition name="/member/viewDetail" extends="baseLayout"> <put-attribute 
-		name="title" value="회원상세창" /> <put-attribute name="body" value="/WEB-INF/views/member/viewDetail.jsp" 
-		/> </definition> -->
-		
+
 	<definition name="/member/privacy" extends="baseLayout">
 		<put-attribute name="title" value="개인정보 처리방침" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/member/privacy.jsp" />
-	</definition>	
+	</definition>
+	
+	<definition name="/member/mypage" extends="baseLayout">
+		<put-attribute name="title" value="마이페이지" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/member/mypage.jsp" />
+	</definition>		
 	
 </tiles-definitions>

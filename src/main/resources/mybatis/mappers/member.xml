@@ -30,10 +30,6 @@
 	</resultMap>
 
 	
-	<!-- <resultMap id="memResult" type="java.util.HashMap"> <result property="id" 
-		column="id" /> <result property="pwd" column="pwd" /> <result property="name" 
-		column="name" /> <result property="email" column="email" /> <result property="joinDate" 
-		column="joinDate" /> </resultMap> -->
 
 	<!-- 아이디 중복체크 -->
 	<select id="selectMember" resultType="int">
@@ -43,13 +39,8 @@
 	]]>
 	</select>
 
-  
-	<select id="selectAllMemberList" resultMap="memResult">
-		<![CDATA[
-         select * from member order by joinDate desc	 	
-      ]]>
-	</select>
 
+	<!-- 회원 가입 -->
 	<insert id="insertMember" parameterType="memberVO">
 		<![CDATA[
 		 insert into member(mem_name, mem_id, mem_pw, mem_tel, mem_phone, mem_email, mem_subscription, mem_company_name)
@@ -57,7 +48,7 @@
 		]]>
 	</insert>
 
-
+	<!-- 정보 수정 -->
 	<update id="updateMember" parameterType="memberVO">
 		<![CDATA[
 	     update t_member
@@ -67,27 +58,49 @@
       ]]>
 	</update>
 
+	<!-- 회원 탈퇴 -->
 	<delete id="deleteMember" parameterType="String">
 		<![CDATA[
-	   delete from  t_member
-	   where
-	   id=#{id}
+	   UPDATE member
+	   SET delYN = true
+	   WHERE id = #{id}
 	]]>
 	</delete>
 
+	<!-- 로그인, 세션에 저장할 정보만 불러온다 -->
 	<select id="loginById" resultMap="memResult" parameterType="memberVO">
 	<![CDATA[
-		select * from member	
-		where mem_id=#{id} and mem_pw=#{pw}		
+		SELECT 
+			mem_id, 
+			mem_name 
+		FROM member	
+		WHERE mem_id=#{id} and mem_pw=#{pw}		
 	]]>
 	</select>
 
+	<!-- 회원의 수강내역 현황 -->
 	<select id="selectEnrollmentDetailByEnrollMap" parameterType="java.util.Map" resultMap="enrdResult">
-		<![CDATA[
-			SELECT enrd_id, crs_id, mem_id, enrd_stat
-			FROM enrollment_detail
-			WHERE crs_id = #{courseId} AND mem_id = #{id}
-		]]>
+	<![CDATA[
+		SELECT enrd_id, crs_id, mem_id, enrd_stat
+		FROM enrollment_detail
+		WHERE crs_id = #{courseId} AND mem_id = #{id}
+	]]>
+	</select>
+	
+	<!-- 회원 정보 수정 시 필요한 정보 -->
+	<select id="selectMemberInfoById" parameterType="string" resultMap="memResult">
+	<![CDATA[
+		SELECT 
+			mem_id,
+			mem_name,
+			mem_tel,
+			mem_phone,
+			mem_email,
+			mem_subscription,
+			mem_company_name
+		FROM member
+		WHERE mem_id = #{id}
+	]]>
 	</select>
 
 </mapper>

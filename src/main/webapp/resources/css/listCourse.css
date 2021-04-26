@@ -1,4 +1,4 @@
-#course__container {
+	#course__container {
 	flex-direction: column;
 }
 
@@ -48,15 +48,9 @@
 	
 }
 
-#course__list th{
-	border-bottom: 1px solid rgba(128, 128, 128, 0.8);
-	height: 60px;
-	
-}
 
 #course__list td {
 	border-bottom: 1px solid rgba(128, 128, 128, 0.8);
-	padding: 8px 12px;
 	height: 60px;
 	font-size: 13px;
 }

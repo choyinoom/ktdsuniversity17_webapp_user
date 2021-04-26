@@ -54,5 +54,11 @@ public class MemberDAOImpl implements MemberDAO {
 		int result = sqlSession.selectOne("mapper.member.selectMember", vo);
 		return result;
 	}
+
+	@Override
+	public MemberVO selectMemberInfoBy(String id) throws DataAccessException {
+		MemberVO vo = sqlSession.selectOne("mapper.member.selectMemberInfoById", id);
+		return vo;
+	}
 	
 }

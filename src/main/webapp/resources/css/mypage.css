@@ -1,0 +1,136 @@
+
+#mypage__banner {
+	width: 100%;
+	background-image: url("../image/login-banner.png")
+}
+
+.menu{
+    margin: 50px auto;
+    padding-bottom: 15px; 
+}
+
+#member__info {
+    margin:auto; 
+    text-align: left;
+    background-color: white;
+
+    /* 테두리 사이의 간격 없애기 */
+    border-collapse: collapse; 
+    border-bottom: 1px solid #dddada;
+    
+  }
+
+#member__info td {
+    border: 1px solid #dddada;
+    /* border: 1px solid #cc2626; */
+
+    /* 테이블 세로 선 border 없애기 */
+    border-left: none;
+    border-right:none;
+
+    /* 글자 사이의 간격 */
+    padding: 12px;
+    height: 25px;
+
+}
+
+#member__info td:nth-child(1) {
+	padding-left: 30px;	
+}
+
+.menu_button{
+    width: 130px;
+    height: 40px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: white;
+    color: black;
+    float:left;
+    border: 3px solid #d1d0d0;
+    cursor: pointer;
+  
+    /* 테두리 색 없애기 */
+    border-left: none;
+    border-right:none;
+    border-top:none;
+    outline: 0;
+
+  }
+
+/* 스타일 적용 순서
+link -> visited -> hover -> active ->focus
+순서대로 하지 않을 경우 제대로 적용되지 않음
+*/
+
+/* 마우스 한번클릭후 */
+.menu_button:visited{
+    border-color: rgb(41, 21, 214);
+    border-width: 6px;
+    border-style:solid;
+
+    /* 메뉴버튼 hover중 아래만 남기고 위,오른쪽, 왼쪽 삭제하기 */
+    border-left: none;
+    border-right:none;
+    border-top:none;
+    border-radius: 0px;
+}
+
+
+/* 마우스 올렸을 때 */
+.menu_button:hover{
+	border-color: #e92b2b;
+    /* display: block; */
+    /* border-color: rgb(41, 21, 214); 테스트 */
+    border-width: 6px;
+    border-style:solid;
+
+    /* 메뉴버튼 hover중 아래만 남기고 위,오른쪽, 왼쪽 삭제하기 */
+    border-left: none;
+    border-right:none;
+    border-top:none;
+    border-radius: 0px;
+}
+
+
+.menu .visited {
+	border-color: #e92b2b;
+    border-width: 6px;
+    border-style:solid;
+
+    border-left: none;
+    border-right:none;
+    border-top:none;
+    border-radius: 0px;
+}
+
+.under{
+    background-color: white;
+    height: 100px;
+    width: 900px;
+    margin: 20px auto; 
+    
+    /* 아래의 버튼 2개를 가운데 정렬하기 위해 사용 */
+    text-align: center;
+    padding-top: 20px;
+}
+
+.td_button{
+  
+    width: 110px;
+    height: 35px;
+    text-align: center;
+    font-size: 14px;
+    background-color: #dddada;
+    color: black;
+    border-radius: 2px;
+    /* 테두리 색 없애기 */
+    border: 0; 
+    outline: 0;
+    cursor: pointer;
+
+    /* 버튼 사이에 간격주기 */
+    margin-left:10px;
+
+
+}

@@ -19,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ktdsuniversity.edu.board.service.BoardService;
 import com.ktdsuniversity.edu.course.service.CourseService;
 import com.ktdsuniversity.edu.course.vo.CourseVO;
 import com.ktdsuniversity.edu.member.service.MemberService;
@@ -48,11 +47,22 @@ public class MemberControllerImpl implements MemberController {
 		return mav;
 	}
 	
+	/* 마이페이지 */
+	@RequestMapping(value = "/member/mypage.do", method = RequestMethod.GET)
+	@Override
+	public ModelAndView mypage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		MemberVO vo = memberService.getMemberInfoBy(memberVO.getId());
+		mav.addObject("memberVO", vo);
+		return mav;
+	}
+	
+	
 	@RequestMapping(value = "/member/privacy.do", method =  RequestMethod.GET)
 	@Override
 	public ModelAndView listPrivacy(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
-		System.out.println(viewName);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		return mav;
@@ -68,18 +78,6 @@ public class MemberControllerImpl implements MemberController {
 		return result;
 	}
 	
-
-	@Override
-	@RequestMapping(value = "/member/listMembers.do", method = RequestMethod.GET)
-	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String) request.getAttribute("viewName");
-		List membersList = memberService.listMembers();
-		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("membersList", membersList);
-
-		return mav;
-	}
-	
 	//회원가입
 	@Override
 	@RequestMapping(value = "/member/addMember.do", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
@@ -87,9 +85,6 @@ public class MemberControllerImpl implements MemberController {
 			HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 				memberService.addMember(member);
-		System.out.println("#####################################");
-		System.out.println(member.getPhone());
-		System.out.println(member.getTel());
 		ModelAndView mav = new ModelAndView("redirect:/");
 		return mav;
 	}
@@ -104,17 +99,7 @@ public class MemberControllerImpl implements MemberController {
 		return mav;
 	}
 
-	/*
-	 * @RequestMapping(value = { "/member/loginForm.do", "/member/memberForm.do" },
-	 * method = RequestMethod.GET)
-	 * 
-	 * @RequestMapping(value = "/member/*Form.do", method = RequestMethod.GET)
-	 * public ModelAndView form(HttpServletRequest request, HttpServletResponse
-	 * response) throws Exception { String viewName = getViewName(request);
-	 * ModelAndView mav = new ModelAndView(); mav.setViewName(viewName); return mav;
-	 * }
-	 * 
-	 */
+	
 	@Override
 	@RequestMapping(value = "/member/login.do", method = RequestMethod.POST)
 	public ModelAndView login(@ModelAttribute("member") MemberVO member, RedirectAttributes rAttr,

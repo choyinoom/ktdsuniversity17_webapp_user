@@ -28,8 +28,11 @@ request.setCharacterEncoding("UTF-8");
 				</c:choose></li>
 			<li class="navbar__menu__each">|</li>
 			<li><a class="navbar__menu__each" href="${contextPath}/member/memberForm.do">회원가입</a></li>
-			<li class="navbar__menu__each">|</li>
-			<li ><a class="navbar__menu__each" href="#">마이페이지</a></li>
+			<c:if test="${isLogOn == '' or isLogOn == true}">
+				<li class="navbar__menu__each">|</li>
+			<li ><a class="navbar__menu__each" href="${contextPath}/member/mypage.do">마이페이지</a></li>
+			</c:if>
+			
 		</ol>
 
 		<div class="topMenu">
