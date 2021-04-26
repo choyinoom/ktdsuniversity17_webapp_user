@@ -14,14 +14,15 @@
 #right {
 	justify-content: flex-start;
 }
-.footer__contents h2{
+
+.footer__contents h3{
 	color: #EFEFEF;
 }
 
 .footer__contents a{
 	display: block;
 	color: #EFEFEF;
-	font-size: 15px;
+	font-size: 12px;
 	margin: 9px 0px;
 }
 
@@ -31,6 +32,7 @@
 
 .footer__contents p {
 	color: #727171;
-	font-size: 14px;
-	line-height: 23px;
+	font-size: 12px;
+	line-height: 20px;
+	margin: 0;
 }
