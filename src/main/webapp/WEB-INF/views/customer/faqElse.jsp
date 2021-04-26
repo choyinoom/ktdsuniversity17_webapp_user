@@ -20,23 +20,23 @@
     
 
 
-    <body>
+    <body class = "faq_body">
     
-    	<div class="banner" id="course__banner">
+    	<div class="banner" id="faq__banner">
 			<h1>FAQ</h1>
 		</div>
     
-        <div class = "container">
-            <div class="menu">
+        <div class = "faq_container">
+            <div class="faq_menu">
 
               <!-- float:left로 주기 -->
               <!-- Jquery용으로 button에 id주기 -->
-               <button class="menu_button_1"><a href="${contextPath}/customer/faq.do">전체</a></button>
-              <button class="menu_button"><a href="${contextPath}/customer/faqMember.do">회원관련</a></button>
-              <button class="menu_button"><a href="${contextPath}/customer/faqCourse.do">수강관련</a></button>
-              <button class="menu_button"><a href="${contextPath}/customer/faqEdu.do">교육관련</a></button>
-              <button class="menu_button"><a href="${contextPath}/customer/faqSuryo.do">수료관련</a></button>
-              <button class="menu_button"><a href="${contextPath}/customer/faqElse.do">기타</a></button>
+               <button class="faq_menu_button_1"><a href="${contextPath}/customer/faq.do">전체</a></button>
+              <button class="faq_menu_button"><a href="${contextPath}/customer/faqMember.do">회원관련</a></button>
+              <button class="faq_menu_button"><a href="${contextPath}/customer/faqCourse.do">수강관련</a></button>
+              <button class="faq_menu_button"><a href="${contextPath}/customer/faqEdu.do">교육관련</a></button>
+              <button class="faq_menu_button"><a href="${contextPath}/customer/faqSuryo.do">수료관련</a></button>
+              <button class="faq_menu_button"><a href="${contextPath}/customer/faqElse.do">기타</a></button>
         
             </div>
 
@@ -63,21 +63,21 @@
                 </div>
               </details>
 
-              <details>
+             <details>
                 <summary class="desc">
                   <p><a class="qna">Q </a>컨소시엄 협약은 어떻게 체결하나요?</p>
                 </summary>
-
-                <div class = "answer">
+				<div class="answer_sub">
+				<img src="${contextPath}/resources/image/disk.png" alt="첨부파일다운">
+ 				 <a href='C:\downloadFile\컨소시엄협약서_2018.02.zip' id="downloadLink" download="컨소시엄협약서_2018.02.zip">첨부파일:컨소시엄협약서_2018.02.zip</a>
+ 				 </div>
+                <div class = "answerConsortium">
                   <!-- 첨부파일있음!!!! -->
                   <a>A </a>국가인적자원개발 컨소시엄 협약체결은 첨부된 컨소시엄협약서(총 3P)를 작성하셔서 제출하여 주시면 됩니다.<br>
                   (1년에 1회 협약체결을 원칙으로 하며 2년간 유효합니다.)<br>
                   
                   (단, 2017년도 이후부터는 타 교육기관과의 중복협약이 가능합니다.)<br>
                   - 문의처 : 권철우 과장(070-4268-6187 / 82036600@kt.com)<br>
-                  
-                  <!-- 문제점 : a태그 쓰면 css에서 가로정렬한 속성 때문에 div가 깨짐!! -->
-                  <a href="${contextPath}/customer/filedownload.jsp">⭐️[첨부파일1] 컨소시엄협약서_2018.02.zip</a>
                 </div>
               </details>
 
