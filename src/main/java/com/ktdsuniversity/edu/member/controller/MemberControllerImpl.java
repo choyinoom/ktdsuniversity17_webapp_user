@@ -48,6 +48,29 @@ public class MemberControllerImpl implements MemberController {
 		return mav;
 	}
 	
+	//약관동의
+	@RequestMapping(value = "/member/joinAgree.do", method =  RequestMethod.GET)
+	@Override
+	public ModelAndView joinAgree(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String)request.getAttribute("viewName");
+		System.out.println(viewName);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
+	}
+	
+	//가입축하
+	@RequestMapping(value = "/member/celebration.do", method =  RequestMethod.GET)
+	@Override
+	public ModelAndView celebrate(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String)request.getAttribute("viewName");
+		System.out.println(viewName);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
+	}
+	
+	//개인정보처리방침
 	@RequestMapping(value = "/member/privacy.do", method =  RequestMethod.GET)
 	@Override
 	public ModelAndView listPrivacy(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -68,7 +91,6 @@ public class MemberControllerImpl implements MemberController {
 		return result;
 	}
 	
-
 	@Override
 	@RequestMapping(value = "/member/listMembers.do", method = RequestMethod.GET)
 	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -90,7 +112,7 @@ public class MemberControllerImpl implements MemberController {
 		System.out.println("#####################################");
 		System.out.println(member.getPhone());
 		System.out.println(member.getTel());
-		ModelAndView mav = new ModelAndView("redirect:/");
+		ModelAndView mav = new ModelAndView("redirect:/member/celebration.do");
 		return mav;
 	}
 

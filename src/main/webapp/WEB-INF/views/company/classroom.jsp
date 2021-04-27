@@ -26,13 +26,21 @@ request.setCharacterEncoding("UTF-8");
 	<div class="scrollTop" onclick="scrollToTop()"></div>
 
 	<!-- 상단배너 -->
-	<img id="classroom__banner"
-		src="${contextPath}/resources/image/classroom_banner2.png" style="width:100%">
-
+	<section class="banner" id="classroom__banner">
+				<h1>교육장 안내</h1>
+	</section>
 	<div class="classroom__container">
+	
+		<div class="classroom__content">
+	<!-- 원하는 위치 이동 버튼 -->
+		<div class="classroom__button">
+			<button  id="classroom__button" onclick="fnMove('1')">강의장</button>
+		    <button id="classroom__button" onclick="fnMove('2')">오시는 길</button>
+	
+		</div>
 
 		<!-- 강의장 조감도 -->
-		<div class="classroom__content">
+		<div class="classroom__content1">
 			<img id="classroom__content"
 				src="${contextPath}/resources/image/classroom_content4.png">
 
@@ -93,7 +101,7 @@ request.setCharacterEncoding("UTF-8");
 			</div>
 
 
-			<div class="classroom_bottom">
+			<div class="classroom__content2">
 				<!-- 카카오맵 API -->
 				<div id="map"></div>
 				
@@ -103,6 +111,7 @@ request.setCharacterEncoding("UTF-8");
 						src="${contextPath}/resources/image/classroom_contact4.png">
 				</div>
 			</div>
+		</div>
 		</div>
 		<script type="text/javascript"
 			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7b93d2a7de17cf2095fb7a7ce6f30699"></script>
@@ -131,96 +140,114 @@ request.setCharacterEncoding("UTF-8");
 
 			// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
 			// marker.setMap(null);
-		</script>
+					</script>
 
-		<!-- 모달 -->
-		<script type="text/javascript">
-			function modal(id) {
-				var zIndex = 9999;
-				var modal = $('#' + id);
+					<!-- 모달 -->
+					<script type="text/javascript">
+						function modal(id) {
+							var zIndex = 9999;
+							var modal = $('#' + id);
 
-				// 모달 div 뒤에 희끄무레한 레이어
-				var bg = $('<div>').css({
-					position : 'fixed',
-					zIndex : zIndex,
-					left : '0px',
-					top : '0px',
-					width : '100%',
-					height : '100%',
-					overflow : 'auto',
-					// 레이어 색갈은 여기서 바꾸면 됨
-					backgroundColor : 'rgba(0,0,0,0.4)'
-				}).appendTo('body');
+							// 모달 div 뒤에 희끄무레한 레이어
+							var bg = $('<div>').css({
+								position: 'fixed',
+								zIndex: zIndex,
+								left: '0px',
+								top: '0px',
+								width: '100%',
+								height: '100%',
+								overflow: 'auto',
+								// 레이어 색갈은 여기서 바꾸면 됨
+								backgroundColor: 'rgba(0,0,0,0.4)'
+							}).appendTo('body');
 
-				modal
-						.css(
-								{
-									position : 'fixed',
-									boxShadow : '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+							modal
+								.css(
+									{
+										position: 'fixed',
+										boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
 
-									// 시꺼먼 레이어 보다 한칸 위에 보이기
-									zIndex : zIndex + 1,
+										// 시꺼먼 레이어 보다 한칸 위에 보이기
+										zIndex: zIndex + 1,
 
-									// div center 정렬
-									top : '50%',
-									left : '50%',
-									transform : 'translate(-50%, -50%)',
-									msTransform : 'translate(-50%, -50%)',
-									webkitTransform : 'translate(-50%, -50%)',
+										// div center 정렬
+										top: '50%',
+										left: '50%',
+										transform: 'translate(-50%, -50%)',
+										msTransform: 'translate(-50%, -50%)',
+										webkitTransform: 'translate(-50%, -50%)',
 
-									width : '55%',
-									height : '77%',
-								/* border-radius : '5px' */
-								}).show()
-						// 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
-						.find('.modal_close_btn').on('click', function() {
-							bg.remove();
-							modal.hide();
+										width: '55%',
+										height: '77%',
+										/* border-radius : '5px' */
+									}).show()
+								// 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
+								.find('.modal_close_btn').on('click', function () {
+									bg.remove();
+									modal.hide();
+								});
+						}
+
+						$('#restroom1').on('click', function () {
+							// 모달창 띄우기
+							modal('restroom1_1');
 						});
-			}
+						$('#restroom2').on('click', function () {
+							// 모달창 띄우기
+							modal('restroom2_1');
+						});
+						$('#restroom3').on('click', function () {
+							// 모달창 띄우기
+							modal('restroom3_1');
+						});
 
-			$('#restroom1').on('click', function() {
-				// 모달창 띄우기
-				modal('restroom1_1');
-			});
-			$('#restroom2').on('click', function() {
-				// 모달창 띄우기
-				modal('restroom2_1');
-			});
-			$('#restroom3').on('click', function() {
-				// 모달창 띄우기
-				modal('restroom3_1');
-			});
+						$('#classroom1').on('click', function () {
+							// 모달창 띄우기
+							modal('classroom1_1');
+						});
+						$('#classroom2').on('click', function () {
+							// 모달창 띄우기
+							modal('classroom2_1');
+						});
+						$('#classroom3').on('click', function () {
+							// 모달창 띄우기
+							modal('classroom3_1');
+						});
+					</script>
 
-			$('#classroom1').on('click', function() {
-				// 모달창 띄우기
-				modal('classroom1_1');
-			});
-			$('#classroom2').on('click', function() {
-				// 모달창 띄우기
-				modal('classroom2_1');
-			});
-			$('#classroom3').on('click', function() {
-				// 모달창 띄우기
-				modal('classroom3_1');
-			});
-		</script>
+					<!-- 스크롤업 -->
+					<script type="text/javascript">
+						window.addEventListener('scroll', function () {
+							const scroll = document.querySelector('.scrollTop');
+							scroll.classList.toggle("active", window.scrollY > 500)
+						})
 
-		<!-- 스크롤업 -->
-		<script type="text/javascript">
-			window.addEventListener('scroll', function() {
-				const scroll = document.querySelector('.scrollTop');
-				scroll.classList.toggle("active", window.scrollY > 500)
-			})
+						function scrollToTop() {
+							window.scrollTo({
+								top: 0,
+								behavior: 'smooth'
+							})
+						}
+					</script>
+					
+					<!-- 원하는 위치이동 -->
+					<script>
+					    function fnMove(seq){
+					        var offset = $(".classroom__content" + seq).offset();
+							if(seq === '1') {
+								$('html, body').animate({scrollTop : offset.top-170}, 400);	
+							} else {
+								$('html, body').animate({scrollTop : offset.top-150}, 400);
+							}
+					    }
+					    function fnMoveTop(){
+					        $('html, body').animate({scrollTop : top}, 400);
+					    }
+					</script>
 
-			function scrollToTop() {
-				window.scrollTo({
-					top : 0,
-					behavior : 'smooth'
-				})
-			}
-		</script>
 
-	</div>
-</body>
-</html>
+
+				</div>
+			</body>
+
+			</html>

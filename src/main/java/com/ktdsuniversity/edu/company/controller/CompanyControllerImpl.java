@@ -19,14 +19,15 @@ import com.ktdsuniversity.edu.common.paging.PageMaker;
 import com.ktdsuniversity.edu.company.service.CompanyService;
 
 @Controller("companyController")
-public class CompanyControllerImpl implements CompanyController{
+public class CompanyControllerImpl implements CompanyController {
 
 	@Autowired
 	CompanyService companyService;
-	
+
 	@Autowired
 	CompanyVO companyvo;
-	
+
+	//회사소개
 	@RequestMapping(value = "/company/companyInfo.do", method =  RequestMethod.GET)
 	@Override
 	public ModelAndView companyInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -37,6 +38,7 @@ public class CompanyControllerImpl implements CompanyController{
 		return mav;
 	}
 	
+	//회사 리스트
 	@Override
 	@RequestMapping(value="/company/listCompanies.do" ,method = RequestMethod.GET)
 	public ModelAndView listCompanies(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -47,6 +49,7 @@ public class CompanyControllerImpl implements CompanyController{
 		return mav;
 	}
 	
+	//검색에 따른 리스트
 	@Override
 	@ResponseBody
 	@RequestMapping(value="/company/listBySearch.do" ,method = RequestMethod.POST)
@@ -56,21 +59,22 @@ public class CompanyControllerImpl implements CompanyController{
 		return companiesBySearchList;
 	}
 	
-	
+	//컨소시엄소개
 	@RequestMapping(value = "/company/consortium.do", method =  RequestMethod.GET)
 	@Override
 	public ModelAndView listConsortium(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String)request.getAttribute("viewName");
+		String viewName = (String) request.getAttribute("viewName");
 		System.out.println(viewName);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		return mav;
 	}
-	
-	@RequestMapping(value = "/company/classroom.do", method =  RequestMethod.GET)
+
+	//교육장안내
+	@RequestMapping(value = "/company/classroom.do", method = RequestMethod.GET)
 	@Override
 	public ModelAndView listClassroom(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String)request.getAttribute("viewName");
+		String viewName = (String) request.getAttribute("viewName");
 		System.out.println(viewName);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);

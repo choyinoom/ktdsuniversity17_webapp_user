@@ -13,72 +13,76 @@
 	margin: 50px;
 }
 
+#memberform__banner {
+	background: url("../image/memberform_banner.png");
+}
+
 .memberform_box {
-background: #ECECEC;
-width: 318px;
-height: 40px;
-border-radius: 6px;
-margin: 0px 10px 0px 30px;
+	background: #ECECEC;
+	width: 318px;
+	height: 40px;
+	border-radius: 6px;
+	margin: 0px 10px 0px 30px;
 }
 
 .memberform_box_id {
-background: #ECECEC;
-width: 200px;
-height: 40px;
-border-radius: 6px;
-margin: 0px 10px 10px 30px;
+	background: #ECECEC;
+	width: 200px;
+	height: 40px;
+	border-radius: 6px;
+	margin: 0px 10px 10px 30px;
 }
 
 .memberform_box_tel {
-background: #ECECEC;
-width: 85px;
-height: 40px;
-border-radius: 6px;
-margin: 0px 10px 0px 10px;
+	background: #ECECEC;
+	width: 85px;
+	height: 40px;
+	border-radius: 6px;
+	margin: 0px 10px 0px 10px;
 }
 
 .memberform_box_company {
-background: #ECECEC;
-width: 220px;
-height: 40px;
-border-radius: 6px;
-margin: 0px 10px 0px 30px;
+	background: #ECECEC;
+	width: 220px;
+	height: 40px;
+	border-radius: 6px;
+	margin: 0px 10px 0px 30px;
 }
 
 .memberSubscription {
--webkit-appearance : checkbox;
-margin: 3px 8px 0px 32px;
-position : relative;
-top : 1px;
+	-webkit-appearance: checkbox;
+	margin: 3px 8px 0px 32px;
+	position: relative;
+	top: 1px;
 }
 
-#memberSubscription{
-color: #4D4D4D;
-font-size: 13px;
-margin-bottom : 5px;
+#memberSubscription {
+	color: #4D4D4D;
+	font-size: 13px;
+	margin-bottom: 5px;
 }
 
 #memberform_necessity {
-font-size : 16px;
-color: #E91B23;
-font-weight: 700;
+	font-size: 16px;
+	color: #E91B23;
+	font-weight: 700;
 }
 
 .memberform table tr td {
 	border-bottom: none;
 	height: 50px;
-	padding: 0px;
+	padding: 0em 0em 1em 0em;
 }
 
 #memberform_search {
-background: #969696;
-width: 80px;
-height: 40px;
-border-radius: 6px;
-margin: 0px 10px 0px 5px;
-color: #EFEFEF;
-cursor: pointer;
-font-size: 16px;
+	background: #969696;
+	width: 80px;
+	height: 40px;
+	border-radius: 6px;
+	margin: 0px 10px 0px 5px;
+	color: #EFEFEF;
+	cursor: pointer;
+	font-size: 16px;
 }
 
 .memberform_button {
@@ -87,63 +91,192 @@ font-size: 16px;
 	margin: 30px;
 }
 
-.memberform_button > input{
-font-weight: 500;
-color: #EFEFEF;
-background: #E91B23;
-width: 90px;
-height: 40px;
-border-radius: 4px;
-font-size: 16px;
-cursor: pointer;
+.memberform_button>input {
+	font-weight: 500;
+	color: #EFEFEF;
+	background: #E91B23;
+	width: 90px;
+	height: 40px;
+	border-radius: 4px;
+	font-size: 16px;
+	cursor: pointer;
 }
 
-#memberForm_cancel{
-background: #969696;
-margin-left:15px;
+#memberForm_cancel {
+	background: #969696;
+	margin-left: 15px;
 }
 
-#idChk{
-background: #969696;
-width: 100px;
-height: 40px;
-border-radius: 6px;
-margin: 0px 10px 0px 5px;
-color: #EFEFEF;
-cursor: pointer;
-font-size: 16px;
-border:none;
+#idChk {
+	background: #969696;
+	width: 100px;
+	height: 40px;
+	border-radius: 6px;
+	margin: 0px 10px 0px 5px;
+	color: #EFEFEF;
+	cursor: pointer;
+	font-size: 16px;
+	border: none;
 }
 
 #userTel {
-background: #ECECEC;
-width: 85px;
-height: 40px;
-border-radius: 6px;
-margin: 0px 10px 0px 30px;
-border: none;
-text-align:center;
+	background: #ECECEC;
+	width: 85px;
+	height: 40px;
+	border-radius: 6px;
+	margin: 0px 10px 0px 30px;
+	border: none;
+	text-align: center;
 }
 
 #userPhone {
-background: #ECECEC;
-width: 85px;
-height: 40px;
-border-radius: 6px;
-margin: 0px 10px 0px 30px;
-border: none;
+	background: #ECECEC;
+	width: 85px;
+	height: 40px;
+	border-radius: 6px;
+	margin: 0px 10px 0px 30px;
+	border: none;
 }
 
-#alert-success{
-display: none;
-color: #00c853;
-margin-left: 30px;
-font-size: 12px;
+#alert-success {
+	display: none;
+	color: #00c853;
+	margin-left: 30px;
+	font-size: 12px;
 }
 
 #alert-danger {
-display: none;
-color: #E91B23;
-margin-left: 30px;
-font-size: 12px;
+	display: none;
+	color: #E91B23;
+	margin-left: 30px;
+	font-size: 12px;
+}
+
+/* 약관동의 */
+.checkbox_container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.checkbox_group {
+	width: 50%;
+	margin-top: 2.5em;
+}
+
+.joinAgree_title1 {
+	display: flex;
+	justify-content: space-between;
+}
+
+.joinAgree_text {
+	font-size: 1.5em;
+	margin-bottom: 0.4em;
+}
+
+.joinAgree_checkAll {
+	margin-top: 1em;
+	margin-bottom: 0.7em;
+}
+
+.joinAgree_box {
+	overflow: scroll;
+	height: 20em;
+	overflow-x: hidden;
+	word-break: break-all;
+	font-size: 1.5ex;
+	background: #ececec;
+	padding: 2em;
+}
+
+.btn_next { /*다음 버튼 css*/
+	color: rgb(255, 255, 255);
+	background-color: red;
+	width: 100px;
+	height: 40px;
+	margin: 0px;
+	font-size: large;
+	outline: 0;
+	border: 0;
+	border-radius: 5px;
+}
+
+.btn_cancel { /*취소 버튼 css*/
+	color: rgb(255, 255, 255);
+	background-color: rgba(141, 139, 139, 0.918);
+	width: 100px;
+	height: 40px;
+	margin: 30px;
+	font-size: large;
+	outline: 0;
+	border: 0;
+	border-radius: 5px;
+}
+
+.joinAgree_box::-webkit-scrollbar { /*이용약관, 개인정보 스크롤 박스 css*/
+	width: 1.4em;
+}
+
+.joinAgree_box::-webkit-scrollbar-thumb {
+	height: 6em;
+	background-color: #c9c9c9;
+	border-radius: 10px;
+}
+
+#check_all, #chk1, #chk2 {
+	-webkit-appearance: checkbox;
+	zoom: 1.4;
+	transform: translateY(0.2em);
+	margin-top: 0.5em;
+}
+
+#btn_1, #btn_2 {
+	cursor: pointer;
+}
+
+/* 가입축하 */
+.celebration_container {
+		display : flex;
+    	flex-direction: column;
+    	align-items: center;
+}
+
+.celebration_message {
+	font-size: 2.5em;
+    font-weight: 300;
+    margin-top: 2em;
+}
+
+.celebration_button {
+    margin: 5em;
+    width : 14%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#celebration_home {
+			color: rgb(255, 255, 255);
+            background-color: red;
+            width: 100px;
+            height: 40px;
+            margin: 0px;
+            font-size: large;
+            outline: 0;
+            border: 0;
+            border-radius: 5px;
+            cursor : pointer;
+}
+
+#celebration_enroll {
+  			color: rgb(255, 255, 255);
+            background-color: rgba(141, 139, 139, 0.918);
+            width: 100px;
+            height: 40px;
+            margin: 30px;
+            font-size: large;
+            outline: 0;
+            border: 0;
+            border-radius: 5px;
+            cursor : pointer;
 }

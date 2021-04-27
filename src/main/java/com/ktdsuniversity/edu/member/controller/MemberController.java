@@ -20,4 +20,6 @@ public interface MemberController {
                               HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView listPrivacy(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView joinAgree(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView celebrate(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

@@ -1,14 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" isELIgnored="false"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-request.setCharacterEncoding("UTF-8");
-%>
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+			<% request.setCharacterEncoding("UTF-8"); %>
+				<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<link rel="stylesheet"
-	href="<c:url 
+				<link rel="stylesheet" href="<c:url 
 value='/resources/css/footer.css'/>">
 
 
@@ -70,32 +66,32 @@ value='/resources/css/footer.css'/>">
 				modaldal
 						.css(
 								{
-									position : 'fixed',
-									boxShadow : '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0,0,0,0.19)',
+									position: 'fixed',
+									boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0,0,0,0.19)',
 
 									// 시꺼먼 레이어 보다 한칸 위에 보이기
-									zIndex : zIndex + 1,
+									zIndex: zIndex + 1,
 
 									// div center 정렬
-									top : '50%',
-									left : '50%',
-									transform : 'translate(-50%, -50%)',
-									msTransform : 'translate(-50%, -50%)',
-									webkitTransform : 'translate(-50%, -50%)',
+									top: '50%',
+									left: '50%',
+									transform: 'translate(-50%, -50%)',
+									msTransform: 'translate(-50%, -50%)',
+									webkitTransform: 'translate(-50%, -50%)',
 
-									width : '60%',
-									height : '77%',
-								/* border-radius : '5px' */
+									width: '60%',
+									height: '77%',
+									/* border-radius : '5px' */
 								}).show()
-						// 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
-						.find('.modal_close_btn').on('click', function() {
-							bg.remove();
-							modaldal.hide(); 
-						});
-			}
+							// 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
+							.find('.modal_close_btn').on('click', function () {
+								bg.remove();
+								modaldal.hide();
+							});
+					}
 
-			$('#noEmail').on('click', function() {
-				// 모달창 띄우기
-				modaldal('noEmail_modal');
-			});
-		</script>
+					$('#noEmail').on('click', function () {
+						// 모달창 띄우기
+						modaldal('noEmail_modal');
+					});
+				</script>
