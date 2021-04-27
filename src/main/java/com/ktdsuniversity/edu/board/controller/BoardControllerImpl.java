@@ -46,19 +46,24 @@ public class BoardControllerImpl implements BoardController {
 	public ModelAndView listArticles(@RequestParam("pageNo") int pageNo, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		String viewName = (String) request.getAttribute("viewName");
+		String pagingSize = (String) request.getAttribute("pagingSize");
+		String searchText = (String) request.getParameter("searchText");
+		
+		if (pagingSize == null)
+			pagingSize = "10";
 		List<ArticleVO> articlesList = null;
+		int noticesCnt = 0;
 		if (searchText != null) {
-			articlesList = boardService.listBySearchArticles(pageNo, searchText); 	
+			articlesList = boardService.listArticlesBy(pageNo, Integer.parseInt(pagingSize), searchText);
+			noticesCnt = boardService.countNoticesBy(searchText);
 		} else {
-			articlesList = boardService.listArticles(pageNo);
+			articlesList = boardService.listArticles(pageNo, Integer.parseInt(pagingSize));
+			noticesCnt = boardService.countAllNotices();
 		}
-    
+			
 		ModelAndView mav = new ModelAndView(viewName);		
-		int totalPages = boardService.findTotalPages(); // 총 페이지 수 계산
-		int all = boardService.countAllNotices();	
 		mav.addObject("articlesList", articlesList);
-		mav.addObject("totalPages", totalPages);
-		mav.addObject("all", all);
+		mav.addObject("noticesCnt", noticesCnt);
 		mav.addObject("pageNo", pageNo);
 		return mav;
 			
@@ -69,23 +74,26 @@ public class BoardControllerImpl implements BoardController {
 	@RequestMapping(value="/ajax/customer/listNotices", method= RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Object> getArticles(@RequestParam("pageNo") int pageNo, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		Map<String, Object> result = new HashMap<String, Object>();
 		String searchText = (String) request.getParameter("searchText");
-		
-		if (searchText != null) {
-			List<ArticleVO> articlesList = boardService.listBySearchArticles(pageNo, searchText);
-			result.put("articlesList", articlesList);
-			return result; 
-			
+		int pagingSize = Integer.parseInt(request.getParameter("pagingSize"));
+		Map<String, Object> result = new HashMap<String, Object>();
+		List<ArticleVO> articlesList = null;
+		int noticesCnt = 0;	
+		if (searchText.length() != 0) {
+			articlesList = boardService.listArticlesBy(pageNo, pagingSize, searchText);
+			noticesCnt = boardService.countNoticesBy(searchText);
 		} else {
-			List<ArticleVO> articlesList = boardService.listArticles(pageNo);
-			result.put("articlesList", articlesList);
-			return result; 
+			articlesList = boardService.listArticles(pageNo, pagingSize);
+			noticesCnt = boardService.countAllNotices();
 		}
+		result.put("articlesList", articlesList);
+		result.put("noticesCnt", noticesCnt);
+		result.put("pageNo", pageNo);
+		return result;
 	}
 	
 	/* 공지사항 상세내용을 보여주기 위한 메서드*/
+	@Override
 	@RequestMapping(value = "/customer/viewNotice.do", method = RequestMethod.GET)
 	public ModelAndView viewArticle(@RequestParam("articleId") int articleId, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
@@ -98,6 +106,12 @@ public class BoardControllerImpl implements BoardController {
 		mav.addObject("vo", vo);
 		mav.addObject("filevo", filevo);
 		return mav;
+	}
+	
+	@Override
+	@RequestMapping(value="/customer/faq.do")
+	public String viewFaq(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		return "/customer/faq";
 	}
 	
 	// �븳 媛� �씠誘몄� 湲��벐湲�

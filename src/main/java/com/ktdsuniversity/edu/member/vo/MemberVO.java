@@ -16,10 +16,9 @@ public class MemberVO {
 	private String joinDate;
 	private String modDate;
 	private int loginFail;
-
-	public MemberVO() {
-	}
-
+	
+	public MemberVO() {}
+	
 	public MemberVO(String id, String name, String pw, String tel, String phone, String email, String subscription,
 			String companyName, String delYN, String joinDate, String modDate, int loginFail) {
 		this.id = id;
@@ -38,27 +37,27 @@ public class MemberVO {
 	public String getId() {
 		return id;
 	}
-
+	
 	public void setId(String id) {
 		this.id = id;
 	}
-
+	
 	public String getName() {
 		return name;
 	}
-
+	
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	public String getPw() {
 		return pw;
 	}
-
+	
 	public void setPw(String pw) {
 		this.pw = pw;
 	}
-
+	
 	public String getTel() {
 		return tel;
 	}
@@ -70,43 +69,43 @@ public class MemberVO {
 	public String getPhone() {
 		return phone;
 	}
-
+	
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
+	
 	public String getEmail() {
 		return email;
 	}
-
+	
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	
 	public String getSubscription() {
 		return subscription;
 	}
-
+	
 	public void setSubscription(String subscription) {
 		this.subscription = subscription;
 	}
-
+	
 	public String getCompanyName() {
 		return companyName;
 	}
-
+	
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
-
+	
 	public String getDelYN() {
 		return delYN;
 	}
-
+	
 	public void setDelYN(String delYN) {
 		this.delYN = delYN;
 	}
-
+	
 	public String getJoinDate() {
 		return joinDate;
 	}

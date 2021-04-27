@@ -1,8 +1,5 @@
 package com.ktdsuniversity.edu.member.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +20,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ktdsuniversity.edu.board.service.BoardService;
-import com.ktdsuniversity.edu.board.vo.ArticleVO;
 import com.ktdsuniversity.edu.course.service.CourseService;
 import com.ktdsuniversity.edu.course.vo.CourseVO;
 import com.ktdsuniversity.edu.member.service.MemberService;
@@ -37,8 +33,6 @@ public class MemberControllerImpl implements MemberController {
 	@Autowired
 	private CourseService courseService;
 	@Autowired
-	private BoardService boardService;
-	@Autowired
 	MemberVO memberVO;
 	@Autowired
 	CourseVO courseVO;
@@ -50,16 +44,14 @@ public class MemberControllerImpl implements MemberController {
 		// 현재 모집중인 과정
 		Map<String, Object> courseMap = courseService.listCoursesForWelcomePage();
 		String coursesJSON = new ObjectMapper().writeValueAsString(courseMap); // courseMap을 JSON으로 변환
-		// 최신 공지사항
-		List<ArticleVO> noticesList = boardService.listNoticesForWelcomepage();
 		mav.addObject("coursesJSON", coursesJSON);
-		mav.addObject("noticesList", noticesList);
 		return mav;
 	}
 	
-	@RequestMapping(value = "/member/privacy.do", method =  RequestMethod.GET)
+	//약관동의
+	@RequestMapping(value = "/member/joinAgree.do", method =  RequestMethod.GET)
 	@Override
-	public ModelAndView listPrivacy(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView joinAgree(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
 		System.out.println(viewName);
 		ModelAndView mav = new ModelAndView();
@@ -67,6 +59,18 @@ public class MemberControllerImpl implements MemberController {
 		return mav;
 	}
 	
+	//가입축하
+	@RequestMapping(value = "/member/celebration.do", method =  RequestMethod.GET)
+	@Override
+	public ModelAndView celebrate(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String)request.getAttribute("viewName");
+		System.out.println(viewName);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
+	}
+	
+	//개인정보처리방침
 	@RequestMapping(value = "/member/privacy.do", method =  RequestMethod.GET)
 	@Override
 	public ModelAndView listPrivacy(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -87,9 +91,6 @@ public class MemberControllerImpl implements MemberController {
 		return result;
 	}
 	
-	
-	
-
 	@Override
 	@RequestMapping(value = "/member/listMembers.do", method = RequestMethod.GET)
 	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -111,7 +112,7 @@ public class MemberControllerImpl implements MemberController {
 		System.out.println("#####################################");
 		System.out.println(member.getPhone());
 		System.out.println(member.getTel());
-		ModelAndView mav = new ModelAndView("redirect:/");
+		ModelAndView mav = new ModelAndView("redirect:/member/celebration.do");
 		return mav;
 	}
 

@@ -1,11 +1,9 @@
 package com.ktdsuniversity.edu.member.service;
 
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -44,14 +42,13 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.loginById(memberVO);
 	}
 
-	@Override
-	public int idCheck(MemberVO vo) throws DataAccessException {
-		int result = memberDAO.idCheck(vo);
-		return result;
-	}
-
 	public EnrollmentDetailVO findEnrollmentDetailBy(Map<String, Object> enrollMap) throws DataAccessException {
 		return memberDAO.selectEnrollmentDetailBy(enrollMap);
 	}
 
+	public int idCheck(MemberVO vo) throws DataAccessException {
+		int result = memberDAO.idCheck(vo);
+		return result;
+	}
+	
 }

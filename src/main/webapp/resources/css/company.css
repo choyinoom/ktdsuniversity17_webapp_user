@@ -24,6 +24,7 @@
 .company__container {
 	display: flex;
 	justify-content: center;
+	width : 100%;
 }
 
 .company__content {
@@ -42,10 +43,44 @@
 	margin-top: 100px;
 }
 
+#classroom__banner {
+	background: url("../image/classroom_banner.png");
+}
+
+.classroom__button {
+	display : flex;
+	justify-content: center;
+	margin : 50px 0px 50px 0px;
+	width : 1000px;
+	position: sticky;
+	top : 90px;
+	background: #fff;
+}
+
+#classroom__button {
+	width : 180px;
+	height : 70px;
+	font-size: 2em;
+	font-weight : 700;
+	cursor: pointer;
+	background-color: #fff;
+	padding : 0px;
+	border : none;
+	color : #4d4d4d;
+	border-bottom : 1px solid;
+}
+
+#classroom__button:hover {
+	border-bottom : 4px solid #e91b23;
+}
 .consortium__content {
 	display: flex;
 	justify-content: center;
 	margin: 60px;
+}
+
+#consortium__banner {
+	background: url("../image/consortium_banner.png");
 }
 
 .classroom__container {
@@ -54,9 +89,15 @@
 }
 
 .classroom__content {
+	width : 1000px;
+	display : flex;
+	justify-content: center;
+	flex-direction: column;
+	margin-left : 50px;
+}
+
+.classroom__content1 {
 	width: 1000px;
-	display: block;
-	margin: 60px;
 }
 
 #classroom__contact {
@@ -82,8 +123,9 @@
 	border-bottom: 1px solid #969696;
 }
 
-.classroom_bottom {
+.classroom__content2 {
 	display : flex;
+	margin-bottom : 50px;
 }
 
 #classroom1, #classroom2, #classroom3 {

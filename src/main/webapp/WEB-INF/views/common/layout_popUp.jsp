@@ -8,10 +8,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <style>
-
-
-    </style>
+    <script src="<c:url value='/resources/js/jquery-3.6.0.min.js'/>"></script>
     <title><tiles:insertAttribute name="title" /></title>
   </head>
     <body>

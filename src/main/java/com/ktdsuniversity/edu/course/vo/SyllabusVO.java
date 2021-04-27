@@ -18,15 +18,17 @@ public class SyllabusVO {
 	private int time;
 	private int days;
 	private String bannerImg;
+	private int crsCategoryId;
 	
+	private CourseCategoryVO courseCategoryVO;
 	
 	public SyllabusVO() {
 		
 	}
 
 	public SyllabusVO(int id, String name, String reportName, String type, String category, String overview,
-			String objectives, String target, String contents, String joinDate, String modDate, int time, int days, String bannerImg) {
-		super();
+			String objectives, String target, String contents, String joinDate, String modDate, int time, int days, String bannerImg, int crsCategoryId,
+			CourseCategoryVO courseCategoryVO) {
 		this.id = id;
 		this.name = name;
 		this.reportName = reportName;
@@ -41,6 +43,8 @@ public class SyllabusVO {
 		this.time = time;
 		this.days = days;
 		this.bannerImg = bannerImg;
+		this.crsCategoryId = crsCategoryId;
+		this.courseCategoryVO = courseCategoryVO;
 	}
 
 	public int getId() {
@@ -180,7 +184,21 @@ public class SyllabusVO {
 		this.bannerImg = bannerImg;
 	}
 
+	public int getCrsCategoryId() {
+		return crsCategoryId;
+	}
 
+	public void setCrsCategoryId(int crsCategoryId) {
+		this.crsCategoryId = crsCategoryId;
+	}
+
+	public CourseCategoryVO getCourseCategoryVO() {
+		return courseCategoryVO;
+	}
+
+	public void setCourseCategoryVO(CourseCategoryVO courseCategoryVO) {
+		this.courseCategoryVO = courseCategoryVO;
+	}
 
 	
 	

@@ -14,8 +14,9 @@ request.setCharacterEncoding("UTF-8");
 <link rel="stylesheet" href="<c:url value='/resources/css/memberForm.css'/>">
 </head>
 <body>
-	<img id="memberform__banner"
-		src="${contextPath}/resources/image/memberform_banner.png">
+	<section class="banner" id="memberform__banner">
+				<h1>회원가입</h1>
+	</section>
 	<div class="memberform_container">
 		<div class="memberform">
 			<form id="addMemberForm" method="post" action="${contextPath}/member/addMember.do" name="addFrm">
@@ -30,13 +31,13 @@ request.setCharacterEncoding("UTF-8");
 						<td width="110"><p align="left">
 								아이디<span id="memberform_necessity">&nbsp;*</span></td>
 						<td width="400">
-							<input class="memberform_box_id" minlength="4" maxlength="12" required id="userId" type="text" name="id">
+							<input class="memberform_box_id" minlength="4" maxlength="12" required id="userId" type="text" name="id" pattern="[0-9a-zA-z]+">
 						<button class="idChk" type="button" id="idChk" onclick="fn_idChk();" value="N">중복확인</button></td>
 					</tr>
 					<tr>
 						<td width="110"><p align="left">비밀번호<span	id="memberform_necessity">&nbsp;*</span></td>
 						<td width="400">
-						<input id="pwd1" class="memberform_box" maxlength="16" required type="password" name="pw">
+						<input id="pwd1" class="memberform_box" required type="password" name="pw" pattern="^(?=.*[0-9])(?=.*[a-zA-Z]).{8,16}$">
 						<span style="color: #4D4D4D; margin-left: 35px; font-size: 12px;">8~16자리의 영문, 숫자를 조합하여 입력해주세요.</span></td>
 					</tr>
 					<tr style="margin-bottom: 20px;">
@@ -70,8 +71,8 @@ request.setCharacterEncoding("UTF-8");
 								<option value="063">063</option>
 								<option value="064">064</option>
 						</select>- 
-						<input class="memberform_box_tel" type="tel" name="tel2" maxlength='4' >- 
-						<input class="memberform_box_tel" type="tel" name="tel3" maxlength='4'>
+						<input class="memberform_box_tel" type="tel" name="tel2" maxlength='4' pattern="[0-9]+" >- 
+						<input class="memberform_box_tel" type="tel" name="tel3" maxlength='4' pattern="[0-9]+" >
 						<input type="hidden" name="tel"></td>
 					</tr>
 					<tr>
@@ -87,8 +88,8 @@ request.setCharacterEncoding("UTF-8");
 								<option value="017">017</option>
 								<option value="019">019</option>
 						</select>- 
-						<input class="memberform_box_tel" type="tel" name="phone2" maxlength='4'>- 
-						<input class="memberform_box_tel" type="tel" name="phone3" maxlength='4'>
+						<input class="memberform_box_tel" type="tel" name="phone2" maxlength='4' pattern="[0-9]+">- 
+						<input class="memberform_box_tel" type="tel" name="phone3" maxlength='4' pattern="[0-9]+">
 						<input type="hidden" name="phone"></td>
 					</tr>
 					<tr>
@@ -108,7 +109,7 @@ request.setCharacterEncoding("UTF-8");
 				</table>
 				<div class="memberform_button">
 					<input id="submit" type="submit" value="가입" onclick="addFrm.checking_email()">
-					<input id="memberForm_cancel" type="button" onclick="history.back()" value="취소">
+					<input id="memberForm_cancel" type="button" onclick="location.href='${contextPath}/'" value="취소">
 				</div>
 			</form>
 		</div>
@@ -234,7 +235,7 @@ request.setCharacterEncoding("UTF-8");
 		function popup(){
 		    var url = "${contextPath}/company/popUp.do";
 		    var name = "popup test";
-		    var option = "width = 600, height = 600, top = 100, left = 200, location = no"
+		    var option = "width = 630, height = 620, top = 100, left = 200, location = no"
 		    window.open(url, name, option);
 		    
 		}

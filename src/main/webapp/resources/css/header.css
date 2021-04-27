@@ -14,9 +14,9 @@
     top: 20px;
 }
 
-<<<<<<< HEAD =======>>>>>>>dev .navbar__menu {
-    width: 100%;
-    flex-direction: column;
+.navbar__menu {
+	width: 100%;
+	flex-direction: column;
 }
 
 .navbar__menu__each {

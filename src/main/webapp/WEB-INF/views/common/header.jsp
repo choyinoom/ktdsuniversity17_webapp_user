@@ -26,7 +26,7 @@
 							</c:choose>
 						</li>
 						<li class="navbar__menu__each">|</li>
-						<li><a class="navbar__menu__each" href="${contextPath}/member/memberForm.do">회원가입</a></li>
+						<li><a class="navbar__menu__each" href="${contextPath}/member/joinAgree.do">회원가입</a></li>
 						<li class="navbar__menu__each">|</li>
 						<li><a class="navbar__menu__each" href="#">마이페이지</a></li>
 					</ol>

@@ -19,8 +19,10 @@ public interface BoardDAO {
 	public int countAllNotices() throws DataAccessException;
 	public int addHits(ArticleVO articleVO) throws DataAccessException;
 	public List<ArticleVO> selectBySearchArticlesListBy(Map<String, Object> map) throws DataAccessException;
+	public int countNoticesBy(String searchText) throws DataAccessException;
 	// public int insertNewArticle(Map articleMap) throws DataAccessException;
 	// public void insertNewImage(Map articleMap) throws DataAccessException;
 	// public void updateArticle(Map articleMap) throws DataAccessException;
 	// public void deleteArticle(int articleNO) throws DataAccessException;
+	
 }

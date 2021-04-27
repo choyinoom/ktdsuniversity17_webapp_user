@@ -8,8 +8,6 @@
 .footer__contents {
 	flex-direction: column;
 	justify-content: center;
-	height: 240px;
-	padding: 20px 0px;
 	text-align: left;
 }
 
@@ -35,8 +33,4 @@
 	color: #727171;
 	font-size: 14px;
 	line-height: 23px;
-}
-
-#right h2 {
-	padding-top: 22px;
 }

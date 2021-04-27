@@ -42,15 +42,14 @@ public class MemberDAOImpl implements MemberDAO {
 		return vo;
 	}
 
-	@Override
-	public int idCheck(MemberVO vo) throws DataAccessException {
-		int result = sqlSession.selectOne("mapper.member.selectMember", vo);
-		return result;
-	}
-
 	public EnrollmentDetailVO selectEnrollmentDetailBy(Map<String, Object> enrollMap) throws DataAccessException {
 		EnrollmentDetailVO vo = sqlSession.selectOne("mapper.member.selectEnrollmentDetailByEnrollMap", enrollMap);
 		return vo;
 	}
 
+	public int idCheck(MemberVO vo) throws DataAccessException{
+		int result = sqlSession.selectOne("mapper.member.selectMember", vo);
+		return result;
+	}
+	
 }

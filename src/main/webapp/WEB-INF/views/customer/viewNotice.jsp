@@ -32,7 +32,9 @@ request.setCharacterEncoding("UTF-8");
 					</ul>
 				</div>
 				<div class="addfile">첨부파일 : <a href="${contextPath}/fileDown.do?filename=${filevo.name}&articleId=${articleId }">&nbsp;${filevo.name }</a></div>
-				<div class="notice_content">${vo.contents}</div>
+				<div class="contents notice_content">
+					<pre>${vo.contents}</pre>
+				</div>
 				<div class="notice_listbutton"><input type="button" onclick="history.back()"
 					style="width: 60px; height: 30px; font-weight: bold; cursor:pointer;" value="목록"></div>
 			</div>

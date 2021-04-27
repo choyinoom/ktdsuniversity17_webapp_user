@@ -30,6 +30,11 @@ margin-left : 22px;
 margin-bottom: 30px;
 }
 
+.notice_content pre {
+    font-family: 'Noto Sans KR';
+    word-break: keep-all;
+    white-space: pre-wrap;
+}
 .addfile {
 display: flex;
 justify-content: flex-end;
@@ -39,4 +44,6 @@ margin-bottom: 12px;
 .notice_listbutton {
 display :flex;
 justify-content: flex-end;
+margin-top: 30px;
+margin-bottom: 30px;
 }

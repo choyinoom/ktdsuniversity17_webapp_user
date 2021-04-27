@@ -1,120 +1,142 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-		<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-		<% request.setCharacterEncoding("UTF-8"); %>
+<%
+request.setCharacterEncoding("UTF-8");
+%>
 
-			<html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>교육장안내</title>
+<link href="<c:url value='/resources/css/company.css?ver=1'/>"
+	rel="stylesheet">
 
-			<head>
-				<meta charset="UTF-8">
-				<title>교육장안내</title>
-				<link href="<c:url value='/resources/css/company.css?ver=1'/>" rel="stylesheet">
+<!-- 모달창 스크립트 -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
-				<!-- 모달창 스크립트 -->
-				<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-				<link rel="stylesheet"
-					href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+</head>
+<body>
+	<!-- 스크롤업 -->
+	<div class="scrollTop" onclick="scrollToTop()"></div>
 
-			</head>
+	<!-- 상단배너 -->
+	<section class="banner" id="classroom__banner">
+				<h1>교육장 안내</h1>
+	</section>
+	<div class="classroom__container">
+	
+		<div class="classroom__content">
+	<!-- 원하는 위치 이동 버튼 -->
+		<div class="classroom__button">
+			<button  id="classroom__button" onclick="fnMoveTop()">강의장</button>
+		    <button id="classroom__button" onclick="fnMove('2')">오시는 길</button>
+	
+		</div>
 
-			<body>
-				<!-- 스크롤업 -->
-				<div class="scrollTop" onclick="scrollToTop()"></div>
+		<!-- 강의장 조감도 -->
+		<div class="classroom__content1">
+			<img id="classroom__content"
+				src="${contextPath}/resources/image/classroom_content4.png">
 
-				<!-- 상단배너 -->
-				<img id="classroom__banner" src="${contextPath}/resources/image/classroom_banner2.png">
+			<!-- 휴게실 사진 영역 -->
+			<span
+				style="font-size: 30px; color: #4E4D4D; font-weight: 500; margin: 30px 0px 0px 0px;"><p>휴게실</p></span>
+			<div class="restroom">
+				<img id="restroom1"
+					src="${contextPath}/resources/image/restroom1.png"> <img
+					id="restroom2" src="${contextPath}/resources/image/restroom2.png">
+				<img id="restroom3"
+					src="${contextPath}/resources/image/restroom3.png">
+			</div>
 
-				<div class="classroom__container">
+			<!-- 모달 휴게실 사진 영역 -->
+			<div id="restroom1_1">
+				<img src="${contextPath}/resources/image/restroom1.png" style="width:100%; height: 100%"> <a
+					class="modal_close_btn"><img
+					src="${contextPath}/resources/image/close_button.png"></a>
+			</div>
+			<div id="restroom2_1">
+				<img src="${contextPath}/resources/image/restroom2.png" style="width:100%; height: 100%"> <a
+					class="modal_close_btn"><img
+					src="${contextPath}/resources/image/close_button.png"></a>
+			</div>
+			<div id="restroom3_1">
+				<img src="${contextPath}/resources/image/restroom3.png" style="width:100%; height: 100%"> <a
+					class="modal_close_btn"><img
+					src="${contextPath}/resources/image/close_button.png"></a>
+			</div>
 
-					<!-- 강의장 조감도 -->
-					<div class="classroom__content">
-						<img id="classroom__content" src="${contextPath}/resources/image/classroom_content4.png">
+			<!-- 강의장 사진 영역 -->
+			<span
+				style="font-size: 30px; color: #4E4D4D; font-weight: 500; margin: 30px 0px 0px 0px;"><p>강의장</p></span>
+			<div class="classroom">
+				<img id="classroom1"
+					src="${contextPath}/resources/image/classroom1.png"> <img
+					id="classroom2" src="${contextPath}/resources/image/classroom2.png">
+				<img id="classroom3"
+					src="${contextPath}/resources/image/classroom3.png">
+			</div>
 
-						<!-- 휴게실 사진 영역 -->
-						<span style="font-size: 30px; color: #4E4D4D; font-weight: 500; margin: 30px 0px 0px 0px;">
-							<p>휴게실</p>
-						</span>
-						<div class="restroom">
-							<img id="restroom1" src="${contextPath}/resources/image/restroom1.png"> <img id="restroom2"
-								src="${contextPath}/resources/image/restroom2.png">
-							<img id="restroom3" src="${contextPath}/resources/image/restroom3.png">
-						</div>
-
-						<!-- 모달 휴게실 사진 영역 -->
-						<div id="restroom1_1">
-							<img src="${contextPath}/resources/image/restroom1.png"> <a class="modal_close_btn"><img
-									src="${contextPath}/resources/image/close_button.png"></a>
-						</div>
-						<div id="restroom2_1">
-							<img src="${contextPath}/resources/image/restroom2.png"> <a class="modal_close_btn"><img
-									src="${contextPath}/resources/image/close_button.png"></a>
-						</div>
-						<div id="restroom3_1">
-							<img src="${contextPath}/resources/image/restroom3.png"> <a class="modal_close_btn"><img
-									src="${contextPath}/resources/image/close_button.png"></a>
-						</div>
-
-						<!-- 강의장 사진 영역 -->
-						<span style="font-size: 30px; color: #4E4D4D; font-weight: 500; margin: 30px 0px 0px 0px;">
-							<p>강의장</p>
-						</span>
-						<div class="classroom">
-							<img id="classroom1" src="${contextPath}/resources/image/classroom1.png"> <img
-								id="classroom2" src="${contextPath}/resources/image/classroom2.png">
-							<img id="classroom3" src="${contextPath}/resources/image/classroom3.png">
-						</div>
-
-						<!-- 모달 강의장 사진 영역 -->
-						<div id="classroom1_1">
-							<img src="${contextPath}/resources/image/classroom1.png"> <a class="modal_close_btn"><img
-									src="${contextPath}/resources/image/close_button.png"></a>
-						</div>
-						<div id="classroom2_1">
-							<img src="${contextPath}/resources/image/classroom2.png"> <a class="modal_close_btn"><img
-									src="${contextPath}/resources/image/close_button.png"></a>
-						</div>
-						<div id="classroom3_1">
-							<img src="${contextPath}/resources/image/classroom3.png"> <a class="modal_close_btn"><img
-									src="${contextPath}/resources/image/close_button.png"></a>
-						</div>
+			<!-- 모달 강의장 사진 영역 -->
+			<div id="classroom1_1">
+				<img src="${contextPath}/resources/image/classroom1.png" style="width:100%; height: 100%"> <a
+					class="modal_close_btn"><img
+					src="${contextPath}/resources/image/close_button.png"></a>
+			</div>
+			<div id="classroom2_1">
+				<img src="${contextPath}/resources/image/classroom2.png" style="width:100%; height: 100%"> <a
+					class="modal_close_btn"><img
+					src="${contextPath}/resources/image/close_button.png"></a>
+			</div>
+			<div id="classroom3_1">
+				<img src="${contextPath}/resources/image/classroom3.png" style="width:100%; height: 100%"> <a
+					class="modal_close_btn"><img
+					src="${contextPath}/resources/image/close_button.png"></a>
+			</div>
 
 
-						<div class="classroom_bottom">
-							<!-- 카카오맵 API -->
-							<div id="map"></div>
+			<div class="classroom__content2">
+				<!-- 카카오맵 API -->
+				<div id="map"></div>
+				
+				<!-- 오시는길 설명 -->
+				<div class="classroom__contact">
+					<img id="classroom__contact"
+						src="${contextPath}/resources/image/classroom_contact4.png">
+				</div>
+			</div>
+		</div>
+		</div>
+		<script type="text/javascript"
+			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7b93d2a7de17cf2095fb7a7ce6f30699"></script>
+		<script>
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+			mapOption = {
+				center : new kakao.maps.LatLng(37.4821859130098,
+						127.00364910080704), // 지도의 중심좌표
+				level : 3
+			// 지도의 확대 레벨
+			};
 
-							<!-- 오시는길 설명 -->
-							<div class="classroom__contact">
-								<img id="classroom__contact"
-									src="${contextPath}/resources/image/classroom_contact4.png">
-							</div>
-						</div>
-					</div>
-					<script type="text/javascript"
-						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7b93d2a7de17cf2095fb7a7ce6f30699"></script>
-					<script>
-						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-							mapOption = {
-								center: new kakao.maps.LatLng(37.4821859130098,
-									127.00364910080704), // 지도의 중심좌표
-								level: 3
-								// 지도의 확대 레벨
-							};
+			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-						var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+			// 마커가 표시될 위치입니다 
+			var markerPosition = new kakao.maps.LatLng(37.4821859130098,
+					127.00364910080704);
 
-						// 마커가 표시될 위치입니다 
-						var markerPosition = new kakao.maps.LatLng(37.4821859130098,
-							127.00364910080704);
+			// 마커를 생성합니다
+			var marker = new kakao.maps.Marker({
+				position : markerPosition
+			});
 
-						// 마커를 생성합니다
-						var marker = new kakao.maps.Marker({
-							position: markerPosition
-						});
-
-						// 마커가 지도 위에 표시되도록 설정합니다
-						marker.setMap(map);
+			// 마커가 지도 위에 표시되도록 설정합니다
+			marker.setMap(map);
 
 			// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
 			// marker.setMap(null);
@@ -207,6 +229,19 @@
 							})
 						}
 					</script>
+					
+					<!-- 원하는 위치이동 -->
+					<script>
+					    function fnMove(seq){
+					        var offset = $(".classroom__content" + seq).offset();
+					        $('html, body').animate({scrollTop : offset.top}, 400);
+					    }
+					    function fnMoveTop(){
+					        $('html, body').animate({scrollTop : top}, 400);
+					    }
+					</script>
+
+
 
 				</div>
 			</body>
