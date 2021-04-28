@@ -16,5 +16,7 @@ public interface MemberDAO {
 	public EnrollmentDetailVO selectEnrollmentDetailBy(Map<String, Object> enrollMap) throws DataAccessException;
 	public int idCheck(MemberVO vo) throws DataAccessException;
 	public MemberVO selectMemberInfoBy(String id) throws DataAccessException;
+	public MemberVO selectMemberPwInfoById(String id) throws DataAccessException;
+	public int updatePwOfMember(MemberVO vo);
 
 }

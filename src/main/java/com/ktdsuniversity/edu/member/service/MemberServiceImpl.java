@@ -58,4 +58,16 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.selectMemberInfoBy(id);
 	}
 	
+	@Override
+	public MemberVO selectMemberPwInfoById(String id) throws Exception {
+		return memberDAO.selectMemberPwInfoById(id);
+	}
+
+// 비밀번호변경
+
+	@Override
+	public int updatePwOfMember(MemberVO vo) {
+		return memberDAO.updatePwOfMember(vo);
+	}
+	
 }

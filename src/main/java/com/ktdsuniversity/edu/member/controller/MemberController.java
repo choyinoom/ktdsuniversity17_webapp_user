@@ -20,4 +20,9 @@ public interface MemberController {
                               HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView listPrivacy(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView changePwdForm(MemberVO member, HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	/* 비밀번호변경 */
+	public ModelAndView changePwd(MemberVO member, @RequestParam String newPw1, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 }

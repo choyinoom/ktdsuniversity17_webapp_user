@@ -68,6 +68,44 @@ public class MemberControllerImpl implements MemberController {
 		return mav;
 	}
 	
+	/* 마이페이지->비밀번호 변경폼*/
+	@Override
+	@RequestMapping(value = "/member/changePwdForm.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView changePwdForm(@ModelAttribute("member") MemberVO member, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		String viewName = (String)request.getAttribute("viewName");
+		MemberVO vo = memberService.selectMemberPwInfoById(memberVO.getId());
+		ModelAndView mav = new ModelAndView(); //이것도 바꿔야될것같고
+		mav.setViewName(viewName);
+		mav.addObject("vo", vo);
+		return mav;
+	}
+	
+	/* 마이페이지->비밀번호 변경 */
+	@Override
+	@RequestMapping(value = "/member/changePwd.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView changePwd(@ModelAttribute("member") MemberVO member, @RequestParam String newPw1, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+//		String newPw1 = (String)request.getParameter("newPw1");
+		String viewName = (String)request.getAttribute("viewName"); 
+		System.out.println("############아이디확인#############");
+		System.out.println("사용자 아이디" + memberVO.getId());
+		MemberVO vo = memberService.getMemberInfoBy(memberVO.getId());
+	    vo.setPw(newPw1); //새로운비밀번호 넣기
+	    System.out.println(vo+"********새 비밀번호 잘 들어갔나?********"); //업데이트한 vo로 바꼈는지(비밀번호 들어갔는지 확인)
+	    System.out.println("*******아이디******"+vo.getId());
+	    System.out.println("*******비번******"+vo.getPw());
+		int result = 0; //?
+		result = memberService.updatePwOfMember(vo);
+		 System.out.println("###########################"+result); //테스트
+		ModelAndView mav = new ModelAndView("redirect:/member/mypage.do"); //이것도 바꿔야될것같고
+		return mav;
+	}
+	
+
+	
+	
+	
 	//아이디 중복확인
 	@ResponseBody
 	@RequestMapping(value = "/member/idCheck.do", method =  RequestMethod.POST)

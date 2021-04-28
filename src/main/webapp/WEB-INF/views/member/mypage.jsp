@@ -60,10 +60,12 @@ request.setCharacterEncoding("UTF-8");
 
 		<div class="under">
 			<button class="td_button" id="change__info" type="button">회원정보변경</button>
-			<button class="td_button"
-				onclick="location.href = '${contextPath}/mypage/changePwdForm.do'">비밀번호변경</button>
+			<%-- <button class="td_button" type="button" onclick="location.href = ''">비밀번호변경</button> --%>
+		
+			<button class="td_button" type="button" onclick="location.href='${contextPath}/member/changePwdForm.do'">비밀번호변경</button>
 		</div>
 
+		<!-- ---------회원정보 수정 모달창--------------- -->
 		<div class="custom__modal">
 			<div class="dimmed"></div>
 			<section>
@@ -107,6 +109,7 @@ request.setCharacterEncoding("UTF-8");
 		</div>
 	</div>
 </div>
+
 <script type="text/javascript">
 	/*최초 페이지 진입 시 회원정보에 밑줄*/
 	$(document).ready(function() {
@@ -140,3 +143,6 @@ request.setCharacterEncoding("UTF-8");
 		})
 	})
 </script>
+
+
+

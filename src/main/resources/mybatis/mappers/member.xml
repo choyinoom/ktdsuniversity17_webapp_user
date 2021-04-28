@@ -102,5 +102,29 @@
 		WHERE mem_id = #{id}
 	]]>
 	</select>
+	
+	<select id="selectMemberPwInfoById" parameterType="string" resultMap="memResult">
+	<![CDATA[
+		SELECT 
+		
+		mem_pw
+		FROM member
+		WHERE mem_id = #{id}
+	]]>
+	</select>
+	
+	<!--비밀번호변경 -->
+	<update id = "updatePwOfMember"  parameterType="memberVO">
+	<![CDATA[
+		update member
+		set 
+		mem_pw = #{pw}
+		WHERE mem_id = #{id}
+	]]>
+	
+	</update>
+	
+	
+	
 
 </mapper>
