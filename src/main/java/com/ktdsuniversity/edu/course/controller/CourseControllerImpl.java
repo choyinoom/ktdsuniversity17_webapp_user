@@ -120,4 +120,24 @@ public class CourseControllerImpl implements CourseController{
 		return mav;
 	}
 	
+	/* 수강 취소 요청*/
+	@Override
+	@RequestMapping(value="/dropCourse.do", method= RequestMethod.POST)
+	public ModelAndView dropCourse(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		int courseId = Integer.parseInt(request.getParameter("courseId"));
+		HttpSession session = request.getSession();
+		memberVO = (MemberVO)session.getAttribute("member");
+		
+		Map<String, Object> dropMap = new HashMap<String, Object>();
+		dropMap.put("memberId", memberVO.getId());
+		dropMap.put("courseId", courseId);
+		try {
+			courseService.dropCourse(dropMap);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		ModelAndView mav = new ModelAndView("redirect:/member/myPage.do?pageFlag=C");
+		return mav;
+	}
 }

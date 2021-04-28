@@ -44,7 +44,7 @@ $(document).ready(function() {
 </script>
 
 <div class="grid" id="course__banner">
-	<div class="grid mx-auto row-wrap" id="course__wrapper">
+	<div class="grid mx-auto row-wrap ai-center" id="course__wrapper">
 		<div class="grid ai-center" id="course__logo">
 			<img alt="과정 로고" src="${contextPath}/resources/image/course_banner/${syllabus.bannerImg}">
 		</div>

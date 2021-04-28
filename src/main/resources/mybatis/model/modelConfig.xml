@@ -5,6 +5,7 @@
 	<typeAliases>
 		<typeAlias type="com.ktdsuniversity.edu.member.vo.MemberVO" alias="memberVO" />
 		<typeAlias type="com.ktdsuniversity.edu.member.vo.EnrollmentDetailVO" alias="enrollmentDetailVO"/>
+		<typeAlias type="com.ktdsuniversity.edu.member.vo.SatisfactionVO" alias="satisfactionVO"/>
 		<typeAlias type="com.ktdsuniversity.edu.company.vo.CompanyVO" alias="companyVO" />
 		<typeAlias type="com.ktdsuniversity.edu.board.vo.ArticleVO" alias="articleVO" />
 		<typeAlias type="com.ktdsuniversity.edu.board.vo.ArticleFileVO" alias="articleFileVO" />

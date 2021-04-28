@@ -17,18 +17,7 @@
 		<result property="loginFail" column="mem_login_fail" />
 	</resultMap>
 	
-	<resultMap id="enrdResult" type="enrollmentDetailVO">
-		<id property="id" column="enrd_id"/>
-		<result property="crsId" column="crs_id"/>
-		<result property="memId" column="mem_id"/>
-		<result property="stat" column="enrd_stat"/>
-		<result property="joinDate" column="enrd_join_date"/>
-		<result property="modDate" column="enrd_mod_date"/>
-		<result property="completeDate" column="enrd_complete_date"/>
-		<association property="syllabusVO" resultMap="mapper.course.slbResult"/>
-		<association property="courseVO" resultMap="mapper.course.crsResult"/>
-	</resultMap>
-
+	
 	
 
 	<!-- 아이디 중복체크 -->
@@ -49,13 +38,19 @@
 	</insert>
 
 	<!-- 정보 수정 -->
-	<update id="updateMember" parameterType="memberVO">
-		<![CDATA[
-	     update t_member
-	     set pwd=#{pwd}, name=#{name}, email=#{email}
-	     where
-	     id=#{id}
-      ]]>
+	<update id="updateMemberInfo" parameterType="memberVO">
+     
+     	UPDATE member
+     	SET
+     		mem_phone = #{phone},
+     		mem_email = #{email},
+     		mem_subscription = #{subscription},
+     		<if test="#{tel} != null">
+     		mem_tel= #{tel},
+     		</if>
+     		mem_mod_date = TO_CHAR(sysdate, 'YYYY-MM-DD hh:mm:ss')
+     	WHERE mem_id=#{id}
+    
 	</update>
 
 	<!-- 회원 탈퇴 -->
@@ -72,20 +67,21 @@
 	<![CDATA[
 		SELECT 
 			mem_id, 
-			mem_name 
+			mem_name,
+			mem_company_name 
 		FROM member	
 		WHERE mem_id=#{id} and mem_pw=#{pw}		
 	]]>
 	</select>
 
-	<!-- 회원의 수강내역 현황 -->
-	<select id="selectEnrollmentDetailByEnrollMap" parameterType="java.util.Map" resultMap="enrdResult">
+	<!-- 비밀번호 오류 5회 -->
+	<update id="updateLoginFail" parameterType="String">
 	<![CDATA[
-		SELECT enrd_id, crs_id, mem_id, enrd_stat
-		FROM enrollment_detail
-		WHERE crs_id = #{courseId} AND mem_id = #{id}
+		UPDATE member
+		SET mem_login_fail = mem_login_fail + 1
+		WHERE mem_id=#{id}
 	]]>
-	</select>
+	</update>
 	
 	<!-- 회원 정보 수정 시 필요한 정보 -->
 	<select id="selectMemberInfoById" parameterType="string" resultMap="memResult">
@@ -102,5 +98,4 @@
 		WHERE mem_id = #{id}
 	]]>
 	</select>
-
 </mapper>

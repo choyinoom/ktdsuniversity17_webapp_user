@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.enrollment">
+	<resultMap id="stfResult" type="SatisfactionVO">
+		<result property="id" column="stf_id" />
+        <result property="title" column="stf_title" />
+        <result property="joinDate" column="stf_join_date" />
+        <result property="state" column="stf_state" />
+        <result property="contents" column="stf_contents" />
+        <result property="url" column="stf_url" />
+        <result property="crsId" column="crs_id" />
+	</resultMap> 
+
+	<resultMap id="enrdResult" type="enrollmentDetailVO">
+		<id property="id" column="enrd_id"/>
+		<result property="crsId" column="crs_id"/>
+		<result property="memId" column="mem_id"/>
+		<result property="stat" column="enrd_stat"/>
+		<result property="joinDate" column="enrd_join_date"/>
+		<result property="modDate" column="enrd_mod_date"/>
+		<result property="completeDate" column="enrd_complete_date"/>
+		<association property="syllabusVO" resultMap="mapper.course.slbResult"/>
+		<association property="courseVO" resultMap="mapper.course.crsResult"/>
+		<association property="satisfactionVO" resultMap="mapper.enrollment.stfResult"/>
+	</resultMap>
+
+	<!-- 수강신청 시 회원의 수강내역 확인-->
+	<select id="selectEnrollmentDetailByEnrollMap" parameterType="java.util.Map" resultMap="enrdResult">
+	<![CDATA[
+		SELECT 
+			enrd_id, 
+			crs_id, 
+			mem_id, 
+			enrd_stat
+		FROM enrollment_detail
+		WHERE crs_id = #{courseId} AND mem_id = #{id}
+	]]>
+	</select>
+	
+	
+	<!-- 수강신청 -->
+	<insert id="insertNewEnrollment" parameterType="java.util.Map">
+	<![CDATA[
+		INSERT INTO 
+			enrollment_detail(
+				enrd_id, 
+				crs_id, 
+				mem_id, 
+				enrd_stat
+			)
+		VALUES(
+			enrd_seq.NEXTVAL, 
+			#{courseId}, 
+			#{id}, 
+			'신청'
+		)
+	]]>
+	</insert>
+	
+	<!-- 수강 취소 요청 -->
+	<update id="updateEnrdStatToDrop" parameterType="java.util.Map">
+	<![CDATA[
+		UPDATE enrollment_detail
+		SET enrd_stat = '취소요청'
+		WHERE 
+			mem_id = #{memberId} and
+			crs_id = #{courseId}
+	]]>
+	</update>
+	
+	<!-- 마이페이지 회원의 전체 수강내역-->
+	<select id="selectEnrollmentDetailById" parameterType="String" resultMap="enrdResult">
+		<![CDATA[
+			SELECT 
+				E.enrd_id as enrd_id,
+				E.enrd_stat	as enrd_stat,
+				E.enrd_complete_date as enrd_complete_date, 
+				E.crs_id as crs_id,
+				SUBSTR(C.crs_start_date,0,10) as crs_start_date, 
+				SUBSTR(C.crs_end_date,0,10) as crs_end_date, 
+				C.crs_classroom as crs_classroom, 
+				S.slb_id as slb_id,
+				S.slb_name as slb_name,
+				S.slb_type as slb_type,
+				S.slb_time as slb_time,
+				N.stf_id as stf_id,
+				N.stf_state as stf_state,
+				N.stf_url as stf_url
+			FROM enrollment_detail E
+				INNER JOIN course C on E.crs_id = C.crs_id
+				INNER JOIN syllabus S on  C.slb_id = S.slb_id
+				LEFT OUTER JOIN satisfaction N on N.crs_id = C.crs_id
+			WHERE mem_id = #{id}
+			ORDER BY crs_start_date, crs_end_date
+		]]>
+	</select>
+
+</mapper>

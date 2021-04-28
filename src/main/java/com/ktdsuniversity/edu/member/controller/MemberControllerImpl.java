@@ -9,6 +9,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +25,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ktdsuniversity.edu.course.service.CourseService;
 import com.ktdsuniversity.edu.course.vo.CourseVO;
 import com.ktdsuniversity.edu.member.service.MemberService;
+import com.ktdsuniversity.edu.member.vo.EnrollmentDetailVO;
 import com.ktdsuniversity.edu.member.vo.MemberVO;
 
 @Controller("memberController")
@@ -48,16 +52,55 @@ public class MemberControllerImpl implements MemberController {
 	}
 	
 	/* 마이페이지 */
-	@RequestMapping(value = "/member/mypage.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/myPage.do", method = RequestMethod.GET)
 	@Override
 	public ModelAndView mypage(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String)request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		MemberVO vo = memberService.getMemberInfoBy(memberVO.getId());
-		mav.addObject("memberVO", vo);
+		String pageFlag = request.getParameter("pageFlag");
+		ModelAndView mav = new ModelAndView();
+		if(pageFlag == null) {
+			mav.setViewName("/member/myPage");
+			MemberVO vo = memberService.getMemberInfo(memberVO.getId());
+			mav.addObject("memberVO", vo);
+		} else {
+			mav.setViewName("/member/myCourse");
+			List<EnrollmentDetailVO> enrollmentDetailList = memberService.findEnrollmentDetailBy(memberVO.getId());
+			mav.addObject("enrollmentDetailList", enrollmentDetailList);
+		}		
 		return mav;
 	}
 	
+	
+	/* 정보 수정*/
+	@Override
+	@RequestMapping(value = "/member/changeMemberInfo.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<String> changeMemberInfo(@ModelAttribute("member") MemberVO member, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		member.setId(memberVO.getId());
+		int result = 0;
+		try {
+			result = memberService.changeMemberInfo(member);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		String contextPath = request.getContextPath();
+		String message = null;
+		ResponseEntity<String> resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		if (result == 1) {
+			message = "<script>";
+			message += "alert('정보가 변경되었습니다.');";
+			message += "window.location.replace('" + contextPath + "/member/mypage.do')";
+			message += "</script>";
+		} else {
+			message = "<script>";
+			message += " alert(`정보 변경에 실패하였습니다.\n관리자에게 문의하십시오.`);";
+			message += " history.go(-1); ";
+			message += "</script>";
+		}
+		resEnt = new ResponseEntity<String> (message, responseHeaders, HttpStatus.CREATED);
+		return resEnt; 
+	}
 	
 	@RequestMapping(value = "/member/privacy.do", method =  RequestMethod.GET)
 	@Override
@@ -95,7 +138,7 @@ public class MemberControllerImpl implements MemberController {
 			HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		memberService.removeMember(id);
-		ModelAndView mav = new ModelAndView("redirect:/member/listMembers.do");
+		ModelAndView mav = new ModelAndView("redirect:/");
 		return mav;
 	}
 
@@ -121,11 +164,13 @@ public class MemberControllerImpl implements MemberController {
 
 		} else {
 			rAttr.addAttribute("result", "loginFailed");
+			memberService.updateLoginFail(member.getId());
 			mav.setViewName("redirect:/member/loginForm.do");
 		}
 		return mav;
 	}
 
+	/* 로그아웃 */
 	@Override
 	@RequestMapping(value = "/member/logout.do", method = RequestMethod.GET)
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -133,7 +178,7 @@ public class MemberControllerImpl implements MemberController {
 		session.removeAttribute("member");
 		session.removeAttribute("isLogOn");
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/member/listMembers.do");
+		mav.setViewName("redirect:/");
 		return mav;
 	}
 

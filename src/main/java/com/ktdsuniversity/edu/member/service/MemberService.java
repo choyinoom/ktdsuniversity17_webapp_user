@@ -9,12 +9,14 @@ import com.ktdsuniversity.edu.member.vo.EnrollmentDetailVO;
 import com.ktdsuniversity.edu.member.vo.MemberVO;
 
 public interface MemberService {
-	public List listMembers() throws DataAccessException;
 	public int addMember(MemberVO memberVO) throws DataAccessException;
 	public int removeMember(String id) throws DataAccessException;
 	public MemberVO login(MemberVO memberVO) throws Exception;
-	public EnrollmentDetailVO findEnrollmentDetailBy(Map<String, Object> enrollMap) throws DataAccessException;
 	public int idCheck(MemberVO vo) throws DataAccessException;
-	public MemberVO getMemberInfoBy(String id) throws Exception;
+	public MemberVO getMemberInfo(String id) throws Exception;
+	public int changeMemberInfo(MemberVO member) throws Exception;
+	public int updateLoginFail(String id) throws Exception;
+	public EnrollmentDetailVO findEnrollmentDetailBy(Map<String, Object> enrollMap) throws Exception;
+	public List<EnrollmentDetailVO> findEnrollmentDetailBy(String id) throws Exception;
 
 }

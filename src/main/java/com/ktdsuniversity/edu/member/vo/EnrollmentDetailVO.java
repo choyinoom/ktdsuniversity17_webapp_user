@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 import com.ktdsuniversity.edu.course.vo.CourseVO;
 import com.ktdsuniversity.edu.course.vo.SyllabusVO;
-
+import com.ktdsuniversity.edu.member.vo.SatisfactionVO;
 @Component("enrollmentDetailVO")
 public class EnrollmentDetailVO {
 	private int id;
@@ -17,13 +17,14 @@ public class EnrollmentDetailVO {
 	
 	private CourseVO courseVO;
 	private SyllabusVO syllabusVO;
+	private SatisfactionVO satisfactionVO;
 	
 	public EnrollmentDetailVO() {
 		
 	}
 	
 	public EnrollmentDetailVO(int id, int crsId, String memId, String stat, String joinDate, String modDate,
-			String completeDate, CourseVO courseVO, SyllabusVO syllabusVO) {
+			String completeDate, CourseVO courseVO, SyllabusVO syllabusVO, SatisfactionVO satisfactionVO) {
 		this.id = id;
 		this.crsId = crsId;
 		this.memId = memId;
@@ -33,6 +34,7 @@ public class EnrollmentDetailVO {
 		this.completeDate = completeDate;
 		this.courseVO = courseVO;
 		this.syllabusVO = syllabusVO;
+		this.satisfactionVO = satisfactionVO;
 	}
 
 	public int getId() {
@@ -107,4 +109,11 @@ public class EnrollmentDetailVO {
 		this.syllabusVO = syllabusVO;
 	}
 	
+	public SatisfactionVO getSatisfactionVO() {
+		return satisfactionVO;
+	}
+
+	public void setSatisfactionVO (SatisfactionVO satisfactionVO) {
+		this.satisfactionVO = satisfactionVO;
+	}
 }

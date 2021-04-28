@@ -77,22 +77,6 @@ link -> visited -> hover -> active ->focus
 }
 
 
-/* 마우스 올렸을 때 */
-.menu_button:hover{
-	border-color: #e92b2b;
-    /* display: block; */
-    /* border-color: rgb(41, 21, 214); 테스트 */
-    border-width: 6px;
-    border-style:solid;
-
-    /* 메뉴버튼 hover중 아래만 남기고 위,오른쪽, 왼쪽 삭제하기 */
-    border-left: none;
-    border-right:none;
-    border-top:none;
-    border-radius: 0px;
-}
-
-
 .menu .visited {
 	border-color: #e92b2b;
     border-width: 6px;
@@ -131,6 +115,32 @@ link -> visited -> hover -> active ->focus
 
     /* 버튼 사이에 간격주기 */
     margin-left:10px;
+}
 
+#member__info > tbody > tr:nth-child(1) > td {
+	border-style: none;
+}
 
+#member__info > tbody input {
+	border-radius: 2px;
+    border: 1px solid #3F3F3F;
+    height: 20px;
+    padding-left: 5px; 
+}
+
+#member__info  input[name="subscription"] {
+	height: 11px;
+    width: 11px;
+    -webkit-appearance: radio;
+}
+
+#member__info input[name^="tel"], input[name^="phone"] {
+	width: 30px;
+}
+
+#mypage__container > div > div.custom__modal > section > p {
+	font-size: 10px;
+	padding: 0;
+	margin-top:5px;
+	margin-bottom:5px;
 }

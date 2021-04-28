@@ -21,13 +21,6 @@ public class MemberServiceImpl implements MemberService {
 	private MemberDAO memberDAO;
 
 	@Override
-	public List listMembers() throws DataAccessException {
-		List membersList = null;
-		membersList = memberDAO.selectAllMemberList();
-		return membersList;
-	}
-
-	@Override
 	public int addMember(MemberVO member) throws DataAccessException {
 		return memberDAO.insertMember(member);
 	}
@@ -42,20 +35,38 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.loginById(memberVO);
 	}
 
-	@Override
-	public EnrollmentDetailVO findEnrollmentDetailBy(Map<String, Object> enrollMap)
-			throws DataAccessException {
-		return memberDAO.selectEnrollmentDetailBy(enrollMap);
-	}
-
 	public int idCheck(MemberVO vo) throws DataAccessException {
 		int result = memberDAO.idCheck(vo);
 		return result;
 	}
 
 	@Override
-	public MemberVO getMemberInfoBy(String id) throws Exception {
-		return memberDAO.selectMemberInfoBy(id);
+	public MemberVO getMemberInfo(String id) throws Exception {
+		return memberDAO.selectMemberInfo(id);
+	}
+
+	@Override
+	public int changeMemberInfo(MemberVO member) throws Exception {
+		return memberDAO.updateMemberInfo(member);
+	}
+
+	@Override
+	public int updateLoginFail(String id) throws Exception {
+		return memberDAO.updateLoginFail(id);		
+	}
+
+
+	@Override
+	public EnrollmentDetailVO findEnrollmentDetailBy(Map<String, Object> enrollMap)
+			throws Exception {
+		return memberDAO.selectEnrollmentDetailBy(enrollMap);
+	}
+	
+	@Override
+	public List<EnrollmentDetailVO> findEnrollmentDetailBy(String id) throws Exception {
+		List<EnrollmentDetailVO> enrollmentDetailList = null;
+		enrollmentDetailList = memberDAO.selectEnrollmentDetailBy(id);
+		return enrollmentDetailList;
 	}
 	
 }

@@ -18,21 +18,26 @@ request.setCharacterEncoding("UTF-8");
 
 	<div class="navbar__menu grid">
 		<ol class="navbar__menu__tnb grid">
-			<li><c:choose>
-					<c:when test="${isLogOn == true  && member!= null}">
+			<c:choose>
+				<c:when test="${isLogOn == true  && member!= null}">
+					<li>
 						<a class="navbar__menu__each" href="${contextPath}/member/logout.do"> 로그아웃 </a>
-					</c:when>
-					<c:otherwise>
+					</li>
+					<li class="navbar__menu__each">|</li>
+					<li>
+						<a class="navbar__menu__each" href="${contextPath}/member/myPage.do">마이페이지</a>
+					</li>
+				</c:when>
+				<c:otherwise>
+					<li>
 						<a class="navbar__menu__each" href="${contextPath}/member/loginForm.do"> 로그인 </a>
-					</c:otherwise>
-				</c:choose></li>
-			<li class="navbar__menu__each">|</li>
-			<li><a class="navbar__menu__each" href="${contextPath}/member/memberForm.do">회원가입</a></li>
-			<c:if test="${isLogOn == '' or isLogOn == true}">
-				<li class="navbar__menu__each">|</li>
-			<li ><a class="navbar__menu__each" href="${contextPath}/member/mypage.do">마이페이지</a></li>
-			</c:if>
-			
+					</li>
+					<li class="navbar__menu__each">|</li>
+					<li>
+						<a class="navbar__menu__each" href="${contextPath}/member/memberForm.do">회원가입</a>
+					</li>	
+				</c:otherwise>
+			</c:choose>
 		</ol>
 
 		<div class="topMenu">
