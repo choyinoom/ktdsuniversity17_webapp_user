@@ -1,4 +1,4 @@
-package com.ktdsuniversity.edu.member.controller;
+	package com.ktdsuniversity.edu.member.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -188,13 +188,46 @@ public class MemberControllerImpl implements MemberController {
 	}
 
 	@Override
-	@RequestMapping(value = "/member/removeMember.do", method = RequestMethod.GET)
-	public ModelAndView removeMember(@RequestParam("id") String id, HttpServletRequest request,
+	@RequestMapping(value = "/member/removeMember.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<String> removeMember(@ModelAttribute("member") MemberVO member, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		memberService.removeMember(id);
-		ModelAndView mav = new ModelAndView("redirect:/");
-		return mav;
+		MemberVO vo = memberService.login(member);
+		
+		ResponseEntity<String> resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		
+		String message = null;
+		if (vo != null) {
+			try {
+				int result = memberService.removeMember(member.getId());
+				String contextPath = request.getContextPath();
+				
+				if (result == 1) {
+					message = "<script>";
+					message += "alert(`탈퇴가 완료되었습니다.\n그동안 이용해주셔서 감사합니다.`);";
+					message += "window.location.replace('" + contextPath + "/')";
+					message += "</script>";
+				} else {
+					message = "<script>";
+					message += " alert(`탈퇴에 실패하였습니다.\n관리자에게 문의하십시오.`);";
+					message += " history.go(-1); ";
+					message += "</script>";
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			message = "<script>";
+			message += "alert(`비밀번호가 틀렸습니다..`);";
+			message += " history.go(-1); ";
+			message += "</script>";
+		}
+		
+		resEnt = new ResponseEntity<String> (message, responseHeaders, HttpStatus.CREATED);
+		return resEnt;
 	}
 
 	

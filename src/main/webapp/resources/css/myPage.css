@@ -117,6 +117,7 @@ link -> visited -> hover -> active ->focus
     margin-left:10px;
 }
 
+/* 회원 정보 목록*/
 #member__info > tbody > tr:nth-child(1) > td {
 	border-style: none;
 }
@@ -143,4 +144,28 @@ link -> visited -> hover -> active ->focus
 	padding: 0;
 	margin-top:5px;
 	margin-bottom:5px;
+}
+
+/* 회원 탈퇴 모달 */
+div[id="out"] section {
+    width: 410px;
+}
+
+div[id="out"] ul{
+    list-style-type: circle;
+    padding: 10px;
+    margin: 0px;
+}
+
+div[id="out"] input {
+    border:2px solid black !important;
+}
+
+#frm__out input:nth-child(2) {
+    margin-left: 14px;
+}
+
+#frm__out {
+    padding-top: 10px;
+    padding-bottom: 10px
 }

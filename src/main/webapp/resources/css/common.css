@@ -247,8 +247,18 @@ table td {
     border-radius: 4px;
     font-size: 13px;
     font-weight: 500;
-    background-color: #ffc107;
     font-family: 'Noto Sans KR';
+    cursor: pointer;
+}
+
+#buttons button[id="submit"] {
+    background-color: #e91b23;
+    color:#efefef;
+}
+
+#buttons button[id="cancle"] {
+    background-color: #969696;
+    color:#efefef;
 }
 
 select {

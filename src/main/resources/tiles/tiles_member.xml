@@ -20,7 +20,7 @@
 
 
 	<definition name="/member/loginForm" extends="baseLayout">
-		<put-attribute name="title" value="로그인창" />
+		<put-attribute name="title" value="로그인" />
 		<put-attribute name="body" value="/WEB-INF/views/member/loginForm.jsp" />
 	</definition>
 
@@ -46,12 +46,12 @@
 	
 	
 	<definition name="/member/myPage" extends="baseLayout">
-		<put-attribute name="title" value="마이페이지 개인정보" />
+		<put-attribute name="title" value="마이페이지" />
 		<put-attribute name="body"	value="/WEB-INF/views/member/myPage.jsp" />
 	</definition>
 	
 	<definition name="/member/myCourse" extends="baseLayout">
-		<put-attribute name="title" value="마이페이지 수강현황" />
+		<put-attribute name="title" value="마이페이지" />
 		<put-attribute name="body"	value="/WEB-INF/views/member/myCourse.jsp" />
 	</definition>		
 	

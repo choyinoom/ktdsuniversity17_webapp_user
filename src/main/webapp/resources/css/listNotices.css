@@ -19,3 +19,7 @@
 	position: relative;
 	top: -14px;	
 }
+
+.search__result {
+	display: none;
+}

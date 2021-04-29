@@ -44,9 +44,7 @@
 				</div>
 			</form>
 		</div>
-		<c:if test="${searchText != null}">
-			<p class='search__result'><b>${searchText}</b>에 대한 검색결과: <span id=count></span> 건</p>
-		</c:if>
+		<p class='search__result'><b><span id="keyword">${searchText}</span></b>에 대한 검색결과: <span id=count>${noticesCnt}</span> 건</p>
 		<table id="notice__list">
 			<thead>
 				<tr align="center">
@@ -150,7 +148,10 @@
 		const pageNo = 1;	// 검색 시 무조건 1페이지 반환
 		const pagingSize = Number(document.getElementById('pagingSize').value);
 		const searchText = document.getElementById('searchText').value;
-
+		
+		$(".search__result").css('display', 'block');
+		$("span[id='keyword']").text(searchText);
+		
 		fn_sendRequest(pageNo)
 			.then((response) => {
 				fn_drawingTable(response, pageNo, pagingSize);
@@ -163,6 +164,9 @@
 		const articlesList = response.articlesList;
 		const noticesCnt = response.noticesCnt;
 		var index = Math.max(articlesList.length, noticesCnt -  pagingSize * (pageNo - 1));
+		/* ###에 대한 검색결과: 몇 건*/
+		$("span[id='count']").text(noticesCnt);
+		
 		var tableBody = $("#notice__list tbody");
 		tableBody.empty(); // 테이블 비우기
 
@@ -220,6 +224,19 @@
 				fn_getPage(pageNo);
 			}
 		});
+
+		const searchText = '${searchText}';
+		const noticesCnt = ${noticesCnt};
+		if (searchText.length > 0) {
+			$(".search__result").css('display', 'block');
+			$("span[id='keyword']").text(searchText);
+			
+			if(noticesCnt > 0) {
+				$("span[id='count']").text(noticesCnt);
+			} else {
+				$("span[id='count']").text('0');
+			}
+		}
 	})
 </script>
 <script src="${contextPath}/resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
