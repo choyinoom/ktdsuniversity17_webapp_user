@@ -79,7 +79,7 @@
 	        
 	        <div class="changePwd_under">
 	            <input id="ok_Button" type = "submit" value="확인" />
-	            <button id="cancle_Button" onclick="location.href='${contextPath}/member/mypage.do'">취소</button>
+	            <button type="cancle" id="cancle_Button" onclick="location.href='${contextPath}/member/myPage.do'; return false;">취소</button>
 	            <!-- 취소버튼 클릭시 이전페이지(마이페이지)로 돌아가도록 링크설정 -->
 	        </div>
          </form>

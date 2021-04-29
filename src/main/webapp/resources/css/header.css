@@ -26,11 +26,11 @@
 .navbar__menu__each__main {
     color: black;
     margin-left: 90px;
+    margin-right: 15px;
 }
 
-.navbar__menu__each__main:after {
-    color: black;
-    margin-left: 90px;
+.navbar__menu__gnb li:nth-child(4) a{
+	margin-right: 0px !important;
 }
 
 .navbar__menu__each__sub {
@@ -82,7 +82,16 @@
     border-bottom: 1px solid rgba(232, 12, 30, 0.8);
 }
 
-/*main������ ����*/
+
+.navbar__logo.mouse img {
+    float: left;
+    content: url("../image/logo-horizontal-transparent.png") !important;
+    width: 180px;
+    padding: 8px 12px;
+}
+
+
+/* 메인 페이지에서만 적용*/
 .header__transparent {
     background: transparent;
 }
@@ -107,13 +116,6 @@
     padding: 8px 12px;
 }
 
-.navbar__logo.mouse img {
-    float: left;
-    content: url("../image/logo-horizontal-transparent.png") !important;
-    width: 180px;
-    padding: 8px 12px;
-}
-
 .header__transparent .navbar__menu__each {
     color: white;
 }
@@ -122,7 +124,7 @@
     color: white;
 }
 
-/*스크롤 시 내비게이션 바*/
+/* 메인 페이지 이 외 모든 페이지에 적용, 스크롤 시 내비게이션 바*/
 .navbar.scrolled {
     background-color: #fff !important;
     transition: background-color 200ms linear;

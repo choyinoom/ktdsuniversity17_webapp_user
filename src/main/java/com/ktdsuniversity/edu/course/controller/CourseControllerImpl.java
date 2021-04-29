@@ -42,13 +42,16 @@ public class CourseControllerImpl implements CourseController{
 	@RequestMapping(value = "/listCourses.do", method = RequestMethod.GET)
 	public ModelAndView listCourses(@RequestParam(required=false) String keyword, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		
 		List<CourseVO> coursesList = null;
 		if (keyword != null) { // 검색 필터 적용시
 			coursesList = courseService.listCoursesBy(keyword);
+			mav.addObject("keyword", keyword);
 		} else { // 검색 필터 미적용시
 			coursesList = courseService.listCourses();
 		}
-		ModelAndView mav = new ModelAndView(viewName);
+		
 		String coursesJSON = new ObjectMapper().writeValueAsString(coursesList);
 		mav.addObject("coursesJSON", coursesJSON);
 		return mav;
@@ -79,7 +82,7 @@ public class CourseControllerImpl implements CourseController{
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		
-		if(stat == null || stat.equals("취소")) {// 수강이력이 없거나, 취소 상태인 경우 
+		if(stat == null || stat.equals("취소요청")) {// 수강이력이 없거나, 취소 상태인 경우 
 			try {
 				courseService.enrollCourse(enrollMap);
 				message = "<script>";

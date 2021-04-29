@@ -22,27 +22,22 @@
 		</div>
 		<table id="my__courses" style="text-align:center;">
 			<tr>
-				<th width="30%">강좌명</th>
+				<th width="37%">강좌명</th>
 				<th width="30%">교육기간</th>
 				<th width="5%">강의장</th>
-				<th width="15%">상태</th>
-				<th width="10%">수료증</th>
-				<th width="10%" ><span style="font-size: 22px;">🧙‍</span></th>
+				<th colspan=2 >상태</th>
 			</tr>
 			<c:forEach var="detail" items="${enrollmentDetailList}">
 				<tr>
 					<td style="text-align:left;" data-id=${detail.courseVO.id} data-type=${detail.syllabusVO.type}>${detail.syllabusVO.name}</td>
 					<td><span id="crsStartDate">${detail.courseVO.startDate}</span> ~ ${detail.courseVO.endDate}<br>${detail.syllabusVO.time}시간</td>
 					<td>${detail.courseVO.classroom}</td>
-					<td><span id="enrdStat">${detail.stat}</span></td>
-					<c:if test="${detail.stat eq '수료'}">
-						<td data-id=${detail.id} data-complete=${detail.completeDate}>
+					<td data-id=${detail.id} data-complete=${detail.completeDate}>
+						<span id="enrdStat">${detail.stat}</span>
+						<c:if test="${detail.stat eq '수료'}">
 							<img src="${contextPath}/resources/image/disk.png"></img>
-						</td>
-					</c:if>
-					<c:if test="${detail.stat ne '수료'}">
-						<td></td>
-					</c:if>
+						</c:if>
+					</td>
 					<td>
 						<button class='td_button'>신청취소</button>
 						<button class='goForm' data-id=${detail.satisfactionVO.id} data-state=${detail.satisfactionVO.state} onclick="window.open('${detail.satisfactionVO.url}')">설문조사</button>
@@ -144,13 +139,13 @@
 			
 			const row = $(this).closest("tr").find("td");
 			let completionInfo = {
-				enrollmentId: $(row[4]).data('id'),
+				enrollmentId: $(row[3]).data('id'),
 				type: $(row[0]).data('type'),
 				userName: '${member.name}',
 				companyName: '${member.companyName}',
 				courseName: row[0].textContent,
 				date: row[1].textContent.substr(0, 23),
-				complete: $(row[4]).data('complete')
+				complete: $(row[3]).data('complete')
 			};
 
 			
