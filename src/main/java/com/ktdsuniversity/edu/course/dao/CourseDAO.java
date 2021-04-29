@@ -22,4 +22,6 @@ public interface CourseDAO {
 	public List<CourseVO> selectAllCourseListBy(String keyword)throws DataAccessException;
 
 	public int dropCourse(Map<String, Object> dropMap)throws DataAccessException;
+
+	public int updateCourseApplyNum(int courseId) throws DataAccessException;
 }

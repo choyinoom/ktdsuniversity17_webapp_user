@@ -55,4 +55,9 @@ public class CourseDAOImpl implements CourseDAO{
 	public int dropCourse(Map<String, Object> dropMap) throws DataAccessException {
 		return sqlSession.update("mapper.enrollment.updateEnrdStatToDrop", dropMap);
 	}
+
+	@Override
+	public int updateCourseApplyNum(int courseId) throws DataAccessException {
+		return sqlSession.update("mapper.enrollment.updateCourseApplyNum", courseId);
+	}
 }
