@@ -101,6 +101,13 @@ footer {
     width: 1000px;
 }
 
+.filter {
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
 .search {
 	justify-content: flex-end;
 	align-items: flex-end;
@@ -129,6 +136,7 @@ footer {
     margin-left: 5px;
     padding: 5px;
     border-radius: 4px;
+    cursor: pointer;
 }
 
 /*테이블*/

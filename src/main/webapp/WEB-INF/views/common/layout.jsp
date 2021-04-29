@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
-  <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -14,39 +14,42 @@
 		rel="stylesheet">
 	<title><tiles:insertAttribute name="title" /></title>
 	<script>
+		function scrollUp() {//mousleave
+			return new Promise(function(resolve, reject) {
+				$('.navbar__menu__each__sub').slideUp(300);
+				setTimeout(function() {
+					resolve();							
+				}, 300);
+			});
+		}
+		
+		function makeTransparent() {
+			return scrollUp().then(function() {
+				$(".header__transparent .navbar__menu__each").css("color", "white");
+				$(".header__transparent .navbar__menu__each__main").css("color", "white");
+				$(".header__transparent").css("background", "transparent");
+				var $logo = $(".navbar__logo");
+				$logo.toggleClass('mouse');
+			});	
+		}
+		
 		$(function() {
 			$(document).scroll(
-					function() {
-						var $header = $("header");
-						$header.toggleClass('scrolled',
-								$(this).scrollTop() > $header.height());
-					});
+				function() {
+					var $header = $("header");
+					$header.toggleClass('scrolled', $(this).scrollTop() > $header.height());
+			});
 	
-			$('header').hover(
-					function() {
-						$('.navbar__menu__each__sub').slideDown(300);
-						$(".header__transparent").css("background", "white");
-						$(".header__transparent .navbar__menu__each").css("color",
-								"black");
-						$(".header__transparent .navbar__menu__each__main").css(
-								"color", "black");
-						var $header = $(".topMenu");
-						$header.toggleClass('mouseover');
-						var $logo = $(".navbar__logo");
-						$logo.toggleClass('mouse');
-					},
-					function() {
-						$('.navbar__menu__each__sub').slideUp(300);
-						$(".header__transparent").css("background", "transparent");
-						$(".header__transparent .navbar__menu__each").css("color",
-								"white");
-						$(".header__transparent .navbar__menu__each__main").css(
-								"color", "white");
-						var $header = $(".topMenu");
-						$header.toggleClass('mouseenter');
-						var $logo = $(".navbar__logo");
-						$logo.toggleClass('mouse');
-					});
+		$('header').hover(
+			function() {//mouseenter
+				$('.navbar__menu__each__sub').slideDown(300);
+				$(".header__transparent").css("background", "white");
+				$(".header__transparent .navbar__menu__each").css("color", "black");
+				$(".header__transparent .navbar__menu__each__main").css("color", "black");
+				var $logo = $(".navbar__logo");
+				$logo.toggleClass('mouse');
+			},
+			makeTransparent);
 		});
 	</script>
 </head>

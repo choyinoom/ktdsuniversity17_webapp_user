@@ -62,9 +62,15 @@
 	padding-left: 40px;
 }
 
+#my__courses td:nth-child(4) {
+	text-align: right;
+	padding-right: 5px;
+}
 
+ 
 .td_button, .goForm {
     display: none;
+    float: left;
     height: fit-content;
     margin: 0px auto;
     padding: 5px;
@@ -85,7 +91,7 @@
 }
 
 #my__courses img {
-    width: 20px;
+    width: 14px;
     cursor:pointer;
 }
 

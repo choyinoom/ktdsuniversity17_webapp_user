@@ -6,7 +6,7 @@
 
 
 <%String searchType=request.getParameter("searchType"); String
-searchText=request.getParameter("searchText"); %>
+	searchText=request.getParameter("searchText"); %>
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link href="<c:url value='/resources/css/listNotices.css'/>" rel="stylesheet">
@@ -16,7 +16,7 @@ searchText=request.getParameter("searchText"); %>
 		<h1>공지사항</h1>
 	</section>
 	<section class="grid mx-auto col-wrap contents">
-		<div class="grid" id="notice__filter">
+		<div class="grid filter">
 			<div id="select">
 				<select id="pagingSize" onchange="fn_applyPagingSize()">
 					<option value=10 selected>10개씩 보기</option>
@@ -40,11 +40,13 @@ searchText=request.getParameter("searchText"); %>
 							</c:otherwise>
 						</c:choose>
 					</div>
-					<input type="submit" class='search__btn' value="검색"  style="cursor: pointer;">
+					<input type="submit" class='search__btn' value="검색">
 				</div>
 			</form>
 		</div>
-
+		<c:if test="${searchText != null}">
+			<p class='search__result'><b>${searchText}</b>에 대한 검색결과: <span id=count></span> 건</p>
+		</c:if>
 		<table id="notice__list">
 			<thead>
 				<tr align="center">
@@ -63,27 +65,30 @@ searchText=request.getParameter("searchText"); %>
 						<c:set var="index" value="${noticesCnt - 10 * (pageNo - 1)}" />
 					</c:otherwise>
 				</c:choose>
-						<c:forEach var="notice" items="${articlesList}" varStatus="stat">
-							<tr align="center">
-								<td width="20%">
-									<c:if test="${notice.important != null}">
-										<span class="notice__important">공지</span>
-									</c:if>
-									<c:if test="${notice.important == null}">
-										${index}
-									</c:if>
-								</td>
-								<td class="row__title" width="60%">
-									<a href="${contextPath}/customer/viewNotice.do?articleId=${notice.id}">${notice.title}</a>
-									<c:if test="${fn:contains(notice.file, 'T')}">
-										<img src="${contextPath}/resources/image/disk.png">
-									</c:if>
-								</td>
-								<td width="20%">${notice.joinDate}</td>
-							</tr>
-							<c:set var="index" value="${index - 1}" />
-						</c:forEach>
-				</tbody>
+				<c:forEach var="notice" items="${articlesList}" varStatus="stat">
+					<tr align="center">
+						<td width="20%">
+							<c:choose>
+								<c:when test="${notice.important != null}">
+									<span class="notice__important">공지</span>
+								</c:when>
+								<c:otherwise>
+									${index}
+								</c:otherwise>
+							</c:choose>
+						</td>
+						<td class="row__title" width="60%">
+							<a
+								href="${contextPath}/customer/viewNotice.do?articleId=${notice.id}">${notice.title}</a>
+							<c:if test="${fn:contains(notice.file, 'T')}">
+								<img src="${contextPath}/resources/image/disk.png">
+							</c:if>
+						</td>
+						<td width="20%">${notice.joinDate}</td>
+					</tr>
+					<c:set var="index" value="${index - 1}" />
+				</c:forEach>
+			</tbody>
 		</table>
 		<div class="Pagination">
 			<ul class="grid mx-auto pagination" id="pagination">
@@ -125,7 +130,7 @@ searchText=request.getParameter("searchText"); %>
 		}
 	}
 
-	function fn_paginationCtrl(response, pagingSize) { // 페이지네이션 설정 초기화s
+	function fn_paginationCtrl(response, pagingSize) { // 페이지네이션 설정 초기화
 		const noticesCnt = response.noticesCnt;
 		const totalPages = Math.ceil(noticesCnt / pagingSize);
 		$("#pagination").twbsPagination('destroy');
@@ -160,31 +165,31 @@ searchText=request.getParameter("searchText"); %>
 		var index = Math.max(articlesList.length, noticesCnt -  pagingSize * (pageNo - 1));
 		var tableBody = $("#notice__list tbody");
 		tableBody.empty(); // 테이블 비우기
-		
-			articlesList.forEach(function (article) {
-				var tr = $('<tr align="center"></tr>');
-				var td = null;
-				// 번호 컬럼
-				if (article['important'] === '공지') {
-					tr.append('<td width="20%"><span class="notice__important">공지</span></td>');
-				} else {
-					tr.append(`<td>\${index}</td>`);
-				}
-				index = index - 1;
-				// 제목 컬럼
-				td = $(`<td width="60%" class="row__title">
+
+		articlesList.forEach(function (article) {
+			var tr = $('<tr align="center"></tr>');
+			var td = null;
+			// 번호 컬럼
+			if (article['important'] === '공지') {
+				tr.append('<td width="20%"><span class="notice__important">공지</span></td>');
+			} else {
+				tr.append(`<td>\${index}</td>`);
+			}
+			index = index - 1;
+			// 제목 컬럼
+			td = $(`<td width="60%" class="row__title">
 				<a href="${contextPath}/customer/viewNotice.do?articleId=\${article.id}">
 				\${article.title}
 				</a></td>`);
-				if (article['file'] === 'T') { // 첨부파일 있을 경우 아이콘 표시
-					td.append('<img src="${contextPath}/resources/image/disk.png">');
-				}
-				tr.append(td);
-				// 등록일 컬럼
-				td = $(`<td width="20%">\${article['joinDate']}</td>`);
-				tr.append(td);
-				tableBody.append(tr);
-			})
+			if (article['file'] === 'T') { // 첨부파일 있을 경우 아이콘 표시
+				td.append('<img src="${contextPath}/resources/image/disk.png">');
+			}
+			tr.append(td);
+			// 등록일 컬럼
+			td = $(`<td width="20%">\${article['joinDate']}</td>`);
+			tr.append(td);
+			tableBody.append(tr);
+		})
 	}
 
 

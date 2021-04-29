@@ -10,16 +10,6 @@
 	position: relative;
 	top: -14px;
 }
-#course__contents {
-    width: 1000px;
-}
-
-#course__search {
-    justify-content: flex-end;
-    align-items: flex-end;
-    padding-bottom: 30px;
-    margin-bottom: 10px;
-}
 
 #course__search img {
     width: 21px;
@@ -38,11 +28,6 @@
     margin: 0px;
     width: 130px;
     height: 14px;
-}
-#search_btn {
-    margin-left: 5px;
-    padding: 5px;
-    border-radius: 4px;
 }
 
 #course__list {
