@@ -21,7 +21,7 @@ request.setCharacterEncoding("UTF-8");
 	display: flex;
     flex-direction: column;
     align-items: center;
-	width: 600px;
+	width: 100%;
 	margin: 0px;
 	padding: 0px;
 	font-family: 'Noto Sans KR', sans-serif;

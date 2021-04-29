@@ -93,11 +93,29 @@ request.setCharacterEncoding("UTF-8");
 						<input type="hidden" name="phone"></td>
 					</tr>
 					<tr>
-						<td width="110"><p align="left">이메일<span id="memberform_necessity">&nbsp;*</span></td>
-						<td width="400">
-						<input class="memberform_box" id="userEmail" type="email" name="email">
-						<input class="memberSubscription" id="subscription" type="checkbox" name="subscription1"><span id="memberSubscription">E-Mail 수신 동의(선택)</span></td>
-						<input class="memberSubscription" id="subscription" type="hidden" name="subscription">
+						<td width="110"><p align="left" style="top: -1em; position: relative;">이메일<span id="memberform_necessity">&nbsp;*</span></td>
+						<!-- <td width="400">
+						<input class="memberform_box" id="userEmail" type="email" name="email"> -->
+						
+			             <td width="400"><p style="margin-left: 1.9em;">
+			             <input type="text" name="emailId" id="inputEmail">@
+			             <input type="text" name="emailAddress" id="inputEmail">
+						<div class="memberSubscription">
+						<input id="subscription" type="checkbox" name="subscription1"><span id="memberSubscription">E-Mail 수신 동의(선택)</span></td>
+						<input id="subscription" type="hidden" name="subscription">
+						</div>
+				            <td style="position: relative; left: -3.3em;">
+				             <select name="emailAddresList">
+				                <option value="">직접입력</option>
+				                <option value="naver.com">naver.com</option>
+				                <option value="hanmail.net">hanmail.net</option>
+				                <option value="gmail.com">gmail.com</option>
+				                <option value="kakao.com">kakao.com</option>
+				                <option value="nate.com">nate.com</option>
+				                <option value="yahoo.co.kr">yahoo.co.kr</option>
+				             </select>
+			             <input type="hidden" name="email" >
+				             </td>
 					</tr>
 					<tr>
 					<tr>
@@ -147,6 +165,10 @@ request.setCharacterEncoding("UTF-8");
 		         var phone3 = registercheckfrm.phone3.value;
 		         var tel = tel1+'-'+tel2+'-'+tel3;
 		         var phone = phone1+'-'+phone2+'-'+phone3;
+		         var emailId = registercheckfrm.emailId.value;
+		         var emailAddress = registercheckfrm.emailAddress.value;
+		         var email = emailId + '@' + emailAddress;
+		         
 		         
 		         if(tel == '--') {
 		        	 tel = null;
@@ -154,6 +176,7 @@ request.setCharacterEncoding("UTF-8");
 		         registercheckfrm.tel.value = tel;
 		         }
 		         registercheckfrm.phone.value = phone;
+		         registercheckfrm.email.value = email;
 		         return true;
 		      }); 
 		   })
@@ -239,6 +262,21 @@ request.setCharacterEncoding("UTF-8");
 		    window.open(url, name, option);
 		    
 		}
+		
+		
+		//이메일 선택
+		$("select[name='emailAddresList']").on('change', function() {
+	         
+	         selectedAddress = $("select[name='emailAddresList'] option:selected").val();
+	         if (selectedAddress != "") {
+	            $("input[name='emailAddress']").attr('readonly', true);
+	         } else{
+	            $("input[name='emailAddress']").attr('readonly', false);
+	         }
+	         var frm = document.addFrm;
+	         frm.emailAddress.value = selectedAddress;
+	         
+	      })
 		
 		
 		</script>

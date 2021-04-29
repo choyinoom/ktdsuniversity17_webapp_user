@@ -31,7 +31,7 @@
 					</li>
 					<li class="navbar__menu__each">|</li>
 					<li>
-						<a class="navbar__menu__each" href="${contextPath}/member/memberForm.do">회원가입</a>
+						<a class="navbar__menu__each" href="${contextPath}/member/joinAgree.do">회원가입</a>
 					</li>	
 				</c:otherwise>
 			</c:choose>
