@@ -33,15 +33,14 @@
 										<div class="search__in">
 											<c:choose>
 												<c:when test="${searchText != null }">
-													<input type="text" name="searchText" id="searchText"
-														value="${searchText }">
+													<input type="text" name="searchText" id="searchText" value="${searchText }">
 												</c:when>
 												<c:otherwise>
 													<input type="text" name="searchText" id="searchText">
 												</c:otherwise>
 											</c:choose>
 										</div>
-										<input type="submit" class='search__btn' value="검색">
+										<input type="submit" class='search__btn' value="검색"  style="cursor: pointer;">
 									</div>
 								</form>
 							</div>
@@ -64,30 +63,27 @@
 											<c:set var="index" value="${noticesCnt - 10 * (pageNo - 1)}" />
 										</c:otherwise>
 									</c:choose>
-									<c:forEach var="notice" items="${articlesList}" varStatus="stat">
-										<tr align="center">
-											<td width="20%">
-												<c:choose>
-													<c:when test="${notice.important != null}">
-														<span class="notice__important">공지</span>
-													</c:when>
-													<c:otherwise>
-														${index}
-													</c:otherwise>
-												</c:choose>
-											</td>
-											<td class="row__title" width="60%">
-												<a
-													href="${contextPath}/customer/viewNotice.do?articleId=${notice.id}">${notice.title}</a>
-												<c:if test="${fn:contains(notice.file, 'T')}">
-													<img src="${contextPath}/resources/image/disk.png">
-												</c:if>
-											</td>
-											<td width="20%">${notice.joinDate}</td>
-										</tr>
-										<c:set var="index" value="${index - 1}" />
-									</c:forEach>
-								</tbody>
+											<c:forEach var="notice" items="${articlesList}" varStatus="stat">
+												<tr align="center">
+													<td width="20%">
+														<c:if test="${notice.important != null}">
+															<span class="notice__important">공지</span>
+														</c:if>
+														<c:if test="${notice.important == null}">
+															${index}
+														</c:if>
+													</td>
+													<td class="row__title" width="60%">
+														<a href="${contextPath}/customer/viewNotice.do?articleId=${notice.id}">${notice.title}</a>
+														<c:if test="${fn:contains(notice.file, 'T')}">
+															<img src="${contextPath}/resources/image/disk.png">
+														</c:if>
+													</td>
+													<td width="20%">${notice.joinDate}</td>
+												</tr>
+												<c:set var="index" value="${index - 1}" />
+											</c:forEach>
+									</tbody>
 							</table>
 							<div class="Pagination">
 								<ul class="grid mx-auto pagination" id="pagination">
@@ -164,31 +160,31 @@
 							var index = Math.max(articlesList.length, noticesCnt -  pagingSize * (pageNo - 1));
 							var tableBody = $("#notice__list tbody");
 							tableBody.empty(); // 테이블 비우기
-
-							articlesList.forEach(function (article) {
-								var tr = $('<tr align="center"></tr>');
-								var td = null;
-								// 번호 컬럼
-								if (article['important'] === '공지') {
-									tr.append('<td width="20%"><span class="notice__important">공지</span></td>');
-								} else {
-									tr.append(`<td>\${index}</td>`);
-								}
-								index = index - 1;
-								// 제목 컬럼
-								td = $(`<td width="60%" class="row__title">
-					<a href="${contextPath}/customer/viewNotice.do?articleId=\${article.id}">
-					\${article.title}
-					</a></td>`);
-								if (article['file'] === 'T') { // 첨부파일 있을 경우 아이콘 표시
-									td.append('<img src="${contextPath}/resources/image/disk.png">');
-								}
-								tr.append(td);
-								// 등록일 컬럼
-								td = $(`<td width="20%">\${article['joinDate']}</td>`);
-								tr.append(td);
-								tableBody.append(tr);
-							})
+							
+								articlesList.forEach(function (article) {
+									var tr = $('<tr align="center"></tr>');
+									var td = null;
+									// 번호 컬럼
+									if (article['important'] === '공지') {
+										tr.append('<td width="20%"><span class="notice__important">공지</span></td>');
+									} else {
+										tr.append(`<td>\${index}</td>`);
+									}
+									index = index - 1;
+									// 제목 컬럼
+									td = $(`<td width="60%" class="row__title">
+									<a href="${contextPath}/customer/viewNotice.do?articleId=\${article.id}">
+									\${article.title}
+									</a></td>`);
+									if (article['file'] === 'T') { // 첨부파일 있을 경우 아이콘 표시
+										td.append('<img src="${contextPath}/resources/image/disk.png">');
+									}
+									tr.append(td);
+									// 등록일 컬럼
+									td = $(`<td width="20%">\${article['joinDate']}</td>`);
+									tr.append(td);
+									tableBody.append(tr);
+								})
 						}
 
 

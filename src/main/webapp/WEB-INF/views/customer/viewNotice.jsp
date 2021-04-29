@@ -31,7 +31,15 @@ request.setCharacterEncoding("UTF-8");
 						<li id="notice_joindate">등록일&nbsp;&nbsp;${vo.joinDate}</li>
 					</ul>
 				</div>
-				<div class="addfile">첨부파일 : <a href="${contextPath}/fileDown.do?filename=${filevo.name}&articleId=${articleId }">&nbsp;${filevo.name }</a></div>
+				<div class="addfile">
+					<c:choose>
+						<c:when test="${filevo.name != null}">
+								첨부파일 : <a href="${contextPath}/fileDown.do?filename=${filevo.name}&articleId=${articleId }">&nbsp;${filevo.name }</a>	
+						</c:when>
+						<c:otherwise>
+						</c:otherwise>
+					</c:choose>
+				</div>
 				<div class="contents notice_content">
 					<pre>${vo.contents}</pre>
 				</div>

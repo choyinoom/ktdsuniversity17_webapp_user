@@ -41,6 +41,14 @@ justify-content: flex-end;
 margin-bottom: 12px;
 }
 
+.addfile a{
+color : black;
+}
+
+.addfile a:hover{
+color : blue;
+}
+
 .notice_listbutton {
 display :flex;
 justify-content: flex-end;

@@ -1,4 +1,51 @@
 /*메인 캐러셀에는 next, prev 버튼 없음*/
+#mainModal{
+max-width: auto;
+width : 500px;
+height : 500px;
+background-size : 100% 100%;
+float : left;
+top: 50px;
+left: 50px;
+position: absolute;
+z-index: 100;
+}
+
+.modal_content p{
+text-align : left;
+line-height : 1em;
+}
+
+.modal_text{
+font-size: 12pt;
+font-weight: 400;
+}
+
+.modal_button{
+background-color : #e91b23; 
+border: none; 
+text-align: center; 	
+border-top-left-radius : 5px;
+border-bottom-left-radius : 5px;
+border-top-right-radius : 5px;
+border-bottom-right-radius : 5px;
+width: 123px;
+height: 40px;
+margin-top: 10px;
+}
+
+.modal_button a{
+color: #f2f2f2; 
+font-weight : bold;
+font-size : 11pt;
+}
+
+.modal_footer{
+font-size: 13pt;
+color : #f2f2f2; 
+
+}	
+
 .main__carousel button[class~="slick-arrow"] {
 	display: none !important;
 }

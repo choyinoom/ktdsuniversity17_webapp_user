@@ -41,11 +41,33 @@ public class MemberControllerImpl implements MemberController {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		// 현재 모집중인 과정
+		
+		/*
+		 * Cookie cookie = new Cookie("key", "value"); cookie.setmaxAge();
+		 * response.addCookie(cookie); Cookie[] cookies = request.getCookies();
+		 */
+		
+		
+		
+		
+		
+		
 		Map<String, Object> courseMap = courseService.listCoursesForWelcomePage();
 		String coursesJSON = new ObjectMapper().writeValueAsString(courseMap); // courseMap을 JSON으로 변환
 		mav.addObject("coursesJSON", coursesJSON);
 		return mav;
 	}
+	
+	/*
+	 * @RequestMapping(value = { "/", "/main.do" }, method = RequestMethod.GET)
+	 * private ModelAndView main(HttpServletRequest request, HttpServletResponse
+	 * response) throws Exception{ String viewName = (String)
+	 * request.getAttribute("viewName"); ModelAndView mav = new
+	 * ModelAndView(viewName); // 현재 모집중인 과정 Map<String, Object> courseMap =
+	 * courseService.listCoursesForWelcomePage(); String coursesJSON = new
+	 * ObjectMapper().writeValueAsString(courseMap); // courseMap을 JSON으로 변환
+	 * mav.addObject("coursesJSON", coursesJSON); return mav; }
+	 */
 	
 	/* 마이페이지 */
 	@RequestMapping(value = "/member/mypage.do", method = RequestMethod.GET)
@@ -182,5 +204,9 @@ public class MemberControllerImpl implements MemberController {
 		}
 		return viewName;
 	}
+	
+	
+	
+	
 
 }
