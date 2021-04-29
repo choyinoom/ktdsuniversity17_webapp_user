@@ -10,6 +10,33 @@
 			<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 			<link rel="stylesheet" type="text/css"
 				href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+
+		<!-- The Modal -->
+		<div id="mainModal" class="modal" style="background-image : url('${contextPath}/resources/image/modal_bg.jpg');">
+	     	<div class="modal_content">
+	                <p><b><span style="font-size: 22pt;">2022년 국가인적자원개발</span></b></p>
+	                <p><b><span style="font-size: 22pt;">컨소시엄 수요조사 안내</span></b></p>
+	                <p><br/></p>
+	                <p><span class="modal_text">2022년 국가인적자원 개발</span></p>
+	                <p><span class="modal_text">컨소시엄 교육과정 개설을 위하여</span></p>
+	                <p><span class="modal_text">수요조사를 진행하고자 합니다.</span></p>
+	                <p><span class="modal_text"><br /></span></p>
+	                <p><span class="modal_text">더 좋은 과정을 만들 수 있도록</span></p>
+	                <p><span class="modal_text">수요조사에 응답하여 주시면 감사하겠습니다.</span></p>
+	                <p style="padding-top: 22px; font-size: 10pt;"><span>조사기간 : 2021-05-25 ~ 2021-06-25</span></p>
+	                <button type="button" class="modal_button"><a href="https://forms.gle/r33T5Fksozpw9ZbR7" target="_blank">조사 참여하기</a></button>
+ 	          </div>
+ 	                     
+			<div class="modal_footer">
+				<p style="padding-top: 20px;">
+					<span id="modal_today_close" style="cursor: pointer; float : left;"><img src="${contextPath}/resources/image/modal_x.png"  style="margin-right: 5px; width: 20px;
+   					 object-fit: contain; margin-right: 5px;  position: relative; top: 3px;">오늘 하루 열지 않기</span> 						
+				     <span id="modal_close" style="cursor:pointer; float : right;" onClick="close_pop();" data-dismiss="modal">닫기</span>
+				</p>
+			</div>
+    	</div>
+        <!--End Modal-->
+				
 			<section class="main__carousel">
 				<div class="carousel-item">
 					<img src="${contextPath}/resources/image/main_banner/1.png" alt="전경">
@@ -74,7 +101,8 @@
 					</ul>
 				</nav>
 			</section>
-			<script type="text/javascript"
+			
+				<script type="text/javascript"
 				src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 			<script type="text/javascript">
 				function fn_createCard(month) {
@@ -208,6 +236,7 @@
 					})
 
 				});
+				
 			</script>
 			<script type="text/javascript">
 				// 월별 모집 과정을 보여주기 위해 월별 버튼 생성
@@ -228,3 +257,67 @@
 				if (allHiddenCards.length === 0) // 더보기 할 카드가 있음.
 					$("#more").addClass("hidden");
 			</script>
+			
+			<!-- 모달창 -->
+			<script type="text/javascript">
+			 jQuery(document).ready(function() {			 
+				 if( document.cookie != "" ){
+					 $('#mainModal').hide();	      
+				 } else {
+					 $('#mainModal').show();	     
+				 }
+	        });
+			 
+	        //팝업 Close 기능
+	        function close_pop(flag) {
+	             $('#mainModal').hide();
+	        };
+	        
+       		// 쿠키 생성
+			function setCookie(name, value, expiredays){
+				var today = new Date();
+				console.log(today.getDate())
+				today.setDate(today.getDate() + expiredays) // 현재시간에 하루를 더함
+				document.cookie = name + '=' + escape(value) + '; expires=' + today.toGMTString();
+			} 
+	       
+			// 쿠키 가져오기
+			function getCookie(name) {
+				var cookie = document.cookie;
+				if (document.cookie != "") {
+					var cookie_array = cookie.split("; ");
+					console.log(cookie_array)
+					for ( var index in cookie_array) {
+						var cookie_name = cookie_array[index].split("=");
+						if (cookie_name[0] == "mycookie") {
+							return cookie_name[1];
+						}
+					}
+				}
+				return;
+			}
+	        
+			// 오늘 하루 안보기 버튼 클릭하고 난 후
+			$("#modal_today_close").click(function() {
+				setCookie("mycookie", 'popupEnd', 1);
+			 	var checkCookie = getCookie("mycookie");
+				
+				if(checkCookie == 'popupEnd') {
+					$("#mainModal").hide();
+				} else {
+					$("#mainModal").show();
+				}  
+				
+				})
+				
+			</script>
+			
+			
+			        
+
+
+
+
+
+
+			

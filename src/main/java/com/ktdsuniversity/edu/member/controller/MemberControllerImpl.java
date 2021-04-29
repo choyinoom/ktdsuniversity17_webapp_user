@@ -43,8 +43,7 @@ public class MemberControllerImpl implements MemberController {
 	@RequestMapping(value = { "/", "/main.do" }, method = RequestMethod.GET)
 	private ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String viewName = (String) request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		// 현재 모집중인 과정
+		ModelAndView mav = new ModelAndView(viewName);		
 		Map<String, Object> courseMap = courseService.listCoursesForWelcomePage();
 		String coursesJSON = new ObjectMapper().writeValueAsString(courseMap); // courseMap을 JSON으로 변환
 		mav.addObject("coursesJSON", coursesJSON);
@@ -283,5 +282,9 @@ public class MemberControllerImpl implements MemberController {
 		}
 		return viewName;
 	}
+	
+	
+	
+	
 
 }
