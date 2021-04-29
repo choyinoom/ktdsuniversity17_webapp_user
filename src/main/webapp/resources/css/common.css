@@ -251,12 +251,12 @@ table td {
     cursor: pointer;
 }
 
-#buttons button[id="submit"] {
+#buttons .submit {
     background-color: #e91b23;
     color:#efefef;
 }
 
-#buttons button[id="cancle"] {
+#buttons .cancle {
     background-color: #969696;
     color:#efefef;
 }

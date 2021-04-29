@@ -90,11 +90,3 @@
     font-weight: 600;
     color: #4d4d4d;
 }
-
-li[class~="first"] {
-    display: none !important;
-}
-
-li[class~="last"] {
-    display: none !important;
-}

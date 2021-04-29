@@ -131,8 +131,8 @@ request.setCharacterEncoding("UTF-8");
 				<p>이름과 소속회사 변경을 원하실 경우 관리자에게 문의주십시오.</p>
 				<p>케이티디에스 역량강화팀 이홍은 010-2709-8965 / hongeun.lee@kt.com</p>
 				<div class="grid row-wrap" id="buttons">
-					<button id="submit" form="personal__info" type="submit">수정</button>
-					<button id="cancle">취소</button>
+					<button class="submit" form="personal__info" type="submit">수정</button>
+					<button class="cancle">취소</button>
 				</div>
 			</section>
 		</div>
@@ -154,8 +154,8 @@ request.setCharacterEncoding("UTF-8");
 					<input type="password" name="pw" placeholder="비밀번호">
 				</form>
 				<div class="grid row-wrap" id="buttons">
-					<button id="submit" form="frm__out" type="submit">탈퇴</button>
-					<button id="cancle">취소</button>
+					<button class="submit" form="frm__out" type="submit">탈퇴</button>
+					<button class="cancle">취소</button>
 				</div>
 			</section>
 		</div>
@@ -201,7 +201,7 @@ request.setCharacterEncoding("UTF-8");
 		});
 
 		/* 회원 정보 수정 모달 속 '수정' 버튼*/
-		$('div[id="edit"] #subtit').on('click', function() {
+		$('div[id="edit"] .submit').on('click', function() {
 			$('#personal__info input[type="hidden"][name="phone"]').val($('#personal__info input[name="phone1"]').val()+'-'+$('#personal__info input[name="phone2"]').val()+'-'+$('#personal__info input[name="phone3"]').val());
 			const tel1 = $("#personal__info input[name='tel1']").val();
 			const tel2 = $("#personal__info input[name='tel2']").val();
@@ -216,7 +216,7 @@ request.setCharacterEncoding("UTF-8");
 		})	
 
 		/* 취소 버튼*/
-		$('.custom__modal #cancle').on('click', function() {
+		$('.custom__modal .cancle').on('click', function() {
 			$('.custom__modal').css('display', 'none');
 		})
 	})

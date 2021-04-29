@@ -58,7 +58,7 @@
 		FROM course
 			INNER JOIN syllabus USING(slb_id)
 		WHERE crs_stat = '신청가능' AND trunc(sysdate) <= to_date(crs_re_date, 'YYYY-MM-DD HH24:MI:SS')
-		ORDER BY crs_start_date
+		ORDER BY crs_start_date desc
 	]]>
 	</select>
 	
@@ -78,6 +78,7 @@
 			slb_type, 
 			slb_category,
 			slb_overview,
+			slb_objectives,
 			slb_target,
 			slb_contents,
 			slb_banner_img,

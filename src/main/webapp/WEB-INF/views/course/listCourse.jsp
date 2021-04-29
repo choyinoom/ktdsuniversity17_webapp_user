@@ -62,8 +62,8 @@ request.setCharacterEncoding("UTF-8");
 				<p id="date"></p>
 				<p id="time"></p>
 				<div class = "grid row-wrap" id="buttons">
-					<button id="submit">신청</button>
-					<button id="cancle">취소</button>
+					<button class="submit">신청</button>
+					<button class="cancle">취소</button>
 				</div>
 			</div>
 		</section>
@@ -180,7 +180,7 @@ request.setCharacterEncoding("UTF-8");
 	});
 
 	/* 수강신청 버튼*/
-	$('#enroll #submit').on('click', function() {
+	$('#enroll .submit').on('click', function() {
 		let form = document.createElement("form");
 		form.action = '${contextPath}/course/enrollCourse.do';
 		form.method = "post";
@@ -193,7 +193,7 @@ request.setCharacterEncoding("UTF-8");
 	})
 
 	/* 취소 버튼*/
-	$('.custom__modal #cancle').on('click', function() {
+	$('.custom__modal .cancle').on('click', function() {
 		$('.custom__modal').css('display','none');
 })
 </script>
