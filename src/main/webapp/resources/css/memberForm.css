@@ -9,8 +9,10 @@
 }
 
 .memberform {
-	width: 516px;
+	width: 630px;
 	margin: 50px;
+	left: 4em;
+    position: relative;
 }
 
 #memberform__banner {
@@ -53,13 +55,38 @@
 	margin: 0px 10px 0px 30px;
 }
 
-.memberSubscription {
-	-webkit-appearance: checkbox;
-	margin: 3px 8px 0px 32px;
-	position: relative;
-	top: 1px;
+#inputEmail {
+	background: #ECECEC;
+	width: 150px;
+	height: 40px;
+	border-radius: 6px;
+	margin: 0px 10px 0px 1px;
 }
 
+select[name='emailAddresList'] {
+	background: #ECECEC;
+	width: 100px;
+	height: 40px;
+	border-radius: 6px;
+	margin: 0px 10px 0px 20px;
+	border: none;
+	top: -0.9em;
+}
+
+.memberSubscription {
+	margin: 3px 8px 0px 32px;
+	position: relative;
+	top: -0.5em;
+    left: -0.4em;
+}
+
+#subscription{
+	-webkit-appearance: checkbox;
+	zoom: 1.3;
+    top: 0.1em;
+    position: relative;
+    margin-right: 0.4em;
+}
 #memberSubscription {
 	color: #4D4D4D;
 	font-size: 13px;
@@ -93,6 +120,8 @@
 	display: flex;
 	justify-content: center;
 	margin: 30px;
+	left: -4em;
+    position: relative;
 }
 
 .memberform_button>input {
