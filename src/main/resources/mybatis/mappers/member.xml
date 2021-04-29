@@ -17,23 +17,6 @@
 		<result property="loginFail" column="mem_login_fail" />
 	</resultMap>
 	
-	<resultMap id="enrdResult" type="enrollmentDetailVO">
-		<id property="id" column="enrd_id"/>
-		<result property="crsId" column="crs_id"/>
-		<result property="memId" column="mem_id"/>
-		<result property="stat" column="enrd_stat"/>
-		<result property="joinDate" column="enrd_join_date"/>
-		<result property="modDate" column="enrd_mod_date"/>
-		<result property="completeDate" column="enrd_complete_date"/>
-		<association property="syllabusVO" resultMap="mapper.course.slbResult"/>
-		<association property="courseVO" resultMap="mapper.course.crsResult"/>
-	</resultMap>
-	
-
-	<!-- <resultMap id="memResult" type="java.util.HashMap"> <result property="id" 
-		column="id" /> <result property="pwd" column="pwd" /> <result property="name" 
-		column="name" /> <result property="email" column="email" /> <result property="joinDate" 
-		column="joinDate" /> </resultMap> -->
 
 	<!-- 아이디 중복체크 -->
 	<select id="selectMember" resultType="int">
@@ -43,12 +26,8 @@
 	]]>
 	</select>
 
-	<select id="selectAllMemberList" resultMap="memResult">
-		<![CDATA[
-         select * from member order by joinDate desc	 	
-      ]]>
-	</select>
 
+	<!-- 회원 가입 -->
 	<insert id="insertMember" parameterType="memberVO">
 		<![CDATA[
 		 insert into member(mem_name, mem_id, mem_pw, mem_tel, mem_phone, mem_email, mem_subscription, mem_company_name)
@@ -56,37 +35,90 @@
 		]]>
 	</insert>
 
-
-	<update id="updateMember" parameterType="memberVO">
-		<![CDATA[
-	     update t_member
-	     set pwd=#{pwd}, name=#{name}, email=#{email}
-	     where
-	     id=#{id}
-      ]]>
+	<!-- 정보 수정 -->
+	<update id="updateMemberInfo" parameterType="memberVO">
+     
+     	UPDATE member
+     	SET
+     		mem_phone = #{phone},
+     		mem_email = #{email},
+     		mem_subscription = #{subscription},
+     		<if test="#{tel} != null">
+     		mem_tel= #{tel},
+     		</if>
+     		mem_mod_date = TO_CHAR(sysdate, 'YYYY-MM-DD hh:mm:ss')
+     	WHERE mem_id=#{id}
+    
 	</update>
 
+	<!-- 회원 탈퇴 -->
 	<delete id="deleteMember" parameterType="String">
 		<![CDATA[
-	   delete from  t_member
-	   where
-	   id=#{id}
+	   UPDATE member
+	   SET delYN = true
+	   WHERE id = #{id}
 	]]>
 	</delete>
 
+	<!-- 로그인, 세션에 저장할 정보만 불러온다 -->
 	<select id="loginById" resultMap="memResult" parameterType="memberVO">
-		<![CDATA[
-		select * from member	
-		where mem_id=#{id} and mem_pw=#{pw}		
+	<![CDATA[
+		SELECT 
+			mem_id, 
+			mem_name,
+			mem_company_name 
+		FROM member	
+		WHERE mem_id=#{id} and mem_pw=#{pw}		
 	]]>
 	</select>
 
-	<select id="selectEnrollmentDetailByEnrollMap" parameterType="java.util.Map" resultMap="enrdResult">
-		<![CDATA[
-			SELECT enrd_id, crs_id, mem_id, enrd_stat
-			FROM enrollment_detail
-			WHERE crs_id = #{courseId} AND mem_id = #{id}
-		]]>
+	<!-- 비밀번호 오류 5회 -->
+	<update id="updateLoginFail" parameterType="String">
+	<![CDATA[
+		UPDATE member
+		SET mem_login_fail = mem_login_fail + 1
+		WHERE mem_id=#{id}
+	]]>
+	</update>
+	
+	<!-- 회원 정보 수정 시 필요한 정보 -->
+	<select id="selectMemberInfoById" parameterType="string" resultMap="memResult">
+	<![CDATA[
+		SELECT 
+			mem_id,
+			mem_name,
+			mem_tel,
+			mem_phone,
+			mem_email,
+			mem_subscription,
+			mem_company_name
+		FROM member
+		WHERE mem_id = #{id}
+	]]>
 	</select>
+	
+	<select id="selectMemberPwInfoById" parameterType="string" resultMap="memResult">
+	<![CDATA[
+		SELECT 
+		
+		mem_pw
+		FROM member
+		WHERE mem_id = #{id}
+	]]>
+	</select>
+	
+	<!--비밀번호변경 -->
+	<update id = "updatePwOfMember"  parameterType="memberVO">
+	<![CDATA[
+		update member
+		set 
+		mem_pw = #{pw}, mem_login_fail = 0
+		WHERE mem_id = #{id}
+	]]>
+	
+	</update>
+	
+	
+	
 
 </mapper>

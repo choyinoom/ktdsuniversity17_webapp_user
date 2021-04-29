@@ -11,4 +11,5 @@ public interface CourseController {
 	public ModelAndView listCourses(@RequestParam(required=false) String keyword, HttpServletRequest request, HttpServletResponse response) throws Exception; 
 	public ResponseEntity enrollCourse(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView viewCourse(int syllabusId, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView dropCourse(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

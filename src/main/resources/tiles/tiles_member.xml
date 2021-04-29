@@ -2,26 +2,20 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
 	<definition name="baseLayout" template="/WEB-INF/views/common/layout.jsp">
-		<put-attribute name="title" value="" />
-		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
-		<put-attribute name="body" value="" />
-		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+		<put-attribute name="title" 	value="" />
+ 		<put-attribute name="header" 	value="/WEB-INF/views/common/header.jsp" />
+		<put-attribute name="body" 		value="" />
+		<put-attribute name="footer" 	value="/WEB-INF/views/common/footer.jsp" />
 	</definition>
 
 	<definition name="" extends="baseLayout">
-		<put-attribute name="title" value="메인페이지" />
-		<put-attribute name="body" value="/WEB-INF/views/main.jsp" />
+		<put-attribute name="title"	value="메인페이지" />
+		<put-attribute name="body"	value="/WEB-INF/views/main.jsp" />
 	</definition>
 
 	<definition name="main" extends="baseLayout">
 		<put-attribute name="title" value="메인페이지" />
-		<put-attribute name="body" value="/WEB-INF/views/main.jsp" />
-	</definition>
-
-
-	<definition name="/member/listMembers" extends="baseLayout">
-		<put-attribute name="title" value="회원목록창" />
-		<put-attribute name="body" value="/WEB-INF/views/member/listMembers.jsp" />
+		<put-attribute name="body" 	value="/WEB-INF/views/main.jsp" />
 	</definition>
 
 
@@ -36,21 +30,36 @@
 	</definition>
 	
 	<definition name="/member/memberForm" extends="baseLayout">
-		<put-attribute name="title" value="회원등록창" />
+		<put-attribute name="title" value="회원등록" />
 		<put-attribute name="body" value="/WEB-INF/views/member/memberForm.jsp" />
 	</definition>
 	
 	<definition name="/member/celebration" extends="baseLayout">
-		<put-attribute name="title" value="회원등록창" />
+		<put-attribute name="title" value="회원 가입이 완료되었습니다." />
 		<put-attribute name="body" value="/WEB-INF/views/member/celebration.jsp" />
 	</definition>
-	<!-- <definition name="/member/viewDetail" extends="baseLayout"> <put-attribute 
-		name="title" value="회원상세창" /> <put-attribute name="body" value="/WEB-INF/views/member/viewDetail.jsp" 
-		/> </definition> -->
 
 	<definition name="/member/privacy" extends="baseLayout">
 		<put-attribute name="title" value="개인정보 처리방침" />
 		<put-attribute name="body" value="/WEB-INF/views/member/privacy.jsp" />
+	</definition>
+	
+	
+	<definition name="/member/myPage" extends="baseLayout">
+		<put-attribute name="title" value="마이페이지 개인정보" />
+		<put-attribute name="body"	value="/WEB-INF/views/member/myPage.jsp" />
+	</definition>
+	
+	<definition name="/member/myCourse" extends="baseLayout">
+		<put-attribute name="title" value="마이페이지 수강현황" />
+		<put-attribute name="body"	value="/WEB-INF/views/member/myCourse.jsp" />
+	</definition>		
+	
+	<!-- 비밀번호 변경	 -->
+	<definition name="/member/changePwdForm" extends="baseLayout">
+		<put-attribute name="title" value="비밀번호 변경" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/member/changePwd.jsp" />
 	</definition>	
 	
 </tiles-definitions>

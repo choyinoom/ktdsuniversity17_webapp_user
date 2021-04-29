@@ -3,9 +3,11 @@ html {
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden;
+	position: relative;
+	width: 100%;
 }
 
 a {
@@ -26,11 +28,6 @@ input {
     border: none;
     text-decoration: none;
     -webkit-appearance: none;
-}
-
-#wrapper {
-    position: relative;
-    width: 100%;
 }
 
 header {
@@ -225,10 +222,8 @@ table td {
 	position: absolute;
 	border-radius: 4px;
     background-color: #fff;
-    padding: 38px 64px;
-    width: calc(100% - 40px);
-    max-width: 416px;
-    min-width: 320px;
+	padding: 38px 64px;
+    width: 400px; /*디폴트*/
 }
 
 .custom__modal #buttons {
@@ -236,12 +231,16 @@ table td {
 	padding-top: 14px;
 }
 
-#buttons button {
-    border-style: none;
+
+#buttons button { /* 모달 속 버튼 */
+	border-style: none;
     margin: 0px 12px;
-    padding: 8px;
+    padding: 8px 12px;
     border-radius: 4px;
     font-size: 13px;
+    font-weight: 500;
+    background-color: #ffc107;
+    font-family: 'Noto Sans KR';
 }
 
 select {

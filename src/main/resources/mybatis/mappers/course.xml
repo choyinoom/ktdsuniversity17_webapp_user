@@ -48,6 +48,8 @@
 			crs_id, 
 			SUBSTR(crs_start_date,0,10) as crs_start_date, 
 			SUBSTR(crs_end_date,0,10) as crs_end_date, 
+			crs_start_time,
+			crs_end_time,
 			crs_classroom, 
 			slb_name, 
 			slb_type, 
@@ -60,24 +62,7 @@
 	]]>
 	</select>
 	
-	<!-- 수강신청 -->
-	<insert id="insertNewEnrollment" parameterType="java.util.Map">
-	<![CDATA[
-		INSERT INTO 
-			enrollment_detail(
-				enrd_id, 
-				crs_id, 
-				mem_id, 
-				enrd_stat
-			)
-		VALUES(
-			enrd_seq.NEXTVAL, 
-			#{courseId}, 
-			#{id}, 
-			'신청'
-		)
-	]]>
-	</insert>
+	
 	
 	<!-- 과정 상세 내용 출력 -->
 	<select id="selectCourse" parameterType="int" resultMap="crsResult">
@@ -143,5 +128,4 @@
 		WHERE slb_name like '%' || #{keyword} || '%'
 	]]>
 	</select>
-
 </mapper>

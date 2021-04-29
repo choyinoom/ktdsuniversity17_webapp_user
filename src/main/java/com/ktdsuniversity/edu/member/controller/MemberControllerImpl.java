@@ -9,6 +9,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +22,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ktdsuniversity.edu.board.service.BoardService;
 import com.ktdsuniversity.edu.course.service.CourseService;
 import com.ktdsuniversity.edu.course.vo.CourseVO;
 import com.ktdsuniversity.edu.member.service.MemberService;
+import com.ktdsuniversity.edu.member.vo.EnrollmentDetailVO;
 import com.ktdsuniversity.edu.member.vo.MemberVO;
 
 @Controller("memberController")
@@ -48,6 +51,7 @@ public class MemberControllerImpl implements MemberController {
 		return mav;
 	}
 	
+
 	//약관동의
 	@RequestMapping(value = "/member/joinAgree.do", method =  RequestMethod.GET)
 	@Override
@@ -75,11 +79,93 @@ public class MemberControllerImpl implements MemberController {
 	@Override
 	public ModelAndView listPrivacy(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
-		System.out.println(viewName);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		return mav;
 	}
+
+	/* 마이페이지 */
+	@RequestMapping(value = "/member/myPage.do", method = RequestMethod.GET)
+	@Override
+	public ModelAndView mypage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String pageFlag = request.getParameter("pageFlag");
+		ModelAndView mav = new ModelAndView();
+		if(pageFlag == null) {
+			mav.setViewName("/member/myPage");
+			MemberVO vo = memberService.getMemberInfo(memberVO.getId());
+			mav.addObject("memberVO", vo);
+		} else {
+			mav.setViewName("/member/myCourse");
+			List<EnrollmentDetailVO> enrollmentDetailList = memberService.findEnrollmentDetailBy(memberVO.getId());
+			mav.addObject("enrollmentDetailList", enrollmentDetailList);
+		}		
+		return mav;
+	}
+	
+	
+	/* 정보 수정*/
+	@Override
+	@RequestMapping(value = "/member/changeMemberInfo.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<String> changeMemberInfo(@ModelAttribute("member") MemberVO member, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		member.setId(memberVO.getId());
+		int result = 0;
+		try {
+			result = memberService.changeMemberInfo(member);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		String contextPath = request.getContextPath();
+		String message = null;
+		ResponseEntity<String> resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		if (result == 1) {
+			message = "<script>";
+			message += "alert('정보가 변경되었습니다.');";
+			message += "window.location.replace('" + contextPath + "/member/myPage.do')";
+			message += "</script>";
+		} else {
+			message = "<script>";
+			message += " alert(`정보 변경에 실패하였습니다.\n관리자에게 문의하십시오.`);";
+			message += " history.go(-1); ";
+			message += "</script>";
+		}
+		resEnt = new ResponseEntity<String> (message, responseHeaders, HttpStatus.CREATED);
+		return resEnt; 
+	}
+	
+	
+	/* 마이페이지->비밀번호 변경폼*/
+	@Override
+	@RequestMapping(value = "/member/changePwdForm.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView changePwdForm(@ModelAttribute("member") MemberVO member, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		String viewName = (String)request.getAttribute("viewName");
+		MemberVO vo = memberService.selectMemberPwInfoById(memberVO.getId());
+		ModelAndView mav = new ModelAndView(); //이것도 바꿔야될것같고
+		mav.setViewName(viewName);
+		mav.addObject("vo", vo);
+		return mav;
+	}
+	
+	/* 마이페이지->비밀번호 변경 */
+	@Override
+	@RequestMapping(value = "/member/changePwd.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView changePwd(@ModelAttribute("member") MemberVO member, @RequestParam String newPw1, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		String viewName = (String)request.getAttribute("viewName"); 
+		MemberVO vo = memberService.getMemberInfo(memberVO.getId());
+	    vo.setPw(newPw1); //새로운비밀번호 넣기
+		int result = 0; //?
+		result = memberService.updatePwOfMember(vo);
+		ModelAndView mav = new ModelAndView("redirect:/member/myPage.do"); 
+		return mav;
+	}
+	
+
+	
+	
 	
 	//아이디 중복확인
 	@ResponseBody
@@ -91,17 +177,6 @@ public class MemberControllerImpl implements MemberController {
 		return result;
 	}
 	
-	@Override
-	@RequestMapping(value = "/member/listMembers.do", method = RequestMethod.GET)
-	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String) request.getAttribute("viewName");
-		List membersList = memberService.listMembers();
-		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("membersList", membersList);
-
-		return mav;
-	}
-	
 	//회원가입
 	@Override
 	@RequestMapping(value = "/member/addMember.do", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
@@ -109,9 +184,6 @@ public class MemberControllerImpl implements MemberController {
 			HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 				memberService.addMember(member);
-		System.out.println("#####################################");
-		System.out.println(member.getPhone());
-		System.out.println(member.getTel());
 		ModelAndView mav = new ModelAndView("redirect:/member/celebration.do");
 		return mav;
 	}
@@ -122,21 +194,11 @@ public class MemberControllerImpl implements MemberController {
 			HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		memberService.removeMember(id);
-		ModelAndView mav = new ModelAndView("redirect:/member/listMembers.do");
+		ModelAndView mav = new ModelAndView("redirect:/");
 		return mav;
 	}
 
-	/*
-	 * @RequestMapping(value = { "/member/loginForm.do", "/member/memberForm.do" },
-	 * method = RequestMethod.GET)
-	 * 
-	 * @RequestMapping(value = "/member/*Form.do", method = RequestMethod.GET)
-	 * public ModelAndView form(HttpServletRequest request, HttpServletResponse
-	 * response) throws Exception { String viewName = getViewName(request);
-	 * ModelAndView mav = new ModelAndView(); mav.setViewName(viewName); return mav;
-	 * }
-	 * 
-	 */
+	
 	@Override
 	@RequestMapping(value = "/member/login.do", method = RequestMethod.POST)
 	public ModelAndView login(@ModelAttribute("member") MemberVO member, RedirectAttributes rAttr,
@@ -158,11 +220,13 @@ public class MemberControllerImpl implements MemberController {
 
 		} else {
 			rAttr.addAttribute("result", "loginFailed");
+			memberService.updateLoginFail(member.getId());
 			mav.setViewName("redirect:/member/loginForm.do");
 		}
 		return mav;
 	}
 
+	/* 로그아웃 */
 	@Override
 	@RequestMapping(value = "/member/logout.do", method = RequestMethod.GET)
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -170,7 +234,7 @@ public class MemberControllerImpl implements MemberController {
 		session.removeAttribute("member");
 		session.removeAttribute("isLogOn");
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/member/listMembers.do");
+		mav.setViewName("redirect:/");
 		return mav;
 	}
 

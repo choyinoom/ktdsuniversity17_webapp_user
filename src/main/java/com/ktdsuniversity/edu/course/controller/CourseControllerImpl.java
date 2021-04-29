@@ -65,7 +65,7 @@ public class CourseControllerImpl implements CourseController{
 		
 		Map<String, Object> enrollMap = new HashMap<String, Object>();
 		enrollMap.put("id", memberVO.getId());
-		enrollMap.put("courseId", Integer.parseInt(request.getParameter("courseId")));
+		enrollMap.put("courseId", request.getParameter("courseId"));
 		System.out.println(memberVO.getId());
 		System.out.println(request.getParameter("courseId"));
 		// 이미 수강 접수한 이력이 있는지 확인한다.
@@ -83,7 +83,7 @@ public class CourseControllerImpl implements CourseController{
 			try {
 				courseService.enrollCourse(enrollMap);
 				message = "<script>";
-				message += " alert('수강신청이 완료되었습니다.');";
+				message += " alert(`신청이 완료되었습니다.\n신청현황은 마이페이지>수강현황에서 확인할 수 있습니다.`);";
 				message += " history.go(-1); "; // 이전 페이지로 돌아가기
 				message += " </script>";
 			} catch(Exception e) {
@@ -120,4 +120,24 @@ public class CourseControllerImpl implements CourseController{
 		return mav;
 	}
 	
+	/* 수강 취소 요청*/
+	@Override
+	@RequestMapping(value="/dropCourse.do", method= RequestMethod.POST)
+	public ModelAndView dropCourse(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		int courseId = Integer.parseInt(request.getParameter("courseId"));
+		HttpSession session = request.getSession();
+		memberVO = (MemberVO)session.getAttribute("member");
+		
+		Map<String, Object> dropMap = new HashMap<String, Object>();
+		dropMap.put("memberId", memberVO.getId());
+		dropMap.put("courseId", courseId);
+		try {
+			courseService.dropCourse(dropMap);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		ModelAndView mav = new ModelAndView("redirect:/member/myPage.do?pageFlag=C");
+		return mav;
+	}
 }

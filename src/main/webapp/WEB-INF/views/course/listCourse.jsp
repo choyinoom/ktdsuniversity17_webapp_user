@@ -42,7 +42,7 @@ request.setCharacterEncoding("UTF-8");
 					<ul class = "grid mx-auto" id="pagination"></ul>
 				</div>
 			</section>
-			<div class="custom__modal">
+			<div class="custom__modal" id="enroll">
 				<div class="dimmed"></div>
 				<section id="course__enroll">
 					<div id="content">
@@ -50,6 +50,7 @@ request.setCharacterEncoding("UTF-8");
 						<hr>
 						<p id="name"></p>
 						<p id="date"></p>
+						<p id="time"></p>
 						<div class = "grid row-wrap" id="buttons">
 							<button id="submit">신청</button>
 							<button id="cancle">취소</button>
@@ -82,7 +83,7 @@ request.setCharacterEncoding("UTF-8");
 	            	td = curRow.find("td").last();
 	            	td.append(courseName);
 	            	// 교육기간
-	            	curRow.append(`<td>\${course['startDate']} ~ \${course['endDate']}<br>\${course['syllabusVO']['time']}시간</td>`);
+	            	curRow.append(`<td data-start=\${course['startTime']} data-end=\${course['endTime']}>\${course['startDate']} ~ \${course['endDate']}<br>\${course['syllabusVO']['time']}시간</td>`);
 	            	// 수강신청 버튼
 	            	var enrollBtn = $('<button id="course__btn">신청하기</button>');
 	            	curRow.append("<td></td>");
@@ -120,12 +121,13 @@ request.setCharacterEncoding("UTF-8");
 				course = {
 					id: row[0].textContent,
 				 	name: row[2].textContent, 
-				 	date: row[3].textContent
+				 	date: row[3].textContent,
+				 	time: $(row[3]).data('start') + " ~ " + $(row[3]).data('end')
 				}
 	
 				$('#name').text('과정명: ' + course.name); 
-				$('#date').text('일시: ' + course.date.substr(0,23));
-				 
+				$('#date').text('날짜: ' + course.date.substr(0,23));
+				$('#time').text('시간: ' + course.time); 
 				$('.custom__modal').css('display','flex');
 			} else {
 				alert("로그인 후 수강신청이 가능합니다.");
@@ -135,7 +137,7 @@ request.setCharacterEncoding("UTF-8");
 		});
 		
 		/* 수강신청 버튼*/
-		$('.custom__modal #submit').on('click', function() {
+		$('#enroll #submit').on('click', function() {
 			let form = document.createElement("form");
 			form.action = '${contextPath}/course/enrollCourse.do';
 			form.method = "post";

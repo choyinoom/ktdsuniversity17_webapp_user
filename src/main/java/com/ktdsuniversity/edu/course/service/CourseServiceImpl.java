@@ -47,7 +47,7 @@ public class CourseServiceImpl implements CourseService {
 		// 강의들을 모집월별로 분류한다.
 		for(int i=0; i<coursesList.size(); i++) {
 			CourseVO course = coursesList.get(i);
-			String month = course.getStartDate().substring(0,2).replace("0", ""); // 04월 --> 4월
+			String month = course.getStartDate().substring(0,2).replaceFirst("^0+(?!$)", ""); // 04월 --> 4월
 			
 			// courseMap에 month를 키로 하는 value가 있는지 확인한다.
 			if(courseMap.isEmpty() || !courseMap.containsKey(month)) {
@@ -68,5 +68,10 @@ public class CourseServiceImpl implements CourseService {
 		List<CourseVO> coursesList = null;
 		coursesList = courseDAO.selectAllCourseListBy(keyword);
 		return coursesList;
+	}
+
+	@Override
+	public int dropCourse(Map<String, Object> dropMap) throws Exception {
+		return courseDAO.dropCourse(dropMap);
 	}
 }
