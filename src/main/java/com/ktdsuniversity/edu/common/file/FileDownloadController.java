@@ -23,14 +23,14 @@ import com.ktdsuniversity.edu.board.vo.ArticleVO;
 
 @Controller
 public class FileDownloadController {
-	private static final String ARTICLE_FILE_REPO = "C:\\uploadtest";
+	private static final String ARTICLE_FILE_REPO = "C:\\Users\\lho16\\git workspace\\uni17_admin\\src\\main\\webapp\\resources\\articleFile";
 	
 	@Autowired
 	private BoardService boardService;
 	@Autowired
 	private ArticleVO articleVO;
 	
-	@RequestMapping("/download.do")
+	@RequestMapping("/download.do") 
 	protected void download(@RequestParam("imageFileName") String imageFileName,	//?��미�? ?��?��?���? ?��?��
 							@RequestParam("articleNO") String articleNO,
 			                 HttpServletResponse response)throws Exception {
