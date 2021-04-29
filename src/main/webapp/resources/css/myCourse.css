@@ -7,6 +7,11 @@
 	background-image: url("../image/login-banner.png")
 }
 
+#myCouse_stat {
+	position: relative;
+    left: 3em;	
+}
+
 .menu{
     margin: 50px auto;
     padding-bottom: 15px; 
@@ -63,8 +68,9 @@
 }
 
 #my__courses td:nth-child(4) {
-	text-align: right;
+	text-align: center;
 	padding-right: 5px;
+	width: 10%;
 }
 
  
