@@ -6,6 +6,10 @@
     background: url("../image/course-banner.png");
 }
 
+#course__banner h1{
+	position: relative;
+	top: -14px;
+}
 #course__contents {
     width: 1000px;
 }
@@ -47,15 +51,15 @@
 }
 
 #course__list th {
-    border-bottom: 1px solid rgba(128, 128, 128, 0.8);
+    border-bottom: 2px solid rgba(128, 128, 128, 1);
     height: 60px;
 }
 
 #course__list td {
-    border-bottom: 1px solid rgba(128, 128, 128, 0.8);
+    border-bottom: 1px solid rgba(128, 128, 128, 0.3);
     padding: 8px 12px;
     height: 60px;
-    font-size: 13px;
+    font-size: 0.9em;
 }
 
 #course__name {
@@ -71,10 +75,11 @@
     width: fit-content;
     border-radius: 6px;
     border-style: none;
-    background: #ee2129;
+    background: #e91b23;
     color: white;
-    padding: 4px 12px;
+    padding: 8px 12px;
     font-size: 13px;
+    cursor: pointer;
 }
 
 #Pagination {

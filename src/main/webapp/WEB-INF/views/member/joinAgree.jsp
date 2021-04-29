@@ -22,7 +22,7 @@ request.setCharacterEncoding("UTF-8");
 	    <div class="checkbox_group">
 	    
 	    <div class="joinAgree_title1">
-	    <div class="joinAgree_text">이용약관</div>
+	    <div class="joinAgree_text" id="joinAgree_text">이용약관</div>
 	    <div class="joinAgree_checkAll">
 	    <input type="checkbox" id="check_all"  >
 	    <label for="check_all"> 전체 동의 </label>

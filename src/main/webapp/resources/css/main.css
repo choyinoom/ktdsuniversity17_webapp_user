@@ -111,6 +111,7 @@
 
 .card:hover .card__back {
 	opacity: 1;
+	height: calc(100% - 24px);
 }
 
 .hidden {
@@ -149,8 +150,8 @@
 	background: rgba(0, 0, 0, 0.7);
 	color: #fff;
 	width: inherit;
-	height: calc(100% - 24px);
-	transition: .5 ease;
+	height: 0px;
+	transition: height 0.2s linear;
 	opacity: 0;
 }
 
@@ -178,6 +179,7 @@
 	border-style: none;
 	border-radius: 4px;
 	margin: 0px auto;
+	cursor: pointer;
 }
 
 #article__quickview { /* faq, 공지사항, 오시는 길, 내비게이션 */

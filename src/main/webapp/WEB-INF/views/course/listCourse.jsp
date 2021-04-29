@@ -20,7 +20,6 @@ request.setCharacterEncoding("UTF-8");
 			<section class="banner" id="course__banner">
 				<h1>과정 안내</h1>
 			</section>
-			<h2>현재 모집중인 과정</h2>
 			<section id="course__contents">
 				<form class="grid" id="course__search">
 					<img src="${contextPath}/resources/image/loupe.png" alt="검색하기">

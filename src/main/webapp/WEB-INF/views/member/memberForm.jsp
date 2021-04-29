@@ -71,8 +71,8 @@ request.setCharacterEncoding("UTF-8");
 								<option value="063">063</option>
 								<option value="064">064</option>
 						</select>- 
-						<input class="memberform_box_tel" type="tel" name="tel2" maxlength='4' pattern="[0-9]+" >- 
-						<input class="memberform_box_tel" type="tel" name="tel3" maxlength='4' pattern="[0-9]+" >
+						<input class="memberform_box_tel" type="tel" name="tel2" minlenth='3' maxlength='4' pattern="[0-9]+" >- 
+						<input class="memberform_box_tel" type="tel" name="tel3" minlenth='3' maxlength='4' pattern="[0-9]+" >
 						<input type="hidden" name="tel"></td>
 					</tr>
 					<tr>
@@ -88,8 +88,8 @@ request.setCharacterEncoding("UTF-8");
 								<option value="017">017</option>
 								<option value="019">019</option>
 						</select>- 
-						<input class="memberform_box_tel" type="tel" name="phone2" maxlength='4' pattern="[0-9]+">- 
-						<input class="memberform_box_tel" type="tel" name="phone3" maxlength='4' pattern="[0-9]+">
+						<input class="memberform_box_tel" type="tel" name="phone2" minlenth='3' maxlength='4' pattern="[0-9]+">- 
+						<input class="memberform_box_tel" type="tel" name="phone3" minlenth='3' maxlength='4' pattern="[0-9]+">
 						<input type="hidden" name="phone"></td>
 					</tr>
 					<tr>

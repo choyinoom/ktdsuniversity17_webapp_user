@@ -38,21 +38,10 @@ value='/resources/css/loginForm.css'/>">
 	
 	<div class="mx-auto grid ai-center" id="login__container">
 		<!-- 로그인폼 -->
-		<form name="frmLogin" method="post"
-			action="${contextPath}/member/login.do" class="login__form">
-			<fieldset>
-				<div class="input__row" id="login__id" >
-					<input type="text" name="id" placeholder="아이디" required
-						oninvalid="this.setCustomValidity('Enter User Name Here')"
-						oninput="this.setCustomValidity('')">
-				</div>
-				<div class="input__row" id="login__pw" >
-					<input type="password" name="pw" placeholder="비밀번호" required
-						oninvalid="this.setCustomValidity('Enter User Password Here')"
-						oninput="this.setCustomValidity('')">
-				</div>
+		<form name="frmLogin" method="post"	action="${contextPath}/member/login.do" class="login__form">
+					<input type="text" name="id" placeholder="아이디" required>
+					<input type="password" name="pw" placeholder="비밀번호" required>
 				<input type="submit" id="login__btn" value="로그인">
-			</fieldset>
 		</form>
 		<!-- 도움 받기 -->
 		<div id="login__help">
@@ -62,7 +51,7 @@ value='/resources/css/loginForm.css'/>">
 		</div>
 		<div id="join">
 			<span><b>회원이 아니신가요?</b><br></span>
-			<a href="${contextPath}/member/memberForm.do">회원가입하기</a>
+			<a href="${contextPath}/member/joinAgree.do">회원가입하기</a>
 		</div>
 		</div>
 		
