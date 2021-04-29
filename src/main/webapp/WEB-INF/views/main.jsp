@@ -34,7 +34,7 @@
 						kt ds는 KT 정보시스템 구축 기술과 노하우를 기반으로 <br> 새로운 IT서비스를 창출하고 우수한 인재를
 						양성하여 <br> 고객의 가치를 최고로 실현하는 IT서비스 전문기업입니다.
 					</p>
-					<button onclick="location.href='${contextpath}/company/company.do'" type="button">자세히 보기</button>
+					<button style="cursor: pointer;" onclick="location.href='${contextpath}/edu/company/companyInfo.do'" type="button">자세히 보기</button>
 				</div>
 
 			</div>

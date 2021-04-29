@@ -71,6 +71,7 @@
     text-align: center;
     border-style: none;
     border-radius: 7px;
+    cursor: pointer;
 }
 
 .td_button{ /* 신청취소 버튼 */
@@ -85,6 +86,7 @@
 
 #my__courses img {
     width: 20px;
+    cursor:pointer;
 }
 
 

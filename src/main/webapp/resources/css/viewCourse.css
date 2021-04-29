@@ -54,7 +54,7 @@
 
 #enroll__button { 
 	width: 165px;
-	height: 30px;
+	height: 37px;
 	float: right;
 	background: #ec7880;
 	border-radius: 5px;
@@ -70,7 +70,7 @@
     color: white;
     text-align: center;
     letter-spacing: -0.5px;
-    padding-top: 4px;
+    padding-top: 7px;
 }
 
 

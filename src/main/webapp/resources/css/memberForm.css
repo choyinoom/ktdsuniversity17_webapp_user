@@ -17,6 +17,10 @@
 	background: url("../image/memberform_banner.png");
 }
 
+#memberform__banner h1{
+	position: relative;
+	top: -14px;
+}
 .memberform_box {
 	background: #ECECEC;
 	width: 318px;
@@ -172,6 +176,10 @@
 .joinAgree_text {
 	font-size: 1.5em;
 	margin-bottom: 0.4em;
+}
+
+#joinAgree_text {
+	transform: translateY(15px);
 }
 
 .joinAgree_checkAll {

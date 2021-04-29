@@ -21,8 +21,7 @@ request.setCharacterEncoding("UTF-8");
 	 
 	<div class="consortium__container">
 		<section class="banner" id="consortium__banner">
-				<span style="position:relative; top:-2em;"><h1>정부 지원 무료 교육<br>국가인적자원개발 컨소시엄</h1></span>
-				<span style="position:relative; top:-8em; color: #fff;">채용과 교육의 기회를 동시에 제공합니다.</span>
+				<span style="position:relative; top:-1em;"><h1>정부 지원 무료 교육<br>국가인적자원개발 컨소시엄</h1></span>
 		</section>
 		<div class="consortium__content">
 			<img id="consortium__content"
