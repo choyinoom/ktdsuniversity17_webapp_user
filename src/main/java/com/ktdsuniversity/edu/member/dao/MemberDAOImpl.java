@@ -67,6 +67,19 @@ public class MemberDAOImpl implements MemberDAO {
 		EnrollmentDetailVO vo = sqlSession.selectOne("mapper.enrollment.selectEnrollmentDetailByEnrollMap", enrollMap);
 		return vo;
 	}
+
+	@Override
+	public MemberVO selectMemberPwInfoById(String id) throws DataAccessException {
+		MemberVO vo = sqlSession.selectOne("mapper.member.selectMemberPwInfoById", id);
+		return vo;
+	}
+
+	/* 비밀번호변경 */
+	@Override
+	public int updatePwOfMember(MemberVO vo) {
+		
+		return sqlSession.update("mapper.member.updatePwOfMember", vo);
+	}
 	
 	/* 마이페이지 수강현황 */
 	@Override

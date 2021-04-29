@@ -19,4 +19,8 @@ public interface MemberService {
 	public EnrollmentDetailVO findEnrollmentDetailBy(Map<String, Object> enrollMap) throws Exception;
 	public List<EnrollmentDetailVO> findEnrollmentDetailBy(String id) throws Exception;
 
+	public MemberVO selectMemberPwInfoById(String id) throws Exception;
+	
+	/* 비밀번호변경 */
+	public int updatePwOfMember(MemberVO vo);
 }

@@ -90,7 +90,7 @@ public class MemberControllerImpl implements MemberController {
 		if (result == 1) {
 			message = "<script>";
 			message += "alert('정보가 변경되었습니다.');";
-			message += "window.location.replace('" + contextPath + "/member/mypage.do')";
+			message += "window.location.replace('" + contextPath + "/member/myPage.do')";
 			message += "</script>";
 		} else {
 			message = "<script>";
@@ -110,6 +110,37 @@ public class MemberControllerImpl implements MemberController {
 		mav.setViewName(viewName);
 		return mav;
 	}
+	
+	/* 마이페이지->비밀번호 변경폼*/
+	@Override
+	@RequestMapping(value = "/member/changePwdForm.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView changePwdForm(@ModelAttribute("member") MemberVO member, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		String viewName = (String)request.getAttribute("viewName");
+		MemberVO vo = memberService.selectMemberPwInfoById(memberVO.getId());
+		ModelAndView mav = new ModelAndView(); //이것도 바꿔야될것같고
+		mav.setViewName(viewName);
+		mav.addObject("vo", vo);
+		return mav;
+	}
+	
+	/* 마이페이지->비밀번호 변경 */
+	@Override
+	@RequestMapping(value = "/member/changePwd.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView changePwd(@ModelAttribute("member") MemberVO member, @RequestParam String newPw1, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		String viewName = (String)request.getAttribute("viewName"); 
+		MemberVO vo = memberService.getMemberInfo(memberVO.getId());
+	    vo.setPw(newPw1); //새로운비밀번호 넣기
+		int result = 0; //?
+		result = memberService.updatePwOfMember(vo);
+		ModelAndView mav = new ModelAndView("redirect:/member/myPage.do"); 
+		return mav;
+	}
+	
+
+	
+	
 	
 	//아이디 중복확인
 	@ResponseBody

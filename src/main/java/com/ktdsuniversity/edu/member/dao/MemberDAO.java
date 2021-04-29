@@ -18,5 +18,6 @@ public interface MemberDAO {
 	public int updateLoginFail(String id) throws DataAccessException;
 	public EnrollmentDetailVO selectEnrollmentDetailBy(Map<String, Object> enrollMap) throws DataAccessException;
 	public List<EnrollmentDetailVO> selectEnrollmentDetailBy(String id) throws DataAccessException;
-
+	public MemberVO selectMemberPwInfoById(String id) throws DataAccessException;
+	public int updatePwOfMember(MemberVO vo);
 }
