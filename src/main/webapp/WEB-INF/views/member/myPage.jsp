@@ -70,9 +70,11 @@ request.setCharacterEncoding("UTF-8");
 			<button class="td_button" id="change__info" type="button">회원정보변경</button>
 			<button class="td_button"
 				onclick="location.href = '${contextPath}/member/changePwdForm.do'">비밀번호변경</button>
+			<button class="td_button" id="sign__out">탈퇴</button>
 		</div>
 
-		<div class="custom__modal">
+		<!-- 회원 정보 수정 모달-->
+		<div class="custom__modal" id="edit"> 
 			<div class="dimmed"></div>
 			<section>
 			<h4 style="text-align: center">회원정보 변경 🙋‍♂️</h4>
@@ -134,6 +136,29 @@ request.setCharacterEncoding("UTF-8");
 				</div>
 			</section>
 		</div>
+
+		<!-- 회원 탈퇴 모달-->
+		<div class="custom__modal" id="out">
+			<div class="dimmed"></div>
+			<section>
+				<h4 style="text-align: center">회원 탈퇴</h4>
+				<hr>
+				<ul>
+					<li>본인 확인을 위해 비밀번호를 한 번 더 입력해주세요.</li>
+					<li>항상 비밀번호는 타인에게 노출되지 않도록 주의해 주세요.</li>
+				</ul>
+				<form id="frm__out" method="post" action="${contextPath}/member/removeMember.do">
+					<label for="id">아이디</label>
+					<input type="text"	name="id" value="${member.id}" readonly><br>
+					<label for="pw">비밀번호</label>
+					<input type="password" name="pw" placeholder="비밀번호">
+				</form>
+				<div class="grid row-wrap" id="buttons">
+					<button id="submit" form="frm__out" type="submit">탈퇴</button>
+					<button id="cancle">취소</button>
+				</div>
+			</section>
+		</div>
 	</div>
 </div>
 <script type="text/javascript">
@@ -147,14 +172,14 @@ request.setCharacterEncoding("UTF-8");
 		});
 		
 		
-		if('${memberVO.subscription}' === 'T') { // default 수신동의 여부
+		if('${memberVO.subscription}' === 'T') { // 모달 속 default 수신동의 여부
 			document.querySelector("#subscription_T").checked = true;
 		} else {
 			document.querySelector("#subscription_F").checked = true;
 		}
 		
 		$("#change__info").on("click", function() {
-			$('.custom__modal').css('display', 'flex');
+			$('div[id="edit"]').css('display', 'flex');
 			/* 기존 전화번호 */
 			var tNumber = '${memberVO.tel}';	
 			if (tNumber.length > 0) {
@@ -175,16 +200,21 @@ request.setCharacterEncoding("UTF-8");
 			}
 		});
 
-		$('.custom__modal #submit').on('click', function() {
+		/* 회원 정보 수정 모달 속 '수정' 버튼*/
+		$('div[id="edit"] #subtit').on('click', function() {
 			$('#personal__info input[type="hidden"][name="phone"]').val($('#personal__info input[name="phone1"]').val()+'-'+$('#personal__info input[name="phone2"]').val()+'-'+$('#personal__info input[name="phone3"]').val());
 			const tel1 = $("#personal__info input[name='tel1']").val();
 			const tel2 = $("#personal__info input[name='tel2']").val();
 			const tel3 = $("#personal__info input[name='tel3']").val();
 			if(tel1 !== undefined && tel2 !== undefined && tel3 !== undefined)
 				$('#personal__info [type="hidden"][name="tel"]').val(tel1+'-'+tel2+'-'+tel3);
-			
-		})
+		});
 		
+		/* 마이페이지에서 탈퇴 버튼 클릭 시 */
+		$("button[id='sign__out']").on("click", function() {
+			$("div[id='out']").css('display', 'flex'); // 모달 생성
+		})	
+
 		/* 취소 버튼*/
 		$('.custom__modal #cancle').on('click', function() {
 			$('.custom__modal').css('display', 'none');

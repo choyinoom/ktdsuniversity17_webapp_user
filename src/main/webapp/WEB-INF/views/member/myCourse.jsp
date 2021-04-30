@@ -24,8 +24,9 @@
 			<tr>
 				<th width="37%">강좌명</th>
 				<th width="30%">교육기간</th>
-				<th width="5%">강의장</th>
-				<th colspan=2 >상태</th>
+				<th width="14%">강의장</th>
+				<th><p id="myCouse_stat">상태</p></th>
+				<th></th>
 			</tr>
 			<c:forEach var="detail" items="${enrollmentDetailList}">
 				<tr>
