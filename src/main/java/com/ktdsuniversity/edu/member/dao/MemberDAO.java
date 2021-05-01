@@ -11,7 +11,6 @@ import com.ktdsuniversity.edu.member.vo.MemberVO;
 public interface MemberDAO {
 	public int insertMember(MemberVO memberVO) throws DataAccessException ;
 	public int deleteMember(String id) throws DataAccessException;
-
 	public MemberVO loginById(MemberVO memberVO) throws DataAccessException;
 	public int idCheck(MemberVO vo) throws DataAccessException;
 	public MemberVO selectMemberInfo(String id) throws DataAccessException;

@@ -1,5 +1,6 @@
 	package com.ktdsuniversity.edu.member.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,11 +42,11 @@ public class MemberControllerImpl implements MemberController {
 	CourseVO courseVO;
 
 	@RequestMapping(value = { "/", "/main.do" }, method = RequestMethod.GET)
-	private ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	private ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);		
 		Map<String, Object> courseMap = courseService.listCoursesForWelcomePage();
-		String coursesJSON = new ObjectMapper().writeValueAsString(courseMap); // courseMap을 JSON으로 변환
+		String coursesJSON = new ObjectMapper().writeValueAsString(courseMap); // courseMap�쓣 JSON�쑝濡� 蹂��솚
 		mav.addObject("coursesJSON", coursesJSON);
 		return mav;
 	}
@@ -55,26 +56,24 @@ public class MemberControllerImpl implements MemberController {
 	@RequestMapping(value = "/member/joinAgree.do", method =  RequestMethod.GET)
 	@Override
 	public ModelAndView joinAgree(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String)request.getAttribute("viewName");
-		System.out.println(viewName);
+		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		return mav;
 	}
-	
-	//가입축하
-	@RequestMapping(value = "/member/celebration.do", method =  RequestMethod.GET)
+
+	// 회원가입 축하
+	@RequestMapping(value = "/member/celebration.do", method = RequestMethod.GET)
 	@Override
 	public ModelAndView celebrate(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String)request.getAttribute("viewName");
-		System.out.println(viewName);
+		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		return mav;
 	}
-	
-	//개인정보처리방침
-	@RequestMapping(value = "/member/privacy.do", method =  RequestMethod.GET)
+
+	// 개인정보처리방침
+	@RequestMapping(value = "/member/privacy.do", method = RequestMethod.GET)
 	@Override
 	public ModelAndView listPrivacy(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
@@ -142,7 +141,7 @@ public class MemberControllerImpl implements MemberController {
 		request.setCharacterEncoding("utf-8");
 		String viewName = (String)request.getAttribute("viewName");
 		MemberVO vo = memberService.selectMemberPwInfoById(memberVO.getId());
-		ModelAndView mav = new ModelAndView(); //이것도 바꿔야될것같고
+		ModelAndView mav = new ModelAndView(); 
 		mav.setViewName(viewName);
 		mav.addObject("vo", vo);
 		return mav;
@@ -163,12 +162,10 @@ public class MemberControllerImpl implements MemberController {
 	}
 	
 
-	
-	
-	
+
 	//아이디 중복확인
 	@ResponseBody
-	@RequestMapping(value = "/member/idCheck.do", method =  RequestMethod.POST)
+	@RequestMapping(value = "/member/idCheck.do", method = RequestMethod.POST)
 	public int idCheck(String id, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		MemberVO vo = new MemberVO();
 		vo.setId(id);
@@ -269,6 +266,54 @@ public class MemberControllerImpl implements MemberController {
 		mav.setViewName("redirect:/");
 		return mav;
 	}
+
+	// 비밀번호 찾기 폼
+	@Override
+	@RequestMapping(value = "/member/findPwdForm.do")
+	public String findPwdForm() throws Exception {
+		return "/member/findPwdForm";
+	}
+
+	// 비밀번호 찾기
+	@Override
+	@RequestMapping(value = "/member/findPwd.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<String> findPwd(@ModelAttribute MemberVO member, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		request.setCharacterEncoding("utf-8");
+		ResponseEntity<String> resEnt = null;
+		String message = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		
+		// 아이디가 없으면
+		int result = memberService.idCheck(member);
+		if (result == 0) {
+			message = "등록된 아이디가 없습니다.";
+		}
+		else {
+			MemberVO vo = memberService.getMemberInfo(member.getId());
+			// 등록된 이메일이 없으면
+			if(!member.getEmail().equals(vo.getEmail())) {
+				message = "등록된 이메일과 다릅니다.";
+			} else {
+				//랜덤으로 번호 생성
+				String pw = "";
+				for (int i = 0; i < 12; i++) {
+					pw += (char) ((Math.random() * 26) + 97);
+				}
+				member.setPw(pw);
+				memberService.updatePwOfMember(member);
+				// 비밀번호 변경 메일 발송
+				memberService.sendPwdResetMail(member);
+				message = "이메일로 임시 비밀번호를 발송하였습니다.";
+			}
+		}
+		
+		resEnt = new ResponseEntity<String> (message, responseHeaders, HttpStatus.CREATED);
+		return resEnt;
+	}   
+	
 
 	@RequestMapping(value = "/member/*Form.do", method = RequestMethod.GET)
 	private ModelAndView form(@RequestParam(value = "result", required = false) String result,
