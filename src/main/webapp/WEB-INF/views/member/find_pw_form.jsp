@@ -36,6 +36,7 @@ request.setCharacterEncoding("UTF-8");
 				},
 				success : function(result) {
 					alert(result);
+					$(location).attr('href', '${contextPath}/member/loginForm.do')
 				},
 			})
 		});
