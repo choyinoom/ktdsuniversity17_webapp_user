@@ -62,6 +62,10 @@
 	margin-left:40px;
 	color: white;
 	border-style: none;
+	font-size: 1.1em;
+    font-weight: 600;
+    margin-top: 1em;
+    cursor: pointer;
 }
 
 #enroll__button a {
