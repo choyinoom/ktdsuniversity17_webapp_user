@@ -58,6 +58,15 @@
 	]]>
 	</insert>
 	
+	<!-- 수강신청 인원 증가-->
+	<update id="updateCourseApplyNum" parameterType="int">
+	<![CDATA[
+		UPDATE course 
+		SET crs_apply_num = crs_apply_num + 1 
+		WHERE crs_id = #{courseId}
+	]]>
+	</update>
+
 	<!-- 수강 취소 요청 -->
 	<update id="updateEnrdStatToDrop" parameterType="java.util.Map">
 	<![CDATA[

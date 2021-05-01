@@ -8,6 +8,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ktdsuniversity.edu.course.dao.CourseDAO;
 import com.ktdsuniversity.edu.course.vo.CourseVO;
@@ -25,9 +27,14 @@ public class CourseServiceImpl implements CourseService {
 		return coursesList;
 	}
 
+	
 	@Override
-	public int enrollCourse(Map<String, Object> enrollMap) throws Exception {
-		return courseDAO.enrollCourse(enrollMap);
+	@Transactional(rollbackFor = Exception.class)
+	public int enrollCourse(Map<String, Object> enrollMap){
+			int result1 = courseDAO.enrollCourse(enrollMap);
+			int courseId = Integer.parseInt((String)enrollMap.get("courseId"));
+			int result2 = courseDAO.updateCourseApplyNum(courseId);
+			return result1 * result2;
 	}
 
 	@Override

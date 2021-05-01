@@ -7,12 +7,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.ktdsuniversity.edu.course.vo.CourseVO;
 import com.ktdsuniversity.edu.course.vo.SyllabusVO;
 
-@Transactional
 @Repository("courseDAO")
 public class CourseDAOImpl implements CourseDAO{
 	@Autowired
@@ -56,5 +54,10 @@ public class CourseDAOImpl implements CourseDAO{
 	@Override
 	public int dropCourse(Map<String, Object> dropMap) throws DataAccessException {
 		return sqlSession.update("mapper.enrollment.updateEnrdStatToDrop", dropMap);
+	}
+
+	@Override
+	public int updateCourseApplyNum(int courseId) throws DataAccessException {
+		return sqlSession.update("mapper.enrollment.updateCourseApplyNum", courseId);
 	}
 }

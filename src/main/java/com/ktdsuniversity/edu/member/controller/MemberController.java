@@ -15,7 +15,7 @@ import com.ktdsuniversity.edu.member.vo.MemberVO;
 public interface MemberController {
 	public ModelAndView mypage(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView addMember(@ModelAttribute("info") MemberVO memberVO,HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public ModelAndView removeMember(@RequestParam("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ResponseEntity<String> removeMember(@ModelAttribute("member") MemberVO member, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView login(@ModelAttribute("member") MemberVO member,
                               RedirectAttributes rAttr,
                               HttpServletRequest request, HttpServletResponse response) throws Exception;

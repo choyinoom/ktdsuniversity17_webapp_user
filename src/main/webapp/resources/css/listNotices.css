@@ -12,10 +12,29 @@
 
 #notice__list img {
 	width: 15px;
-    padding-left: 5px;
+	height: 15px;
+    margin: -2px 0px;
 }
 
 .notice__banner h1{
 	position: relative;
 	top: -14px;	
+}
+
+.search__result {
+	display: none;
+}
+
+button[id="new"] {
+	position: absolute;
+	width: fit-content;
+	height: fit-content;
+	padding-top: 2px;
+    padding-bottom: 2px;
+	margin: 5px 7px;
+    background-color: #e91b23;
+    border-radius: 4px;
+    color: #efefef;
+    border-style: none;
+    font-size: 9px;
 }

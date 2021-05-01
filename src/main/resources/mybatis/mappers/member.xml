@@ -53,10 +53,12 @@
 
 	<!-- 회원 탈퇴 -->
 	<delete id="deleteMember" parameterType="String">
-		<![CDATA[
-	   UPDATE member
-	   SET delYN = true
-	   WHERE id = #{id}
+	<![CDATA[
+	   	UPDATE member
+	   	SET 
+			mem_delYN = 'F',
+			mem_mod_date = TO_CHAR(sysdate, 'YYYY-MM-DD HH:MM:SS')
+	   WHERE mem_id = #{id}
 	]]>
 	</delete>
 
@@ -68,7 +70,10 @@
 			mem_name,
 			mem_company_name 
 		FROM member	
-		WHERE mem_id=#{id} and mem_pw=#{pw}		
+		WHERE 
+			mem_id=#{id} and 
+			mem_pw=#{pw} and
+			mem_delYN = 'T'		
 	]]>
 	</select>
 

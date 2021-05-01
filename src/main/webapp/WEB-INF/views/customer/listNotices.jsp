@@ -44,9 +44,7 @@
 				</div>
 			</form>
 		</div>
-		<c:if test="${searchText != null}">
-			<p class='search__result'><b>${searchText}</b>에 대한 검색결과: <span id=count></span> 건</p>
-		</c:if>
+		<p class='search__result'><b><span id="keyword">${searchText}</span></b>에 대한 검색결과: <span id=count>${noticesCnt}</span> 건</p>
 		<table id="notice__list">
 			<thead>
 				<tr align="center">
@@ -150,7 +148,10 @@
 		const pageNo = 1;	// 검색 시 무조건 1페이지 반환
 		const pagingSize = Number(document.getElementById('pagingSize').value);
 		const searchText = document.getElementById('searchText').value;
-
+		
+		$(".search__result").css('display', 'block');
+		$("span[id='keyword']").text(searchText);
+		
 		fn_sendRequest(pageNo)
 			.then((response) => {
 				fn_drawingTable(response, pageNo, pagingSize);
@@ -163,12 +164,15 @@
 		const articlesList = response.articlesList;
 		const noticesCnt = response.noticesCnt;
 		var index = Math.max(articlesList.length, noticesCnt -  pagingSize * (pageNo - 1));
+		/* ###에 대한 검색결과: 몇 건*/
+		$("span[id='count']").text(noticesCnt);
+		
 		var tableBody = $("#notice__list tbody");
 		tableBody.empty(); // 테이블 비우기
 
 		articlesList.forEach(function (article) {
-			var tr = $('<tr align="center"></tr>');
-			var td = null;
+			let tr = $('<tr align="center"></tr>');
+			let td = null;
 			// 번호 컬럼
 			if (article['important'] === '공지') {
 				tr.append('<td width="20%"><span class="notice__important">공지</span></td>');
@@ -177,12 +181,15 @@
 			}
 			index = index - 1;
 			// 제목 컬럼
-			td = $(`<td width="60%" class="row__title">
+			td = $(`<td width="60%" class="row__title" align="center">
 				<a href="${contextPath}/customer/viewNotice.do?articleId=\${article.id}">
 				\${article.title}
 				</a></td>`);
 			if (article['file'] === 'T') { // 첨부파일 있을 경우 아이콘 표시
 				td.append('<img src="${contextPath}/resources/image/disk.png">');
+			}
+			if (isNewNotice(article['joinDate'])) { // 등록한 지 일주일 안 지난 공지사항은 new 표시
+				td.append('<button id="new">new</button>');
 			}
 			tr.append(td);
 			// 등록일 컬럼
@@ -205,6 +212,24 @@
 			})
 			.catch((error) => { console.log(error) });
 	}
+
+	function isNewNotice(arg) {
+		// 게시된 지 일주일이 지나지 않은 공지 제목 옆에는 'new'를 띄운다.
+		const today = new Date();
+		const artJoinDate = arg.split("-");
+		const joinDate = new Date(artJoinDate[0], Number(artJoinDate[1])-1, artJoinDate[2]);
+		
+		// Do the math.
+		var millisecondsPerDay = 1000 * 60 * 60 * 24;
+		var millisBetween = today.getTime() - joinDate.getTime();
+		var days = millisBetween / millisecondsPerDay;
+
+		if (days < 7) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 </script>
 <script type="text/javascript">
 	$(document).ready(function () {
@@ -220,6 +245,19 @@
 				fn_getPage(pageNo);
 			}
 		});
+
+		const searchText = '${searchText}';
+		const noticesCnt = ${noticesCnt};
+		if (searchText.length > 0) {
+			$(".search__result").css('display', 'block');
+			$("span[id='keyword']").text(searchText);
+			
+			if(noticesCnt > 0) {
+				$("span[id='count']").text(noticesCnt);
+			} else {
+				$("span[id='count']").text('0');
+			}
+		}
 	})
 </script>
 <script src="${contextPath}/resources/js/jquery.twbsPagination.js" type="text/javascript"></script>

@@ -53,8 +53,8 @@
 		</div>
 		<section id="certification">
 			<div class = "grid row-wrap" id="buttons">
-				<button id="submit" onclick="window.print()">출력</button>
-				<button id="cancle">취소</button>
+				<button class="submit" onclick="window.print()">출력</button>
+				<button class="cancle">취소</button>
 			</div>
 			<div class="completionPrint">
 				<img id="completionImg" alt="" src="${contextPath}/resources/image/completion8.jpg">
@@ -91,8 +91,8 @@
 				<p id="name"></p>
 				<p id="date"></p>
 				<div class = "grid row-wrap" id="buttons">
-					<button id="submit">예</button>
-					<button id="cancle">아니오</button>
+					<button class="submit">예</button>
+					<button class="cancle">아니오</button>
 				</div>
 			</div>
 		</section>
@@ -175,7 +175,7 @@
 			$('div[id="drop"]').css('display','flex');
 		});
 
-		$('div[id="drop"] #submit').on('click', function() {
+		$('div[id="drop"] .submit').on('click', function() {
 			let form = document.createElement("form");
 			form.action = '${contextPath}/course/dropCourse.do';
 			form.method = "post";
@@ -187,7 +187,7 @@
 			form.submit();
 		})
 		/* 취소 버튼*/
-		$('.custom__modal #cancle').on('click', function() {
+		$('.custom__modal .cancle').on('click', function() {
 			$('.custom__modal').css('display','none');
 		})
 		
