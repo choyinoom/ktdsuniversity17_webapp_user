@@ -23,4 +23,13 @@ public interface MemberService {
 
 	public int idCheck(MemberVO vo) throws DataAccessException;
 
+	
+	// 비밀번호 찾기할 때 쓰는 메소드들
+	void send_mail(MemberVO member, String div) throws Exception;
+
+	void find_pw(HttpServletResponse response, MemberVO member) throws Exception;
+	
+	public void check_id(String id, HttpServletResponse response) throws Exception;
+
+
 }

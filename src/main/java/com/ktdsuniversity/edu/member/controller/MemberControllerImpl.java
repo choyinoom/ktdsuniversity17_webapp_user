@@ -1,5 +1,6 @@
 package com.ktdsuniversity.edu.member.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,59 +39,59 @@ public class MemberControllerImpl implements MemberController {
 	CourseVO courseVO;
 
 	@RequestMapping(value = { "/", "/main.do" }, method = RequestMethod.GET)
-	private ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	private ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
-		// 현재 모집중인 과정
+		// �쁽�옱 紐⑥쭛以묒씤 怨쇱젙
 		Map<String, Object> courseMap = courseService.listCoursesForWelcomePage();
-		String coursesJSON = new ObjectMapper().writeValueAsString(courseMap); // courseMap을 JSON으로 변환
+		String coursesJSON = new ObjectMapper().writeValueAsString(courseMap); // courseMap�쓣 JSON�쑝濡� 蹂��솚
 		mav.addObject("coursesJSON", coursesJSON);
 		return mav;
 	}
-	
-	//약관동의
-	@RequestMapping(value = "/member/joinAgree.do", method =  RequestMethod.GET)
+
+	// �빟愿��룞�쓽
+	@RequestMapping(value = "/member/joinAgree.do", method = RequestMethod.GET)
 	@Override
 	public ModelAndView joinAgree(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String)request.getAttribute("viewName");
+		String viewName = (String) request.getAttribute("viewName");
 		System.out.println(viewName);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		return mav;
 	}
-	
-	//가입축하
-	@RequestMapping(value = "/member/celebration.do", method =  RequestMethod.GET)
+
+	// 媛��엯異뺥븯
+	@RequestMapping(value = "/member/celebration.do", method = RequestMethod.GET)
 	@Override
 	public ModelAndView celebrate(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String)request.getAttribute("viewName");
+		String viewName = (String) request.getAttribute("viewName");
 		System.out.println(viewName);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		return mav;
 	}
-	
-	//개인정보처리방침
-	@RequestMapping(value = "/member/privacy.do", method =  RequestMethod.GET)
+
+	// 媛쒖씤�젙蹂댁쿂由щ갑移�
+	@RequestMapping(value = "/member/privacy.do", method = RequestMethod.GET)
 	@Override
 	public ModelAndView listPrivacy(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String)request.getAttribute("viewName");
+		String viewName = (String) request.getAttribute("viewName");
 		System.out.println(viewName);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		return mav;
 	}
-	
-	//아이디 중복확인
+
+	// �븘�씠�뵒 以묐났�솗�씤
 	@ResponseBody
-	@RequestMapping(value = "/member/idCheck.do", method =  RequestMethod.POST)
+	@RequestMapping(value = "/member/idCheck.do", method = RequestMethod.POST)
 	public int idCheck(String id, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		MemberVO vo = new MemberVO();
 		vo.setId(id);
 		int result = memberService.idCheck(vo);
 		return result;
 	}
-	
+
 	@Override
 	@RequestMapping(value = "/member/listMembers.do", method = RequestMethod.GET)
 	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -101,14 +102,14 @@ public class MemberControllerImpl implements MemberController {
 
 		return mav;
 	}
-	
-	//회원가입
+
+	// �쉶�썝媛��엯
 	@Override
 	@RequestMapping(value = "/member/addMember.do", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
 	public ModelAndView addMember(@ModelAttribute("member") MemberVO member, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-				memberService.addMember(member);
+		memberService.addMember(member);
 		System.out.println("#####################################");
 		System.out.println(member.getPhone());
 		System.out.println(member.getTel());
@@ -173,6 +174,28 @@ public class MemberControllerImpl implements MemberController {
 		mav.setViewName("redirect:/member/listMembers.do");
 		return mav;
 	}
+
+	// 비밀번호 찾기 폼
+	@RequestMapping(value = "/member/find_pw_form.do")
+	public String find_pw_form() throws Exception {
+		return "/member/find_pw_form";
+	}
+
+	// 비밀번호 찾기
+	@RequestMapping(value = "/member/find_pw.do", method = RequestMethod.POST)
+	public void find_pw(@ModelAttribute MemberVO member, HttpServletResponse response) throws Exception {
+		memberService.find_pw(response, member);
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@" + member.getId());
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@" + member.getEmail());
+	}
+	
+	// 아이디 검사(AJAX)
+		@RequestMapping(value = "/check_id.do", method = RequestMethod.POST)
+		public void check_id(@RequestParam("id") String id, HttpServletResponse response) throws Exception{
+			memberService.check_id(id, response);
+		}
+
+
 
 	@RequestMapping(value = "/member/*Form.do", method = RequestMethod.GET)
 	private ModelAndView form(@RequestParam(value = "result", required = false) String result,

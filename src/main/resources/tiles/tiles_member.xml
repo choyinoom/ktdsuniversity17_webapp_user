@@ -53,4 +53,10 @@
 		<put-attribute name="body" value="/WEB-INF/views/member/privacy.jsp" />
 	</definition>	
 	
+	<!--비밀번호 찾기 타일즈 추가 -->
+	<definition name="/member/find_pw_form" extends="baseLayout">
+		<put-attribute name="title" value="비밀번호 찾기" />
+		<put-attribute name="body" value="/WEB-INF/views/member/find_pw_form.jsp" />
+	</definition>	
+	
 </tiles-definitions>

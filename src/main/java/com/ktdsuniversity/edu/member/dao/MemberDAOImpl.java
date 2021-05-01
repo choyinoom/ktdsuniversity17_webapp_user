@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ktdsuniversity.edu.member.vo.EnrollmentDetailVO;
 import com.ktdsuniversity.edu.member.vo.MemberVO;
@@ -51,5 +52,29 @@ public class MemberDAOImpl implements MemberDAO {
 		int result = sqlSession.selectOne("mapper.member.selectMember", vo);
 		return result;
 	}
+	
+	
+	// 비밀번호 찾기 할 때 쓰는 메소드들
+	// 비밀번호 수정
+		@Transactional
+		public int update_pw(MemberVO member) throws Exception{
+			int result = sqlSession.update("mapper.member.update_pw", member);
+			return result;
+		}
+		
+		// 아이디 체크
+		@Override
+		public int check_id(String id) throws DataAccessException {
+			int result = sqlSession.selectOne("mapper.member.check_id", id);
+			return result;
+		}
+		
+		// 로그인 되는
+		@Override
+		public MemberVO login(String id) throws DataAccessException {
+			MemberVO vo = sqlSession.selectOne("mapper.member.login", id);
+			System.out.println("@@@@@@@@@@@@@@@@@@@@@@" +vo.getEmail());
+			return vo;
+		}
 	
 }

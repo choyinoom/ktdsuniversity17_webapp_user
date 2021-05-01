@@ -21,4 +21,12 @@ public interface MemberDAO {
 	
 	public int idCheck(MemberVO vo) throws DataAccessException;
 
+	
+	// 비밀번호 찾기할 때 쓰는 메소드들 3개
+	public int check_id(String id) throws DataAccessException;
+
+	public MemberVO login(String id) throws DataAccessException;
+
+	public int update_pw(MemberVO member) throws Exception;
+
 }

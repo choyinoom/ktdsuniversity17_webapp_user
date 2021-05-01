@@ -67,8 +67,5 @@ value='/resources/css/loginForm.css'/>">
 		</div>
 		
 	</div>
-	
-	 
-
 </body>
 </html>

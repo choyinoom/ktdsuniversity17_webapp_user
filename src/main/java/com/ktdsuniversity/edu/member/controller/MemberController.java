@@ -22,4 +22,5 @@ public interface MemberController {
 	public ModelAndView listPrivacy(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView joinAgree(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView celebrate(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 }
