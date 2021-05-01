@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ktdsuniversity.edu.member.vo.EnrollmentDetailVO;
 import com.ktdsuniversity.edu.member.vo.MemberVO;
@@ -87,6 +88,5 @@ public class MemberDAOImpl implements MemberDAO {
 		List<EnrollmentDetailVO> enrollmentDetailList = null;
 		enrollmentDetailList = sqlSession.selectList("mapper.enrollment.selectEnrollmentDetailById", id);
 		return enrollmentDetailList;
-	}
-	
+	}	
 }

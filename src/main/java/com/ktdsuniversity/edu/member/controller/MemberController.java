@@ -26,8 +26,8 @@ public interface MemberController {
 	public ResponseEntity<String> changeMemberInfo(@ModelAttribute("member")MemberVO member, HttpServletRequest request, HttpServletResponse response)
 			throws Exception;
 	public ModelAndView changePwdForm(MemberVO member, HttpServletRequest request, HttpServletResponse response) throws Exception;
-
-	/* 비밀번호변경 */
 	public ModelAndView changePwd(MemberVO member, @RequestParam String newPw1, HttpServletRequest request, HttpServletResponse response) throws Exception;
-	
+	public String findPwdForm() throws Exception;
+	public ResponseEntity<String> findPwd(@ModelAttribute MemberVO member, HttpServletRequest request, HttpServletResponse response) throws Exception;
+
 }

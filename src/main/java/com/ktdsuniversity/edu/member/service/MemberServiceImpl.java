@@ -3,7 +3,7 @@ package com.ktdsuniversity.edu.member.service;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -75,10 +75,51 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 // 비밀번호변경
-
 	@Override
 	public int updatePwOfMember(MemberVO vo) {
 		return memberDAO.updatePwOfMember(vo);
 	}
 	
+	// 임시 비밀번호 발송 메일 메소드
+	@SuppressWarnings("deprecation")
+	@Override
+	public void sendPwdResetMail(MemberVO member) throws Exception {
+		String charSet = "utf-8";
+		String hostSMTP = "smtp.naver.com";
+		String hostSMTPid = "junh011@naver.com";
+		String hostSMTPpwd = "ju0382";
+
+		String fromEmail = "junh011@naver.com";
+		String fromName = "kt ds University";
+		String subject = "kt ds University 임시 비밀번호 입니다.";
+		String msg = "임시 비밀번호 발급";
+
+		
+		subject = "kt s University 임시 비밀번호 입니다.";
+		msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
+		msg += "<h3 style='color: blue;'>";
+		msg += member.getId() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
+		msg += "<p>임시 번호: ";
+		msg += member.getPw() + "</p></div>";
+		
+		String mail = member.getEmail();
+		try {
+			HtmlEmail email = new HtmlEmail();
+			email.setDebug(true);
+			email.setCharset(charSet);
+			email.setSSL(true);
+			email.setHostName(hostSMTP);
+			email.setSmtpPort(587);
+
+			email.setAuthentication(hostSMTPid, hostSMTPpwd);
+			email.setTLS(true);
+			email.addTo(mail, charSet);
+			email.setFrom(fromEmail, fromName, charSet);
+			email.setSubject(subject);
+			email.setHtmlMsg(msg);
+			email.send();
+		} catch (Exception e) {
+			System.out.println("메일 전송 실패: " + e);
+		}
+	}
 }
