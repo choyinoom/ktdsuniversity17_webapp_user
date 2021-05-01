@@ -114,7 +114,7 @@ request.setCharacterEncoding("UTF-8");
 		</div>
 		</div>
 		<script type="text/javascript"
-			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7b93d2a7de17cf2095fb7a7ce6f30699"></script>
+			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b0bb62569d170ba99fca7cae0b15a369"></script>
 		<script>
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			mapOption = {

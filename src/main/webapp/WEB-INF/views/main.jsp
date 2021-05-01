@@ -141,9 +141,9 @@
 						// card-front
 						var cardFront = $(`<a class="card__front" href="${contextPath}/course/viewCourse.do?courseId=\${cur['id']}"></a>`);
 						var cardImage = $('<div class="card__image"></div>');
-						const backgroundImg = '${contextPath}/resources/image/course_banner/' + backgroundMapper[cur['syllabusVO']['crsCategoryId'] || 'undefined'] + '.jpg';
+						const backgroundImg = '/server/resources/image/course_card/' + backgroundMapper[cur['syllabusVO']['crsCategoryId'] || 'undefined'] + '.jpg';
 						cardImage.css('background-image', `url(\${backgroundImg})`);
-						var img = $(`<img src="${contextPath}/resources/image/course_banner/\${cur['syllabusVO']['bannerImg']}"></img>`)
+						var img = $(`<img src="/server/resources/image/\${cur['syllabusVO']['id']}/\${cur['syllabusVO']['bannerImg']}"></img>`)
 
 						cardImage.append(img);
 

@@ -74,6 +74,7 @@
 			crs_start_time, 
 			crs_end_time, 
 			crs_classroom, 
+			slb_id,
 			slb_name, 
 			slb_type, 
 			slb_category,
@@ -94,14 +95,15 @@
 	<select id="selectAllCourseListForWelcomePage" resultMap="crsResult">
 	<![CDATA[
 		SELECT
-		    crs_id,
-		    crs_category_id,
-		    to_char(to_date(SUBSTR(crs_start_date,0,10)),'MM"월" DD"일"') as crs_start_date, 
-		    to_char(to_date(SUBSTR(crs_end_date,0,10)),'MM"월" DD"일"') as crs_end_date,
-		    slb_name,
-		    slb_banner_img 
+			crs_id,
+			crs_category_id,
+			to_char(to_date(SUBSTR(crs_start_date,0,10),'YYYY-MM-DD'),'MM"월" DD"일"') as crs_start_date, 
+			to_char(to_date(SUBSTR(crs_end_date,0,10),'YYYY-MM-DD'),'MM"월" DD"일"') as crs_end_date,
+			slb_id,
+			slb_name,
+			slb_banner_img 
 		FROM course
-		    INNER JOIN syllabus using(slb_id)
+			INNER JOIN syllabus using(slb_id)
 		WHERE crs_stat = '신청가능' AND trunc(sysdate) <= to_date(crs_re_date, 'YYYY-MM-DD HH24:MI:SS')
 		ORDER BY crs_start_date
 	]]>

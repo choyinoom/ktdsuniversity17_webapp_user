@@ -91,9 +91,10 @@ footer {
 
 .banner h1 {
     color: white;
-    padding-top: 40px;
-    padding-bottom: 40px;
+    padding-top: 51.7px;
+    padding-bottom: 51.7px;
     font-size: 2em;
+    margin: 0px;
 }
 
 .contents {
