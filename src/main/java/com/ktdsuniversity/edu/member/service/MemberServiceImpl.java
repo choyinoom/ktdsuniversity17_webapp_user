@@ -32,6 +32,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberVO login(MemberVO memberVO) throws Exception {
+		memberDAO.updateLoginFailToZero(memberVO.getId());
 		return memberDAO.loginById(memberVO);
 	}
 
@@ -52,7 +53,11 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int updateLoginFail(String id) throws Exception {
-		return memberDAO.updateLoginFail(id);		
+		int result = memberDAO.updateLoginFail(id);
+		if (result == 1) {
+			result = memberDAO.selectLoginFail(id);
+		}	
+		return result;
 	}
 
 

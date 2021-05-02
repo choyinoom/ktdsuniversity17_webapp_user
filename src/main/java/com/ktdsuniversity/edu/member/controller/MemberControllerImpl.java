@@ -249,7 +249,10 @@ public class MemberControllerImpl implements MemberController {
 
 		} else {
 			rAttr.addAttribute("result", "loginFailed");
-			memberService.updateLoginFail(member.getId());
+			int count = memberService.updateLoginFail(member.getId());
+			if(count >= 5) {
+				rAttr.addFlashAttribute("failedCount", count); //url에 표시되지 않음.
+			}
 			mav.setViewName("redirect:/member/loginForm.do");
 		}
 		return mav;

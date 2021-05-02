@@ -60,6 +60,11 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.update("mapper.member.updateLoginFail", id);
 	}
 	
+	@Override
+	public int selectLoginFail(String id) throws DataAccessException {
+		return sqlSession.selectOne("mapper.member.selectLoginFail", id);
+	}
+	
 	/* 중복 수강신청 방지 */
 	@Override
 	public EnrollmentDetailVO selectEnrollmentDetailBy(Map<String, Object> enrollMap)
@@ -76,7 +81,7 @@ public class MemberDAOImpl implements MemberDAO {
 
 	/* 비밀번호변경 */
 	@Override
-	public int updatePwOfMember(MemberVO vo) {
+	public int updatePwOfMember(MemberVO vo) throws DataAccessException{
 		
 		return sqlSession.update("mapper.member.updatePwOfMember", vo);
 	}
@@ -88,5 +93,10 @@ public class MemberDAOImpl implements MemberDAO {
 		List<EnrollmentDetailVO> enrollmentDetailList = null;
 		enrollmentDetailList = sqlSession.selectList("mapper.enrollment.selectEnrollmentDetailById", id);
 		return enrollmentDetailList;
-	}	
+	}
+	
+	@Override
+	public int updateLoginFailToZero(String id) {
+		return sqlSession.update("mapper.member.updateLoginFailToZero", id);
+	}
 }

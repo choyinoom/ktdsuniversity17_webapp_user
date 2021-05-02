@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
+
 import com.ktdsuniversity.edu.member.vo.EnrollmentDetailVO;
 import com.ktdsuniversity.edu.member.vo.MemberVO;
 
@@ -16,8 +17,10 @@ public interface MemberDAO {
 	public MemberVO selectMemberInfo(String id) throws DataAccessException;
 	public int updateMemberInfo(MemberVO member) throws DataAccessException;
 	public int updateLoginFail(String id) throws DataAccessException;
+	public int selectLoginFail(String id) throws DataAccessException;
 	public EnrollmentDetailVO selectEnrollmentDetailBy(Map<String, Object> enrollMap) throws DataAccessException;
 	public List<EnrollmentDetailVO> selectEnrollmentDetailBy(String id) throws DataAccessException;
 	public MemberVO selectMemberPwInfoById(String id) throws DataAccessException;
-	public int updatePwOfMember(MemberVO vo);
+	public int updatePwOfMember(MemberVO vo) throws DataAccessException;
+	public int updateLoginFailToZero(String id) throws DataAccessException;
 }

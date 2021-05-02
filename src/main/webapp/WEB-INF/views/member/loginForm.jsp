@@ -15,16 +15,7 @@ request.setCharacterEncoding("UTF-8");
 <link rel="stylesheet"
 	href="<c:url 
 value='/resources/css/loginForm.css'/>">
-<title>로그인창</title>
-<c:choose>
-	<c:when test="${result=='loginFailed' }">
-		<script>
-			window.onload = function() {
-				alert("아이디나 비밀번호가 틀립니다.다시 로그인 하세요!");
-			}
-		</script>
-	</c:when>
-</c:choose>
+
 </head>
 
 <body>
@@ -39,9 +30,20 @@ value='/resources/css/loginForm.css'/>">
 	<div class="mx-auto grid ai-center" id="login__container">
 		<!-- 로그인폼 -->
 		<form name="frmLogin" method="post"	action="${contextPath}/member/login.do" class="login__form">
-					<input type="text" name="id" placeholder="아이디" required>
-					<input type="password" name="pw" placeholder="비밀번호" required>
-				<input type="submit" id="login__btn" value="로그인">
+			<input type="text" name="id" placeholder="아이디" required>
+			<input type="password" name="pw" placeholder="비밀번호" required>
+			<input type="submit" id="login__btn" value="로그인">
+			<c:choose>
+				<c:when test="${result=='loginFailed' }">
+					<c:if test="${failedCount != null && failedCount >= 5}">
+						<p>로그인에 5회이상 실패하였습니다.</p>
+					</c:if>
+					<c:if test="${failedCount == null }">
+						<p>존재하지 않는 아이디이거나, 잘못된 비밀번호 입니다.</p>
+			
+					</c:if>
+				</c:when>
+			</c:choose>
 		</form>
 		<!-- 도움 받기 -->
 		<div id="login__help">

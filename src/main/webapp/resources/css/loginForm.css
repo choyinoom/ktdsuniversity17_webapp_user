@@ -31,6 +31,11 @@
 	padding: 5px;
 }
 
+.login__form p {
+	color: #e91b23;
+    font-weight: 600;
+}
+
 #login__btn {
 	width: 93%;
     height: 49px;
