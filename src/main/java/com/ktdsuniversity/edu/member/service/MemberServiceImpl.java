@@ -100,7 +100,7 @@ public class MemberServiceImpl implements MemberService {
 		String msg = "임시 비밀번호 발급";
 
 		
-		subject = "kt s University 임시 비밀번호 입니다.";
+		subject = "kt ds University 임시 비밀번호 입니다.";
 		msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
 		msg += "<h3 style='color: blue;'>";
 		msg += member.getId() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
