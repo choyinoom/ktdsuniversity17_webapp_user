@@ -23,7 +23,7 @@ import com.ktdsuniversity.edu.board.vo.ArticleVO;
 
 @Controller
 public class FileDownloadController {
-	private static final String ARTICLE_FILE_REPO = "C:\\Users\\lho16\\git workspace\\uni17_admin\\src\\main\\webapp\\resources\\articleFile";
+	private static final String ARTICLE_FILE_REPO = "/home/ubuntu/ktdsuniversity_webapp/resources/articleFile";
 	
 	@Autowired
 	private BoardService boardService;
@@ -31,11 +31,11 @@ public class FileDownloadController {
 	private ArticleVO articleVO;
 	
 	@RequestMapping("/download.do") 
-	protected void download(@RequestParam("imageFileName") String imageFileName,	//?��미�? ?��?��?���? ?��?��
+	protected void download(@RequestParam("imageFileName") String imageFileName,	
 							@RequestParam("articleNO") String articleNO,
 			                 HttpServletResponse response)throws Exception {
 		OutputStream out = response.getOutputStream();
-		String downFile = ARTICLE_FILE_REPO + "\\" +articleNO+"\\"+ imageFileName;	//?��?�� 경로 ?��?��
+		String downFile = ARTICLE_FILE_REPO + "/" +articleNO+"/"+ imageFileName;	// 첨부파일 저장될 경로
 		File file = new File(downFile);
 
 		response.setHeader("Cache-Control", "no-cache");
@@ -58,7 +58,7 @@ public class FileDownloadController {
 		  String articleId = request.getParameter("articleId");
 		  System.out.println(articleId);
 	      System.out.println("filename :: " + filename);
-	      String path = ARTICLE_FILE_REPO +  "\\" + articleId + "\\";
+	      String path = ARTICLE_FILE_REPO +  "/" + articleId + "/";
 	      
 	      HashMap map = new HashMap();
 	      map.put("path", path); 
