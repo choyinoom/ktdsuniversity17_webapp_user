@@ -57,4 +57,12 @@
 		<beans:property name="defaultEncoding" value="utf-8" />
 	</beans:bean>
 	
+	<!-- Download를 위한 빈 등록 :: 별도의 출력 결과 페이지 빈.... -->
+   <beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+      <beans:property name="order" value="0"></beans:property> <!-- 우선순위 지정 -->
+   </beans:bean>
+   <!-- Download 설정시 위 beans 2개를 설정해줘야 한다. -->
+   <beans:bean name="downloadView" class="com.ktdsuniversity.edu.common.util.DownloadView"/>
+	
+	
 </beans:beans>

@@ -13,38 +13,42 @@
 
 .login__form {
 	width: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 
-.input__row {
-	position: relative;
-    height: 22px;
-    margin-bottom: 18px;
-    padding: 7px 35px 10px 11px;
-    border: solid 1px #dadada;
-    background: #f3f3f3;
-    border-radius: 4px;
-}
-
-.input__row input {
-	width: 100%;
-	height: 27px;
-	background: #f3f3f3;
+.login__form input {
+	width: 90%;
+    height: 40px;
+    border-radius: 0.5em;
+    background: #ececec;
+    padding: 0.5em 0em 0em 1em;
+    margin-bottom: 0.8em;
 }
 
 #login__id #login__pw {
 	padding: 5px;
 }
 
+.login__form p {
+	color: #e91b23;
+    font-weight: 600;
+}
+
 #login__btn {
-	width: 100%;
-	height: 40px;
-	border-radius: 4px;
-	color: white;
-	background: #D64A4A;
+	width: 93%;
+    height: 49px;
+    border-radius: 0.5em;
+    color: white;
+    background: #e91b23;
+    font-weight: 800;
+    font-size: 1em;
+    cursor: pointer;
+    padding: 0em 0em 0em 0em;
 }
 
 #login__help {
-	padding-top: 40px;
 	text-align: center;
 }
 
@@ -60,7 +64,11 @@
 }
 #login__help a {
 	display: block;
-	font-size: 12px;
+    font-size: 0.9em;
 	text-decoration: underline;
 	margin: 20px 5px;
+}
+
+#join {
+	margin-top: 1em;
 }

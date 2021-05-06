@@ -84,8 +84,7 @@
 </head>
 
 <body>
-	<form name="frmArticle" method="post" action="${contextPath}"
-		enctype="multipart/form-data">
+	<form name="frmArticle" action="${contextPath}" enctype="multipart/form-data">
 		<table border=0 align="center">
 			<tr>
 				<td width=150 align="center" bgcolor=#FF9933>글번호</td>

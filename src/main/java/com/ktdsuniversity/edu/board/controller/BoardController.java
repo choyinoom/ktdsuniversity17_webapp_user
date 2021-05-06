@@ -12,14 +12,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 public interface BoardController {
 	
-	public ModelAndView listArticles(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	
-	public ResponseEntity addNewArticle(MultipartHttpServletRequest multipartRequest,HttpServletResponse response) throws Exception;
-	
-	public ModelAndView viewArticle(@RequestParam("articleNO") int articleNO,
-			                        HttpServletRequest request, HttpServletResponse response) throws Exception;
-	//public ResponseEntity modArticle(MultipartHttpServletRequest multipartRequest,  HttpServletResponse response) throws Exception;
-	public ResponseEntity  removeArticle(@RequestParam("articleNO") int articleNO,
-                              HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView listArticles(@RequestParam("pageNo") int currentPage, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView viewArticle(@RequestParam("articleId") int articleId, HttpServletRequest request, HttpServletResponse response) throws Exception;
+//	public ResponseEntity addNewArticle(MultipartHttpServletRequest multipartRequest,HttpServletResponse response) throws Exception;		                        H
+//	public ResponseEntity modArticle(MultipartHttpServletRequest multipartRequest,  HttpServletResponse response) throws Exception;
+//	public ResponseEntity removeArticle(@RequestParam("articleNO") int articleNO, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public String viewFaq(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 }

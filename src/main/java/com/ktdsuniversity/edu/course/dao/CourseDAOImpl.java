@@ -17,29 +17,47 @@ public class CourseDAOImpl implements CourseDAO{
 	private SqlSession sqlSession;
 	
 	@Override
-	public List selectAllCourseList() throws DataAccessException {
-		List<CourseDAO> courseList = null;
-		courseList = sqlSession.selectList("mapper.course.selectAllCourseList");
-		return courseList;
+	public List<CourseVO> selectAllCourseList() throws DataAccessException {
+		List<CourseVO> coursesList = sqlSession.selectList("mapper.course.selectAllCourseList");
+		return coursesList;
 	}
 
 	@Override
 	public int enrollCourse(Map<String, Object> enrollMap) throws DataAccessException {
-		
-		return sqlSession.insert("mapper.course.insertNewEnrollment", enrollMap);
+		return sqlSession.insert("mapper.enrollment.insertNewEnrollment", enrollMap);
 	}
 
 	@Override
 	public SyllabusVO selectSyllabus(int courseId) {
-		SyllabusVO syllabusVO = null;
-		syllabusVO =  sqlSession.selectOne("mapper.course.selectSyllabus", courseId);
+		SyllabusVO syllabusVO = sqlSession.selectOne("mapper.course.selectSyllabus", courseId);
 		return syllabusVO;
 	}
 	
 	@Override
 	public CourseVO selectCourse(int courseId) {
-		CourseVO courseVO = null;
-		courseVO = sqlSession.selectOne("mapper.course.selectCourse", courseId);
+		CourseVO courseVO = sqlSession.selectOne("mapper.course.selectCourse", courseId);
 		return courseVO;
+	}
+	
+	@Override
+	public List<CourseVO> selectAllCourseListForWelcomePage() throws DataAccessException {
+		List<CourseVO> coursesList = sqlSession.selectList("mapper.course.selectAllCourseListForWelcomePage");
+		return coursesList;
+	}
+
+	@Override
+	public List<CourseVO> selectAllCourseListBy(String keyword) throws DataAccessException {
+		List<CourseVO> coursesList = sqlSession.selectList("mapper.course.selectAllCourseListBy", keyword);
+		return coursesList;
+	}
+
+	@Override
+	public int dropCourse(Map<String, Object> dropMap) throws DataAccessException {
+		return sqlSession.update("mapper.enrollment.updateEnrdStatToDrop", dropMap);
+	}
+
+	@Override
+	public int updateCourseApplyNum(int courseId) throws DataAccessException {
+		return sqlSession.update("mapper.enrollment.updateCourseApplyNum", courseId);
 	}
 }

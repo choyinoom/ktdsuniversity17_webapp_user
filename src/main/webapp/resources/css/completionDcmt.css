@@ -1,0 +1,122 @@
+@media only print {
+	header, footer, body * {
+		visibility: hidden;
+	}
+	
+	section[id='certification'], .completionPrint, .completionPrint * {
+		visibility: visible;
+	}
+
+	section[id='certification'] {
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}	
+	
+	.completionPrint {
+		position: absolute !important;
+		left: -260px;
+		top: -520px;
+	}
+}
+
+@font-face {
+	font-family: 'DX';
+	src: url('../font/DXSJStd-B.otf')
+		format('opentype');
+	font-weight: Medium;
+	font-style: Regular;
+}
+
+.completionPrint {
+	position:relative;
+	display: flex;
+	justify-content: center;
+	font-family: 'DX';
+	text-align: center;
+}
+
+.completionText {
+	position: absolute;
+	z-index: 11;
+	width: 630px;
+	top: 114px;
+}
+
+ #completionImg {
+	width: 800px;
+	height: 1132.1px;
+	z-index: 10;
+}
+
+.completion_serial {
+	font-size: 20px;
+	text-align: left;
+}
+
+.completion_main {
+	font-size: 65px;
+	margin: 55px;
+	letter-spacing: 25px;
+}
+
+.completion_info {
+	text-align: left;
+}
+
+.completion_info ul {
+	list-style: none;
+	font-size: 20px;
+}
+
+.completion_info ul li {
+	margin: 4px;
+}
+
+.completion_content {
+	margin: 40px;
+	word-spacing: 6px;
+	font-size: 28px;	
+}
+
+.completion_date {
+	margin: 60px;
+	font-size: 20px;
+}
+
+#completion_logo {
+	margin: 10px;
+	/* width : 282.17px;
+	height : 48px; */
+}
+
+.completion_ceo {
+	margin: 10px;
+	font-size: 23px;
+}
+
+.completionButton {
+	margin : 50px;
+}
+
+.completionButton > input {
+	width : 90px;
+	height: 40px;
+	font-size : 18px;
+}
+
+#compl_name {
+	letter-spacing: 73px;
+}
+
+#compl_companyName {
+	letter-spacing: 28px;
+}
+
+#compl_slb_name {
+	letter-spacing: 5px;
+}
+
+#compl_crs_date {
+	letter-spacing: 13px;
+}

@@ -8,31 +8,31 @@
 .footer__contents {
 	flex-direction: column;
 	justify-content: center;
-	height: 240px;
-	padding: 20px 0px;
 	text-align: left;
 }
 
 #right {
 	justify-content: flex-start;
 }
+
 .footer__contents h3{
-	color: white;
+	color: #EFEFEF;
 }
 
 .footer__contents a{
 	display: block;
-	color: white;
-	font-size: 15px;
+	color: #EFEFEF;
+	font-size: 12px;
 	margin: 9px 0px;
 }
 
-.footer__contents p {
-	color: white;
-	font-size: 14px;
-	line-height: 23px;
-}
+.footer__contents a:hover{
+	color: #E91B23;
+	}
 
-#right h3 {
-	padding-top: 22px;
+.footer__contents p {
+	color: #727171;
+	font-size: 12px;
+	line-height: 20px;
+	margin: 0;
 }

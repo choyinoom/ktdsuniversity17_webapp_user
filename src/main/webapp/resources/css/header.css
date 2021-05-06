@@ -1,96 +1,149 @@
 .navbar {
-	justify-content: space-between;
- 	max-width: 1000px;
- 	padding: 0 15px; 
-	background: transparent;
-	
+    justify-content: space-between;
+    max-width: 1000px;
+    padding: 0 15px;
+    background: transparent;
 }
 
-.navbar__logo img{
-	float: left;
-	content	: url("../image/logo-horizontal-transparent.png");
-	width: 180px;
-	padding: 8px 12px;
+.navbar__logo img {
+    float: left;
+    content: url("../image/logo-horizontal-transparent.png");
+    width: 180px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 20px;
 }
 
-.navbar__menu{
+.navbar__menu {
 	width: 100%;
 	flex-direction: column;
 }
 
 .navbar__menu__each {
-	color:black;
+    color: black;
+}
+
+.navbar__menu__each__main {
+    color: black;
+    margin-left: 90px;
+    margin-right: 15px;
+}
+
+.navbar__menu__gnb li:nth-child(4) a{
+	margin-right: 0px !important;
+}
+
+.navbar__menu__each__sub {
+    list-style: none;
+    padding-top: 8px;
+    display: none;
+}
+
+.navbar__menu__each__sub li {
+    position: relative;
+    left: 50px;
+}
+
+#navbar__menu__each__sub__text {
+    font-size: 16px;
+    color: #1a1a1a;
+    font-weight: 500;
 }
 
 .navbar__menu__tnb {
-	position: relative;
+    position: relative;
     top: 10px;
-	min-width: 200px;
-	list-style: none;
-	justify-content:flex-end;
-	margin: 0px;
-	margin-left: auto;
-	margin-right: 3.8px;
-	padding: 2px 12px;
-	font-family: 'Noto Sans KR';
-	font-size: 13px;
+    min-width: 200px;
+    list-style: none;
+    justify-content: flex-end;
+    margin: 0px;
+    padding: 2px 0px;
+    font-family: "Noto Sans KR";
+    font-size: 13px;
 }
 
 .navbar__menu__tnb li {
-	padding: 8px 4px;
+    margin-left: 5px;
 }
 
 .navbar__menu__gnb {
-	min-width: 700px;
-	list-style: none;
-	justify-content: space-between;
-	margin: 0px;
-	padding: 8px;
-	padding-left: 100px;
-	font-family: 'Droid Sans Fallback';
-	font-size: 18px;
-}
-
-.navbar__menu__gnb li {
-	padding: 8px 12px;
+    min-width: 700px;
+    list-style: none;
+    margin-top: 22px;
+    padding-left: 100px;
+    font-family: "Noto Sans KR";
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .navbar__menu__gnb li a:hover {
-	border-bottom: 1px solid rgba(232, 12, 30, .8);
+    border-bottom: 1px solid rgba(232, 12, 30, 0.8);
 }
 
-/*main������ ����*/
+
+.navbar__logo.mouse img {
+    float: left;
+    content: url("../image/logo-horizontal-transparent.png") !important;
+    width: 180px;
+    padding: 8px 12px;
+}
+
+
+/* 메인 페이지에서만 적용*/
 .header__transparent {
-	background: transparent;
+    background: transparent;
 }
 
-.header__transparent .navbar__logo img{
-	float: left;
-	content	: url("../image/white-logo-horizontal-transparent.png");
-	width: 180px;
-	padding: 8px 12px;
+.header__transparent.scrolled {
+    background-color: #fff;
+    color: black;
+}
+
+.header__transparent.scrolled .navbar__menu__each {
+    color: black !important;
+}
+
+.header__transparent.scrolled .navbar__menu__each__main {
+    color: black !important;
+}
+
+.header__transparent .navbar__logo img {
+    float: left;
+    content: url("../image/white-logo-horizontal-transparent.png");
+    width: 180px;
+    padding: 8px 12px;
 }
 
 .header__transparent .navbar__menu__each {
-	color:white;
+    color: white;
 }
 
-/*��ũ�ѽ� ���� */
+.header__transparent .navbar__menu__each__main {
+    color: white;
+}
+
+/* 메인 페이지 이 외 모든 페이지에 적용, 스크롤 시 내비게이션 바*/
 .navbar.scrolled {
-  background-color: #fff !important;
-  transition: background-color 200ms linear;
+    background-color: #fff !important;
+    transition: background-color 200ms linear;
 }
 
-.scrolled navbar__menu{
-	color: black;
+.scrolled navbar__menu {
+    color: black;
 }
 
 .scrolled .navbar__logo img {
-	content: url("../image/logo-horizontal-transparent.png") !important;
-	width: 180px;
-	padding: 8px 12px;
+    content: url("../image/logo-horizontal-transparent.png") !important;
+    width: 180px;
+    padding: 8px 12px;
 }
 
 .scrolled .navbar__menu__each {
-	color:black;
+    color: black;
+}
+
+.scrolled .navbar__menu__each__main {
+    color: black;
 }

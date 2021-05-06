@@ -1,0 +1,132 @@
+#findPw__banner {
+   width: 100%;
+   background-image: url("../image/login-banner.png")
+}
+
+.findPw_container{
+    background-color: white;
+    flex-direction: column;
+    display: flex; 
+    /* height: 500px; */
+    padding-bottom: 40px;
+    
+}
+
+.findPw_menu{
+    width: 900px;
+    margin:auto; 
+
+   /* 배너이미지랑 메뉴 사이 간격주기 */
+    margin-top:60px;
+    margin-bottom: 30px;
+}
+
+
+.menu_button{
+    width: 140px;
+    height: 40px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: white;
+    color: black;
+    float:left;
+    border: none;
+    cursor: pointer;
+  
+    /* 테두리 색 없애기 */
+    border-left: none;
+    border-right:none;
+    border-top:none;
+    outline: 0;
+    
+    /* 0427수정함- 클릭한 메뉴에 border-bottom 고정해서 주기*/
+    border-bottom: 6px solid #e92b2b;
+
+  }
+  
+/*  페이지들어갔을때 버튼 아래 빨간줄 뜨게 하는거 */
+.findPw_menu .visited {
+   border-color: #e92b2b;
+    border-width: 6px;
+    border-style:solid;
+
+    border-left: none;
+    border-right:none;
+    border-top:none;
+    border-radius: 0px;
+}
+
+
+.findPw_id{
+    width: 900px;
+    margin:auto; 
+
+  /*   background-color: red;  */
+
+}
+
+
+input[type=text] {
+    
+    /* text-align: left;
+    margin: 0px; */
+
+    /* 테두리 아래만 남기고 없애기 */
+    border-bottom : 1px solid #d3d2d2;
+
+    width: 900px;
+    height:25px; 
+    padding: 12px;
+
+   
+   }
+/* 클릭했을 때 나오는 테두리 없애기 */
+input:focus {
+    outline:none;
+}
+
+
+.findPw_under{
+    background-color: white;
+/*     height: 100px; */
+    width: 900px;
+    margin:auto; 
+   margin-top:40px; 
+  
+    /* 아래의 버튼 2개를 가운데 정렬하기 위해 사용 */
+    text-align: center;
+}
+
+#email_btn {
+width: 17%;
+height: 36px;
+margin: auto;
+text-align: center;
+font-size: 17px;
+background-color:#e91b23;
+color: white;
+border-radius: 3px;
+cursor: pointer;
+margin-right: 20px;
+
+border: 0; 
+outline: 0;
+
+}
+
+#cancel_btn {
+    width: 9%;
+    height: 36px;
+    margin: auto;
+    text-align: center;
+    font-size: 17px;
+    background-color: rgb(194, 188, 188);
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+    
+    border: 0; 
+    outline: 0;
+
+}

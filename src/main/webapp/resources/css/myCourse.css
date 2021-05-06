@@ -1,0 +1,109 @@
+#mycourse__container {
+    padding-bottom: 60px;
+}
+
+#mycourse__banner {
+	width: 100%;
+	background-image: url("../image/login-banner.png")
+}
+
+#myCouse_stat {
+	position: relative;
+    left: 3em;	
+}
+
+.menu{
+    margin: 50px auto;
+    padding-bottom: 15px; 
+}
+
+.menu_button{
+    width: 130px;
+    height: 40px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: white;
+    color: black;
+    float:left;
+    border: 3px solid #d1d0d0;
+    cursor: pointer;
+  
+    /* 테두리 색 없애기 */
+    border-left: none;
+    border-right:none;
+    border-top:none;
+    outline: 0;
+
+  }
+  
+.menu .visited {
+	border-color: #e92b2b;
+    border-width: 6px;
+    border-style:solid;
+
+    border-left: none;
+    border-right:none;
+    border-top:none;
+    border-radius: 0px;
+}
+
+.under{
+    background-color: white;
+    height: 100px;
+    width: 900px;
+    margin: 20px auto; 
+    
+    /* 아래의 버튼 2개를 가운데 정렬하기 위해 사용 */
+    text-align: center;
+    padding-top: 20px;
+}
+
+#my__courses td {
+	height: fit-content;
+}
+
+#my__courses td:nth-child(1) {
+	padding-left: 40px;
+}
+
+#my__courses td:nth-child(4) {
+	text-align: center;
+	padding-right: 5px;
+	width: 10%;
+}
+
+ 
+.td_button, .goForm {
+    display: none;
+    float: left;
+    height: fit-content;
+    margin: 0px auto;
+    padding: 5px;
+    text-align: center;
+    border-style: none;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.td_button{ /* 신청취소 버튼 */
+    background-color: #dc3545;
+    color: white;
+}
+
+.goForm { /* 설문조사 바로가기 */
+    background-color: #673ab7;
+    color: white;
+}
+
+#my__courses img {
+    width: 14px;
+    cursor:pointer;
+}
+
+
+section[id='certification'] {
+	width: 900px;
+	height: 500px;
+	overflow-y: scroll;
+}

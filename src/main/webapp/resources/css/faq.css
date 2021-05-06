@@ -1,0 +1,293 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+
+/* #faq__banner {
+	background:url("../image/login-banner.png");
+	width:100%;
+} */
+
+#faq__banner {
+	background:url("../image/login-banner.png");
+	/* width:100% 는 commom.css파일의 <div class="banner"> 에 이미 적혀있기때문에 쓰지 않았습니다 */
+}
+
+.faq_body{
+    background-color: white;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.faq_container{
+    background-color: white;
+    flex-direction: column;
+    display: flex; 
+    margin: auto;
+margin-top: 50px; 
+/*     margin-top: 180px; */
+    width: 800px;
+   
+} 
+
+.faq_menu{
+    /* height: 200px; */
+    width: 800px;
+
+    /* div 가운데정렬하기 */
+    margin-bottom: 50px;
+
+    /* menu_button 여러개를 가운데정렬하기 위해 필요 */
+    text-align: center;
+    border-bottom: 1px solid #d1d0d0;
+
+}
+
+.faq_menu a:link { 
+	/* 클릭했을 때 바뀌는 색 */
+	color: black;
+    text-decoration: none;}
+
+ .faq_menu a:visited { 
+ 	color: black;
+ 	text-decoration: none; }
+ 	
+
+/* 검색기능 사용하게 되면 주석풀기 */
+/* .faq_container .faq_search{
+
+    justify-content: flex-end;
+    margin-bottom: 30px;
+    text-align: center;
+    flex-direction: row;
+    display: flex; 
+    background-color: white;
+    height: 22px;
+
+}
+
+.faq_search_in{
+    height: 13px;
+}
+
+ faq_search_in > input 속성에 css 적용/ input부분
+input[type=text]{
+    border: none; 
+    border-bottom: 1px solid rgba(128, 128, 128, 0.8);
+    outline:none; 
+}
+ 
+input:focus {
+    outline:none;  클릭했을때 생기는 테두리 없애기
+}
+
+검색버튼
+.faq_search > input[type=submit] {
+    border: none; 
+    cursor: pointer;
+    border-radius: 4px;
+    margin-left: 5px;
+    outline:none; 클릭했을때 생기는 테두리 없애기
+} */
+
+
+/*첨부파일 이미지*/
+.answer_sub img{
+    width: 15px;
+    height: 15px;
+    padding: 0px 5px; 
+}  
+
+
+.faq_menu_button_1{
+    width: 120px;
+    height: 40px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: white;
+    /* border: 3px solid #d1d0d0; */
+    cursor: pointer;
+    border: none;
+    outline: none; /*클릭시 테두리 없애기*/
+
+    /* menu div 의 맨 왼쪽에 정렬 */
+    float: left;
+    
+
+    
+}
+
+.faq_menu_button{
+    width: 120px;
+    height: 40px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: white;
+    /* border: 3px solid #d1d0d0; */
+    cursor: pointer;
+    border: none;
+    outline: none; /*클릭시 테두리 없애기*/
+  
+    /* 버튼간 간격 주기 */
+    margin-left: 10px;
+
+  }
+
+/* 스타일 적용 순서
+link -> visited -> hover -> active ->focus
+순서대로 하지 않을 경우 제대로 적용되지 않음
+*/
+
+/* 마우스 올렸을 때 */
+.faq_menu_button:hover{
+	border-color: #e92b2b;
+    border-width: 6px;
+    border-style:solid;
+    /* 메뉴버튼 hover중 아래만 남기고 위,오른쪽, 왼쪽 삭제하기 */
+    border-left: none;
+    border-right:none;
+    border-top:none;
+    border-radius: 0px;
+}
+
+.faq_menu_button_1:hover{
+	border-color: #e92b2b;
+    /* border-color: rgb(41, 21, 214); 테스트 */
+    border-width: 6px;
+    border-style:solid;
+    /* 메뉴버튼 hover중 아래만 남기고 위,오른쪽, 왼쪽 삭제하기 */
+    border-left: none;
+    border-right:none;
+    border-top:none;
+    border-radius: 0px;
+}
+
+
+/* --------여기부터 Q&A박스 css입니다----------- */
+
+.list {
+    width: 800px;
+    margin: auto;
+    padding: 0;
+    margin-bottom:100px;
+    }
+
+/* 질문박스 */
+details > summary {
+list-style: none;
+padding: 14px;
+margin: 0;
+border-top: 1px solid rgba(175, 172, 172, 0.2);
+background:rgb(239, 239, 239);
+cursor: pointer;
+display: block;
+
+outline:none; /*클릭했을때 생기는 테두리 없애기*/
+
+/* 스르륵열리게하기 */
+   transition-property: all;
+   transition-duration: 3s;
+   transition-delay: 2s;
+
+}
+
+/* 질문 Q 폰트*/
+details > summary > a{
+    font-size: 18px;
+    /* font-weight: bold; */
+    font-weight: 900;
+    color: #e92b2b;
+}
+
+details {
+	/* 답변박스 스르륵 열리게 하는 효과 제발돼라! */
+   transition-property:all;
+   transition-duration: 3s;
+   transition-delay: 2s;
+}
+
+/* 답변박스 아래로 열리는 효과 */
+details[open] {
+	background: white;
+	
+	/* 너비는 800px로 고정하고 답변 길이만큼 높이 커지게하기(inline-block) */
+	display: inline-block; 
+	width: 800px;
+	/* 스르륵열리게하기 */
+   transition-property: all;
+   transition-duration: 3s;
+   transition-delay: 2s;
+
+}
+
+details >.answer{
+    margin: 20px 20px 20px 20px; /*위 오른쪽 아래 왼쪽*/
+
+    /* 답변박스의 A와 답변 내용을 가로정렬하기 위해 필요 */
+    flex-direction: row;
+    display: flex;
+    line-height: 30px;
+    
+    /* 스르륵열리게하기 */
+   transition-property: all;
+   transition-duration: 3s;
+   transition-delay: 2s;
+    
+}
+
+details >.answerConsortium{
+    margin: 8px 20px 20px 20px; /*위 오른쪽 아래 왼쪽*/
+
+    /* 답변박스의 A와 답변 내용을 가로정렬하기 위해 필요 */
+    flex-direction: row;
+    display: flex;
+    line-height: 30px;
+    
+}
+
+details >.answer_text {
+    border: none;
+    
+}
+
+details >.answer_sub {
+	display : flex;
+	justify-content: flex-end;
+	margin-top : 10px;
+}
+
+details >.answer_sub a{
+	color : black;
+	font-size : 14px;
+}
+
+/* 질문 부분 글씨 */
+.desc p{
+    font-weight: 500;
+    margin: 0px;
+   
+}
+
+.qna {
+    font-size: 18px;   
+    font-weight: 900;
+    color: #e92b2b;
+    margin-right: 15px; /* Q랑 질문 사이 간격주기 */
+   
+}
+
+/* 답변 A 폰트 */
+details > .answer >a{
+    font-size: 18px;
+    font-weight: 700;
+    color: black;
+    margin-right: 15px;
+}
+
+details > summary::-webkit-details-marker {
+display: none;
+
+}
+
+
+
+

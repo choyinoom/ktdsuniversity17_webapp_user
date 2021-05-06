@@ -1,48 +1,43 @@
 package com.ktdsuniversity.edu.board.vo;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.sql.Date;
+
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
 @Component("articleVO")
 public class ArticleVO {
-	private int level;
-	private int articleNO;
-	private int parentNO;
+	private int id;
 	private String title;
-	private String content;
-	private String imageFileName;
-	private String id;
-	private Date writeDate;
-
-	public ArticleVO() throws Exception {
-		System.out.println("ArticleVO 생성자");
+	private String joinDate;
+	private String contents;
+	private char file;
+	private String important;
+	private int hits;
+	
+	private List<ArticleFileVO> articleFiles;
+	
+	public ArticleVO() {
+	
 	}
 
-	public int getArticleNO() {
-		return articleNO;
+	public ArticleVO(int id, String title, String joinDate, String contents, char file, String important, int hits, List<ArticleFileVO> articleFiles) {
+		this.id = id;
+		this.title = title;
+		this.joinDate = joinDate;
+		this.contents = contents;
+		this.file = file;
+		this.important = important;
+		this.hits = hits;
+		this.articleFiles = articleFiles;
 	}
 
-	public void setArticleNO(int articleNO) {
-		this.articleNO = articleNO;
+	public int getId() {
+		return id;
 	}
 
-	public int getParentNO() {
-		return parentNO;
-	}
-
-	public void setParentNO(int parentNO) {
-		this.parentNO = parentNO;
-	}
-
-	public int getLevel() {
-		return level;
-	}
-
-	public void setLevel(int level) {
-		this.level = level;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getTitle() {
@@ -53,42 +48,54 @@ public class ArticleVO {
 		this.title = title;
 	}
 
-	public String getContent() {
-		return content;
+	public String getJoinDate() {
+		return joinDate;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setJoinDate(String joinDate) {
+		this.joinDate = joinDate;
 	}
 
-	public String getImageFileName() {
-		return imageFileName;
+	public String getContents() {
+		return contents;
 	}
 
-	public void setImageFileName(String imageFileName) {
-		try {
-			if (imageFileName != null && imageFileName.length() != 0) {
-				this.imageFileName = URLEncoder.encode(imageFileName, "UTF-8");
-			}
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+	public void setContents(String contents) {
+		this.contents = contents;
 	}
 
-	public String getId() {
-		return id;
+	public char getFile() {
+		return file;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setFile(char file) {
+		this.file = file;
 	}
 
-	public Date getWriteDate() {
-		return writeDate;
+	public String getImportant() {
+		return important;
 	}
 
-	public void setWriteDate(Date writeDate) {
-		this.writeDate = writeDate;
+	public void setImportant(String important) {
+		this.important = important;
 	}
 
+	public int getHits() {
+		return hits;
+	}
+
+	public void setHits(int hits) {
+		this.hits = hits;
+	}
+
+	public List<ArticleFileVO> getArticleFiles() {
+		return articleFiles;
+	}
+
+	public void setArticleFileVO(List<ArticleFileVO> articleFiles) {
+		System.out.println("prprprpprprprp");
+		this.articleFiles = articleFiles;
+	}
+	
+	
 }
