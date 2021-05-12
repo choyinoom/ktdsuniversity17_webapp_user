@@ -36,18 +36,18 @@
 		<association property="courseCategoryVO" resultMap="crsCategoryResult"></association>
 	</resultMap>
 
-
 	<resultMap id="crsCategoryResult" type="courseCategoryVO">
 		<result property="id" column="crs_category_id"/>
 		<result property="name" column="crs_category_name"/>
 	</resultMap>
+
 	<!-- 강의목록 출력 -->
 	<select id="selectAllCourseList" resultMap="crsResult">
 	<![CDATA[
 		SELECT 
 			crs_id, 
-			SUBSTR(crs_start_date,0,10) as crs_start_date, 
-			SUBSTR(crs_end_date,0,10) as crs_end_date, 
+			SUBSTR(crs_start_date,1,10) as crs_start_date, 
+			SUBSTR(crs_end_date,1,10) as crs_end_date, 
 			crs_start_time,
 			crs_end_time,
 			crs_classroom, 
@@ -55,9 +55,9 @@
 			slb_type, 
 			slb_category, 
 			slb_time
-		FROM course
-			INNER JOIN syllabus USING(slb_id)
-		WHERE crs_stat = '신청가능' AND trunc(sysdate) <= to_date(crs_re_date, 'YYYY-MM-DD HH24:MI:SS')
+		FROM ktds17b.course
+			INNER JOIN ktds17b.syllabus USING(slb_id)
+		WHERE crs_stat = '신청가능' AND now() <= to_date(crs_re_date, 'YYYY-MM-DD HH24:MI:SS')
 		ORDER BY crs_start_date desc
 	]]>
 	</select>
@@ -69,8 +69,8 @@
 	<![CDATA[
 		SELECT 
 			crs_id, 
-			SUBSTR(crs_start_date,0,10) as crs_start_date, 
-			SUBSTR(crs_end_date,0,10) as crs_end_date, 
+			SUBSTR(crs_start_date,1,10) as crs_start_date, 
+			SUBSTR(crs_end_date,1,10) as crs_end_date, 
 			crs_start_time, 
 			crs_end_time, 
 			crs_classroom, 
@@ -84,9 +84,9 @@
 			slb_contents,
 			slb_banner_img,
 			crs_category_name 
-		FROM course
-			INNER JOIN syllabus USING(slb_id)
-			INNER JOIN course_category USING(crs_category_id)
+		FROM ktds17b.course
+			INNER JOIN ktds17b.syllabus USING(slb_id)
+			INNER JOIN ktds17b.course_category USING(crs_category_id)
 		WHERE crs_id = #{courseId}
 	]]>
 	</select>
@@ -97,14 +97,14 @@
 		SELECT
 			crs_id,
 			crs_category_id,
-			to_char(to_date(SUBSTR(crs_start_date,0,10),'YYYY-MM-DD'),'MM"월" DD"일"') as crs_start_date, 
-			to_char(to_date(SUBSTR(crs_end_date,0,10),'YYYY-MM-DD'),'MM"월" DD"일"') as crs_end_date,
+			to_char(to_date(SUBSTR(crs_start_date,1,10),'YYYY-MM-DD'),'MM"월" DD"일"') as crs_start_date, 
+			to_char(to_date(SUBSTR(crs_end_date,1,10),'YYYY-MM-DD'),'MM"월" DD"일"') as crs_end_date,
 			slb_id,
 			slb_name,
 			slb_banner_img 
-		FROM course
-			INNER JOIN syllabus using(slb_id)
-		WHERE crs_stat = '신청가능' AND trunc(sysdate) <= to_date(crs_re_date, 'YYYY-MM-DD HH24:MI:SS')
+		FROM ktds17b.course
+			INNER JOIN ktds17b.syllabus using(slb_id)
+		WHERE crs_stat = '신청가능' AND now() <= to_date(crs_re_date, 'YYYY-MM-DD HH24:MI:SS')
 		ORDER BY crs_start_date
 	]]>
 	</select>
@@ -115,16 +115,16 @@
 		WITH base as (
 			SELECT 
 				crs_id, 
-				SUBSTR(crs_start_date,0,10) as crs_start_date, 
-				SUBSTR(crs_end_date,0,10) as crs_end_date, 
+				SUBSTR(crs_start_date,1,10) as crs_start_date, 
+				SUBSTR(crs_end_date,1,10) as crs_end_date, 
 				crs_classroom, 
 				slb_name, 
 				slb_type, 
 				slb_category, 
 				slb_time
-			FROM course
-				INNER JOIN syllabus USING(slb_id)
-			WHERE crs_stat = '신청가능' AND trunc(sysdate) <= to_date(crs_re_date, 'YYYY-MM-DD HH24:MI:SS')
+			FROM ktds17b.course
+				INNER JOIN ktds17b.syllabus USING(slb_id)
+			WHERE crs_stat = '신청가능' AND now() <= to_date(crs_re_date, 'YYYY-MM-DD HH24:MI:SS')
 			ORDER BY crs_start_date )
 		SELECT *
 		FROM base

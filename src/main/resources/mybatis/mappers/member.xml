@@ -30,15 +30,14 @@
 	<!-- 회원 가입 -->
 	<insert id="insertMember" parameterType="memberVO">
 		<![CDATA[
-		 insert into member(mem_name, mem_id, mem_pw, mem_tel, mem_phone, mem_email, mem_subscription, mem_company_name)
+		 insert into ktds17b.member(mem_name, mem_id, mem_pw, mem_tel, mem_phone, mem_email, mem_subscription, mem_company_name)
 		 values(#{name}, #{id}, #{pw}, #{tel, jdbcType=VARCHAR}, #{phone, jdbcType=VARCHAR}, #{email}, #{subscription}, #{companyName})
 		]]>
 	</insert>
 
 	<!-- 정보 수정 -->
 	<update id="updateMemberInfo" parameterType="memberVO">
-     
-     	UPDATE member
+     	UPDATE ktds17b.member
      	SET
      		mem_phone = #{phone},
      		mem_email = #{email},
@@ -46,18 +45,17 @@
      		<if test="#{tel} != null">
      		mem_tel= #{tel},
      		</if>
-     		mem_mod_date = TO_CHAR(sysdate, 'YYYY-MM-DD hh:mm:ss')
+     		mem_mod_date = TO_CHAR(now(), 'YYYY-MM-DD hh:mm:ss')
      	WHERE mem_id=#{id}
-    
 	</update>
 
 	<!-- 회원 탈퇴 -->
 	<delete id="deleteMember" parameterType="String">
 	<![CDATA[
-	   	UPDATE member
+	   	UPDATE ktds17b.member
 	   	SET 
 			mem_delYN = 'F',
-			mem_mod_date = TO_CHAR(sysdate, 'YYYY-MM-DD HH:MM:SS')
+			mem_mod_date = TO_CHAR(now(), 'YYYY-MM-DD HH:MM:SS')
 	   WHERE mem_id = #{id}
 	]]>
 	</delete>
@@ -69,7 +67,7 @@
 			mem_id, 
 			mem_name,
 			mem_company_name 
-		FROM member	
+		FROM ktds17b.member	
 		WHERE 
 			mem_id=#{id} and 
 			mem_pw=#{pw} and
@@ -80,7 +78,7 @@
 	<!-- 비밀번호 오류 -->
 	<update id="updateLoginFail" parameterType="String">
 	<![CDATA[
-		UPDATE member
+		UPDATE ktds17b.member
 		SET mem_login_fail = mem_login_fail + 1
 		WHERE mem_id=#{id}
 	]]>
@@ -97,7 +95,7 @@
 			mem_email,
 			mem_subscription,
 			mem_company_name
-		FROM member
+		FROM ktds17b.member
 		WHERE mem_id = #{id}
 	]]>
 	</select>
@@ -106,7 +104,7 @@
 	<![CDATA[
 		SELECT 
 		mem_pw
-		FROM member
+		FROM ktds17b.member
 		WHERE mem_id = #{id}
 	]]>
 	</select>
@@ -114,7 +112,7 @@
 	<!--비밀번호변경 -->
 	<update id = "updatePwOfMember"  parameterType="memberVO">
 	<![CDATA[
-		update member
+		update ktds17b.member
 		set 
 		mem_pw = #{pw}, mem_login_fail = 0
 		WHERE mem_id = #{id}
@@ -124,7 +122,7 @@
 	<select id="selectLoginFail" parameterType="string" resultType="int">
 	<![CDATA[
 		SELECT mem_login_fail
-		FROM member
+		FROM ktds17b.member
 		WHERE mem_id = #{id}
 	]]>	
 	</select>
@@ -132,7 +130,7 @@
 	<!-- 로그인 성공시 mem_login_fail 초기화 -->
 	<update id="updateLoginFailToZero" parameterType="string">
 	<![CDATA[
-		UPDATE member
+		UPDATE ktds17b.member
 		SET mem_login_fail = 0
 		WHERE mem_id=#{id}
 	]]>	
